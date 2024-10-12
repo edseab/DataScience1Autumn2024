@@ -39,7 +39,7 @@ rep(4,3)
 
 # Each argument has a name. By explicitly referring to these names when calling the function, we can avoid  any problems with order. For example:
 rep(x=3, times=4)
-rep(times=4, x=3)
+rep(times=5, x=3)
 
 # produce the same result, because we inputed the arguments by name using the 'argname = x' construction. When we don't use this construction, the function defaults each input to an argument according to a predefined order.
 
