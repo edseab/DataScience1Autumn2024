@@ -131,7 +131,9 @@ my.vector[4]
 my.vector[2:4]
 my.vector[c(1,4)]
 a <- "I m Adam"
+b <- "Amrid"
 a
+b
 
 ### 1.1
 # You can assign values to specific elements. Try writing a line of code below that changes the 4th element of my.vector to the word 'test'
