@@ -63,13 +63,13 @@ rep(4, 3)
 ?rep
 # Testing the rep function
 rep(1:4, 2)
-rep(1:4, each = 2)
-rep(1:4, c(2, 2, 2, 2))
-rep(1:4, c(2, 1, 2, 1))
+rep(1:4, each = 2) 
+rep(1:4, c(2,2,2,2))
+rep(1:4, c(2,1,2,1))
 rep(1:4, each = 2, length.out = 4)
 rep(1:4, each = 2, length.out = 10)
 rep(1:4, each = 2, length.out = 6)
-rep(1:4, each = 2, times = 3)
+rep(1:4, each = 2, times = 3) 
 # Each argument has a name. By explicitly referring to these names when calling the function, we can avoid  any problems with order. For example: # nolint
 
 rep(x=3, times=4) # nolint: infix_spaces_linter.
@@ -120,6 +120,16 @@ y
 class(y)
 # testing class
 
+=======
+class (y)
+<<<<<<< HEAD
+>>>>>>> 1b0b93d (Created a file inside a branch)
+=======
+#testing class
+
+>>>>>>> 8335800 (Testing the rep functions)
+
+>>>>>>> 55a0316 (Testing the rep functions)
 # y is now a 'character' object (R does not use the term 'string')
 
 # If we forget to use quote marks R will search for a stored object with that name and return an error if it doesn't find it:
@@ -150,10 +160,17 @@ TRUE | TRUE
 TRUE | FALSE
 FALSE | FALSE
 <<<<<<< HEAD
+<<<<<<< HEAD
 FALSE | TRUE
 =======
+<<<<<<< HEAD
 FALSE | TRUE
 
+=======
+>>>>>>> 1b0b93d (Created a file inside a branch)
+=======
+FALSE | TRUE
+>>>>>>> 8335800 (Testing the rep functions)
 
 # There is also an exclusive or function, xor(), but it isn't used much.
 
@@ -183,6 +200,12 @@ my.vector <- c('this','is','a','vector')
 my.vector
 length(my.vector)
 class(my.vector)
+<<<<<<< HEAD
+>>>>>>> 1b0b93d (Created a file inside a branch)
+=======
+?class
+>>>>>>> 8335800 (Testing the rep functions)
+
 # You can use square brackets to isolate elements in a vector by putting their index between the brackets:
 my.vector[1]
 my.vector[4]
