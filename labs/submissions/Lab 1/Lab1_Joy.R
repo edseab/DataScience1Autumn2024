@@ -68,7 +68,15 @@ rep(3,4)
 rep(4,3)
 # If you can't remember in which order you have to input the arguments of a function, or if you just want to learn what a function does, you can type in ? followed by the function name in the console:
 ?rep
-
+# Testing the rep function
+rep(1:4, 2)
+rep(1:4, each = 2) 
+rep(1:4, c(2,2,2,2))
+rep(1:4, c(2,1,2,1))
+rep(1:4, each = 2, length.out = 4)
+rep(1:4, each = 2, length.out = 10)
+rep(1:4, each = 2, length.out = 6)
+rep(1:4, each = 2, times = 3) 
 # Each argument has a name. By explicitly referring to these names when calling the function, we can avoid  any problems with order. For example: # nolint
 rep(x=3, times=4) # nolint: infix_spaces_linter.
 rep(times=4, x=3) # nolint: infix_spaces_linter.
@@ -117,7 +125,12 @@ class(y)
 
 =======
 class (y)
->>>>>>> 5c44116 (Created a file inside a branch):labs/Submissions/Lab1/Lab1_Joy.R
+<<<<<<< HEAD
+>>>>>>> 1b0b93d (Created a file inside a branch)
+=======
+#testing class
+
+>>>>>>> 8335800 (Testing the rep functions)
 
 # y is now a 'character' object (R does not use the term 'string')
 
@@ -151,10 +164,9 @@ FALSE & FALSE
 TRUE | TRUE
 TRUE | FALSE
 FALSE | FALSE
-<<<<<<< HEAD:labs/submissions/Lab 1/Lab1_Joy.R
 FALSE | TRUE
 =======
->>>>>>> 5c44116 (Created a file inside a branch):labs/Submissions/Lab1/Lab1_Joy.R
+FALSE | TRUE
 
 # There is also an exclusive or function, xor(), but it isn't used much.
 
@@ -173,7 +185,6 @@ z
 
 # Vectors can be created from singular elements using the function c(), which stands for combine or concatenate.
 
-<<<<<<< HEAD:labs/submissions/Lab 1/Lab1_Joy.R
 my.vector <- c("this", "is", "a", "vector")
 my.vector
 length(my.vector)
@@ -184,13 +195,11 @@ my.vector <- c('this','is','a','vector')
 my.vector
 length(my.vector)
 class(my.vector)
->>>>>>> 5c44116 (Created a file inside a branch):labs/Submissions/Lab1/Lab1_Joy.R
 
 # You can use square brackets to isolate elements in a vector by putting their index between the brackets:
 my.vector[1]
 my.vector[4]
 my.vector[2:4]
-<<<<<<< HEAD:labs/submissions/Lab 1/Lab1_Joy.R
 my.vector[c(1, 4)]
 
 ### 1.1
@@ -220,14 +229,12 @@ my.vector[c(1,4)]
 # Instead of indices, you can select elements of a vector using a logical vector of the same length, e.g.
 
 my.vector[c(TRUE,TRUE,FALSE,FALSE,FALSE)]
->>>>>>> 5c44116 (Created a file inside a branch):labs/Submissions/Lab1/Lab1_Joy.R
 
 
 ####################################
 ####     Logical operators      ####
 ####################################
 
-<<<<<<< HEAD:labs/submissions/Lab 1/Lab1_Joy.R
 # LOGICAL OPERATORS are operators that return logical vectors of the same length as the left argument. Examples include '==', the equality operator (not to be confused with the single = which is an assignment operator), >, <, >=, <=, and != (the 'different from' operator). # nolint: line_length_linter.
 
 # For example:
@@ -254,7 +261,6 @@ intersect(group1, group2)
 # Write a line of code that replicates this output using only group1, group2, square brackets, and logical operators.
 
 group2[group2 %in% group1]
-=======
 # LOGICAL OPERATORS are operators that return logical vectors of the same length as the left argument. Examples include '==', the equality operator (not to be confused with the single = which is an assignment operator), >, <, >=, <=, and != (the 'different from' operator).
 
 # For example:
@@ -276,14 +282,12 @@ group1 %in% group2
 intersect(group1,group2)
 # Write a line of code that replicates this output using only group1, group2, square brackets, and logical operators.
 
->>>>>>> 5c44116 (Created a file inside a branch):labs/Submissions/Lab1/Lab1_Joy.R
 
 ####################################
 ####     Writing functions      ####
 ####################################
 
 # Functions can be written and stored as objects. e.g:
-<<<<<<< HEAD:labs/submissions/Lab 1/Lab1_Joy.R
 f1 <- function(x) x * 2 + 1
 =======
 f1 <- function(x) x*2 + 1
@@ -292,16 +296,12 @@ f1
 # This function has only 1 argument, x. Try out this new function:
 f1(3)
 f1(7)
-<<<<<<< HEAD:labs/submissions/Lab 1/Lab1_Joy.R
 ex.vector <- c(2, 7, 4, 24, 13, 8, 12)
-=======
 ex.vector <- c(2,7,4,24,13,8,12)
->>>>>>> 5c44116 (Created a file inside a branch):labs/Submissions/Lab1/Lab1_Joy.R
 f1(ex.vector)
 
 # You can write several lines of code in a function by enclosing all of the in curly brackets {}. The function 'return' can then specify what the output can be. For example:
 
-<<<<<<< HEAD:labs/submissions/Lab 1/Lab1_Joy.R
 f2 <- function(x, y) {
   z <- x %% y
   return(z == 0)
@@ -317,13 +317,11 @@ f2 <- function(x,y){
 
 f2(8,9)
 f2(14,7)
->>>>>>> 5c44116 (Created a file inside a branch):labs/Submissions/Lab1/Lab1_Joy.R
 
 ### 3.1 What is the purpose of function f2? Write in comments below.
 
 ### 3.2
 # Based on the definition of the mean from today's lecture, write a function that calculates the mean of all of the elements of a vector. assign it to the object my.mean. You will find the functions 'sum' and 'length' useful here.
-<<<<<<< HEAD:labs/submissions/Lab 1/Lab1_Joy.R
 my.mean <- function(x){
   total <- sum(x)
   z <- length(x)
@@ -333,8 +331,6 @@ my.mean <- function(x){
 ex.vector <- c(2,5,6,8,9)
 my.mean(ex.vector)
 
-=======
->>>>>>> 5c44116 (Created a file inside a branch):labs/Submissions/Lab1/Lab1_Joy.R
 
 # compare your function to the native function in R. Does it produce the same results?
 
