@@ -2,13 +2,7 @@
 ###################################
 ########                   ########
 ########   Data Science 1  ########
-
 ########       Lab 1       ########
-
-########       Lab 1       ######## 
-
-########       Lab 1       ########
-
 ########   15 Oct. 2024    ########
 ########                   ########
 ###################################
@@ -36,14 +30,8 @@
 # Text beginning with a # sign is read as 'comment' and will not be evaluated by the console.
 ## Numbers (like 1.1, 2.3, etc) signify that I would like you to write a line a code in the code file and run it in the console
 
-
-####    Functions   ####A
-
+########################
 ####    Functions   ####
-
-
-####    Functions   ####A
-
 ########################
 
 # FUNCTIONS are commands that take in inputs and produce outputs. They mostly take in the inputs in brackets, like this:
@@ -161,6 +149,7 @@ FALSE & FALSE
 TRUE | TRUE
 TRUE | FALSE
 FALSE | FALSE
+<<<<<<< HEAD
 FALSE | TRUE
 =======
 FALSE | TRUE
@@ -483,6 +472,7 @@ runif(5, 0, 1)
 ### 4.3
 # Using runif, write a function that returns TRUE 22% of the time and FALSE 78% of the time
 
+<<<<<<< HEAD
 prob <- function(x)
 {
   outcome <- runif(x, 0,1 ) <= 0.22
@@ -499,6 +489,7 @@ prob(50)
 ### 4.5
 # Similarly, what is the probability density for a uniform pdf bounded between 5 and 6 associated with all values of x between 5 and 6?
 
+<<<<<<< HEAD
 #the probability density for a uniform pdf bouneded between 0 and 1 associated with all values of x between 5 and 6 is also 1 as shown below
 
 pdf <- 1/(6-5)
