@@ -39,6 +39,7 @@ rep(4,3)
 ?rep
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Each argument has a name. By explicitly referring to these names when calling the function, we can avoid  any problems with order. For example: # nolint
 rep(x=3, times=4) # nolint: infix_spaces_linter.
 rep(times=4, x=3) # nolint: infix_spaces_linter.
@@ -51,6 +52,11 @@ rep(times=5, x=3)
 =======
 rep(times=4, x=3)
 >>>>>>> f9b88ec (Returned to its original state)
+=======
+# Each argument has a name. By explicitly referring to these names when calling the function, we can avoid  any problems with order. For example: # nolint
+rep(x=3, times=4) # nolint: infix_spaces_linter.
+rep(times=4, x=3) # nolint: infix_spaces_linter.
+>>>>>>> b692108 (changes reverted)
 
 # produce the same result, because we inputed the arguments by name using the 'argname = x' construction. When we don't use this construction, the function defaults each input to an argument according to a predefined order.
 
