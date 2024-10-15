@@ -38,10 +38,25 @@ rep(3,4)
 rep(4,3)
 # If you can't remember in which order you have to input the arguments of a function, or if you just want to learn what a function does, you can type in ? followed by the function name in the console:
 ?rep
+<<<<<<< HEAD:labs/submissions/Lab 1/Asmaa-Maaroufi_Lab1.R
 
 # Each argument has a name. By explicitly referring to these names when calling the function, we can avoid  any problems with order. For example:
 rep(x=3, times=4)
 rep(times=4, x=3)
+=======
+# Testing the rep function
+rep(1:4, 2)
+rep(1:4, each = 2) 
+rep(1:4, c(2,2,2,2))
+rep(1:4, c(2,1,2,1))
+rep(1:4, each = 2, length.out = 4)
+rep(1:4, each = 2, length.out = 10)
+rep(1:4, each = 2, length.out = 6)
+rep(1:4, each = 2, times = 3) 
+# Each argument has a name. By explicitly referring to these names when calling the function, we can avoid  any problems with order. For example: # nolint
+rep(x=3, times=4) # nolint: infix_spaces_linter.
+rep(times=4, x=3) # nolint: infix_spaces_linter.
+>>>>>>> 43ed9f6 (Testing the rep functions):labs/Submissions/Lab1/Lab1_Joy.R
 
 # produce the same result, because we inputed the arguments by name using the 'argname = x' construction. When we don't use this construction, the function defaults each input to an argument according to a predefined order.
 
@@ -77,6 +92,8 @@ class(x)
 "Hello" -> y
 y
 class (y)
+#testing class
+
 
 # y is now a 'character' object (R does not use the term 'string')
 
@@ -104,6 +121,7 @@ FALSE & FALSE
 TRUE | TRUE
 TRUE | FALSE
 FALSE | FALSE
+FALSE | TRUE
 
 # There is also an exclusive or function, xor(), but it isn't used much.
 
@@ -126,6 +144,7 @@ my.vector <- c('this','is','a','vector')
 my.vector
 length(my.vector)
 class(my.vector)
+?class
 
 # You can use square brackets to isolate elements in a vector by putting their index between the brackets:
 my.vector[1]
