@@ -4,7 +4,7 @@
 ###################################
 ########                   ########
 ########   Data Science 1  ########
-########       Lab 1       ######## 
+########       Lab 1       ########
 ########   15 Oct. 2024    ########
 ########                   ########
 ###################################
@@ -15,8 +15,8 @@
 
 
 
-# On the right is the console. You can input code directly into the console line by line - you do not need to run an entire file. Try running a simple calculation in the console, like 5+9. Type it in and press enter. 
-5+9
+# On the right is the console. You can input code directly into the console line by line - you do not need to run an entire file. Try running a simple calculation in the console, like 5+9. Type it in and press enter.
+5 + 9
 # You can also write code in this, the code editor, and run it from here. Try highlighting the following line and pressing 'Ctrl + Enter' ('Cmd + Enter' on MacOS):
 12 * 4 - 6
 
@@ -33,9 +33,9 @@ sqrt(25)
 exp(3)
 
 # Often, functions take multiple inputs with different functions. Note how:
-rep(3,4)
+rep(3, 4)
 # produces a different output from
-rep(4,3)
+rep(4, 3)
 # If you can't remember in which order you have to input the arguments of a function, or if you just want to learn what a function does, you can type in ? followed by the function name in the console:
 ?rep
 <<<<<<< HEAD:labs/submissions/Lab 1/Asmaa-Maaroufi_Lab1.R
@@ -46,17 +46,22 @@ rep(times=4, x=3)
 =======
 # Testing the rep function
 rep(1:4, 2)
-rep(1:4, each = 2) 
-rep(1:4, c(2,2,2,2))
-rep(1:4, c(2,1,2,1))
+rep(1:4, each = 2)
+rep(1:4, c(2, 2, 2, 2))
+rep(1:4, c(2, 1, 2, 1))
 rep(1:4, each = 2, length.out = 4)
 rep(1:4, each = 2, length.out = 10)
 rep(1:4, each = 2, length.out = 6)
-rep(1:4, each = 2, times = 3) 
+rep(1:4, each = 2, times = 3)
 # Each argument has a name. By explicitly referring to these names when calling the function, we can avoid  any problems with order. For example: # nolint
+<<<<<<< HEAD:labs/submissions/Lab 1/Asmaa-Maaroufi_Lab1.R
 rep(x=3, times=4) # nolint: infix_spaces_linter.
 rep(times=4, x=3) # nolint: infix_spaces_linter.
 >>>>>>> 43ed9f6 (Testing the rep functions):labs/Submissions/Lab1/Lab1_Joy.R
+=======
+rep(x = 3, times = 4) # nolint: infix_spaces_linter.
+rep(times = 4, x = 3) # nolint: infix_spaces_linter.
+>>>>>>> de225a2 (testing codes):labs/Submissions/Lab1/Lab1_Joy.R
 
 # produce the same result, because we inputed the arguments by name using the 'argname = x' construction. When we don't use this construction, the function defaults each input to an argument according to a predefined order.
 
@@ -72,7 +77,7 @@ x <- 4
 
 # You can now see in the 'Environment' tab below that the object 'x'  is stored with the value 4.
 
-x*5
+x * 5
 
 ##############################################################
 ###    ADVANCED NOTE: the = operator can also be used      ###
@@ -91,8 +96,8 @@ class(x)
 
 "Hello" -> y
 y
-class (y)
-#testing class
+class(y)
+# testing class
 
 
 # y is now a 'character' object (R does not use the term 'string')
@@ -101,9 +106,9 @@ class (y)
 
 Salaam -> y
 
-# One final very important class of object is the 'logical' class, a.k.a. Boolean. 
+# One final very important class of object is the 'logical' class, a.k.a. Boolean.
 
-# One final very important class of object is the 'logical' class, a.k.a. Boolean. 
+# One final very important class of object is the 'logical' class, a.k.a. Boolean.
 # Boolean objects can take one of two values
 
 TRUE
@@ -140,7 +145,7 @@ z
 
 # Vectors can be created from singular elements using the function c(), which stands for combine or concatenate.
 
-my.vector <- c('this','is','a','vector')
+my.vector <- c("this", "is", "a", "vector")
 my.vector
 length(my.vector)
 class(my.vector)
@@ -150,71 +155,76 @@ class(my.vector)
 my.vector[1]
 my.vector[4]
 my.vector[2:4]
-my.vector[c(1,4)]
+my.vector[c(1, 4)]
 
 ### 1.1
 # You can assign values to specific elements. Try writing a line of code below that changes the 4th element of my.vector to the word 'test'
-my.vector[c(4)] <- 'test'
+my.vector[c(4)] <- "test"
 my.vector
 
 ### 1.2
 # You can even assign values to elements of a vector that don't exist yet, thus creating them. Try assigning the word 'example' to the (as yet non-existent) 5th element of my.vector.
-my.vector[c(5)] <- 'example'
+my.vector[5] <- "example"
 my.vector
 
 # Instead of indices, you can select elements of a vector using a logical vector of the same length, e.g.
 
-my.vector[c(TRUE,TRUE,FALSE,FALSE,FALSE)]
+my.vector[c(TRUE, TRUE, FALSE, FALSE, FALSE)]
 
 
 ####################################
 ####     Logical operators      ####
 ####################################
 
-# LOGICAL OPERATORS are operators that return logical vectors of the same length as the left argument. Examples include '==', the equality operator (not to be confused with the single = which is an assignment operator), >, <, >=, <=, and != (the 'different from' operator).
+# LOGICAL OPERATORS are operators that return logical vectors of the same length as the left argument. Examples include '==', the equality operator (not to be confused with the single = which is an assignment operator), >, <, >=, <=, and != (the 'different from' operator). # nolint: line_length_linter.
 
 # For example:
-my.vector == 'is'
+my.vector == "is"
 1:10 >= 5
-1:10 %% 2 == 0    ## %% is the remainder operator, it returns the remainder when you divide the left argument by the right argument.
+1:10 %% 2 == 0 ## %% is the remainder operator, it returns the remainder when you divide the left argument by the right argument. # nolint
 
 ### 2.1
 digits <- 0:10
+digits
 # Using the least amount of code possible, write a line of code that returns only the odd values of the digits object.
+odd_numbers <- digits[digits %% 2 == 1]
+odd_numbers
+print(odd_numbers)
 
 # Another important logical operator is the %in% operator. It tells you if the elements on the left are found in the elements on the right. E.G.
-group1 <- c('Arthur', 'Fatima', 'Suleiman', 'Marco')
-group2 <- c('Marco','Maria', 'Victor','Fatima', 'Antonio')
+group1 <- c("Arthur", "Fatima", "Suleiman", "Marco")
+group2 <- c("Marco", "Maria", "Victor", "Fatima", "Antonio")
 group1 %in% group2
 
-## 2.2 
+## 2.2
 # intersect is a function which returns the elements that all of its arguments have in common. For example:
-intersect(group1,group2)
+intersect(group1, group2)
 # Write a line of code that replicates this output using only group1, group2, square brackets, and logical operators.
 
+group1[group1 %in% group2]
 
 ####################################
 ####     Writing functions      ####
 ####################################
 
 # Functions can be written and stored as objects. e.g:
-f1 <- function(x) x*2 + 1
+f1 <- function(x) x * 2 + 1
 f1
 # This function has only 1 argument, x. Try out this new function:
 f1(3)
 f1(7)
-ex.vector <- c(2,7,4,24,13,8,12)
+ex.vector <- c(2, 7, 4, 24, 13, 8, 12)
 f1(ex.vector)
 
 # You can write several lines of code in a function by enclosing all of the in curly brackets {}. The function 'return' can then specify what the output can be. For example:
 
-f2 <- function(x,y){
-  z = x %% y
+f2 <- function(x, y) {
+  z <- x %% y
   return(z == 0)
 }
 
-f2(8,9)
-f2(14,7)
+f2(8, 9)
+f2(14, 7)
 
 ### 3.1 What is the purpose of function f2? Write in comments below.
 
@@ -230,44 +240,44 @@ mean(ex.vector)
 ####      Randomness in R       ####
 ####################################
 
-# There are several ways to generate randomness in R. The simplest function is 
+# There are several ways to generate randomness in R. The simplest function is
 ?sample
 
-#which randomly draws WITHOUT replacement from a specified vector. For example, to choose a number at random between 1 and 10:
+# which randomly draws WITHOUT replacement from a specified vector. For example, to choose a number at random between 1 and 10:
 sample(1:10, 1)
 # You can run this several times and notice that you get a different answer each time. You can also sample several times at once
 sample(1:10, 3)
-# However, by default, sample won't let the same number repeat when you do this. This is called sampling without replacement, 
+# However, by default, sample won't let the same number repeat when you do this. This is called sampling without replacement,
 # because it is as if, each time you pick out a number, it is now gone from the pool of possible numbers and has not been replaced.
 # If you want to sample randomly between 1 and 10 20 times, each time choosing between all 10 numbers, you have to write:
 sample(1:10, 20, replace = TRUE)
 
 ### 4.1
-# Write a function that simulates the roll of 2 6-sided dice, where the argument x is the number of times you roll the 2 dice, 
+# Write a function that simulates the roll of 2 6-sided dice, where the argument x is the number of times you roll the 2 dice,
 # and the output is a vector of length x, where each element corresponds to the sum of the two sides of the dice.
-# HINT: one way to do this is to start by writing a function for a single 6-sided die, then create a new function 
+# HINT: one way to do this is to start by writing a function for a single 6-sided die, then create a new function
 # that repeats the first function twice and adds up the result.
 
 ### 4.2
-# Using the function hist, create histograms of the results of double dice rolls when you roll them 10 times, 
-#then 50, then 100, then 1000, then 10000. Use breaks=1:12 as an argument within the hist function. 
+# Using the function hist, create histograms of the results of double dice rolls when you roll them 10 times,
+# then 50, then 100, then 1000, then 10000. Use breaks=1:12 as an argument within the hist function.
 # What do you notice? Write it in comments below your code.
 
 
-# Another way to generate randomness is to sample from a pdf, which is a continuous distribution. 
-# The simplest pdf is the uniform function. The uniform function is a flat line bounded between 2 numbers. 
-# Because it is flat, the probability of drawing a sample from any interval of given width between the two bounds 
+# Another way to generate randomness is to sample from a pdf, which is a continuous distribution.
+# The simplest pdf is the uniform function. The uniform function is a flat line bounded between 2 numbers.
+# Because it is flat, the probability of drawing a sample from any interval of given width between the two bounds
 # is the same as from any other interval of given width.
 
 # The function runif(n, min,max) samples n times from a uniform function bounded between the values of min and max.
 # For example, try
-runif(5,0,1)
+runif(5, 0, 1)
 
 ### 4.3
 # Using runif, write a function that returns TRUE 22% of the time and FALSE 78% of the time
 
 ### 4.4
-# Based on today's lecture about pdfs, what is the probability density for a uniform pdf bounded between 
+# Based on today's lecture about pdfs, what is the probability density for a uniform pdf bounded between
 # 0 and 1 associated with all values of x between 0 and 1? Explain why.
 
 ### 4.5
@@ -281,9 +291,9 @@ runif(5,0,1)
 
 ### 4.8
 # run the following code:
-dunif(0.5,0,1)
-dunif(2,0,1)
-dunif(0.2,0,0.5)
-dunif(1.3,0,2)
+dunif(0.5, 0, 1)
+dunif(2, 0, 1)
+dunif(0.2, 0, 0.5)
+dunif(1.3, 0, 2)
 
 # Based on the results of this code and your answers above, what can you conclude about the purpose of the dunif function?
