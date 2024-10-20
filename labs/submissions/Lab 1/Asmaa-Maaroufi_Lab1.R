@@ -267,6 +267,16 @@ sample(1:10, 20, replace = TRUE)
 # HINT: one way to do this is to start by writing a function for a single 6-sided die, then create a new function
 # that repeats the first function twice and adds up the result.
 
+dice <- function(x){
+  outcome_of_dice_one <- sample(1:6, x, replace = TRUE)
+  outcome_of_dice_two <- sample(1:6, x, replace = TRUE)
+
+  outcome <- outcome_of_dice_one + outcome_of_dice_two
+  print(outcome_of_dice_one)
+  print(outcome_of_dice_two)
+  return(outcome)
+  }
+ dice(2)
 ### 4.2
 # Using the function hist, create histograms of the results of double dice rolls when you roll them 10 times,
 # then 50, then 100, then 1000, then 10000. Use breaks=1:12 as an argument within the hist function.
