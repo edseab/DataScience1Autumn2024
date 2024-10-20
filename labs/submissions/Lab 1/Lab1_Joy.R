@@ -270,6 +270,7 @@ digits
 odd_numbers <- digits[digits %% 2 == 1]
 odd_numbers
 
+<<<<<<< HEAD
 
 
 # Another important logical operator is the %in% operator. It tells you if the elements on the left are found in the elements on the right. E.G.
@@ -301,6 +302,8 @@ digits
 odd_numbers <- digits[digits %% 2 == 1]
 odd_numbers
 print(odd_numbers)
+=======
+>>>>>>> 9baf4f4 (function to calculate mean done)
 
 # Another important logical operator is the %in% operator. It tells you if the elements on the left are found in the elements on the right. E.G.
 group1 <- c("Arthur", "Fatima", "Suleiman", "Marco")
