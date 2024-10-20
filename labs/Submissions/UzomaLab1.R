@@ -131,13 +131,17 @@ my.vector[4]
 my.vector[2:4]
 my.vector[c(1,4)]
 
+
+
 ### 1.1
 # You can assign values to specific elements. Try writing a line of code below that changes the 4th element of my.vector to the word 'test'
-
+my.vector[4] <- "test"
+my.vector
 
 ### 1.2
 # You can even assign values to elements of a vector that don't exist yet, thus creating them. Try assigning the word 'example' to the (as yet non-existent) 5th element of my.vector.
-
+my.vector[5] <-"example"
+my.vector
 
 # Instead of indices, you can select elements of a vector using a logical vector of the same length, e.g.
 
