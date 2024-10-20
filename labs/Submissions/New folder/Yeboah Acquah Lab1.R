@@ -20,7 +20,7 @@
 
 
 # Text beginning with a # sign is read as 'comment' and will not be evaluated by the console.
-## Numbers (like 1.1, 2.3, etc) signify that I would like you to write a line of code in the code file and run it in the console
+## Numbers (like 1.1, 2.3, etc) signify that I would like you to write a line a code in the code file and run it in the console
 
 ########################
 ####    Functions   ####
@@ -80,7 +80,7 @@ class (y)
 
 # If we forget to use quote marks R will search for a stored object with that name and return an error if it doesn't find it:
 
-"Salaam" -> y
+Salaam -> y
 
 # One final very important class of object is the 'logical' class, a.k.a. Boolean. 
 
@@ -133,12 +133,11 @@ my.vector[c(1,4)]
 
 ### 1.1
 # You can assign values to specific elements. Try writing a line of code below that changes the 4th element of my.vector to the word 'test'
-my.vector[4] <- 'test'
 
 
 ### 1.2
 # You can even assign values to elements of a vector that don't exist yet, thus creating them. Try assigning the word 'example' to the (as yet non-existent) 5th element of my.vector.
-my.vector[5] <- 'example'
+
 
 # Instead of indices, you can select elements of a vector using a logical vector of the same length, e.g.
 
@@ -159,7 +158,7 @@ my.vector == 'is'
 ### 2.1
 digits <- 0:10
 # Using the least amount of code possible, write a line of code that returns only the odd values of the digits object.
-digits[digits %% 2 != 0]
+
 # Another important logical operator is the %in% operator. It tells you if the elements on the left are found in the elements on the right. E.G.
 group1 <- c('Arthur', 'Fatima', 'Suleiman', 'Marco')
 group2 <- c('Marco','Maria', 'Victor','Fatima', 'Antonio')
