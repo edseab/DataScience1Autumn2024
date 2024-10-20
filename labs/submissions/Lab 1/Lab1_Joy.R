@@ -508,6 +508,7 @@ dice <- function(x){
   return(outcome)
   }
  dice(2)
+<<<<<<< HEAD
 ### 4.2
 # Using the function hist, create histograms of the results of double dice rolls when you roll them 10 times,
 # then 50, then 100, then 1000, then 10000. Use breaks=1:12 as an argument within the hist function.
@@ -533,6 +534,8 @@ hist(dice(10000), 1:12)
 # HINT: one way to do this is to start by writing a function for a single 6-sided die, then create a new function
 # that repeats the first function twice and adds up the result.
 
+=======
+>>>>>>> a6136a7 (function for rolling dice created)
 ### 4.2
 # Using the function hist, create histograms of the results of double dice rolls when you roll them 10 times,
 # then 50, then 100, then 1000, then 10000. Use breaks=1:12 as an argument within the hist function.
