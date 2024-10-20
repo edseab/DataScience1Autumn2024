@@ -14,7 +14,7 @@
 
 
 # On the right is the console. You can input code directly into the console line by line - you do not need to run an entire file. Try running a simple calculation in the console, like 5+9. Type it in and press enter. 
-5+9
+5+6
 # You can also write code in this, the code editor, and run it from here. Try highlighting the following line and pressing 'Ctrl + Enter' ('Cmd + Enter' on MacOS):
 12 * 4 - 6
 
