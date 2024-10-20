@@ -63,13 +63,13 @@ rep(4, 3)
 ?rep
 # Testing the rep function
 rep(1:4, 2)
-rep(1:4, each = 2) 
-rep(1:4, c(2,2,2,2))
-rep(1:4, c(2,1,2,1))
+rep(1:4, each = 2)
+rep(1:4, c(2, 2, 2, 2))
+rep(1:4, c(2, 1, 2, 1))
 rep(1:4, each = 2, length.out = 4)
 rep(1:4, each = 2, length.out = 10)
 rep(1:4, each = 2, length.out = 6)
-rep(1:4, each = 2, times = 3) 
+rep(1:4, each = 2, times = 3)
 # Each argument has a name. By explicitly referring to these names when calling the function, we can avoid  any problems with order. For example: # nolint
 
 rep(x=3, times=4) # nolint: infix_spaces_linter.
@@ -126,6 +126,10 @@ class (y)
 >>>>>>> 1b0b93d (Created a file inside a branch)
 =======
 #testing class
+=======
+class(y)
+# testing class
+>>>>>>> f9aa72b (testing codes)
 
 >>>>>>> 8335800 (Testing the rep functions)
 
