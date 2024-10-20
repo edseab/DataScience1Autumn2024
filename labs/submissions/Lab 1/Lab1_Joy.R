@@ -41,11 +41,15 @@
 ## Numbers (like 1.1, 2.3, etc) signify that I would like you to write a line a code in the code file and run it in the console
 
 ########################
-<<<<<<< HEAD:labs/submissions/Lab 1/Lab1_Joy.R
+<<<<<<< HEAD
+<<<<<<< HEAD
 ####    Functions   ####A
 =======
 ####    Functions   ####
->>>>>>> 5c44116 (Created a file inside a branch):labs/Submissions/Lab1/Lab1_Joy.R
+>>>>>>> 1b0b93d (Created a file inside a branch)
+=======
+####    Functions   ####A
+>>>>>>> 9baf4f4 (function to calculate mean done)
 ########################
 
 # FUNCTIONS are commands that take in inputs and produce outputs. They mostly take in the inputs in brackets, like this:
@@ -300,6 +304,7 @@ digits
 odd_numbers <- digits[digits %% 2 == 1]
 odd_numbers
 
+<<<<<<< HEAD
 
 # Another important logical operator is the %in% operator. It tells you if the elements on the left are found in the elements on the right. E.G.
 group1 <- c("Arthur", "Fatima", "Suleiman", "Marco")
@@ -329,6 +334,8 @@ digits
 odd_numbers <- digits[digits %% 2 == 1]
 odd_numbers
 print(odd_numbers)
+=======
+>>>>>>> 9baf4f4 (function to calculate mean done)
 
 # Another important logical operator is the %in% operator. It tells you if the elements on the left are found in the elements on the right. E.G.
 group1 <- c("Arthur", "Fatima", "Suleiman", "Marco")
@@ -341,10 +348,14 @@ intersect(group1, group2)
 # Write a line of code that replicates this output using only group1, group2, square brackets, and logical operators.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 1b0b93d (Created a file inside a branch)
 =======
 group1[group1 %in% group2]
 >>>>>>> f9aa72b (testing codes)
+=======
+group2[group2 %in% group1]
+>>>>>>> 9baf4f4 (function to calculate mean done)
 
 ####################################
 ####     Writing functions      ####
@@ -408,6 +419,10 @@ f2(14, 7)
 
 ### 3.2
 # Based on the definition of the mean from today's lecture, write a function that calculates the mean of all of the elements of a vector. assign it to the object my.mean. You will find the functions 'sum' and 'length' useful here.
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 9baf4f4 (function to calculate mean done)
 my.mean <- function(x){
   total <- sum(x)
   z <- length(x)
@@ -417,6 +432,11 @@ my.mean <- function(x){
 ex.vector <- c(2,5,6,8,9)
 my.mean(ex.vector)
 
+<<<<<<< HEAD
+=======
+>>>>>>> 1b0b93d (Created a file inside a branch)
+=======
+>>>>>>> 9baf4f4 (function to calculate mean done)
 
 # compare your function to the native function in R. Does it produce the same results?
 
