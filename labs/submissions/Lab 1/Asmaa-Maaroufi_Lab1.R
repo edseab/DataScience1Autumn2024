@@ -281,8 +281,11 @@ dice <- function(x){
 # Using the function hist, create histograms of the results of double dice rolls when you roll them 10 times,
 # then 50, then 100, then 1000, then 10000. Use breaks=1:12 as an argument within the hist function.
 # What do you notice? Write it in comments below your code.
-
-
+?hist
+hist(dice(10), 1:12)
+hist(dice(50), 1:12)
+hist(dice(100), 1:12)
+hist(dice(1000), 1:12)
 # Another way to generate randomness is to sample from a pdf, which is a continuous distribution.
 # The simplest pdf is the uniform function. The uniform function is a flat line bounded between 2 numbers.
 # Because it is flat, the probability of drawing a sample from any interval of given width between the two bounds
