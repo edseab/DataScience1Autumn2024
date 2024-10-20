@@ -23,7 +23,7 @@
 ## Numbers (like 1.1, 2.3, etc) signify that I would like you to write a line a code in the code file and run it in the console
 
 ########################
-####    Functions   ####
+####    Functions   ####A
 ########################
 
 # FUNCTIONS are commands that take in inputs and produce outputs. They mostly take in the inputs in brackets, like this:
@@ -175,7 +175,7 @@ digits
 # Using the least amount of code possible, write a line of code that returns only the odd values of the digits object.
 odd_numbers <- digits[digits %% 2 == 1]
 odd_numbers
-print(odd_numbers)
+
 
 # Another important logical operator is the %in% operator. It tells you if the elements on the left are found in the elements on the right. E.G.
 group1 <- c("Arthur", "Fatima", "Suleiman", "Marco")
@@ -187,7 +187,7 @@ group1 %in% group2
 intersect(group1, group2)
 # Write a line of code that replicates this output using only group1, group2, square brackets, and logical operators.
 
-group1[group1 %in% group2]
+group2[group2 %in% group1]
 
 ####################################
 ####     Writing functions      ####
@@ -216,6 +216,15 @@ f2(14, 7)
 
 ### 3.2
 # Based on the definition of the mean from today's lecture, write a function that calculates the mean of all of the elements of a vector. assign it to the object my.mean. You will find the functions 'sum' and 'length' useful here.
+my.mean <- function(x){
+  total <- sum(x)
+  z <- length(x)
+  y <- total/z
+  return(y)
+}
+ex.vector <- c(2,5,6,8,9)
+my.mean(ex.vector)
+
 
 # compare your function to the native function in R. Does it produce the same results?
 
