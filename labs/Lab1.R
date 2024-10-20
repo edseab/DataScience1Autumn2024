@@ -135,11 +135,14 @@ my.vector[c(1,4)]
 
 ### 1.1
 # You can assign values to specific elements. Try writing a line of code below that changes the 4th element of my.vector to the word 'test'
+my.vector[4]<- "scalar"
+my.vector
 
 
 ### 1.2
 # You can even assign values to elements of a vector that don't exist yet, thus creating them. Try assigning the word 'example' to the (as yet non-existent) 5th element of my.vector.
-
+my.vector[5]<- "product"
+my.vector
 
 # Instead of indices, you can select elements of a vector using a logical vector of the same length, e.g.
 
@@ -159,7 +162,9 @@ my.vector == 'is'
 
 ### 2.1
 digits <- 0:10
+digits
 # Using the least amount of code possible, write a line of code that returns only the odd values of the digits object.
+digits[digits %% 2 == 1]
 
 # Another important logical operator is the %in% operator. It tells you if the elements on the left are found in the elements on the right. E.G.
 group1 <- c('Arthur', 'Fatima', 'Suleiman', 'Marco')
@@ -171,7 +176,7 @@ group1 %in% group2
 intersect(group1,group2)
 # Write a line of code that replicates this output using only group1, group2, square brackets, and logical operators.
 
-
+group1[group1 %in% group2]
 ####################################
 ####     Writing functions      ####
 ####################################
@@ -196,6 +201,7 @@ f2(8,9)
 f2(14,7)
 
 ### 3.1 What is the purpose of function f2? Write in comments below.
+# Function f2 checks if the remainder is 0
 
 ### 3.2
 # Based on the definition of the mean from today's lecture, write a function that calculates the mean of all of the elements of a vector. assign it to the object my.mean. You will find the functions 'sum' and 'length' useful here.
