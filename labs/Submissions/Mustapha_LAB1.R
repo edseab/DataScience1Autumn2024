@@ -15,9 +15,9 @@
 
 # On the right is the console. You can input code directly into the console line by line - you do not need to run an entire file. Try running a simple calculation in the console, like 5+9. Type it in and press enter. 
 5+9
+
 # You can also write code in this, the code editor, and run it from here. Try highlighting the following line and pressing 'Ctrl + Enter' ('Cmd + Enter' on MacOS):
 12 * 4 - 6
-
 
 # Text beginning with a # sign is read as 'comment' and will not be evaluated by the console.
 ## Numbers (like 1.1, 2.3, etc) signify that I would like you to write a line a code in the code file and run it in the console
@@ -149,6 +149,8 @@ my.vector[c(TRUE,TRUE,FALSE,FALSE,FALSE)]
 
 # LOGICAL OPERATORS are operators that return logical vectors of the same length as the left argument. Examples include '==', the equality operator (not to be confused with the single = which is an assignment operator), >, <, >=, <=, and != (the 'different from' operator).
 
+
+
 # For example:
 my.vector == 'is'
 1:10 >= 5
@@ -157,7 +159,7 @@ my.vector == 'is'
 ### 2.1
 digits <- 0:10
 # Using the least amount of code possible, write a line of code that returns only the odd values of the digits object.
-digits %% 2 != 0
+digits[digits %% 2 != 0]
 
 # Another important logical operator is the %in% operator. It tells you if the elements on the left are found in the elements on the right. E.G.
 group1 <- c('Arthur', 'Fatima', 'Suleiman', 'Marco')
@@ -237,7 +239,7 @@ roll_1_die <- function(x){
   sample(c(1:6),x, replace = TRUE)
 }
 
-roll_2_dice <- function(x) {
+roll_2_die <- function(x) {
   dice1 = roll_1_die(x)  # Roll first die 'x' times
   dice2 = roll_1_die(x)  # Roll second die 'x' times
   dice1 + dice2  # Sum of the two dice rolls
@@ -280,18 +282,33 @@ runif(5,0,1)
 ### 4.3
 # Using runif, write a function that returns TRUE 22% of the time and FALSE 78% of the time
 
+result_43 <- function(x){
+  my.vector = runif(x,0,1) <= 0.22
+  set.seed(3) # For reproducibility
+  # Check the proportion of TRUE and FALSE results
+  table(my.vector) / x
+}
+
 ### 4.4
 # Based on today's lecture about pdfs, what is the probability density for a uniform pdf bounded between 
 # 0 and 1 associated with all values of x between 0 and 1? Explain why.
+# Ans: The Uniform PDF bounded by 0 and 1 is "1"
+# i.e. 1/(1-0) = 1
 
 ### 4.5
 # Similarly, what is the probability density for a uniform pdf bounded between 5 and 6 associated with all values of x between 5 and 6?
+# Ans: The Uniform PDF bounded by 5 and 6 is "1"
+# i.e. 1/(6-5) = 1
 
 ### 4.6
 # What is the probability density for a uniform pdf bounded between 0 and 0.5 associated with all values of x between 0 and 0.5?
+# Ans: The Uniform PDF bounded by 0 and 0.5 is "2"
+# i.e. 1/(0.5-0) = 2
 
 ### 4.7
 # What is the probability density for a uniform pdf bounded between 0 and 2 associated with all values of x between 0 and 2?
+# Ans: The Uniform PDF bounded by 0 and 2 is "0.5"
+# i.e. 1/(2-0) = 0.5
 
 ### 4.8
 # run the following code:
@@ -301,3 +318,7 @@ dunif(0.2,0,0.5)
 dunif(1.3,0,2)
 
 # Based on the results of this code and your answers above, what can you conclude about the purpose of the dunif function?
+# Ans: The purpose of the dunif() is to produce the uniform pdf bounded by a "min" and "max" value based on the value "x" where you want to evaluate the pdf.
+# if the value "x" is within the interval;
+# uniform pdf is 1/(max-min)
+# Otherwise the density is 0
