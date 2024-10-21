@@ -26,7 +26,6 @@
 ####    Functions   ####
 ########################
 
-
 # FUNCTIONS are commands that take in inputs and produce outputs. They mostly take in the inputs in brackets, like this:
 sqrt(25)
 exp(3)
@@ -42,8 +41,20 @@ rep(4,3)
 rep(x=3, times=4)
 rep(times=4, x=3)
 
-# produce the same result, because we inputed the arguments by name using the 'argname = x' construction. When we don't use this construction, the function defaults each input to an argument according to a predefined order.
+"rep(1:4, 2)
+rep(1:4, each = 2)       # not the same.
+rep(1:4, c(2,2,2,2))     # same as second.
+rep(1:4, c(2,1,2,1))
+rep(1:4, each = 2, length.out = 4)    # first 4 only.
+rep(1:4, each = 2, length.out = 10)   # 8 integers plus two recycled 1's.
+rep(1:4, each = 2, times = 3)         # length 24, 3 complete replications
+rep(1, 40*(1-.8)) # length 7 on most platforms
+fred <- list(happy = 1:10, name = "squash")
+rep(fred, 5)"
 
+# produce the same result, because we inputed the arguments by name using the 'argname = x' construction. When we don't use this construction, the function defaults each input to an argument according to a predefined order.
+rep(3,4)
+rep(4,3)
 # OPERATORS are special functions that take only 2 arguments, and do not use brackets. Instead, you must input the two arguments on either side of the operator. Examples of operators include +, -,*,/, ^, %%, %/%, :, and there are many more which we will learn about soon.
 
 ########################
@@ -84,8 +95,6 @@ class (y)
 Salaam -> y
 
 # One final very important class of object is the 'logical' class, a.k.a. Boolean. 
-
-# One final very important class of object is the 'logical' class, a.k.a. Boolean. 
 # Boolean objects can take one of two values
 
 TRUE
@@ -116,7 +125,7 @@ xor(FALSE,FALSE)
 # YOu will have noticed that the console has always returned a [1] in front of it's output so far. This is because R has considered all these objects to be 'vectors' (in Python, this is the same thing as an array). Vectors are objects that can contain multiple elements. For example:
 
 z <- 50:80
-z
+z[2]
 
 # The numbers in square brackets tell you the INDEX of the element to their right. The index is simply the position number of that element. You will notice that, unlike in Python, the first element of an object in R has the index number 1 and not 0. This is one of the most important syntactical differences between Python and R (if you think this is not a very important difference, you are correct. The two languages are very similar in syntax.)
 
@@ -159,7 +168,6 @@ my.vector[c(TRUE,TRUE,FALSE,FALSE,FALSE)]
 my.vector == 'is'
 1:10 >= 5
 1:10 %% 2 == 0    ## %% is the remainder operator, it returns the remainder when you divide the left argument by the right argument.
-
 ### 2.1
 digits <- 0:10
 # Using the least amount of code possible, write a line of code that returns only the odd values of the digits object.
@@ -199,7 +207,7 @@ f2(8,9)
 f2(14,7)
 
 ### 3.1 What is the purpose of function f2? Write in comments below.
-#The purpose of f2 is to determine whether the first argument is divisible by the second argument , if that is the case , the function will return TRUE , otherwise it will return FALSE.
+#The purpose of f2 is to determine wheter the first argument is divisible by the second argument , if that is the case , the function will return TRUE , otherwise it will return FALSE
 
 ### 3.2
 # Based on the definition of the mean from today's lecture, write a function that calculates the mean of all of the elements of a vector. assign it to the object my.mean. You will find the functions 'sum' and 'length' useful here.
@@ -208,10 +216,9 @@ my.mean <- function(x){
 }
 my.mean(ex.vector)
 # compare your function to the native function in R. Does it produce the same results?
-
 my.mean(ex.vector)
 mean(ex.vector)
-#Yes, it does ! 
+#Yes, it does.
 
 ####################################
 ####      Randomness in R       ####
@@ -219,6 +226,12 @@ mean(ex.vector)
 
 # There are several ways to generate randomness in R. The simplest function is 
 ?sample
+x <- 1:12
+sample(x)
+
+sample(x, replace = TRUE)
+
+sample(x[x >  8]) # length 4
 
 #which randomly draws WITHOUT replacement from a specified vector. For example, to choose a number at random between 1 and 10:
 sample(1:10, 1)
@@ -227,7 +240,7 @@ sample(1:10, 3)
 # However, by default, sample won't let the same number repeat when you do this. This is called sampling without replacement, 
 # because it is as if, each time you pick out a number, it is now gone from the pool of possible numbers and has not been replaced.
 # If you want to sample randomly between 1 and 10 20 times, each time choosing between all 10 numbers, you have to write:
-sample(1:10, 20, replace = TRUE)
+
 
 ### 4.1
 # Write a function that simulates the roll of 2 6-sided dice, where the argument x is the number of times you roll the 2 dice, 
@@ -238,6 +251,7 @@ dice.roll <- function(x){
   sample(1:6,x,replace = TRUE) + sample(1:6,x,replace = 5)
 }
 dice.roll(5)
+
 ### 4.2
 # Using the function hist, create histograms of the results of double dice rolls when you roll them 10 times, 
 #then 50, then 100, then 1000, then 10000. Use breaks=1:12 as an argument within the hist function. 
@@ -260,6 +274,11 @@ runif(5,0,1)
 
 ### 4.3
 # Using runif, write a function that returns TRUE 22% of the time and FALSE 78% of the time
+fu <- function(){
+  ran <- runif(1)
+  return(ran <= 0.22)
+}
+fu()
 
 ### 4.4
 # Based on today's lecture about pdfs, what is the probability density for a uniform pdf bounded between 
@@ -281,4 +300,4 @@ dunif(2,0,1)
 dunif(0.2,0,0.5)
 dunif(1.3,0,2)
 
-# Based on the results of this code and your answers above, what can you conclude about the purpose of the dunif function?
+# Based on the results of this code and your answers above, what can you conclude about the purpose of the dunif function?sample(x[x >  9]) # oops -- length 10!
