@@ -500,6 +500,9 @@ runif(5, 0, 1)
 # Using runif, write a function that returns TRUE 22% of the time and FALSE 78% of the time
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 2e8fd56 (Exercise 4.1 to 4.8 done)
 prob <- function(x)
 {
   outcome <- runif(x, 0,1 ) <= 0.22
@@ -517,11 +520,15 @@ prob(50)
 # Similarly, what is the probability density for a uniform pdf bounded between 5 and 6 associated with all values of x between 5 and 6?
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 2e8fd56 (Exercise 4.1 to 4.8 done)
 #the probability density for a uniform pdf bouneded between 0 and 1 associated with all values of x between 5 and 6 is also 1 as shown below
 
 pdf <- 1/(6-5)
 pdf
 
+<<<<<<< HEAD
 ### 4.6
 # What is the probability density for a uniform pdf bounded between 0 and 0.5 associated with all values of x between 0 and 0.5?
 
