@@ -169,7 +169,7 @@ group1 %in% group2
 # intersect is a function which returns the elements that all of its arguments have in common. For example:
 intersect(group1,group2)
 # Write a line of code that replicates this output using only group1, group2, square brackets, and logical operators.
-
+group1[group1 %in% group2]
 
 ####################################
 ####     Writing functions      ####
@@ -195,10 +195,14 @@ f2(8,9)
 f2(14,7)
 
 ### 3.1 What is the purpose of function f2? Write in comments below.
-
+##The function is to perform a division and return either true or false depending if the number is 0 or not.
 ### 3.2
 # Based on the definition of the mean from today's lecture, write a function that calculates the mean of all of the elements of a vector. assign it to the object my.mean. You will find the functions 'sum' and 'length' useful here.
-
+my.mean <- function(testing) {
+  testingsum = sum(testing)
+  testingmean = testingsum/length(testing)
+  return(testingmean)
+}
 # compare your function to the native function in R. Does it produce the same results?
 
 my.mean(ex.vector)
@@ -225,6 +229,13 @@ sample(1:10, 20, replace = TRUE)
 # and the output is a vector of length x, where each element corresponds to the sum of the two sides of the dice.
 # HINT: one way to do this is to start by writing a function for a single 6-sided die, then create a new function 
 # that repeats the first function twice and adds up the result.
+sample(1:6,1, replace = TRUE)
+roledice <- function(x){
+  dice1 <- sample(1:6, x, replace = TRUE)
+  dice2 <- sample(1:6, x ,replace = TRUE)
+  sumofdice <- dice1+dice2
+  return(sumofdice)
+}
 
 ### 4.2
 # Using the function hist, create histograms of the results of double dice rolls when you roll them 10 times, 
