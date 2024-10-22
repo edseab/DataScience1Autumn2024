@@ -2,15 +2,13 @@
 ###################################
 ########                   ########
 ########   Data Science 1  ########
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 ########       Lab 1       ########
-=======
+
 ########       Lab 1       ######## 
->>>>>>> 1b0b93d (Created a file inside a branch)
-=======
+
 ########       Lab 1       ########
->>>>>>> f9aa72b (testing codes)
+
 ########   15 Oct. 2024    ########
 ########                   ########
 ###################################
@@ -21,18 +19,16 @@
 
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 # On the right is the console. You can input code directly into the console line by line - you do not need to run an entire file. Try running a simple calculation in the console, like 5+9. Type it in and press enter.
 5 + 9
-=======
+
 # On the right is the console. You can input code directly into the console line by line - you do not need to run an entire file. Try running a simple calculation in the console, like 5+9. Type it in and press enter. 
 5+9
->>>>>>> 1b0b93d (Created a file inside a branch)
-=======
+
 # On the right is the console. You can input code directly into the console line by line - you do not need to run an entire file. Try running a simple calculation in the console, like 5+9. Type it in and press enter.
 5 + 9
->>>>>>> f9aa72b (testing codes)
+
 # You can also write code in this, the code editor, and run it from here. Try highlighting the following line and pressing 'Ctrl + Enter' ('Cmd + Enter' on MacOS):
 12 * 4 - 6
 
@@ -40,16 +36,14 @@
 # Text beginning with a # sign is read as 'comment' and will not be evaluated by the console.
 ## Numbers (like 1.1, 2.3, etc) signify that I would like you to write a line a code in the code file and run it in the console
 
-########################
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 ####    Functions   ####A
-=======
+
 ####    Functions   ####
->>>>>>> 1b0b93d (Created a file inside a branch)
+
 =======
 ####    Functions   ####A
->>>>>>> 9baf4f4 (function to calculate mean done)
+
 ########################
 
 # FUNCTIONS are commands that take in inputs and produce outputs. They mostly take in the inputs in brackets, like this:
@@ -98,8 +92,7 @@ rep(1:4, each = 2, times = 3)
 <<<<<<< HEAD
 rep(x=3, times=4) # nolint: infix_spaces_linter.
 rep(times=4, x=3) # nolint: infix_spaces_linter.
->>>>>>> 1b0b93d (Created a file inside a branch)
-=======
+
 rep(x = 3, times = 4) # nolint: infix_spaces_linter.
 rep(times = 4, x = 3) # nolint: infix_spaces_linter.
 >>>>>>> f9aa72b (testing codes)
@@ -120,13 +113,9 @@ x <- 4
 
 <<<<<<< HEAD
 <<<<<<< HEAD
-x * 5
-=======
+
 x*5
->>>>>>> 1b0b93d (Created a file inside a branch)
-=======
-x * 5
->>>>>>> f9aa72b (testing codes)
+
 
 ##############################################################
 ###    ADVANCED NOTE: the = operator can also be used      ###
@@ -145,23 +134,9 @@ class(x)
 
 "Hello" -> y
 y
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 class(y)
 # testing class
-
-=======
-class (y)
-<<<<<<< HEAD
->>>>>>> 1b0b93d (Created a file inside a branch)
-=======
-#testing class
-=======
-class(y)
-# testing class
->>>>>>> f9aa72b (testing codes)
-
->>>>>>> 8335800 (Testing the rep functions)
 
 # y is now a 'character' object (R does not use the term 'string')
 
@@ -169,8 +144,6 @@ class(y)
 
 Salaam -> y
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 # One final very important class of object is the 'logical' class, a.k.a. Boolean.
 
 # One final very important class of object is the 'logical' class, a.k.a. Boolean.
@@ -178,12 +151,6 @@ Salaam -> y
 # One final very important class of object is the 'logical' class, a.k.a. Boolean. 
 
 # One final very important class of object is the 'logical' class, a.k.a. Boolean. 
->>>>>>> 1b0b93d (Created a file inside a branch)
-=======
-# One final very important class of object is the 'logical' class, a.k.a. Boolean.
-
-# One final very important class of object is the 'logical' class, a.k.a. Boolean.
->>>>>>> f9aa72b (testing codes)
 # Boolean objects can take one of two values
 
 TRUE
@@ -236,7 +203,6 @@ my.vector <- c('this','is','a','vector')
 my.vector
 length(my.vector)
 class(my.vector)
-
 # You can use square brackets to isolate elements in a vector by putting their index between the brackets:
 my.vector[1]
 my.vector[4]
@@ -278,7 +244,7 @@ my.vector
 
 <<<<<<< HEAD
 my.vector[c(TRUE,TRUE,FALSE,FALSE,FALSE)]
->>>>>>> 1b0b93d (Created a file inside a branch)
+>>>>>>>  (Created a file inside a branch)
 =======
 my.vector[c(TRUE, TRUE, FALSE, FALSE, FALSE)]
 >>>>>>> f9aa72b (testing codes)
@@ -335,7 +301,7 @@ odd_numbers <- digits[digits %% 2 == 1]
 odd_numbers
 print(odd_numbers)
 =======
->>>>>>> 9baf4f4 (function to calculate mean done)
+>>>>>>> (function to calculate mean done)
 
 # Another important logical operator is the %in% operator. It tells you if the elements on the left are found in the elements on the right. E.G.
 group1 <- c("Arthur", "Fatima", "Suleiman", "Marco")
@@ -349,13 +315,13 @@ intersect(group1, group2)
 
 <<<<<<< HEAD
 <<<<<<< HEAD
->>>>>>> 1b0b93d (Created a file inside a branch)
+>>>>>>>(Created a file inside a branch)
 =======
 group1[group1 %in% group2]
 >>>>>>> f9aa72b (testing codes)
 =======
 group2[group2 %in% group1]
->>>>>>> 9baf4f4 (function to calculate mean done)
+>>>>>>>  (function to calculate mean done)
 
 ####################################
 ####     Writing functions      ####
@@ -367,7 +333,7 @@ group2[group2 %in% group1]
 f1 <- function(x) x * 2 + 1
 =======
 f1 <- function(x) x*2 + 1
->>>>>>> 1b0b93d (Created a file inside a branch)
+>>>>>>>  (Created a file inside a branch)
 =======
 f1 <- function(x) x * 2 + 1
 >>>>>>> f9aa72b (testing codes)
@@ -379,7 +345,7 @@ f1(7)
 <<<<<<< HEAD
 ex.vector <- c(2, 7, 4, 24, 13, 8, 12)
 ex.vector <- c(2,7,4,24,13,8,12)
->>>>>>> 1b0b93d (Created a file inside a branch)
+>>>>>>>  (Created a file inside a branch)
 =======
 ex.vector <- c(2, 7, 4, 24, 13, 8, 12)
 >>>>>>> f9aa72b (testing codes)
@@ -404,7 +370,7 @@ f2 <- function(x,y){
 
 f2(8,9)
 f2(14,7)
->>>>>>> 1b0b93d (Created a file inside a branch)
+>>>>>>>  (Created a file inside a branch)
 =======
 f2 <- function(x, y) {
   z <- x %% y
@@ -422,7 +388,7 @@ f2(14, 7)
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
->>>>>>> 9baf4f4 (function to calculate mean done)
+>>>>>>> (function to calculate mean done)
 my.mean <- function(x){
   total <- sum(x)
   z <- length(x)
@@ -434,9 +400,7 @@ my.mean(ex.vector)
 
 <<<<<<< HEAD
 =======
->>>>>>> 1b0b93d (Created a file inside a branch)
-=======
->>>>>>> 9baf4f4 (function to calculate mean done)
+
 
 # compare your function to the native function in R. Does it produce the same results?
 
@@ -470,8 +434,8 @@ sample(1:10, 1)
 sample(1:10, 3)
 <<<<<<< HEAD
 # However, by default, sample won't let the same number repeat when you do this. This is called sampling without replacement, 
->>>>>>> 1b0b93d (Created a file inside a branch)
-=======
+
+
 # However, by default, sample won't let the same number repeat when you do this. This is called sampling without replacement,
 >>>>>>> f9aa72b (testing codes)
 # because it is as if, each time you pick out a number, it is now gone from the pool of possible numbers and has not been replaced.
@@ -535,15 +499,13 @@ hist(dice(10000), 1:12)
 # Another way to generate randomness is to sample from a pdf, which is a continuous distribution. 
 # The simplest pdf is the uniform function. The uniform function is a flat line bounded between 2 numbers. 
 # Because it is flat, the probability of drawing a sample from any interval of given width between the two bounds 
->>>>>>> 1b0b93d (Created a file inside a branch)
-=======
-=======
+
 ?hist
 hist(dice(10), 1:12)
 hist(dice(50), 1:12)
 hist(dice(100), 1:12)
 hist(dice(1000), 1:12)
->>>>>>> 085ea9e (Histogram function)
+
 # Another way to generate randomness is to sample from a pdf, which is a continuous distribution.
 # The simplest pdf is the uniform function. The uniform function is a flat line bounded between 2 numbers.
 # Because it is flat, the probability of drawing a sample from any interval of given width between the two bounds
@@ -557,8 +519,7 @@ hist(dice(1000), 1:12)
 runif(5, 0, 1)
 =======
 runif(5,0,1)
->>>>>>> 1b0b93d (Created a file inside a branch)
-=======
+
 runif(5, 0, 1)
 >>>>>>> f9aa72b (testing codes)
 
@@ -568,8 +529,7 @@ runif(5, 0, 1)
 prob <- function(x)
 {
   outcome <- runif(x, 0,1 ) <= 0.22
-  return(outcome)
-}
+  return(outcome)}
 prob(50)
 ### 4.4
 # Based on today's lecture about pdfs, what is the probability density for a uniform pdf bounded between
@@ -579,7 +539,6 @@ prob(50)
 ### 4.4
 # Based on today's lecture about pdfs, what is the probability density for a uniform pdf bounded between
 # 0 and 1 associated with all values of x between 0 and 1? Explain why.
-
 ### 4.5
 # Similarly, what is the probability density for a uniform pdf bounded between 5 and 6 associated with all values of x between 5 and 6?
 
@@ -618,7 +577,7 @@ dunif(1.3, 0, 2)
 #the dunif is used in calculating the probability density of a uniform distribution across a range of values at a given point of x
 =======
 =======
->>>>>>> 2e8fd56 (Exercise 4.1 to 4.8 done)
+
 ### 4.6
 # What is the probability density for a uniform pdf bounded between 0 and 0.5 associated with all values of x between 0 and 0.5?
 
