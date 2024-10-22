@@ -8,17 +8,17 @@
 ###################################
 ###################################
 
+#### ED SEABRIGHT'S ANSWERS
 
 ## Welcome to this first lab. Here we  will learn the basics of R, an open-source programming language and software environment.
-
+.
 
 
 # On the right is the console. You can input code directly into the console line by line - you do not need to run an entire file. Try running a simple calculation in the console, like 5+9. Type it in and press enter. 
 5+9
-# You can also write code in this, the code editor, and run it from here. Try highlighting the following line and clicking 'Run':
+# You can also write code in this, the code editor, and run it from here. Try highlighting the following line and pressing 'Ctrl + Enter' ('Cmd + Enter' on MacOS):
 12 * 4 - 6
 
-# You can also press 'Ctrl (Cmd) + Enter' to run the code you have highlighted.
 
 # Text beginning with a # sign is read as 'comment' and will not be evaluated by the console.
 ## Numbers (like 1.1, 2.3, etc) signify that I would like you to write a line a code in the code file and run it in the console
@@ -38,9 +38,9 @@ rep(4,3)
 # If you can't remember in which order you have to input the arguments of a function, or if you just want to learn what a function does, you can type in ? followed by the function name in the console:
 ?rep
 
-# Each argument has a name. By explicitly referring to these names when calling the function, we can avoid  any problems with order. For example:
-rep(x=3, times=4)
-rep(times=4, x=3)
+# Each argument has a name. By explicitly referring to these names when calling the function, we can avoid  any problems with order. For example: # nolint
+rep(x=3, times=4) # nolint: infix_spaces_linter.
+rep(times=4, x=3) # nolint: infix_spaces_linter.
 
 # produce the same result, because we inputed the arguments by name using the 'argname = x' construction. When we don't use this construction, the function defaults each input to an argument according to a predefined order.
 
@@ -82,6 +82,8 @@ class (y)
 # If we forget to use quote marks R will search for a stored object with that name and return an error if it doesn't find it:
 
 Salaam -> y
+
+# One final very important class of object is the 'logical' class, a.k.a. Boolean. 
 
 # One final very important class of object is the 'logical' class, a.k.a. Boolean. 
 # Boolean objects can take one of two values

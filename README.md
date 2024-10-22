@@ -21,6 +21,8 @@ Repository for UM6Ps Masters in Collective Intelligence Autumn 2024 class in Dat
 
         git config --global user.name "Ed Seabright"
         git config --global user.email ed.seabright@gmail.com
+        git config --global user.password "MyPassword123"
+        git config --global credential.helper store    
 
 6. Clone this repository either from the Source Control tab or the Welcome page (...  -> Help -> Welcome) in Positron/VSCode
    OR using the terminal command line:
