@@ -237,15 +237,15 @@ sample(1:10, 20, replace = TRUE)
 # HINT: one way to do this is to start by writing a function for a single 6-sided die, then create a new function 
 # that repeats the first function twice and adds up the result.
 
-cast.die <- function(x){
+cast_die <- function(x){
   sample(1:6,x,replace=TRUE)
 }
 
-cast.2.dice <- function(x){
-return(cast.die(x)+cast.die(x))
+cast_2_dice <- function(x){
+return(cast_die(x)+cast_die(x))
 }
 
-cast.2.dice(20)
+cast_2_dice(20)
 
 ### 4.2
 # Using the function hist, create histograms of the results of double dice rolls when you roll them 10 times, 
@@ -253,11 +253,11 @@ cast.2.dice(20)
 # What do you notice? Write it in comments below your code.
 
 set.seed(105)
-hist(cast.2.dice(10),breaks=1:12)
-hist(cast.2.dice(50),breaks=1:12)
-hist(cast.2.dice(100),breaks=1:12)
-hist(cast.2.dice(1000),breaks=1:12)
-hist(cast.2.dice(10000),breaks=1:12)
+hist(cast_2_dice(10),breaks=1:12)
+hist(cast_2_dice(50),breaks=1:12)
+hist(cast_2_dice(100),breaks=1:12)
+hist(cast_2_dice(1000),breaks=1:12)
+hist(cast_2_dice(10000),breaks=1:12)
 
 ## The more dice we roll, the more the histogram looks like the probability mass function derived in class
 
@@ -273,14 +273,14 @@ runif(5,0,1)
 ### 4.3
 # Using runif, write a function that returns TRUE 22% of the time and FALSE 78% of the time
 
-generate.bool.22 <- function(x){
+generate_bool_22 <- function(x){
   s <- runif(x,0,1)
   return(s<0.22)
 }
 
-o1 <- generate.bool.22(10)
+o1 <- generate_bool_22(10)
 hist(as.numeric(o1))
-o2 <- generate.bool.22(1000000)
+o2 <- generate_bool_22(1000000)
 hist(as.numeric(o2))
 ### 4.4
 # Based on today's lecture about pdfs, what is the probability density for a uniform pdf bounded between 
