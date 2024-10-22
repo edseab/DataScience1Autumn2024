@@ -279,8 +279,6 @@ fu <- function(){
   return(ran <= 0.22)
 }
 fu()
-ex.ve <-c(163,152,159,162,163,154,152)
-mean(ex.ve)
 
 ### 4.4
 # Based on today's lecture about pdfs, what is the probability density for a uniform pdf bounded between 
