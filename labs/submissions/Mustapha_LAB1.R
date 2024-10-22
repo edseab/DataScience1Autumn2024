@@ -283,7 +283,7 @@ runif(5,0,1)
 # Using runif, write a function that returns TRUE 22% of the time and FALSE 78% of the time
 
 result_43 <- function(x){
-  my.vector = runif(x,0,1) <= 0.22
+  my.vector = runif(x,0,1) < 0.22
   set.seed(3) # For reproducibility
   # Check the proportion of TRUE and FALSE results
   table(my.vector) / x
