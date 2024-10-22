@@ -51,11 +51,13 @@ rep(times=4, x=3)
 
 # Functions are one example of OBJECTS, which are stored within the main (global) ENVIRONMENT of the console. We can create new objects by using the 'assign' operator:
 
-x <- 4
+x <- 4.5
+
 
 # You can now see in the 'Environment' tab below that the object 'x'  is stored with the value 4.
 
 x*5
+
 
 ##############################################################
 ###    ADVANCED NOTE: the = operator can also be used      ###
@@ -133,15 +135,18 @@ my.vector[c(1,4)]
 
 ### 1.1
 # You can assign values to specific elements. Try writing a line of code below that changes the 4th element of my.vector to the word 'test'
-
+my.vector[4]<- 'test'
+my.vector
 
 ### 1.2
 # You can even assign values to elements of a vector that don't exist yet, thus creating them. Try assigning the word 'example' to the (as yet non-existent) 5th element of my.vector.
-
-
+my.vector[5]<-'example'
+my.vector
 # Instead of indices, you can select elements of a vector using a logical vector of the same length, e.g.
 
 my.vector[c(TRUE,TRUE,FALSE,FALSE,FALSE)]
+
+c(TRUE,TRUE,FALSE,FALSE,FALSE)
 
 
 ####################################
@@ -158,17 +163,19 @@ my.vector == 'is'
 ### 2.1
 digits <- 0:10
 # Using the least amount of code possible, write a line of code that returns only the odd values of the digits object.
-
+digits[digits %% 2 != 0]
 # Another important logical operator is the %in% operator. It tells you if the elements on the left are found in the elements on the right. E.G.
 group1 <- c('Arthur', 'Fatima', 'Suleiman', 'Marco')
 group2 <- c('Marco','Maria', 'Victor','Fatima', 'Antonio')
 group1 %in% group2
 
+
+
 ## 2.2 
 # intersect is a function which returns the elements that all of its arguments have in common. For example:
 intersect(group1,group2)
 # Write a line of code that replicates this output using only group1, group2, square brackets, and logical operators.
-
+group1[group1 %in% group2]
 
 ####################################
 ####     Writing functions      ####
@@ -197,9 +204,10 @@ f2(14,7)
 
 ### 3.2
 # Based on the definition of the mean from today's lecture, write a function that calculates the mean of all of the elements of a vector. assign it to the object my.mean. You will find the functions 'sum' and 'length' useful here.
-
-# compare your function to the native function in R. Does it produce the same results?
-
+mean <- c(1,2,3,4,5,6,7,8,9)
+my.mean <- function(x) sum(x)/length(x)
+my.mean(mean)
+# compare your function to the native function in R. Does it produce the same results? YESSSSS
 my.mean(ex.vector)
 mean(ex.vector)
 
@@ -224,12 +232,18 @@ sample(1:10, 20, replace = TRUE)
 # and the output is a vector of length x, where each element corresponds to the sum of the two sides of the dice.
 # HINT: one way to do this is to start by writing a function for a single 6-sided die, then create a new function 
 # that repeats the first function twice and adds up the result.
-
+dice <- c(1,2,3,4,5,6)
+random <- function(x) replicate(x, sum(sample(dice, 2, replace=TRUE)))
+random(5)
 ### 4.2
 # Using the function hist, create histograms of the results of double dice rolls when you roll them 10 times, 
-#then 50, then 100, then 1000, then 10000. Use breaks=1:12 as an argument within the hist function. 
+#then 50, then 100, then 1000, then 10000. Use breaks=1:12 as an argument within the hist function.
+sum_rolls<-c(random(10),random(50),random(100),random(1000),random(10000))
+hist(sum_rolls, breaks = 1:12)
 # What do you notice? Write it in comments below your code.
-
+#Bell-shaped distribution: The sum of two dice peaks around 7, which is the most frequent outcome, while sums like 2 and 12 are much rarer.
+#Symmetry: The distribution is roughly symmetric, with frequencies decreasing as you move away from the center (7).
+#Smoothing with more rolls: As you increase the number of rolls (up to 10,000), the histogram becomes smoother and matches the expected probability distribution.
 
 # Another way to generate randomness is to sample from a pdf, which is a continuous distribution. 
 # The simplest pdf is the uniform function. The uniform function is a flat line bounded between 2 numbers. 
@@ -242,19 +256,30 @@ runif(5,0,1)
 
 ### 4.3
 # Using runif, write a function that returns TRUE 22% of the time and FALSE 78% of the time
+bool_runif <- function() runif(1) < 0.22
+bool_runif()
 
 ### 4.4
 # Based on today's lecture about pdfs, what is the probability density for a uniform pdf bounded between 
 # 0 and 1 associated with all values of x between 0 and 1? Explain why.
 
+#1/The uniform distribution means that every value of x between 0 and 1 is equally likely to occur.
+#2/The total area under the PDF curve must equal 1, because the total probability of all possible outcomes must be 1.
+#3/Since the interval has a length of 1 (from 0 to 1), the height of the PDF must be 1
+#4/ so that the total area is 1×1=1
+#5/Therefore, the PDF is constant and equal to 1 for all values of x between 0 and 1
+
 ### 4.5
 # Similarly, what is the probability density for a uniform pdf bounded between 5 and 6 associated with all values of x between 5 and 6?
+#the probability density function f(x) for all values of x between 5 and 6 is 1 (because 6-5=1 and f(x)1/1=1)
 
 ### 4.6
 # What is the probability density for a uniform pdf bounded between 0 and 0.5 associated with all values of x between 0 and 0.5?
+#the probability density function f(x) for all values of x between 0 and 0.5 is 2
 
 ### 4.7
 # What is the probability density for a uniform pdf bounded between 0 and 2 associated with all values of x between 0 and 2?
+#the probability density function f(x) for all values of x between 0 and 2 is: 0,5
 
 ### 4.8
 # run the following code:
@@ -264,3 +289,4 @@ dunif(0.2,0,0.5)
 dunif(1.3,0,2)
 
 # Based on the results of this code and your answers above, what can you conclude about the purpose of the dunif function?
+#The dunif function in R computes the probability density of a uniform distribution at specified values, given defined minimum and maximum bounds.
