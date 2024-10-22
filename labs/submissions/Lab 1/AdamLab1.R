@@ -163,7 +163,7 @@ my.vector == 'is'
 ### 2.1
 digits <- 0:10
 # Using the least amount of code possible, write a line of code that returns only the odd values of the digits object.
-digits %% 2 != 0
+digits[digits %% 2 != 0]
 # Another important logical operator is the %in% operator. It tells you if the elements on the left are found in the elements on the right. E.G.
 group1 <- c('Arthur', 'Fatima', 'Suleiman', 'Marco')
 group2 <- c('Marco','Maria', 'Victor','Fatima', 'Antonio')
@@ -243,11 +243,11 @@ dice.roll(5)
 # Using the function hist, create histograms of the results of double dice rolls when you roll them 10 times, 
 #then 50, then 100, then 1000, then 10000. Use breaks=1:12 as an argument within the hist function. 
 # What do you notice? Write it in comments below your code.
-hist(dice.roll(10))
-hist(dice.roll(50))
-hist(dice.roll(100))
-hist(dice.roll(1000))
-hist(dice.roll(10000))
+hist(dice.roll(10),breaks=1:12)
+hist(dice.roll(50),breaks=1:12)
+hist(dice.roll(100),breaks=1:12)
+hist(dice.roll(1000),breaks=1:12)
+hist(dice.roll(10000),breaks=1:12)
 
 
 # Another way to generate randomness is to sample from a pdf, which is a continuous distribution. 
@@ -261,7 +261,11 @@ runif(5,0,1)
 
 ### 4.3
 # Using runif, write a function that returns TRUE 22% of the time and FALSE 78% of the time
-
+generate.bool.22 <- function(x){
+  s <- runif(x,0,1)
+  return(s<0.22)
+}
+generate.bool.22(10)
 ### 4.4
 # Based on today's lecture about pdfs, what is the probability density for a uniform pdf bounded between 
 # 0 and 1 associated with all values of x between 0 and 1? Explain why.
