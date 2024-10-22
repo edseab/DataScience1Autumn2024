@@ -132,11 +132,11 @@ my.vector[c(1,4)]
 
 ### 1.1
 # You can assign values to specific elements. Try writing a line of code below that changes the 4th element of my.vector to the word 'test'
-
+my.vector[4] <- "test"
 
 ### 1.2
 # You can even assign values to elements of a vector that don't exist yet, thus creating them. Try assigning the word 'example' to the (as yet non-existent) 5th element of my.vector.
-
+my.vector[5] <- "example"
 
 # Instead of indices, you can select elements of a vector using a logical vector of the same length, e.g.
 
@@ -168,6 +168,7 @@ group1 %in% group2
 intersect(group1,group2)
 # Write a line of code that replicates this output using only group1, group2, square brackets, and logical operators.
 
+group1[group1 %in% group2]
 
 ####################################
 ####     Writing functions      ####
@@ -193,10 +194,17 @@ f2(8,9)
 f2(14,7)
 
 ### 3.1 What is the purpose of function f2? Write in comments below.
+# It is to know if 14 divided by 2 has a remainder 0 or not. If it has remainder 0, it returns TRUE
 
 ### 3.2
 # Based on the definition of the mean from today's lecture, write a function that calculates the mean of all of the elements of a vector. assign it to the object my.mean. You will find the functions 'sum' and 'length' useful here.
+my.mean <- function(x){
+  y = sum(x)/length(x)
+  return(y)
+}
 
+a <- c(3,4,5,6,7,8)
+my.mean(a)
 # compare your function to the native function in R. Does it produce the same results?
 
 my.mean(ex.vector)
@@ -224,10 +232,35 @@ sample(1:10, 20, replace = TRUE)
 # HINT: one way to do this is to start by writing a function for a single 6-sided die, then create a new function 
 # that repeats the first function twice and adds up the result.
 
+die.roll <- function(x){
+  sample(1:6, 1, replace = TRUE)
+}
+
+roll_two_dice <- function(){
+  die.roll() + die.roll()
+}
+
+rolls <- function(x){
+  y <- replicate(x, roll_two_dice())
+  return (y)
+}
+result <- rolls(10)
+print(result)
+
 ### 4.2
 # Using the function hist, create histograms of the results of double dice rolls when you roll them 10 times, 
 #then 50, then 100, then 1000, then 10000. Use breaks=1:12 as an argument within the hist function. 
 # What do you notice? Write it in comments below your code.
+
+times <- c(10, 50, 100, 1000, 10000)
+
+par(mfrow = c(3, 2))  # Set up a 3x2 plotting area
+
+for (count in times) {
+  result <- rolls(count)
+  hist(result, breaks = 1:12, main = paste("Rolls:", count), 
+       xlab = "Sum of Two Dice", ylab = "Frequency", col = "lightblue")
+}
 
 
 # Another way to generate randomness is to sample from a pdf, which is a continuous distribution. 
@@ -275,3 +308,6 @@ dunif(0.2,0,0.5)
 dunif(1.3,0,2)
 
 # Based on the results of this code and your answers above, what can you conclude about the purpose of the dunif function?
+# From the result, It provides a way to evaluate how likely it is to randomly select a particular value from a specified uniform distribution defined by lower and upper bounds.
+#Values outside the defined range return a density of 0, indicating no probability of selecting those values.
+#For values within the range, the output gives the constant height of the probability density function, which is critical for understanding how uniformly distributed data behaves across different intervals.
