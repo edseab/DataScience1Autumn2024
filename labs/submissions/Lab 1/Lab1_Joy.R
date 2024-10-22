@@ -39,8 +39,7 @@ sqrt(25)
 exp(3)
 
 # Often, functions take multiple inputs with different functions. Note how:
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 rep(3, 4)
 # produces a different output from
 rep(4, 3)
@@ -58,24 +57,19 @@ rep(1:4, each = 2, times = 3)
 # Each argument has a name. By explicitly referring to these names when calling the function, we can avoid  any problems with order. For example: # nolint
 rep(x = 3, times = 4) # nolint: infix_spaces_linter.
 rep(times = 4, x = 3) # nolint: infix_spaces_linter.
-=======
-rep(3,4)
-=======
-rep(3, 4)
->>>>>>> f9aa72b (testing codes)
 # produces a different output from
 rep(4, 3)
 # If you can't remember in which order you have to input the arguments of a function, or if you just want to learn what a function does, you can type in ? followed by the function name in the console:
 ?rep
 
 # Each argument has a name. By explicitly referring to these names when calling the function, we can avoid  any problems with order. For example: # nolint
-<<<<<<< HEAD
+
 rep(x=3, times=4) # nolint: infix_spaces_linter.
 rep(times=4, x=3) # nolint: infix_spaces_linter.
 
 rep(x = 3, times = 4) # nolint: infix_spaces_linter.
 rep(times = 4, x = 3) # nolint: infix_spaces_linter.
->>>>>>> f9aa72b (testing codes)
+
 
 # produce the same result, because we inputed the arguments by name using the 'argname = x' construction. When we don't use this construction, the function defaults each input to an argument according to a predefined order.
 
@@ -91,8 +85,8 @@ x <- 4
 
 # You can now see in the 'Environment' tab below that the object 'x'  is stored with the value 4.
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
+
 
 x*5
 
@@ -138,7 +132,6 @@ Salaam -> y
 # One final very important class of object is the 'logical' class, a.k.a. Boolean.
 
 # One final very important class of object is the 'logical' class, a.k.a. Boolean.
-=======
 # One final very important class of object is the 'logical' class, a.k.a. Boolean. 
 
 # One final very important class of object is the 'logical' class, a.k.a. Boolean. 
@@ -194,7 +187,6 @@ my.vector
 length(my.vector)
 class(my.vector)
 ?class
-=======
 my.vector <- c('this','is','a','vector')
 my.vector
 length(my.vector)
@@ -221,11 +213,9 @@ my.vector
 # Instead of indices, you can select elements of a vector using a logical vector of the same length, e.g.
 
 my.vector[c(TRUE, TRUE, FALSE, FALSE, FALSE)]
-=======
 my.vector[c(1,4)]
-=======
 my.vector[c(1, 4)]
->>>>>>> f9aa72b (testing codes)
+
 
 ### 1.1
 # You can assign values to specific elements. Try writing a line of code below that changes the 4th element of my.vector to the word 'test'
@@ -239,7 +229,7 @@ my.vector
 
 # Instead of indices, you can select elements of a vector using a logical vector of the same length, e.g.
 
-<<<<<<< HEAD
+
 my.vector[c(TRUE,TRUE,FALSE,FALSE,FALSE)]
 >>>>>>> 5c44116 (Created a file inside a branch):labs/Submissions/Lab1/Lab1_Joy.R
 
@@ -263,7 +253,6 @@ digits
 odd_numbers <- digits[digits %% 2 == 1]
 odd_numbers
 
-<<<<<<< HEAD
 
 
 # Another important logical operator is the %in% operator. It tells you if the elements on the left are found in the elements on the right. E.G.
@@ -279,9 +268,8 @@ intersect(group1, group2)
 group2[group2 %in% group1]
 =======
 # LOGICAL OPERATORS are operators that return logical vectors of the same length as the left argument. Examples include '==', the equality operator (not to be confused with the single = which is an assignment operator), >, <, >=, <=, and != (the 'different from' operator).
-=======
 # LOGICAL OPERATORS are operators that return logical vectors of the same length as the left argument. Examples include '==', the equality operator (not to be confused with the single = which is an assignment operator), >, <, >=, <=, and != (the 'different from' operator). # nolint: line_length_linter.
->>>>>>> f9aa72b (testing codes)
+
 
 # For example:
 my.vector == "is"
@@ -295,8 +283,7 @@ digits
 odd_numbers <- digits[digits %% 2 == 1]
 odd_numbers
 print(odd_numbers)
-=======
->>>>>>> (function to calculate mean done)
+
 
 # Another important logical operator is the %in% operator. It tells you if the elements on the left are found in the elements on the right. E.G.
 group1 <- c("Arthur", "Fatima", "Suleiman", "Marco")
@@ -317,12 +304,10 @@ intersect(group1, group2)
 # Functions can be written and stored as objects. e.g:
 <<<<<<< HEAD:labs/submissions/Lab 1/Lab1_Joy.R
 f1 <- function(x) x * 2 + 1
-=======
 f1 <- function(x) x*2 + 1
->>>>>>>  (Created a file inside a branch)
-=======
+
 f1 <- function(x) x * 2 + 1
->>>>>>> f9aa72b (testing codes)
+
 f1
 # This function has only 1 argument, x. Try out this new function:
 f1(3)
@@ -344,7 +329,6 @@ f2 <- function(x, y) {
 
 f2(8, 9)
 f2(14, 7)
-=======
 f2 <- function(x,y){
   z = x %% y
   return(z == 0)
@@ -380,8 +364,7 @@ mean(ex.vector)
 ####      Randomness in R       ####
 ####################################
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 # There are several ways to generate randomness in R. The simplest function is
 ?sample
 
@@ -390,30 +373,27 @@ sample(1:10, 1)
 # You can run this several times and notice that you get a different answer each time. You can also sample several times at once
 sample(1:10, 3)
 # However, by default, sample won't let the same number repeat when you do this. This is called sampling without replacement,
-=======
 # There are several ways to generate randomness in R. The simplest function is 
-=======
 # There are several ways to generate randomness in R. The simplest function is
->>>>>>> f9aa72b (testing codes)
+
 ?sample
 
 # which randomly draws WITHOUT replacement from a specified vector. For example, to choose a number at random between 1 and 10:
 sample(1:10, 1)
 # You can run this several times and notice that you get a different answer each time. You can also sample several times at once
 sample(1:10, 3)
-<<<<<<< HEAD
+
 # However, by default, sample won't let the same number repeat when you do this. This is called sampling without replacement, 
 
 
 # However, by default, sample won't let the same number repeat when you do this. This is called sampling without replacement,
->>>>>>> f9aa72b (testing codes)
+
 # because it is as if, each time you pick out a number, it is now gone from the pool of possible numbers and has not been replaced.
 # If you want to sample randomly between 1 and 10 20 times, each time choosing between all 10 numbers, you have to write:
 sample(1:10, 20, replace = TRUE)
 
 ### 4.1
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 # Write a function that simulates the roll of 2 6-sided dice, where the argument x is the number of times you roll the 2 dice,
 # and the output is a vector of length x, where each element corresponds to the sum of the two sides of the dice.
 # HINT: one way to do this is to start by writing a function for a single 6-sided die, then create a new function
@@ -429,6 +409,7 @@ dice <- function(x){
   return(outcome)
   }
  dice(2)
+
 
 ### 4.2
 # Using the function hist, create histograms of the results of double dice rolls when you roll them 10 times,
@@ -446,22 +427,19 @@ hist(dice(10000), 1:12)
 # Another way to generate randomness is to sample from a pdf, which is a continuous distribution.
 # The simplest pdf is the uniform function. The uniform function is a flat line bounded between 2 numbers.
 # Because it is flat, the probability of drawing a sample from any interval of given width between the two bounds
-=======
 # Write a function that simulates the roll of 2 6-sided dice, where the argument x is the number of times you roll the 2 dice, 
-=======
 # Write a function that simulates the roll of 2 6-sided dice, where the argument x is the number of times you roll the 2 dice,
->>>>>>> f9aa72b (testing codes)
+
 # and the output is a vector of length x, where each element corresponds to the sum of the two sides of the dice.
 # HINT: one way to do this is to start by writing a function for a single 6-sided die, then create a new function
 # that repeats the first function twice and adds up the result.
+
 
 ### 4.2
 # Using the function hist, create histograms of the results of double dice rolls when you roll them 10 times,
 # then 50, then 100, then 1000, then 10000. Use breaks=1:12 as an argument within the hist function.
 # What do you notice? Write it in comments below your code.
 
-
-<<<<<<< HEAD
 # Another way to generate randomness is to sample from a pdf, which is a continuous distribution. 
 # The simplest pdf is the uniform function. The uniform function is a flat line bounded between 2 numbers. 
 # Because it is flat, the probability of drawing a sample from any interval of given width between the two bounds 
@@ -470,19 +448,17 @@ hist(dice(10000), 1:12)
 # Another way to generate randomness is to sample from a pdf, which is a continuous distribution.
 # The simplest pdf is the uniform function. The uniform function is a flat line bounded between 2 numbers.
 # Because it is flat, the probability of drawing a sample from any interval of given width between the two bounds
->>>>>>> f9aa72b (testing codes)
+
 # is the same as from any other interval of given width.
 
 # The function runif(n, min,max) samples n times from a uniform function bounded between the values of min and max.
 # For example, try
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 runif(5, 0, 1)
-=======
 runif(5,0,1)
 
 runif(5, 0, 1)
->>>>>>> f9aa72b (testing codes)
+
 
 ### 4.3
 # Using runif, write a function that returns TRUE 22% of the time and FALSE 78% of the time
