@@ -41,16 +41,6 @@ rep(4,3)
 rep(x=3, times=4)
 rep(times=4, x=3)
 
-"rep(1:4, 2)
-rep(1:4, each = 2)       # not the same.
-rep(1:4, c(2,2,2,2))     # same as second.
-rep(1:4, c(2,1,2,1))
-rep(1:4, each = 2, length.out = 4)    # first 4 only.
-rep(1:4, each = 2, length.out = 10)   # 8 integers plus two recycled 1's.
-rep(1:4, each = 2, times = 3)         # length 24, 3 complete replications
-rep(1, 40*(1-.8)) # length 7 on most platforms
-fred <- list(happy = 1:10, name = "squash")
-rep(fred, 5)"
 
 # produce the same result, because we inputed the arguments by name using the 'argname = x' construction. When we don't use this construction, the function defaults each input to an argument according to a predefined order.
 rep(3,4)
@@ -64,6 +54,7 @@ rep(4,3)
 # Functions are one example of OBJECTS, which are stored within the main (global) ENVIRONMENT of the console. We can create new objects by using the 'assign' operator:
 
 x <- 4
+x
 
 # You can now see in the 'Environment' tab below that the object 'x'  is stored with the value 4.
 
@@ -168,7 +159,7 @@ my.vector == 'is'
 ### 2.1
 digits <- 0:10
 # Using the least amount of code possible, write a line of code that returns only the odd values of the digits object.
-digits %% 2 != 0
+
 # Another important logical operator is the %in% operator. It tells you if the elements on the left are found in the elements on the right. E.G.
 group1 <- c('Arthur', 'Fatima', 'Suleiman', 'Marco')
 group2 <- c('Marco','Maria', 'Victor','Fatima', 'Antonio')
@@ -248,18 +239,8 @@ sample(1:10, 3)
 # and the output is a vector of length x, where each element corresponds to the sum of the two sides of the dice.
 # HINT: one way to do this is to start by writing a function for a single 6-sided die, then create a new function 
 # that repeats the first function twice and adds up the result.
-
-die.roll <- function(x){
-  sample(1:6, 1, replace = TRUE)
-}
-
-roll_two_dice <- function(){
-  die.roll() + die.roll()
-}
-
-rolls <- function(x){
-  y <- replicate(x, roll_two_dice())
-  return (y)
+dice.roll <- function(x){
+  sample(1:6,x,replace = TRUE) + sample(1:6,x,replace = 5)
 }
 result <- rolls(10)
 print(result)
@@ -291,11 +272,7 @@ runif(5,0,1)
 
 ### 4.3
 # Using runif, write a function that returns TRUE 22% of the time and FALSE 78% of the time
-fu <- function(){
-  ran <- runif(1)
-  return(ran <= 0.22)
-}
-fu()
+
 
 ### 4.4
 # Based on today's lecture about pdfs, what is the probability density for a uniform pdf bounded between 
