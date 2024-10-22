@@ -174,6 +174,7 @@ intersect(group1,group2)
 group3 <- group1[group1 %in% group2]
 group3
 
+
 ####################################
 ####     Writing functions      ####
 ####################################
@@ -241,6 +242,18 @@ roll_two_dice <- function(x) {
   return(dice_rolls)
 }
 
+#Class answer
+cast.die <- function(x){
+  sample(1:6,x,replace=TRUE)
+}
+
+dast.2.dice <- functionBody(x){
+  return(cast.die(x)+cast.die(x))
+}
+
+cast.2.dice(20)
+
+
 ### 4.2
 # Using the function hist, create histograms of the results of double dice rolls when you roll them 10 times, 
 #then 50, then 100, then 1000, then 10000. Use breaks=1:12 as an argument within the hist function. 
@@ -260,6 +273,8 @@ hist(roll_two_dice(1000), breaks = 1:12, main = "1000 Rolls", xlab = "Sum of Two
 hist(roll_two_dice(10000), breaks = 1:12, main = "10000 Rolls", xlab = "Sum of Two Dice", col = "lightblue")
 
 par(mfrow = c(1, 1))
+
+
 
 # As the number of rolls increases, the histogram starts to resemble a bell-shaped curve.
 # Sums like 7 are more frequent than extremes like 2 or 12. The more rolls, the closer
