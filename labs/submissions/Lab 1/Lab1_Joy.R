@@ -13,18 +13,16 @@
 
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 # On the right is the console. You can input code directly into the console line by line - you do not need to run an entire file. Try running a simple calculation in the console, like 5+9. Type it in and press enter.
 5 + 9
-=======
+
 # On the right is the console. You can input code directly into the console line by line - you do not need to run an entire file. Try running a simple calculation in the console, like 5+9. Type it in and press enter. 
 5+9
->>>>>>> 1b0b93d (Created a file inside a branch)
-=======
+
 # On the right is the console. You can input code directly into the console line by line - you do not need to run an entire file. Try running a simple calculation in the console, like 5+9. Type it in and press enter.
 5 + 9
->>>>>>> f9aa72b (testing codes)
+
 # You can also write code in this, the code editor, and run it from here. Try highlighting the following line and pressing 'Ctrl + Enter' ('Cmd + Enter' on MacOS):
 12 * 4 - 6
 
@@ -74,8 +72,7 @@ rep(4, 3)
 <<<<<<< HEAD
 rep(x=3, times=4) # nolint: infix_spaces_linter.
 rep(times=4, x=3) # nolint: infix_spaces_linter.
->>>>>>> 1b0b93d (Created a file inside a branch)
-=======
+
 rep(x = 3, times = 4) # nolint: infix_spaces_linter.
 rep(times = 4, x = 3) # nolint: infix_spaces_linter.
 >>>>>>> f9aa72b (testing codes)
@@ -96,13 +93,9 @@ x <- 4
 
 <<<<<<< HEAD
 <<<<<<< HEAD
-x * 5
-=======
+
 x*5
->>>>>>> 1b0b93d (Created a file inside a branch)
-=======
-x * 5
->>>>>>> f9aa72b (testing codes)
+
 
 ##############################################################
 ###    ADVANCED NOTE: the = operator can also be used      ###
@@ -303,7 +296,7 @@ odd_numbers <- digits[digits %% 2 == 1]
 odd_numbers
 print(odd_numbers)
 =======
->>>>>>> 9baf4f4 (function to calculate mean done)
+>>>>>>> (function to calculate mean done)
 
 # Another important logical operator is the %in% operator. It tells you if the elements on the left are found in the elements on the right. E.G.
 group1 <- c("Arthur", "Fatima", "Suleiman", "Marco")
@@ -326,7 +319,7 @@ intersect(group1, group2)
 f1 <- function(x) x * 2 + 1
 =======
 f1 <- function(x) x*2 + 1
->>>>>>> 1b0b93d (Created a file inside a branch)
+>>>>>>>  (Created a file inside a branch)
 =======
 f1 <- function(x) x * 2 + 1
 >>>>>>> f9aa72b (testing codes)
@@ -410,8 +403,8 @@ sample(1:10, 1)
 sample(1:10, 3)
 <<<<<<< HEAD
 # However, by default, sample won't let the same number repeat when you do this. This is called sampling without replacement, 
->>>>>>> 1b0b93d (Created a file inside a branch)
-=======
+
+
 # However, by default, sample won't let the same number repeat when you do this. This is called sampling without replacement,
 >>>>>>> f9aa72b (testing codes)
 # because it is as if, each time you pick out a number, it is now gone from the pool of possible numbers and has not been replaced.
@@ -487,8 +480,7 @@ hist(dice(10000), 1:12)
 runif(5, 0, 1)
 =======
 runif(5,0,1)
->>>>>>> 1b0b93d (Created a file inside a branch)
-=======
+
 runif(5, 0, 1)
 >>>>>>> f9aa72b (testing codes)
 
