@@ -123,10 +123,7 @@ class(y)
 =======
 class (y)
 <<<<<<< HEAD
->>>>>>> 1b0b93d (Created a file inside a branch)
-=======
-#testing class
-=======
+
 class(y)
 # testing class
 >>>>>>> f9aa72b (testing codes)
@@ -205,8 +202,7 @@ my.vector
 length(my.vector)
 class(my.vector)
 <<<<<<< HEAD
->>>>>>> 1b0b93d (Created a file inside a branch)
-=======
+
 ?class
 >>>>>>> 8335800 (Testing the rep functions)
 
@@ -502,7 +498,7 @@ runif(5, 0, 1)
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
->>>>>>> 2e8fd56 (Exercise 4.1 to 4.8 done)
+
 prob <- function(x)
 {
   outcome <- runif(x, 0,1 ) <= 0.22
@@ -519,10 +515,8 @@ prob(50)
 ### 4.5
 # Similarly, what is the probability density for a uniform pdf bounded between 5 and 6 associated with all values of x between 5 and 6?
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 2e8fd56 (Exercise 4.1 to 4.8 done)
+
+
 #the probability density for a uniform pdf bouneded between 0 and 1 associated with all values of x between 5 and 6 is also 1 as shown below
 
 pdf <- 1/(6-5)
