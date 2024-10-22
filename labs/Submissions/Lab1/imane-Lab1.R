@@ -16,7 +16,7 @@
 # On the right is the console. You can input code directly into the console line by line - you do not need to run an entire file. Try running a simple calculation in the console, like 5+9. Type it in and press enter. 
 5+9
 # You can also write code in this, the code editor, and run it from here. Try highlighting the following line and pressing 'Ctrl + Enter' ('Cmd + Enter' on MacOS):
-12 * 4 - 6
+12 * 4 - 3
 
 
 # Text beginning with a # sign is read as 'comment' and will not be evaluated by the console.
@@ -28,7 +28,7 @@
 
 # FUNCTIONS are commands that take in inputs and produce outputs. They mostly take in the inputs in brackets, like this:
 sqrt(25)
-exp(3) 
+exp(3)
 
 # Often, functions take multiple inputs with different functions. Note how:
 rep(3,4)
@@ -41,20 +41,8 @@ rep(4,3)
 rep(x=3, times=4)
 rep(times=4, x=3)
 
-"rep(1:4, 2)
-rep(1:4, each = 2)       # not the same.
-rep(1:4, c(2,2,2,2))     # same as second.
-rep(1:4, c(2,1,2,1))
-rep(1:4, each = 2, length.out = 4)    # first 4 only.
-rep(1:4, each = 2, length.out = 10)   # 8 integers plus two recycled 1's.
-rep(1:4, each = 2, times = 3)         # length 24, 3 complete replications
-rep(1, 40*(1-.8)) # length 7 on most platforms
-fred <- list(happy = 1:10, name = "squash")
-rep(fred, 5)"
-
 # produce the same result, because we inputed the arguments by name using the 'argname = x' construction. When we don't use this construction, the function defaults each input to an argument according to a predefined order.
-rep(3,4)
-rep(4,3)
+
 # OPERATORS are special functions that take only 2 arguments, and do not use brackets. Instead, you must input the two arguments on either side of the operator. Examples of operators include +, -,*,/, ^, %%, %/%, :, and there are many more which we will learn about soon.
 
 ########################
@@ -63,11 +51,13 @@ rep(4,3)
 
 # Functions are one example of OBJECTS, which are stored within the main (global) ENVIRONMENT of the console. We can create new objects by using the 'assign' operator:
 
-x <- 4
+x <- 4.5
+
 
 # You can now see in the 'Environment' tab below that the object 'x'  is stored with the value 4.
 
 x*5
+
 
 ##############################################################
 ###    ADVANCED NOTE: the = operator can also be used      ###
@@ -95,6 +85,8 @@ class (y)
 Salaam -> y
 
 # One final very important class of object is the 'logical' class, a.k.a. Boolean. 
+
+# One final very important class of object is the 'logical' class, a.k.a. Boolean. 
 # Boolean objects can take one of two values
 
 TRUE
@@ -114,8 +106,7 @@ TRUE | FALSE
 FALSE | FALSE
 
 # There is also an exclusive or function, xor(), but it isn't used much.
-xor(TRUE,FALSE)
-xor(FALSE,FALSE)
+
 
 
 ####################################
@@ -125,7 +116,7 @@ xor(FALSE,FALSE)
 # YOu will have noticed that the console has always returned a [1] in front of it's output so far. This is because R has considered all these objects to be 'vectors' (in Python, this is the same thing as an array). Vectors are objects that can contain multiple elements. For example:
 
 z <- 50:80
-z[2]
+z
 
 # The numbers in square brackets tell you the INDEX of the element to their right. The index is simply the position number of that element. You will notice that, unlike in Python, the first element of an object in R has the index number 1 and not 0. This is one of the most important syntactical differences between Python and R (if you think this is not a very important difference, you are correct. The two languages are very similar in syntax.)
 
@@ -144,18 +135,18 @@ my.vector[c(1,4)]
 
 ### 1.1
 # You can assign values to specific elements. Try writing a line of code below that changes the 4th element of my.vector to the word 'test'
-my.vector[4] <- 'test'
-my.vector[4]
+my.vector[4]<- 'test'
+my.vector
 
 ### 1.2
 # You can even assign values to elements of a vector that don't exist yet, thus creating them. Try assigning the word 'example' to the (as yet non-existent) 5th element of my.vector.
-my.vector[5] <- "example"
-my.vector[5]
+my.vector[5]<-'example'
 my.vector
-
 # Instead of indices, you can select elements of a vector using a logical vector of the same length, e.g.
 
 my.vector[c(TRUE,TRUE,FALSE,FALSE,FALSE)]
+
+c(TRUE,TRUE,FALSE,FALSE,FALSE)
 
 
 ####################################
@@ -168,14 +159,17 @@ my.vector[c(TRUE,TRUE,FALSE,FALSE,FALSE)]
 my.vector == 'is'
 1:10 >= 5
 1:10 %% 2 == 0    ## %% is the remainder operator, it returns the remainder when you divide the left argument by the right argument.
+
 ### 2.1
 digits <- 0:10
 # Using the least amount of code possible, write a line of code that returns only the odd values of the digits object.
-digits %% 2 != 0
+digits[digits %% 2 != 0]
 # Another important logical operator is the %in% operator. It tells you if the elements on the left are found in the elements on the right. E.G.
 group1 <- c('Arthur', 'Fatima', 'Suleiman', 'Marco')
 group2 <- c('Marco','Maria', 'Victor','Fatima', 'Antonio')
 group1 %in% group2
+
+
 
 ## 2.2 
 # intersect is a function which returns the elements that all of its arguments have in common. For example:
@@ -207,18 +201,15 @@ f2(8,9)
 f2(14,7)
 
 ### 3.1 What is the purpose of function f2? Write in comments below.
-#The purpose of f2 is to determine wheter the first argument is divisible by the second argument , if that is the case , the function will return TRUE , otherwise it will return FALSE
 
 ### 3.2
 # Based on the definition of the mean from today's lecture, write a function that calculates the mean of all of the elements of a vector. assign it to the object my.mean. You will find the functions 'sum' and 'length' useful here.
-my.mean <- function(x){
-  sum(x) / length(x)
-}
-my.mean(ex.vector)
-# compare your function to the native function in R. Does it produce the same results?
+mean <- c(1,2,3,4,5,6,7,8,9)
+my.mean <- function(x) sum(x)/length(x)
+my.mean(mean)
+# compare your function to the native function in R. Does it produce the same results? YESSSSS
 my.mean(ex.vector)
 mean(ex.vector)
-#Yes, it does.
 
 ####################################
 ####      Randomness in R       ####
@@ -226,12 +217,6 @@ mean(ex.vector)
 
 # There are several ways to generate randomness in R. The simplest function is 
 ?sample
-x <- 1:12
-sample(x)
-
-sample(x, replace = TRUE)
-
-sample(x[x >  8]) # length 4
 
 #which randomly draws WITHOUT replacement from a specified vector. For example, to choose a number at random between 1 and 10:
 sample(1:10, 1)
@@ -240,28 +225,25 @@ sample(1:10, 3)
 # However, by default, sample won't let the same number repeat when you do this. This is called sampling without replacement, 
 # because it is as if, each time you pick out a number, it is now gone from the pool of possible numbers and has not been replaced.
 # If you want to sample randomly between 1 and 10 20 times, each time choosing between all 10 numbers, you have to write:
-
+sample(1:10, 20, replace = TRUE)
 
 ### 4.1
 # Write a function that simulates the roll of 2 6-sided dice, where the argument x is the number of times you roll the 2 dice, 
 # and the output is a vector of length x, where each element corresponds to the sum of the two sides of the dice.
 # HINT: one way to do this is to start by writing a function for a single 6-sided die, then create a new function 
 # that repeats the first function twice and adds up the result.
-dice.roll <- function(x){
-  sample(1:6,x,replace = TRUE) + sample(1:6,x,replace = 5)
-}
-dice.roll(5)
-
+dice <- c(1,2,3,4,5,6)
+random <- function(x) replicate(x, sum(sample(dice, 2, replace=TRUE)))
+random(5)
 ### 4.2
 # Using the function hist, create histograms of the results of double dice rolls when you roll them 10 times, 
-#then 50, then 100, then 1000, then 10000. Use breaks=1:12 as an argument within the hist function. 
+#then 50, then 100, then 1000, then 10000. Use breaks=1:12 as an argument within the hist function.
+sum_rolls<-c(random(10),random(50),random(100),random(1000),random(10000))
+hist(sum_rolls, breaks = 1:12)
 # What do you notice? Write it in comments below your code.
-hist(dice.roll(10))
-hist(dice.roll(50))
-hist(dice.roll(100))
-hist(dice.roll(1000))
-hist(dice.roll(10000))
-
+#Bell-shaped distribution: The sum of two dice peaks around 7, which is the most frequent outcome, while sums like 2 and 12 are much rarer.
+#Symmetry: The distribution is roughly symmetric, with frequencies decreasing as you move away from the center (7).
+#Smoothing with more rolls: As you increase the number of rolls (up to 10,000), the histogram becomes smoother and matches the expected probability distribution.
 
 # Another way to generate randomness is to sample from a pdf, which is a continuous distribution. 
 # The simplest pdf is the uniform function. The uniform function is a flat line bounded between 2 numbers. 
@@ -274,24 +256,30 @@ runif(5,0,1)
 
 ### 4.3
 # Using runif, write a function that returns TRUE 22% of the time and FALSE 78% of the time
-fu <- function(){
-  ran <- runif(1)
-  return(ran <= 0.22)
-}
-fu()
+bool_runif <- function() runif(1) < 0.22
+bool_runif()
 
 ### 4.4
 # Based on today's lecture about pdfs, what is the probability density for a uniform pdf bounded between 
 # 0 and 1 associated with all values of x between 0 and 1? Explain why.
 
+#1/The uniform distribution means that every value of x between 0 and 1 is equally likely to occur.
+#2/The total area under the PDF curve must equal 1, because the total probability of all possible outcomes must be 1.
+#3/Since the interval has a length of 1 (from 0 to 1), the height of the PDF must be 1
+#4/ so that the total area is 1×1=1
+#5/Therefore, the PDF is constant and equal to 1 for all values of x between 0 and 1
+
 ### 4.5
 # Similarly, what is the probability density for a uniform pdf bounded between 5 and 6 associated with all values of x between 5 and 6?
+#the probability density function f(x) for all values of x between 5 and 6 is 1 (because 6-5=1 and f(x)1/1=1)
 
 ### 4.6
 # What is the probability density for a uniform pdf bounded between 0 and 0.5 associated with all values of x between 0 and 0.5?
+#the probability density function f(x) for all values of x between 0 and 0.5 is 2
 
 ### 4.7
 # What is the probability density for a uniform pdf bounded between 0 and 2 associated with all values of x between 0 and 2?
+#the probability density function f(x) for all values of x between 0 and 2 is: 0,5
 
 ### 4.8
 # run the following code:
@@ -300,4 +288,5 @@ dunif(2,0,1)
 dunif(0.2,0,0.5)
 dunif(1.3,0,2)
 
-# Based on the results of this code and your answers above, what can you conclude about the purpose of the dunif function?sample(x[x >  9]) # oops -- length 10!
+# Based on the results of this code and your answers above, what can you conclude about the purpose of the dunif function?
+#The dunif function in R computes the probability density of a uniform distribution at specified values, given defined minimum and maximum bounds.
