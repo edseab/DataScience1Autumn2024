@@ -246,14 +246,26 @@ runif(5,0,1)
 # Based on today's lecture about pdfs, what is the probability density for a uniform pdf bounded between 
 # 0 and 1 associated with all values of x between 0 and 1? Explain why.
 
+#The probability density for a uniform PDF bounded between 0 and 1 is constant and equal to 1 for all 
+#x values in the range [0,1]. This means every outcome within this interval is equally likely to occur, 
+#and the total area under the curve is normalized to 1, satisfying the fundamental property of probability distributions.
+
 ### 4.5
 # Similarly, what is the probability density for a uniform pdf bounded between 5 and 6 associated with all values of x between 5 and 6?
+
+#The probability density for a uniform PDF bounded between 5 and 6 is constant and equal to 1 for all 
+#x values in the range [5,6]. This means every outcome within this interval is equally likely to occur, 
+#and the total area under the curve is normalized to 1, satisfying the fundamental property of probability distributions.
 
 ### 4.6
 # What is the probability density for a uniform pdf bounded between 0 and 0.5 associated with all values of x between 0 and 0.5?
 
+#The probability density for a uniform PDF bounded between 0 and 0.5 is constant and equal to 2 for all x values in the range [0,0.5].
+
 ### 4.7
 # What is the probability density for a uniform pdf bounded between 0 and 2 associated with all values of x between 0 and 2?
+
+#The probability density for a uniform PDF bounded between 0 and 2 is constant and equal to 0.5 for all x values in the range [0,2].
 
 ### 4.8
 # run the following code:
