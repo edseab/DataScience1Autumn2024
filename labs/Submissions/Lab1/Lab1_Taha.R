@@ -239,6 +239,8 @@ my.mean(1:5)
 my.mean(ex.vector)
 mean(ex.vector)
 
+mean(1.74, 1.8, 1.78, 1.89, 1.75, 1.)
+
 #ANSWER: same results
 
 ####################################
