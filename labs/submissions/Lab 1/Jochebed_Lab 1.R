@@ -10,7 +10,7 @@
 
 
 ## Welcome to this first lab. Here we  will learn the basics of R, an open-source programming language and software environment.
-
+ 
 
 
 # On the right is the console. You can input code directly into the console line by line - you do not need to run an entire file. Try running a simple calculation in the console, like 5+9. Type it in and press enter. 
@@ -320,6 +320,7 @@ dunif(1.3,0,2)
 
 # Based on the results of this code and your answers above, what can you conclude about the purpose of the dunif function?
 
+<<<<<<< HEAD
 # the function dunif(x,y,z) is a function that takes 3 parameters x,y,z
 # where y and z represents the boundary of the unifrm distribution 
 # and x represents the number whose probability density we are to check
@@ -327,3 +328,5 @@ dunif(1.3,0,2)
 # which corresponds to the probability density of a uniform distribution
 
 
+=======
+>>>>>>> be70fb9 (Creat lab 1 file)
