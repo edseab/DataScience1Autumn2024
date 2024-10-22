@@ -37,9 +37,9 @@ rep(4,3)
 # If you can't remember in which order you have to input the arguments of a function, or if you just want to learn what a function does, you can type in ? followed by the function name in the console:
 ?rep
 
-# Each argument has a name. By explicitly referring to these names when calling the function, we can avoid  any problems with order. For example:
-rep(x=3, times=4)
-rep(times=4, x=3)
+# Each argument has a name. By explicitly referring to these names when calling the function, we can avoid  any problems with order. For example: # nolint
+rep(x=3, times=4) # nolint: infix_spaces_linter.
+rep(times=4, x=3) # nolint: infix_spaces_linter.
 
 # produce the same result, because we inputed the arguments by name using the 'argname = x' construction. When we don't use this construction, the function defaults each input to an argument according to a predefined order.
 
@@ -133,13 +133,11 @@ my.vector[c(1,4)]
 
 ### 1.1
 # You can assign values to specific elements. Try writing a line of code below that changes the 4th element of my.vector to the word 'test'
-my.vector[4] <- 'test'
-my.vector
+my.vector[4] <- "test"
 
 ### 1.2
 # You can even assign values to elements of a vector that don't exist yet, thus creating them. Try assigning the word 'example' to the (as yet non-existent) 5th element of my.vector.
-my.vector[5] <- 'example'
-my.vector
+my.vector[5] <- "example"
 
 # Instead of indices, you can select elements of a vector using a logical vector of the same length, e.g.
 
@@ -160,8 +158,7 @@ my.vector == 'is'
 ### 2.1
 digits <- 0:10
 # Using the least amount of code possible, write a line of code that returns only the odd values of the digits object.
-odd <- digits [digits %% 2 != 0]
-odd
+
 # Another important logical operator is the %in% operator. It tells you if the elements on the left are found in the elements on the right. E.G.
 group1 <- c('Arthur', 'Fatima', 'Suleiman', 'Marco')
 group2 <- c('Marco','Maria', 'Victor','Fatima', 'Antonio')
@@ -171,8 +168,8 @@ group1 %in% group2
 # intersect is a function which returns the elements that all of its arguments have in common. For example:
 intersect(group1,group2)
 # Write a line of code that replicates this output using only group1, group2, square brackets, and logical operators.
-group3 <- group1[group1 %in% group2]
-group3
+
+group1[group1 %in% group2]
 
 ####################################
 ####     Writing functions      ####
@@ -198,14 +195,17 @@ f2(8,9)
 f2(14,7)
 
 ### 3.1 What is the purpose of function f2? Write in comments below.
-#f2 verifies if the the argument x is divisable by y, if yes it returns true, otherwise it returns false
+# It is to know if 14 divided by 2 has a remainder 0 or not. If it has remainder 0, it returns TRUE
 
 ### 3.2
 # Based on the definition of the mean from today's lecture, write a function that calculates the mean of all of the elements of a vector. assign it to the object my.mean. You will find the functions 'sum' and 'length' useful here.
-my.mean <- function(x) {
-  return(sum(x) / length(x))
+my.mean <- function(x){
+  y = sum(x)/length(x)
+  return(y)
 }
-ex.vector <- c(1, 2, 3, 4, 5)
+
+a <- c(3,4,5,6,7,8)
+my.mean(a)
 # compare your function to the native function in R. Does it produce the same results?
 
 my.mean(ex.vector)
@@ -232,39 +232,36 @@ sample(1:10, 20, replace = TRUE)
 # and the output is a vector of length x, where each element corresponds to the sum of the two sides of the dice.
 # HINT: one way to do this is to start by writing a function for a single 6-sided die, then create a new function 
 # that repeats the first function twice and adds up the result.
-roll_die <- function() {
+
+die.roll <- function(x){
   sample(1:6, 1, replace = TRUE)
 }
-roll_two_dice <- function(x) {
-  # Roll the two dice x times and sum the results
-  dice_rolls <- replicate(x, roll_die() + roll_die())
-  return(dice_rolls)
+
+roll_two_dice <- function(){
+  die.roll() + die.roll()
 }
+
+rolls <- function(x){
+  y <- replicate(x, roll_two_dice())
+  return (y)
+}
+result <- rolls(10)
+print(result)
 
 ### 4.2
 # Using the function hist, create histograms of the results of double dice rolls when you roll them 10 times, 
 #then 50, then 100, then 1000, then 10000. Use breaks=1:12 as an argument within the hist function. 
 # What do you notice? Write it in comments below your code.
 
+times <- c(10, 50, 100, 1000, 10000)
 
-par(mfrow = c(3, 2))
-hist(roll_two_dice(10), breaks = 1:12, main = "10 Rolls", xlab = "Sum of Two Dice", col = "lightblue")
+par(mfrow = c(3, 2))  # Set up a 3x2 plotting area
 
-hist(roll_two_dice(50), breaks = 1:12, main = "50 Rolls", xlab = "Sum of Two Dice", col = "lightblue")
-
-hist(roll_two_dice(100), breaks = 1:12, main = "100 Rolls", xlab = "Sum of Two Dice", col = "lightblue")
-
-hist(roll_two_dice(1000), breaks = 1:12, main = "1000 Rolls", xlab = "Sum of Two Dice", col = "lightblue")
-
-
-hist(roll_two_dice(10000), breaks = 1:12, main = "10000 Rolls", xlab = "Sum of Two Dice", col = "lightblue")
-
-par(mfrow = c(1, 1))
-
-# As the number of rolls increases, the histogram starts to resemble a bell-shaped curve.
-# Sums like 7 are more frequent than extremes like 2 or 12. The more rolls, the closer
-# the distribution matches the expected probability distribution.
-
+for (count in times) {
+  result <- rolls(count)
+  hist(result, breaks = 1:12, main = paste("Rolls:", count), 
+       xlab = "Sum of Two Dice", ylab = "Frequency", col = "lightblue")
+}
 
 
 # Another way to generate randomness is to sample from a pdf, which is a continuous distribution. 
@@ -278,22 +275,31 @@ runif(5,0,1)
 
 ### 4.3
 # Using runif, write a function that returns TRUE 22% of the time and FALSE 78% of the time
-random_bool <- function() {
-  return(runif(1, 0, 1) < 0.22)
-}
 
 ### 4.4
 # Based on today's lecture about pdfs, what is the probability density for a uniform pdf bounded between 
 # 0 and 1 associated with all values of x between 0 and 1? Explain why.
 
+#The probability density for a uniform PDF bounded between 0 and 1 is constant and equal to 1 for all 
+#x values in the range [0,1]. This means every outcome within this interval is equally likely to occur, 
+#and the total area under the curve is normalized to 1, satisfying the fundamental property of probability distributions.
+
 ### 4.5
 # Similarly, what is the probability density for a uniform pdf bounded between 5 and 6 associated with all values of x between 5 and 6?
+
+#The probability density for a uniform PDF bounded between 5 and 6 is constant and equal to 1 for all 
+#x values in the range [5,6]. This means every outcome within this interval is equally likely to occur, 
+#and the total area under the curve is normalized to 1, satisfying the fundamental property of probability distributions.
 
 ### 4.6
 # What is the probability density for a uniform pdf bounded between 0 and 0.5 associated with all values of x between 0 and 0.5?
 
+#The probability density for a uniform PDF bounded between 0 and 0.5 is constant and equal to 2 for all x values in the range [0,0.5].
+
 ### 4.7
 # What is the probability density for a uniform pdf bounded between 0 and 2 associated with all values of x between 0 and 2?
+
+#The probability density for a uniform PDF bounded between 0 and 2 is constant and equal to 0.5 for all x values in the range [0,2].
 
 ### 4.8
 # run the following code:
@@ -303,3 +309,6 @@ dunif(0.2,0,0.5)
 dunif(1.3,0,2)
 
 # Based on the results of this code and your answers above, what can you conclude about the purpose of the dunif function?
+# From the result, It provides a way to evaluate how likely it is to randomly select a particular value from a specified uniform distribution defined by lower and upper bounds.
+#Values outside the defined range return a density of 0, indicating no probability of selecting those values.
+#For values within the range, the output gives the constant height of the probability density function, which is critical for understanding how uniformly distributed data behaves across different intervals.

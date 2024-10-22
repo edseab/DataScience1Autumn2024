@@ -231,6 +231,11 @@ sample(1:10, 20, replace = TRUE)
 # and the output is a vector of length x, where each element corresponds to the sum of the two sides of the dice.
 # HINT: one way to do this is to start by writing a function for a single 6-sided die, then create a new function 
 # that repeats the first function twice and adds up the result.
+dice.roll <- function(x){
+  sample(1:6,x,replace = TRUE) + sample(1:6,x,replace = 5)
+}
+result <- rolls(10)
+print(result)
 
 die.roll <- function(x){
   sample(1:6, 1, replace = TRUE)
