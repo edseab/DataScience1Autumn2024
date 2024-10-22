@@ -262,7 +262,7 @@ hist(dice_roll_100times, breaks = 1:12, col = "green", xlab = "Sum of Two Dice",
 dice_roll_1000times <- roll_2_die(1000)
 hist(dice_roll_1000times, breaks = 1:12, col = "yellow", xlab = "Sum of Two Dice", ylab = "Frequency")
 
-dice_roll_10000times <- roll_2_dice(10000)
+dice_roll_10000times <- roll_2_die(10000)
 hist(dice_roll_10000times, breaks = 1:12, col = "red", xlab = "Sum of Two Dice", ylab = "Frequency")
 # -- Comments
 # - It was observed that rolling two dice 10 time is Negatively skewed
