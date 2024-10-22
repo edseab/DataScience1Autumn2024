@@ -28,7 +28,11 @@
 
 # FUNCTIONS are commands that take in inputs and produce outputs. They mostly take in the inputs in brackets, like this:
 sqrt(25)
+<<<<<<< HEAD
 exp(3)
+=======
+exp(3) 
+>>>>>>> f0b54161af98ea6ebabc800f662e7333e553e204
 
 # Often, functions take multiple inputs with different functions. Note how:
 rep(3,4)
@@ -41,6 +45,7 @@ rep(4,3)
 rep(x=3, times=4)
 rep(times=4, x=3)
 
+<<<<<<< HEAD
 "rep(1:4, 2)
 rep(1:4, each = 2)       # not the same.
 rep(1:4, c(2,2,2,2))     # same as second.
@@ -51,6 +56,8 @@ rep(1:4, each = 2, times = 3)         # length 24, 3 complete replications
 rep(1, 40*(1-.8)) # length 7 on most platforms
 fred <- list(happy = 1:10, name = "squash")
 rep(fred, 5)"
+=======
+>>>>>>> f0b54161af98ea6ebabc800f662e7333e553e204
 
 # produce the same result, because we inputed the arguments by name using the 'argname = x' construction. When we don't use this construction, the function defaults each input to an argument according to a predefined order.
 rep(3,4)
@@ -64,6 +71,10 @@ rep(4,3)
 # Functions are one example of OBJECTS, which are stored within the main (global) ENVIRONMENT of the console. We can create new objects by using the 'assign' operator:
 
 x <- 4
+<<<<<<< HEAD
+=======
+x
+>>>>>>> f0b54161af98ea6ebabc800f662e7333e553e204
 
 # You can now see in the 'Environment' tab below that the object 'x'  is stored with the value 4.
 
@@ -144,6 +155,7 @@ my.vector[c(1,4)]
 
 ### 1.1
 # You can assign values to specific elements. Try writing a line of code below that changes the 4th element of my.vector to the word 'test'
+<<<<<<< HEAD
 my.vector[4] <- 'test'
 my.vector[4]
 
@@ -152,6 +164,13 @@ my.vector[4]
 my.vector[5] <- "example"
 my.vector[5]
 my.vector
+=======
+
+
+### 1.2
+# You can even assign values to elements of a vector that don't exist yet, thus creating them. Try assigning the word 'example' to the (as yet non-existent) 5th element of my.vector.
+
+>>>>>>> f0b54161af98ea6ebabc800f662e7333e553e204
 
 # Instead of indices, you can select elements of a vector using a logical vector of the same length, e.g.
 
@@ -171,7 +190,11 @@ my.vector == 'is'
 ### 2.1
 digits <- 0:10
 # Using the least amount of code possible, write a line of code that returns only the odd values of the digits object.
+<<<<<<< HEAD
 digits %% 2 != 0
+=======
+
+>>>>>>> f0b54161af98ea6ebabc800f662e7333e553e204
 # Another important logical operator is the %in% operator. It tells you if the elements on the left are found in the elements on the right. E.G.
 group1 <- c('Arthur', 'Fatima', 'Suleiman', 'Marco')
 group2 <- c('Marco','Maria', 'Victor','Fatima', 'Antonio')
@@ -181,7 +204,11 @@ group1 %in% group2
 # intersect is a function which returns the elements that all of its arguments have in common. For example:
 intersect(group1,group2)
 # Write a line of code that replicates this output using only group1, group2, square brackets, and logical operators.
+<<<<<<< HEAD
 group1[group1 %in% group2]
+=======
+
+>>>>>>> f0b54161af98ea6ebabc800f662e7333e553e204
 
 ####################################
 ####     Writing functions      ####
@@ -207,6 +234,7 @@ f2(8,9)
 f2(14,7)
 
 ### 3.1 What is the purpose of function f2? Write in comments below.
+<<<<<<< HEAD
 #The purpose of f2 is to determine wheter the first argument is divisible by the second argument , if that is the case , the function will return TRUE , otherwise it will return FALSE
 
 ### 3.2
@@ -215,6 +243,12 @@ my.mean <- function(x){
   sum(x) / length(x)
 }
 my.mean(ex.vector)
+=======
+
+### 3.2
+# Based on the definition of the mean from today's lecture, write a function that calculates the mean of all of the elements of a vector. assign it to the object my.mean. You will find the functions 'sum' and 'length' useful here.
+
+>>>>>>> f0b54161af98ea6ebabc800f662e7333e553e204
 # compare your function to the native function in R. Does it produce the same results?
 my.mean(ex.vector)
 mean(ex.vector)
@@ -247,20 +281,26 @@ sample(1:10, 3)
 # and the output is a vector of length x, where each element corresponds to the sum of the two sides of the dice.
 # HINT: one way to do this is to start by writing a function for a single 6-sided die, then create a new function 
 # that repeats the first function twice and adds up the result.
+<<<<<<< HEAD
 dice.roll <- function(x){
   sample(1:6,x,replace = TRUE) + sample(1:6,x,replace = 5)
 }
 dice.roll(5)
+=======
+>>>>>>> f0b54161af98ea6ebabc800f662e7333e553e204
 
 ### 4.2
 # Using the function hist, create histograms of the results of double dice rolls when you roll them 10 times, 
 #then 50, then 100, then 1000, then 10000. Use breaks=1:12 as an argument within the hist function. 
 # What do you notice? Write it in comments below your code.
+<<<<<<< HEAD
 hist(dice.roll(10))
 hist(dice.roll(50))
 hist(dice.roll(100))
 hist(dice.roll(1000))
 hist(dice.roll(10000))
+=======
+>>>>>>> f0b54161af98ea6ebabc800f662e7333e553e204
 
 
 # Another way to generate randomness is to sample from a pdf, which is a continuous distribution. 
@@ -274,6 +314,7 @@ runif(5,0,1)
 
 ### 4.3
 # Using runif, write a function that returns TRUE 22% of the time and FALSE 78% of the time
+<<<<<<< HEAD
 fu <- function(){
   ran <- runif(1)
   return(ran <= 0.22)
@@ -281,6 +322,9 @@ fu <- function(){
 fu()
 ex.ve <-c(163,152,159,162,163,154,152)
 mean(ex.ve)
+=======
+
+>>>>>>> f0b54161af98ea6ebabc800f662e7333e553e204
 
 ### 4.4
 # Based on today's lecture about pdfs, what is the probability density for a uniform pdf bounded between 

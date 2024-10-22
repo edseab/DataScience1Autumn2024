@@ -204,18 +204,24 @@ f2(14,7)
 # Based on the definition of the mean from today's lecture, write a function that calculates the mean of all of the elements of a vector. assign it to the object my.mean. You will find the functions 'sum' and 'length' useful here.
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 3764b5e (modifications)
+=======
+>>>>>>> f0b54161af98ea6ebabc800f662e7333e553e204
 my.mean <- function(x) {
   return(sum(x) / length(x))
 }
 ex.vector <- c(1, 2, 3, 4, 5)
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 
 >>>>>>> 2b57b28 (lab 1 answers)
 =======
 >>>>>>> 3764b5e (modifications)
+=======
+>>>>>>> f0b54161af98ea6ebabc800f662e7333e553e204
 # compare your function to the native function in R. Does it produce the same results?
 
 my.mean(ex.vector)
@@ -244,8 +250,11 @@ sample(1:10, 20, replace = TRUE)
 # that repeats the first function twice and adds up the result.
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 3764b5e (modifications)
+=======
+>>>>>>> f0b54161af98ea6ebabc800f662e7333e553e204
 roll_die <- function() {
   sample(1:6, 1, replace = TRUE)
 }
@@ -255,10 +264,13 @@ roll_two_dice <- function(x) {
   return(dice_rolls)
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 2b57b28 (lab 1 answers)
 =======
 >>>>>>> 3764b5e (modifications)
+=======
+>>>>>>> f0b54161af98ea6ebabc800f662e7333e553e204
 
 ### 4.2
 # Using the function hist, create histograms of the results of double dice rolls when you roll them 10 times, 
@@ -268,8 +280,11 @@ roll_two_dice <- function(x) {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 3764b5e (modifications)
+=======
+>>>>>>> f0b54161af98ea6ebabc800f662e7333e553e204
 par(mfrow = c(3, 2))
 hist(roll_two_dice(10), breaks = 1:12, main = "10 Rolls", xlab = "Sum of Two Dice", col = "lightblue")
 
@@ -291,10 +306,13 @@ par(mfrow = c(1, 1))
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 2b57b28 (lab 1 answers)
 =======
 >>>>>>> 3764b5e (modifications)
+=======
+>>>>>>> f0b54161af98ea6ebabc800f662e7333e553e204
 # Another way to generate randomness is to sample from a pdf, which is a continuous distribution. 
 # The simplest pdf is the uniform function. The uniform function is a flat line bounded between 2 numbers. 
 # Because it is flat, the probability of drawing a sample from any interval of given width between the two bounds 
@@ -308,6 +326,7 @@ runif(5,0,1)
 # Using runif, write a function that returns TRUE 22% of the time and FALSE 78% of the time
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 random_bool <- function() {
   return(runif(1, 0, 1) < 0.22)
 }
@@ -318,6 +337,11 @@ random_bool <- function() {
   return(runif(1, 0, 1) < 0.22)
 }
 >>>>>>> 3764b5e (modifications)
+=======
+random_bool <- function() {
+  return(runif(1, 0, 1) < 0.22)
+}
+>>>>>>> f0b54161af98ea6ebabc800f662e7333e553e204
 
 ### 4.4
 # Based on today's lecture about pdfs, what is the probability density for a uniform pdf bounded between 

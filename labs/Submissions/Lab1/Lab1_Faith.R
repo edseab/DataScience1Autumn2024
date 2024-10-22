@@ -37,15 +37,9 @@ rep(4,3)
 # If you can't remember in which order you have to input the arguments of a function, or if you just want to learn what a function does, you can type in ? followed by the function name in the console:
 ?rep
 
-<<<<<<< HEAD
 # Each argument has a name. By explicitly referring to these names when calling the function, we can avoid  any problems with order. For example: # nolint
 rep(x=3, times=4) # nolint: infix_spaces_linter.
 rep(times=4, x=3) # nolint: infix_spaces_linter.
-=======
-# Each argument has a name. By explicitly referring to these names when calling the function, we can avoid  any problems with order. For example:
-rep(x=3, times=4)
-rep(times=4, x=3)
->>>>>>> f0b54161af98ea6ebabc800f662e7333e553e204
 
 # produce the same result, because we inputed the arguments by name using the 'argname = x' construction. When we don't use this construction, the function defaults each input to an argument according to a predefined order.
 
@@ -139,23 +133,11 @@ my.vector[c(1,4)]
 
 ### 1.1
 # You can assign values to specific elements. Try writing a line of code below that changes the 4th element of my.vector to the word 'test'
-<<<<<<< HEAD
-<<<<<<< HEAD:labs/Submissions/zakariae_mourid.R
 my.vector [4] <- 'test'
-=======
-my.vector[4] <- 'test'
->>>>>>> 6f99392 (4.2 done):labs/submissions/Lab 1/zakariae_mourid.R
 
 ### 1.2
 # You can even assign values to elements of a vector that don't exist yet, thus creating them. Try assigning the word 'example' to the (as yet non-existent) 5th element of my.vector.
 my.vector [5] <- 'example'
-=======
-my.vector[4] <- 'test'
-
-### 1.2
-# You can even assign values to elements of a vector that don't exist yet, thus creating them. Try assigning the word 'example' to the (as yet non-existent) 5th element of my.vector.
-
->>>>>>> f0b54161af98ea6ebabc800f662e7333e553e204
 
 # Instead of indices, you can select elements of a vector using a logical vector of the same length, e.g.
 
@@ -176,26 +158,12 @@ my.vector == 'is'
 ### 2.1
 digits <- 0:10
 # Using the least amount of code possible, write a line of code that returns only the odd values of the digits object.
-<<<<<<< HEAD
-<<<<<<< HEAD:labs/Submissions/zakariae_mourid.R
 digits[digits %% 2 != 0]
-=======
-digits[c(1:10 %% 2 != 0)]
-
->>>>>>> 6f99392 (4.2 done):labs/submissions/Lab 1/zakariae_mourid.R
-=======
-digits[c(1:10 %% 2 != 0)]
-
->>>>>>> f0b54161af98ea6ebabc800f662e7333e553e204
 # Another important logical operator is the %in% operator. It tells you if the elements on the left are found in the elements on the right. E.G.
 group1 <- c('Arthur', 'Fatima', 'Suleiman', 'Marco')
 group2 <- c('Marco','Maria', 'Victor','Fatima', 'Antonio')
 group1 %in% group2
-<<<<<<< HEAD
 group1[group1 %in% group2]
-=======
-
->>>>>>> f0b54161af98ea6ebabc800f662e7333e553e204
 ## 2.2 
 # intersect is a function which returns the elements that all of its arguments have in common. For example:
 intersect(group1,group2)
@@ -226,8 +194,6 @@ f2(8,9)
 f2(14,7)
 
 ### 3.1 What is the purpose of function f2? Write in comments below.
-<<<<<<< HEAD
-<<<<<<< HEAD:labs/Submissions/zakariae_mourid.R
 # f2 will return 
 ### 3.2
 # Based on the definition of the mean from today's lecture, write a function that calculates the mean of all of the elements of a vector. assign it to the object my.mean. You will find the functions 'sum' and 'length' useful here.
@@ -235,19 +201,6 @@ my.mean <- function(experimental){
   expSum = sum(experimental)
   expMean = expSum / length(experimental)
   return(expMean)
-=======
-=======
->>>>>>> f0b54161af98ea6ebabc800f662e7333e553e204
-## it checks if y is divisable by x.
-### 3.2
-# Based on the definition of the mean from today's lecture, write a function that calculates the mean of all of the elements of a vector. assign it to the object my.mean. You will find the functions 'sum' and 'length' useful here.
-my.mean <- function(list)
-{
-  return (sum(list) / length(list))
-<<<<<<< HEAD
->>>>>>> 6f99392 (4.2 done):labs/submissions/Lab 1/zakariae_mourid.R
-=======
->>>>>>> f0b54161af98ea6ebabc800f662e7333e553e204
 }
 # compare your function to the native function in R. Does it produce the same results?
 
@@ -275,50 +228,18 @@ sample(1:10, 20, replace = TRUE)
 # and the output is a vector of length x, where each element corresponds to the sum of the two sides of the dice.
 # HINT: one way to do this is to start by writing a function for a single 6-sided die, then create a new function 
 # that repeats the first function twice and adds up the result.
-<<<<<<< HEAD
-<<<<<<< HEAD:labs/Submissions/zakariae_mourid.R
 rolldice <- function(x){
 dice1 <- sample(1:6, x, replace = TRUE)
   dice2 <- sample(1:6, x ,replace =TRUE)
   sumofdice <- dice1+dice2
   return(sumofdice)
 }
-=======
-=======
->>>>>>> f0b54161af98ea6ebabc800f662e7333e553e204
-my.roll_dice <- function()
-{
-  res <- sample(1:6,1,replace = TRUE)
-}
-my.roll_two_dices <- function()
-{
-  res = my.roll_dice()
-  res = res + my.roll_dice()
-  return (res)
-}
-my.f4 <- function(x)
-{
-  res <- 1:x
-  for (i in res) {
-    res[i] <- my.roll_two_dices()
-    class(i)
-  }
-  return (res)
-}
-my.f4(10)
-my.roll_two_dices()
-<<<<<<< HEAD
->>>>>>> 6f99392 (4.2 done):labs/submissions/Lab 1/zakariae_mourid.R
-=======
->>>>>>> f0b54161af98ea6ebabc800f662e7333e553e204
 
 ### 4.2
 # Using the function hist, create histograms of the results of double dice rolls when you roll them 10 times, 
 #then 50, then 100, then 1000, then 10000. Use breaks=1:12 as an argument within the hist function. 
 # What do you notice? Write it in comments below your code.
-hist(my.f4(100000), breaks = 1:12)
-#what i've noticed that the more iterations we do 
-?hist
+
 
 # Another way to generate randomness is to sample from a pdf, which is a continuous distribution. 
 # The simplest pdf is the uniform function. The uniform function is a flat line bounded between 2 numbers. 
@@ -328,7 +249,7 @@ hist(my.f4(100000), breaks = 1:12)
 # The function runif(n, min,max) samples n times from a uniform function bounded between the values of min and max.
 # For example, try
 runif(5,0,1)
-?dunif
+
 ### 4.3
 # Using runif, write a function that returns TRUE 22% of the time and FALSE 78% of the time
 
@@ -352,11 +273,4 @@ dunif(2,0,1)
 dunif(0.2,0,0.5)
 dunif(1.3,0,2)
 
-# Based on the results of this code and your answers above, what can you conclude about the purpose of the dunif function
-
-
-
-men <- c(174,180,178,185,178,189,175,165,174,197,171,163,173)
-women <- c(163,152,159,162,163,154,152)
-my.mean(men)
-my.mean(women)
+# Based on the results of this code and your answers above, what can you conclude about the purpose of the dunif function?
