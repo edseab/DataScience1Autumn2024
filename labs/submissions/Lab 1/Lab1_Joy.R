@@ -160,8 +160,7 @@ FALSE & FALSE
 TRUE | TRUE
 TRUE | FALSE
 FALSE | FALSE
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 FALSE | TRUE
 =======
 <<<<<<< HEAD
@@ -171,7 +170,7 @@ FALSE | TRUE
 >>>>>>> 1b0b93d (Created a file inside a branch)
 =======
 FALSE | TRUE
->>>>>>> 8335800 (Testing the rep functions)
+
 
 # There is also an exclusive or function, xor(), but it isn't used much.
 
@@ -201,10 +200,10 @@ my.vector <- c('this','is','a','vector')
 my.vector
 length(my.vector)
 class(my.vector)
-<<<<<<< HEAD
+
 
 ?class
->>>>>>> 8335800 (Testing the rep functions)
+
 
 # You can use square brackets to isolate elements in a vector by putting their index between the brackets:
 my.vector[1]
@@ -495,9 +494,7 @@ runif(5, 0, 1)
 ### 4.3
 # Using runif, write a function that returns TRUE 22% of the time and FALSE 78% of the time
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
+
 
 prob <- function(x)
 {
@@ -522,7 +519,7 @@ prob(50)
 pdf <- 1/(6-5)
 pdf
 
-<<<<<<< HEAD
+
 ### 4.6
 # What is the probability density for a uniform pdf bounded between 0 and 0.5 associated with all values of x between 0 and 0.5?
 
