@@ -144,14 +144,11 @@ my.vector[c(1,4)]
 
 ### 1.1
 # You can assign values to specific elements. Try writing a line of code below that changes the 4th element of my.vector to the word 'test'
-my.vector[4] <- 'test'
-my.vector[4]
+my.vector[4] <- "test"
 
 ### 1.2
 # You can even assign values to elements of a vector that don't exist yet, thus creating them. Try assigning the word 'example' to the (as yet non-existent) 5th element of my.vector.
 my.vector[5] <- "example"
-my.vector[5]
-my.vector
 
 # Instead of indices, you can select elements of a vector using a logical vector of the same length, e.g.
 
@@ -181,6 +178,7 @@ group1 %in% group2
 # intersect is a function which returns the elements that all of its arguments have in common. For example:
 intersect(group1,group2)
 # Write a line of code that replicates this output using only group1, group2, square brackets, and logical operators.
+
 group1[group1 %in% group2]
 
 ####################################
@@ -207,14 +205,17 @@ f2(8,9)
 f2(14,7)
 
 ### 3.1 What is the purpose of function f2? Write in comments below.
-#The purpose of f2 is to determine wheter the first argument is divisible by the second argument , if that is the case , the function will return TRUE , otherwise it will return FALSE
+# It is to know if 14 divided by 2 has a remainder 0 or not. If it has remainder 0, it returns TRUE
 
 ### 3.2
 # Based on the definition of the mean from today's lecture, write a function that calculates the mean of all of the elements of a vector. assign it to the object my.mean. You will find the functions 'sum' and 'length' useful here.
 my.mean <- function(x){
-  sum(x) / length(x)
+  y = sum(x)/length(x)
+  return(y)
 }
-my.mean(ex.vector)
+
+a <- c(3,4,5,6,7,8)
+my.mean(a)
 # compare your function to the native function in R. Does it produce the same results?
 my.mean(ex.vector)
 mean(ex.vector)
@@ -247,20 +248,36 @@ sample(1:10, 3)
 # and the output is a vector of length x, where each element corresponds to the sum of the two sides of the dice.
 # HINT: one way to do this is to start by writing a function for a single 6-sided die, then create a new function 
 # that repeats the first function twice and adds up the result.
-dice.roll <- function(x){
-  sample(1:6,x,replace = TRUE) + sample(1:6,x,replace = 5)
+
+die.roll <- function(x){
+  sample(1:6, 1, replace = TRUE)
 }
-dice.roll(5)
+
+roll_two_dice <- function(){
+  die.roll() + die.roll()
+}
+
+rolls <- function(x){
+  y <- replicate(x, roll_two_dice())
+  return (y)
+}
+result <- rolls(10)
+print(result)
 
 ### 4.2
 # Using the function hist, create histograms of the results of double dice rolls when you roll them 10 times, 
 #then 50, then 100, then 1000, then 10000. Use breaks=1:12 as an argument within the hist function. 
 # What do you notice? Write it in comments below your code.
-hist(dice.roll(10))
-hist(dice.roll(50))
-hist(dice.roll(100))
-hist(dice.roll(1000))
-hist(dice.roll(10000))
+
+times <- c(10, 50, 100, 1000, 10000)
+
+par(mfrow = c(3, 2))  # Set up a 3x2 plotting area
+
+for (count in times) {
+  result <- rolls(count)
+  hist(result, breaks = 1:12, main = paste("Rolls:", count), 
+       xlab = "Sum of Two Dice", ylab = "Frequency", col = "lightblue")
+}
 
 
 # Another way to generate randomness is to sample from a pdf, which is a continuous distribution. 
@@ -284,14 +301,26 @@ fu()
 # Based on today's lecture about pdfs, what is the probability density for a uniform pdf bounded between 
 # 0 and 1 associated with all values of x between 0 and 1? Explain why.
 
+#The probability density for a uniform PDF bounded between 0 and 1 is constant and equal to 1 for all 
+#x values in the range [0,1]. This means every outcome within this interval is equally likely to occur, 
+#and the total area under the curve is normalized to 1, satisfying the fundamental property of probability distributions.
+
 ### 4.5
 # Similarly, what is the probability density for a uniform pdf bounded between 5 and 6 associated with all values of x between 5 and 6?
+
+#The probability density for a uniform PDF bounded between 5 and 6 is constant and equal to 1 for all 
+#x values in the range [5,6]. This means every outcome within this interval is equally likely to occur, 
+#and the total area under the curve is normalized to 1, satisfying the fundamental property of probability distributions.
 
 ### 4.6
 # What is the probability density for a uniform pdf bounded between 0 and 0.5 associated with all values of x between 0 and 0.5?
 
+#The probability density for a uniform PDF bounded between 0 and 0.5 is constant and equal to 2 for all x values in the range [0,0.5].
+
 ### 4.7
 # What is the probability density for a uniform pdf bounded between 0 and 2 associated with all values of x between 0 and 2?
+
+#The probability density for a uniform PDF bounded between 0 and 2 is constant and equal to 0.5 for all x values in the range [0,2].
 
 ### 4.8
 # run the following code:
@@ -300,4 +329,7 @@ dunif(2,0,1)
 dunif(0.2,0,0.5)
 dunif(1.3,0,2)
 
-# Based on the results of this code and your answers above, what can you conclude about the purpose of the dunif function?sample(x[x >  9]) # oops -- length 10!
+# Based on the results of this code and your answers above, what can you conclude about the purpose of the dunif function?
+# From the result, It provides a way to evaluate how likely it is to randomly select a particular value from a specified uniform distribution defined by lower and upper bounds.
+#Values outside the defined range return a density of 0, indicating no probability of selecting those values.
+#For values within the range, the output gives the constant height of the probability density function, which is critical for understanding how uniformly distributed data behaves across different intervals.
