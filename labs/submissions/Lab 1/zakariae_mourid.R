@@ -133,7 +133,7 @@ my.vector[c(1,4)]
 
 ### 1.1
 # You can assign values to specific elements. Try writing a line of code below that changes the 4th element of my.vector to the word 'test'
-
+my.vector[4] <- 'test'
 
 ### 1.2
 # You can even assign values to elements of a vector that don't exist yet, thus creating them. Try assigning the word 'example' to the (as yet non-existent) 5th element of my.vector.
@@ -158,6 +158,7 @@ my.vector == 'is'
 ### 2.1
 digits <- 0:10
 # Using the least amount of code possible, write a line of code that returns only the odd values of the digits object.
+digits[c(1:10 %% 2 != 0)]
 
 # Another important logical operator is the %in% operator. It tells you if the elements on the left are found in the elements on the right. E.G.
 group1 <- c('Arthur', 'Fatima', 'Suleiman', 'Marco')
@@ -194,10 +195,13 @@ f2(8,9)
 f2(14,7)
 
 ### 3.1 What is the purpose of function f2? Write in comments below.
-
+## it checks if y is divisable by x.
 ### 3.2
 # Based on the definition of the mean from today's lecture, write a function that calculates the mean of all of the elements of a vector. assign it to the object my.mean. You will find the functions 'sum' and 'length' useful here.
-
+my.mean <- function(list)
+{
+  return (sum(list) / length(list))
+}
 # compare your function to the native function in R. Does it produce the same results?
 
 my.mean(ex.vector)
@@ -224,12 +228,35 @@ sample(1:10, 20, replace = TRUE)
 # and the output is a vector of length x, where each element corresponds to the sum of the two sides of the dice.
 # HINT: one way to do this is to start by writing a function for a single 6-sided die, then create a new function 
 # that repeats the first function twice and adds up the result.
+my.roll_dice <- function()
+{
+  res <- sample(1:6,1,replace = TRUE)
+}
+my.roll_two_dices <- function()
+{
+  res = my.roll_dice()
+  res = res + my.roll_dice()
+  return (res)
+}
+my.f4 <- function(x)
+{
+  res <- 1:x
+  for (i in res) {
+    res[i] <- my.roll_two_dices()
+    class(i)
+  }
+  return (res)
+}
+my.f4(10)
+my.roll_two_dices()
 
 ### 4.2
 # Using the function hist, create histograms of the results of double dice rolls when you roll them 10 times, 
 #then 50, then 100, then 1000, then 10000. Use breaks=1:12 as an argument within the hist function. 
 # What do you notice? Write it in comments below your code.
-
+hist(my.f4(100000), breaks = 1:12)
+#what i've noticed that the more iterations we do 
+?hist
 
 # Another way to generate randomness is to sample from a pdf, which is a continuous distribution. 
 # The simplest pdf is the uniform function. The uniform function is a flat line bounded between 2 numbers. 
@@ -239,7 +266,7 @@ sample(1:10, 20, replace = TRUE)
 # The function runif(n, min,max) samples n times from a uniform function bounded between the values of min and max.
 # For example, try
 runif(5,0,1)
-
+?dunif
 ### 4.3
 # Using runif, write a function that returns TRUE 22% of the time and FALSE 78% of the time
 
@@ -263,4 +290,11 @@ dunif(2,0,1)
 dunif(0.2,0,0.5)
 dunif(1.3,0,2)
 
-# Based on the results of this code and your answers above, what can you conclude about the purpose of the dunif function?
+# Based on the results of this code and your answers above, what can you conclude about the purpose of the dunif function
+
+
+
+men <- c(174,180,178,185,178,189,175,165,174,197,171,163,173)
+women <- c(163,152,159,162,163,154,152)
+my.mean(men)
+my.mean(women)
