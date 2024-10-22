@@ -197,7 +197,7 @@ f2(8,9)
 f2(14,7)
 
 ### 3.1 What is the purpose of function f2? Write in comments below.
-# The purpose of the f2() is check if a number x is divisible by another number y without remainder, and then return TRUE or FALSE
+# Ans: The purpose of the f2() is check if a number x is divisible by another number y without remainder, and then return TRUE or FALSE
 
 ### 3.2
 # Based on the definition of the mean from today's lecture, write a function that calculates the mean of all of the elements of a vector. assign it to the object my.mean. You will find the functions 'sum' and 'length' useful here.
