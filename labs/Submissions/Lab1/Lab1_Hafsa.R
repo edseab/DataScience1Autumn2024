@@ -202,7 +202,10 @@ f2(14,7)
 
 ### 3.2
 # Based on the definition of the mean from today's lecture, write a function that calculates the mean of all of the elements of a vector. assign it to the object my.mean. You will find the functions 'sum' and 'length' useful here.
-
+my.mean <- function(x) {
+  return(sum(x) / length(x))
+}
+ex.vector <- c(1, 2, 3, 4, 5)
 # compare your function to the native function in R. Does it produce the same results?
 
 my.mean(ex.vector)
@@ -229,11 +232,39 @@ sample(1:10, 20, replace = TRUE)
 # and the output is a vector of length x, where each element corresponds to the sum of the two sides of the dice.
 # HINT: one way to do this is to start by writing a function for a single 6-sided die, then create a new function 
 # that repeats the first function twice and adds up the result.
+roll_die <- function() {
+  sample(1:6, 1, replace = TRUE)
+}
+roll_two_dice <- function(x) {
+  # Roll the two dice x times and sum the results
+  dice_rolls <- replicate(x, roll_die() + roll_die())
+  return(dice_rolls)
+}
 
 ### 4.2
 # Using the function hist, create histograms of the results of double dice rolls when you roll them 10 times, 
 #then 50, then 100, then 1000, then 10000. Use breaks=1:12 as an argument within the hist function. 
 # What do you notice? Write it in comments below your code.
+
+
+par(mfrow = c(3, 2))
+hist(roll_two_dice(10), breaks = 1:12, main = "10 Rolls", xlab = "Sum of Two Dice", col = "lightblue")
+
+hist(roll_two_dice(50), breaks = 1:12, main = "50 Rolls", xlab = "Sum of Two Dice", col = "lightblue")
+
+hist(roll_two_dice(100), breaks = 1:12, main = "100 Rolls", xlab = "Sum of Two Dice", col = "lightblue")
+
+hist(roll_two_dice(1000), breaks = 1:12, main = "1000 Rolls", xlab = "Sum of Two Dice", col = "lightblue")
+
+
+hist(roll_two_dice(10000), breaks = 1:12, main = "10000 Rolls", xlab = "Sum of Two Dice", col = "lightblue")
+
+par(mfrow = c(1, 1))
+
+# As the number of rolls increases, the histogram starts to resemble a bell-shaped curve.
+# Sums like 7 are more frequent than extremes like 2 or 12. The more rolls, the closer
+# the distribution matches the expected probability distribution.
+
 
 
 # Another way to generate randomness is to sample from a pdf, which is a continuous distribution. 
@@ -247,6 +278,9 @@ runif(5,0,1)
 
 ### 4.3
 # Using runif, write a function that returns TRUE 22% of the time and FALSE 78% of the time
+random_bool <- function() {
+  return(runif(1, 0, 1) < 0.22)
+}
 
 ### 4.4
 # Based on today's lecture about pdfs, what is the probability density for a uniform pdf bounded between 
