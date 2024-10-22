@@ -202,10 +202,14 @@ f2(14,7)
 
 ### 3.2
 # Based on the definition of the mean from today's lecture, write a function that calculates the mean of all of the elements of a vector. assign it to the object my.mean. You will find the functions 'sum' and 'length' useful here.
+<<<<<<< HEAD
 my.mean <- function(x) {
   return(sum(x) / length(x))
 }
 ex.vector <- c(1, 2, 3, 4, 5)
+=======
+
+>>>>>>> 2b57b28 (lab 1 answers)
 # compare your function to the native function in R. Does it produce the same results?
 
 my.mean(ex.vector)
@@ -232,6 +236,7 @@ sample(1:10, 20, replace = TRUE)
 # and the output is a vector of length x, where each element corresponds to the sum of the two sides of the dice.
 # HINT: one way to do this is to start by writing a function for a single 6-sided die, then create a new function 
 # that repeats the first function twice and adds up the result.
+<<<<<<< HEAD
 roll_die <- function() {
   sample(1:6, 1, replace = TRUE)
 }
@@ -240,6 +245,8 @@ roll_two_dice <- function(x) {
   dice_rolls <- replicate(x, roll_die() + roll_die())
   return(dice_rolls)
 }
+=======
+>>>>>>> 2b57b28 (lab 1 answers)
 
 ### 4.2
 # Using the function hist, create histograms of the results of double dice rolls when you roll them 10 times, 
@@ -247,6 +254,7 @@ roll_two_dice <- function(x) {
 # What do you notice? Write it in comments below your code.
 
 
+<<<<<<< HEAD
 par(mfrow = c(3, 2))
 hist(roll_two_dice(10), breaks = 1:12, main = "10 Rolls", xlab = "Sum of Two Dice", col = "lightblue")
 
@@ -267,6 +275,8 @@ par(mfrow = c(1, 1))
 
 
 
+=======
+>>>>>>> 2b57b28 (lab 1 answers)
 # Another way to generate randomness is to sample from a pdf, which is a continuous distribution. 
 # The simplest pdf is the uniform function. The uniform function is a flat line bounded between 2 numbers. 
 # Because it is flat, the probability of drawing a sample from any interval of given width between the two bounds 
@@ -278,9 +288,12 @@ runif(5,0,1)
 
 ### 4.3
 # Using runif, write a function that returns TRUE 22% of the time and FALSE 78% of the time
+<<<<<<< HEAD
 random_bool <- function() {
   return(runif(1, 0, 1) < 0.22)
 }
+=======
+>>>>>>> 2b57b28 (lab 1 answers)
 
 ### 4.4
 # Based on today's lecture about pdfs, what is the probability density for a uniform pdf bounded between 
