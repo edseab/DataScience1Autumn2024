@@ -134,7 +134,11 @@ my.vector[c(1,4)]
 
 ### 1.1
 # You can assign values to specific elements. Try writing a line of code below that changes the 4th element of my.vector to the word 'test'
+<<<<<<< HEAD:labs/submissions/Lab 1/Jochebed_Lab 1.R
 my.vector[4] <- "test"
+=======
+my.vector[5] <- 'test'
+>>>>>>> 44725da (Completed Exercise 1.1):labs/Submissions/Jochebed_Lab 1.R
 
 ### 1.2
 # You can even assign values to elements of a vector that don't exist yet, thus creating them. Try assigning the word 'example' to the (as yet non-existent) 5th element of my.vector.
