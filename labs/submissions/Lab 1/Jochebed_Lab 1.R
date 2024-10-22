@@ -320,6 +320,7 @@ dunif(1.3,0,2)
 
 # Based on the results of this code and your answers above, what can you conclude about the purpose of the dunif function?
 
+<<<<<<< HEAD:labs/submissions/Lab 1/Jochebed_Lab 1.R
 <<<<<<< HEAD
 # the function dunif(x,y,z) is a function that takes 3 parameters x,y,z
 # where y and z represents the boundary of the unifrm distribution 
@@ -330,3 +331,5 @@ dunif(1.3,0,2)
 
 =======
 >>>>>>> be70fb9 (Creat lab 1 file)
+=======
+>>>>>>> 0eb3579 (Creat lab 1 file):labs/Submissions/Jochebed_Lab 1.R
