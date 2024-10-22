@@ -10,7 +10,7 @@
 
 
 ## Welcome to this first lab. Here we  will learn the basics of R, an open-source programming language and software environment.
-
+ 
 
 
 # On the right is the console. You can input code directly into the console line by line - you do not need to run an entire file. Try running a simple calculation in the console, like 5+9. Type it in and press enter. 
@@ -264,3 +264,4 @@ dunif(0.2,0,0.5)
 dunif(1.3,0,2)
 
 # Based on the results of this code and your answers above, what can you conclude about the purpose of the dunif function?
+
