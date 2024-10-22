@@ -264,7 +264,7 @@ men_heights <- c() ## Populate with the heights of men from class
 women_heights <- c() ## Populate with the heights of women from class
 
 # Write a Welch's t-test function for any two samples x1 and x2
-my_t <- function(x1,x2){
+my_t <- function(x1,x2){ # nolint
   # first, extract the means, variances and Ns of the two samples and save thel to
   n1 <- 
   m1 <-
