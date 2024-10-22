@@ -201,8 +201,9 @@ sample(1:100,1)
 ## RANDOM DISTRIBUTIONS 
 
 # Remember the formula for the Binomial distribution:
-# 𝑷(W=k) =  𝒑^𝒌∗(𝟏−𝒑)^((𝑵−𝒌) )∗(𝒏¦𝒌)
-# Where (𝒏¦𝒌)=  𝒏!/𝒌!(𝒏−𝒌)!
+### P(W=k) = p^k*(1-p)^(N-k)*(n|k)
+
+# Where (n|k) = n!/(k!(n-k)!)
 
 ### 4.1
 # Write a function to calculate the probability of exactly k successes
