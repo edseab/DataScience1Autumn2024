@@ -34,13 +34,9 @@ data(mtcars)
 head(mtcars)
 # Using indexing (square brackets) and the & operator, write a line of code
 # that selects only the rows of mtcars with at least 6 cylinders (mtcars$cyl >= 6) and horsepower of at least 110 (mtcars$hp >= 110). Remember to include all the columns.
-select <- mtcars[ mtcars$cyl >= 6 & mtcars$hp >= 110 ,]
-select
 
 ### 1.2
 # Now select only those rows with either high efficiency (miles per gallon (mpg) of at least 25) or low weight (wt <= 2.5)
-selectA <- mtcars[mtcars$mpg >= 5 & mtcars$wt <= 2.5, ]
-selectA
 
 #############################
 ####    If statements    ####
@@ -60,6 +56,13 @@ if(x-4==1){
 # The function should return a character vector of length n, consisting of 'Water' and 'Land', sampled with probability w. (so probability of sampling 'Water' is w)
 # If the p argument is not numeric, or if it is not between 0 and 1, the function should return the following message:
 # "Please input a probability between 0 and 1"
+
+probe <- function (n, w) {
+    if (!is.numeric(w) || w<0 || w<1) {
+        return ("Please input a probability between 0 and 1")
+    }
+    sample (c("Land", "water")) not done
+}
 
 
 # After the if statement we can put an else statement:
@@ -111,6 +114,11 @@ data(iris)
 
 # Write a for loop that iterates over the column names of the iris dataset and print each together with the number of characters in the column name in parenthesis. Example output: Sepal.Length (12). To get the number of characters use the function nchar().
 
+
+  for (i in iris){
+    print(paste(i, "(", nchar(i), ")", sep =" "))
+  }
+
 # Next, WHILE loops continue to loop until the boolean statment in the defining parentheses, e.g.
 x <- 0
 while(x<100){
@@ -128,25 +136,32 @@ while(x<100){
 # We can run an OLS linear model using lm()
 # Inside the lm and other model functions we use formulas
 # Formulas have the dependent variable on the left and the independent (predictor) variables on the right with a ~ in between
-# Lets run a bivariate regression of car weight (in 1000 pounds/500 kg) on miles per gallon (1mpg = 1km/L)
+# Lets run a bivariate regression of car weight (in 1000 pounds/500 kg) on miles per gallon (1mpg = 0.425km/L)
 model <- lm(mtcars$mpg ~ mtcars$wt)
 summary(model)
 ### 5.1
 # What does the Estimate for the (Intercept) number represent?
+for every 500kg change in the weight of the ar, we would expect the the car to be 5 times less efficient (not sure i heard right)
 ### 5.2
 # What does the Estimate for the mtcars$wt number represent?
 
 ### 5.3 
 # Is the relationship between these two variables positive or negative? Why do you think that might be?
 
+negative. When one increases the other decreases.
+
 ### 5.4 What is the predicted average efficiency in miles per gallon of a 4000 pound (2000kg) car?
+
+37.2851 - 5.3445 * 4
+The predicted average efficiency is 15.9071 miles per gallon (6.760517 kms/l)
 
 # Let's transform the independent variable:
 mtcars$wt_centred <- mtcars$wt - mean(mtcars$wt)
 
 ### 5.5
 # compare the mean and variance of the new variable with the untransformed variable. What do you notice?
-
+mean(mtcars$wt)
+mean(mtcars$wt_centred)
 
 ### 5.6
 # Run the following code:
@@ -161,3 +176,12 @@ x <- cbind(1,mtcars$wt)
 # (x'x)^(-1) * (x'y)
 # where ' means the transpose
 # Run the code you have written. What do you find?
+
+x' <- t(x)
+x' <- t(x)%*%x 
+(x'x) ^ (-1) <- solve (t(x)%*%x )
+(x'y) <- t(x)%*%y
+solve(t(x)%*%x) %*% t(x)%*%y
+
+
+
