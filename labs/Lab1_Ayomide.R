@@ -26,9 +26,12 @@
 ####    Functions   ####
 ########################
 
+'''
+this is ayomide fagbolade branch'''
 # FUNCTIONS are commands that take in inputs and produce outputs. They mostly take in the inputs in brackets, like this:
 sqrt(25)
-exp(3) 
+
+exp(3)
 
 # Often, functions take multiple inputs with different functions. Note how:
 rep(3,4)
@@ -37,14 +40,12 @@ rep(4,3)
 # If you can't remember in which order you have to input the arguments of a function, or if you just want to learn what a function does, you can type in ? followed by the function name in the console:
 ?rep
 
-# Each argument has a name. By explicitly referring to these names when calling the function, we can avoid  any problems with order. For example:
-rep(x=3, times=4)
-rep(times=4, x=3)
-
+# Each argument has a name. By explicitly referring to these names when calling the function, we can avoid  any problems with order. For example: # nolint
+rep(x=3, times=4) # nolint: infix_spaces_linter.
+rep(times=4, x=3) # nolint: infix_spaces_linter.
 
 # produce the same result, because we inputed the arguments by name using the 'argname = x' construction. When we don't use this construction, the function defaults each input to an argument according to a predefined order.
-rep(3,4)
-rep(4,3)
+
 # OPERATORS are special functions that take only 2 arguments, and do not use brackets. Instead, you must input the two arguments on either side of the operator. Examples of operators include +, -,*,/, ^, %%, %/%, :, and there are many more which we will learn about soon.
 
 ########################
@@ -83,7 +84,9 @@ class (y)
 
 # If we forget to use quote marks R will search for a stored object with that name and return an error if it doesn't find it:
 
-Salaam -> y
+"Salaam" -> y
+
+# One final very important class of object is the 'logical' class, a.k.a. Boolean. 
 
 # One final very important class of object is the 'logical' class, a.k.a. Boolean. 
 # Boolean objects can take one of two values
@@ -105,8 +108,7 @@ TRUE | FALSE
 FALSE | FALSE
 
 # There is also an exclusive or function, xor(), but it isn't used much.
-xor(TRUE,FALSE)
-xor(FALSE,FALSE)
+
 
 
 ####################################
@@ -116,7 +118,7 @@ xor(FALSE,FALSE)
 # YOu will have noticed that the console has always returned a [1] in front of it's output so far. This is because R has considered all these objects to be 'vectors' (in Python, this is the same thing as an array). Vectors are objects that can contain multiple elements. For example:
 
 z <- 50:80
-z[2]
+z
 
 # The numbers in square brackets tell you the INDEX of the element to their right. The index is simply the position number of that element. You will notice that, unlike in Python, the first element of an object in R has the index number 1 and not 0. This is one of the most important syntactical differences between Python and R (if you think this is not a very important difference, you are correct. The two languages are very similar in syntax.)
 
@@ -135,11 +137,14 @@ my.vector[c(1,4)]
 
 ### 1.1
 # You can assign values to specific elements. Try writing a line of code below that changes the 4th element of my.vector to the word 'test'
-my.vector[4] <- "test"
+my.vector[4]<- "scalar"
+my.vector
+
 
 ### 1.2
 # You can even assign values to elements of a vector that don't exist yet, thus creating them. Try assigning the word 'example' to the (as yet non-existent) 5th element of my.vector.
-my.vector[5] <- "example"
+my.vector[5]<- "product"
+my.vector
 
 # Instead of indices, you can select elements of a vector using a logical vector of the same length, e.g.
 
@@ -156,9 +161,12 @@ my.vector[c(TRUE,TRUE,FALSE,FALSE,FALSE)]
 my.vector == 'is'
 1:10 >= 5
 1:10 %% 2 == 0    ## %% is the remainder operator, it returns the remainder when you divide the left argument by the right argument.
+
 ### 2.1
 digits <- 0:10
+digits
 # Using the least amount of code possible, write a line of code that returns only the odd values of the digits object.
+digits[digits %% 2 == 1]
 
 # Another important logical operator is the %in% operator. It tells you if the elements on the left are found in the elements on the right. E.G.
 group1 <- c('Arthur', 'Fatima', 'Suleiman', 'Marco')
@@ -171,7 +179,6 @@ intersect(group1,group2)
 # Write a line of code that replicates this output using only group1, group2, square brackets, and logical operators.
 
 group1[group1 %in% group2]
-
 ####################################
 ####     Writing functions      ####
 ####################################
@@ -196,21 +203,24 @@ f2(8,9)
 f2(14,7)
 
 ### 3.1 What is the purpose of function f2? Write in comments below.
-# It is to know if 14 divided by 2 has a remainder 0 or not. If it has remainder 0, it returns TRUE
+# Function f2 checks if the remainder is 0
 
 ### 3.2
 # Based on the definition of the mean from today's lecture, write a function that calculates the mean of all of the elements of a vector. assign it to the object my.mean. You will find the functions 'sum' and 'length' useful here.
-my.mean <- function(x){
-  y = sum(x)/length(x)
-  return(y)
-}
 
-a <- c(3,4,5,6,7,8)
-my.mean(a)
+my.mean <- function(x){
+  # this is a function that calculates the mean
+  z = sum(x)/length(x)
+  return(z)
+}
+testQuestion.vector<- c(2,7,4,24,13,8,12)
+
+my.mean(testQuestion.vector)
+
 # compare your function to the native function in R. Does it produce the same results?
+
 my.mean(ex.vector)
 mean(ex.vector)
-#Yes, it does.
 
 ####################################
 ####      Randomness in R       ####
@@ -218,12 +228,6 @@ mean(ex.vector)
 
 # There are several ways to generate randomness in R. The simplest function is 
 ?sample
-x <- 1:12
-sample(x)
-
-sample(x, replace = TRUE)
-
-sample(x[x >  8]) # length 4
 
 #which randomly draws WITHOUT replacement from a specified vector. For example, to choose a number at random between 1 and 10:
 sample(1:10, 1)
@@ -232,43 +236,50 @@ sample(1:10, 3)
 # However, by default, sample won't let the same number repeat when you do this. This is called sampling without replacement, 
 # because it is as if, each time you pick out a number, it is now gone from the pool of possible numbers and has not been replaced.
 # If you want to sample randomly between 1 and 10 20 times, each time choosing between all 10 numbers, you have to write:
-
+sample(1:10, 20, replace = TRUE)
 
 ### 4.1
-# Write a function that simulates the roll of 2 6-sided dice, where the argument x is the number of times you roll the 2 dice, 
+# Write a function that simulates the roll of 2 6-sided dice, where the argument x is the number of times you roll the 2 dice,
+rollin_1_die <- function(x){
+  reslt_of_rollin = sample(1:6,x, replace = TRUE)
+  return( reslt_of_rollin)
+}  
+
+add_summ_dice <- function(x){
+   a<-rollin_1_die(x)
+   b<-rollin_1_die(x)
+   sum_result <- a+b
+
+  #print(cat("1st die =","\n",a,"\n","2nd die =",b,"\n","Sum of dice =","\n",sum_result))
+  return(sum_result)
+
+}
+
+w<-add_summ_dice(15)
+
 # and the output is a vector of length x, where each element corresponds to the sum of the two sides of the dice.
 # HINT: one way to do this is to start by writing a function for a single 6-sided die, then create a new function 
 # that repeats the first function twice and adds up the result.
-
-die.roll <- function(x){
-  sample(1:6, 1, replace = TRUE)
+roledice <- function(x){
+  dice1 <- sample(1:6, x, replace = TRUE)
+  dice2 <- sample(1:6, x ,replace = TRUE)
+  sumofdice <- dice1+dice2
+  return(sumofdice)
 }
-
-roll_two_dice <- function(){
-  die.roll() + die.roll()
-}
-
-rolls <- function(x){
-  y <- replicate(x, roll_two_dice())
-  return (y)
-}
-result <- rolls(10)
-print(result)
-
 ### 4.2
 # Using the function hist, create histograms of the results of double dice rolls when you roll them 10 times, 
 #then 50, then 100, then 1000, then 10000. Use breaks=1:12 as an argument within the hist function. 
+
+
+hist(add_summ_dice(10),1:12)
+hist(add_summ_dice(50),1:12)
+hist(add_summ_dice(100),1:12)
+hist(add_summ_dice(1000),1:12)
+hist(add_summ_dice(10000),1:12)
+# I noticed that as the sample size begins to increase the shape of the histogram begins to conform to the shape of the graph of the probability mass function, also continously resembling a symmetric uniform distribution
+#The more the number of rolls the more the histogram takes the shape of a normal distribution.
 # What do you notice? Write it in comments below your code.
 
-times <- c(10, 50, 100, 1000, 10000)
-
-par(mfrow = c(3, 2))  # Set up a 3x2 plotting area
-
-for (count in times) {
-  result <- rolls(count)
-  hist(result, breaks = 1:12, main = paste("Rolls:", count), 
-       xlab = "Sum of Two Dice", ylab = "Frequency", col = "lightblue")
-}
 
 
 # Another way to generate randomness is to sample from a pdf, which is a continuous distribution. 
@@ -283,31 +294,41 @@ runif(5,0,1)
 ### 4.3
 # Using runif, write a function that returns TRUE 22% of the time and FALSE 78% of the time
 
-
+prob<- function(x){
+  return(runif(x,0,1)<=0.22)
+}
+# checking answer
+#prob(1000)
+#hist(as.numeric(prob(100),1:12))
 ### 4.4
 # Based on today's lecture about pdfs, what is the probability density for a uniform pdf bounded between 
 # 0 and 1 associated with all values of x between 0 and 1? Explain why.
 
-#The probability density for a uniform PDF bounded between 0 and 1 is constant and equal to 1 for all 
-#x values in the range [0,1]. This means every outcome within this interval is equally likely to occur, 
-#and the total area under the curve is normalized to 1, satisfying the fundamental property of probability distributions.
+# The probability density for a uniform pdf bounded between 
+# 0 and 1 associated with all values of x between 0 and 1 is 1
+
+#why : The probability density function for a uniform distribution is defined by 
+# f(x)=1/(a-b)
+# therefore: 1/(1-0) = 1
+# This value allows the sum of the probilities within the range to be 1
 
 ### 4.5
 # Similarly, what is the probability density for a uniform pdf bounded between 5 and 6 associated with all values of x between 5 and 6?
 
-#The probability density for a uniform PDF bounded between 5 and 6 is constant and equal to 1 for all 
-#x values in the range [5,6]. This means every outcome within this interval is equally likely to occur, 
-#and the total area under the curve is normalized to 1, satisfying the fundamental property of probability distributions.
+#f(x)= 1/(6-5) = 1
+#therefore the probability density for a uniform pdf bounded between 5 and 6 = 1
 
 ### 4.6
 # What is the probability density for a uniform pdf bounded between 0 and 0.5 associated with all values of x between 0 and 0.5?
 
-#The probability density for a uniform PDF bounded between 0 and 0.5 is constant and equal to 2 for all x values in the range [0,0.5].
+#f(x)= 1/(0.5-0) = 2
+#therefore the probability density for a uniform pdf bounded between 0 and 0.5 = 2
 
 ### 4.7
 # What is the probability density for a uniform pdf bounded between 0 and 2 associated with all values of x between 0 and 2?
 
-#The probability density for a uniform PDF bounded between 0 and 2 is constant and equal to 0.5 for all x values in the range [0,2].
+#f(x)= 1/(2-0) = 0.5
+#therefore the probability density for a uniform pdf bounded between 0 and 2 = 0.5
 
 ### 4.8
 # run the following code:
@@ -316,4 +337,10 @@ dunif(2,0,1)
 dunif(0.2,0,0.5)
 dunif(1.3,0,2)
 
-# Based on the results of this code and your answers above, what can you conclude about the purpose of the dunif function?sample(x[x >  9]) # oops -- length 10!
+
+# Based on the results of this code and your answers above, what can you conclude about the purpose of the dunif function?
+# the function dunif(x,y,z) is a function that takes 3 parameters x,y,z
+# where y and z represents the boundary of the unifrm distribution 
+# and x represents the number whose probability density we are to check
+# we can observe that when the value of x is outside the range, we get the probability density of 0
+# which corresponds to the probability density of a uniform distribution
