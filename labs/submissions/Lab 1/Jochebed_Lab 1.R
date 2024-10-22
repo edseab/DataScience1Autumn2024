@@ -332,8 +332,3 @@ dunif(1.3,0,2)
 # we can observe that when the value of x is outside the range, we get the probability density of 0
 # which corresponds to the probability density of a uniform distribution
 
-
-=======
->>>>>>> be70fb9 (Creat lab 1 file)
-=======
->>>>>>> 0eb3579 (Creat lab 1 file):labs/Submissions/Jochebed_Lab 1.R
