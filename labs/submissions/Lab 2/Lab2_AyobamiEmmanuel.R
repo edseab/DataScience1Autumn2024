@@ -270,32 +270,32 @@ qnorm(0.1,175, 10, lower.tail=FALSE)
 
 ### 4.3
 # Let's run a Welch's t-test comparing the heights of men and women in class
-men_heights <- c() ## Populate with the heights of men from class
-women_heights <- c() ## Populate with the heights of women from class
+men_heights <- c(160, 178, 197, 167, 189, 175, 174, 180, 163, 176) ## Populate with the heights of men from class
+women_heights <- c(158, 160, 163, 162, 161, 152, 155, 156, 157, 164) ## Populate with the heights of women from class
 
 # Write a Welch's t-test function for any two samples x1 and x2
 my_t <- function(x1,x2){
   # first, extract the means, variances and Ns of the two samples and save thel to
-  n1 <- 
-  m1 <-
-  s1 <- 
-  n2 <-
-  m2 <- 
-  s2 <- 
+  n1 <- length(x1)
+  m1 <- mean(x1, na.rm=FALSE)
+  s1 <- var(x1, na.rm=FALSE)
+  n2 <- length(x2)
+  m2 <- mean(x2, na.rm=FALSE)
+  s2 <- var(x2, na.rm=FALSE)
  
   # next, calculate the average standard deviation using the formula shown in the class on slide 44:
  
-  s <- 
+  s <- sqrt((s1 / n1) + (s2 / n2))
 
   # next, calculate the t-statistic, again as shown on slide 44
  
-  t <- 
+  t <- (m1 - m2) / s
  
  
   # next, calculate the degrees of freedom (again see slide 44)
   # make sure you use parentheses correctly here
  
-  df <- 
+  df <-  ((s1 / n1) + (s2 / n2))^2 / (((s1 / n1)^2 / (n1 - 1)) + ((s2 / n2)^2 / (n2 - 1)))
  
   # next, calculate the probability that the t-statistic would be greater than the absolute value of the t-statistic that you calculated if the TRUE difference between the groups was 0
   # to do this, you can use function pt
@@ -309,3 +309,6 @@ t.test(men_heights,women_heights)
 my_t(men_heights,women_heights)
 
 # One last question to ponder before next class: Why did we multiply the p-value by 2 in the above function?
+
+#We multiply the one-tailed p-value by 2 because this is a two-tailed t-test. 
+#This accounts for both extremes of the t-distribution (i.e., large positive and large negative values of t.
