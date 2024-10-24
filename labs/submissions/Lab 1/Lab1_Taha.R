@@ -57,6 +57,8 @@ x <- 4
 
 x*5
 
+
+matrix(1:25, nrow = 5)
 ##############################################################
 ###    ADVANCED NOTE: the = operator can also be used      ###
 ###    to assign values to objects, like in Python.        ###
@@ -71,7 +73,6 @@ x*5
 class(x)
 
 # We can also store text into an object, by surrounding it with quote marks:
-
 "Hello" -> y
 y
 class (y)
