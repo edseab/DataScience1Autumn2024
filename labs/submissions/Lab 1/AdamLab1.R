@@ -269,16 +269,22 @@ generate.bool.22(10)
 ### 4.4
 # Based on today's lecture about pdfs, what is the probability density for a uniform pdf bounded between 
 # 0 and 1 associated with all values of x between 0 and 1? Explain why.
+d1 <- 1 / 1 - 0
+d1
+# The probability density for a uniform pdf bounded between 0 and 1 is 1 because the total probability (1) is uniformly distributed across the interval 
 
 ### 4.5
 # Similarly, what is the probability density for a uniform pdf bounded between 5 and 6 associated with all values of x between 5 and 6?
-
+d2 <- 1 / 6 - 5
+d2
 ### 4.6
 # What is the probability density for a uniform pdf bounded between 0 and 0.5 associated with all values of x between 0 and 0.5?
-
+d3 <- 1 / 0.5 - 0
+d3
 ### 4.7
 # What is the probability density for a uniform pdf bounded between 0 and 2 associated with all values of x between 0 and 2?
-
+d4 <- 1 / 2 - 0 
+d4
 ### 4.8
 # run the following code:
 dunif(0.5,0,1)
@@ -287,3 +293,4 @@ dunif(0.2,0,0.5)
 dunif(1.3,0,2)
 
 # Based on the results of this code and your answers above, what can you conclude about the purpose of the dunif function?
+#dunif provides the density at x for a uniform distribution over [a,b], returning 0 if x is outside the interval.
