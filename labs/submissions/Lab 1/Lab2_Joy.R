@@ -43,18 +43,25 @@ star_wars_matrix
 
 rownames(star_wars_matrix) <- c("A new hope", "The empire strikes back", "Return of the Jedi")
 colnames(star_wars_matrix) <- c("US revenue", "International revenue")
-
+star_wars_matrix
 ### 1.1
 # Some important base R functions to know: colSums, rowSums, colMeans, rowMeans
 # Use one of the above functions to calculate the total revenue for each movie (the sum of the US and international revenue)
 # and save it in an object called total_revenue
 
+total_revenue <- rowSums(star_wars_matrix, na.rm = TRUE)
+total_revenue
+
 # We can now add this vector as a new column using the function cbind (column bind)
 
 star_wars_matrix <- cbind(star_wars_matrix, total_revenue)
+star_wars_matrix
 
 ### 1.2
 # Rename the 3rd element of the column names of star_wars_matrix to "Total revenue"
+
+colnames(star_wars_matrix)[3] <- "Total revenue"
+star_wars_matrix
 
 # Now lets create vectors for the box office returns of the prequel trilogy
 
@@ -65,6 +72,15 @@ revenge_of_sith <- c(380.3, 468.5)
 ### 1.3
 # Turn these 3 vectors into a matrix, add a column for total revenue, 
 # and append them to star_wars_matrix using the function rbind (row bind)
+
+prequel_box_office <- c(phantom_menace, attack_of_clones, revenge_of_sith)
+prequel_matrix <- matrix(prequel_box_office, byrow = TRUE, nrow = 3)
+rownames(prequel_matrix) <- c("The Phantom Menace", "Attack of the Clones", "Revenge of the Sith")
+colnames(prequel_matrix) <- c("US revenue", "International revenue")
+prequel_total_revenue <- rowSums(prequel_matrix, na.rm = TRUE)
+prequel_matrix <- cbind(prequel_matrix, "Total revenue" = prequel_total_revenue)
+star_wars_matrix <- rbind(star_wars_matrix, prequel_matrix)
+star_wars_matrix
 
 # Matrices are understood by R to be both one-dimensional, because they are vectors folded onto themselves
 # into columns, but also 2 dimensional, because they have rows and columns. 
@@ -79,7 +95,8 @@ star_wars_matrix[3,1]
 
 ### 1.4 
 # Write a line of code to extract the international revenue of the Phantom Menace (the 4th movie) using numbers to index the matrix
-
+phantom_menace_international <- star_wars_matrix[4, 2]
+phantom_menace_international
 # Compare this to the following:
 star_wars_matrix["The Phantom Menace", "Total revenue"]
 
@@ -126,6 +143,9 @@ my_list$boolean
 
 ### 2.1
 # Using the $ operator, replace the "matrix" element of my_list with the star_wars_matrix
+
+my_list$matrix <- star_wars_matrix
+my_list
 
 # Finally, you can turn any list into a vector with unlist().
 unlist(my_list)
@@ -210,11 +230,23 @@ sample(1:100,1)
 # where n, k and p are arguments of the function
 # To do this you will need to use either the factorial() function
 # or the choose() function
+#using the factorial() function we have:
+
+binomial_dist_formular <-function(n,k,p){
+  permutation_formular <- factorial(n)/(factorial(k)*factorial(n-k))
+  probability_success <- p^k
+  probability_failure <- (1 - p)^(n - k)
+  probability_result <- probability_success * probability_failure * permutation_formular
+  return(probability_result)
+}
+binomial_dist_formular(n = 5, k = 4, p = 0.4)
 
 # use your function to calculate the probability that when the aliens send 10 probes to Earth (probability of water = 0.7),
 # exactly 8 of those probes will send a signal of water
 
+binomial_dist_formular(n = 10, k = 8, p = 0.7)
 # compare this to dbinom(8,10,0.7)
+dbinom(8,10,0.7)
 
 ### PROBABILITY FUNCTIONS IN R 
 # dbinom, dnorm, dunif, dbeta, .... all of these functions calculate f(x) for any given x
@@ -236,7 +268,18 @@ sample(1:100,1)
 # this few Water signals (or fewer).
 # Using rbinom(), simulate 100,000 universes where the aliens sent out 20 probes to Earth
 # and calculate in what percentage of these universes the number of probes signalling Water is 11 or fewer
+
+n_probes <- 20
+p_water <- 0.7
+num_simulations <- 100000
+set.seed(42)
+simulated_results <- rbinom(num_simulations, n_probes, p_water)
+simulated_results
 # What do you conclude to the astronomer?
+proportion_few_signals <- mean(simulated_results <= 11)
+proportion_few_signals
+
+#Conclusion to the astronomer is that It is possible, though somewhat unlikely, that this planet is Earth, given that there’s an 11.5% chance of observing 11 or fewer water signals in this scenario.
 
 # pbinom, pnorm, punif, pbeta, .... all calculate the area under the curve of a given distribution,
 # in the LOWER tail (if lower.tail=TRUE, by default), or the UPPER tail (if you set it to false)
@@ -260,26 +303,27 @@ qnorm(0.1,175, 10, lower.tail=FALSE)
 
 ### 4.3
 # Let's run a Welch's t-test comparing the heights of men and women in class
-men_heights <- c() ## Populate with the heights of men from class
-women_heights <- c() ## Populate with the heights of women from class
+men_heights <- c(192, 163, 198, 190, 173,180,192,195,163,154,180,190) ## Populate with the heights of men from class
+women_heights <- c(152,154,163,163,164,165,163) ## Populate with the heights of women from class
 
 # Write a Welch's t-test function for any two samples x1 and x2
-my_t <- function(x1,x2){
+my_t <- function(x1,x2){ # nolint
   # first, extract the means, variances and Ns of the two samples and save thel to
-  n1 <- 
-  m1 <-
-  s1 <- 
-  n2 <-
-  m2 <- 
-  s2 <- 
+  n1 <- length(x1)
+  m2 <- mean(x2)
+  s1 <- var(x1)
+  n2 <- length(x2)
+  m1 <- mean(x1)
+  s2 <- var(x2)
  
   # next, calculate the average standard deviation using the formula shown in the class on slide 44:
  
-  s <- 
+  s <- sqrt(((s1*s1)/n1)+((s2*s2)/n2))
+  s
 
   # next, calculate the t-statistic, again as shown on slide 44
  
-  t <- 
+  t <- (m1 - m2)/ s
  
  
   # next, calculate the degrees of freedom (again see slide 44)
