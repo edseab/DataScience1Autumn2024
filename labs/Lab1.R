@@ -263,3 +263,10 @@ dunif(0.2,0,0.5)
 dunif(1.3,0,2)
 
 # Based on the results of this code and your answers above, what can you conclude about the purpose of the dunif function?
+name <- input('what is your name? ' )
+#%%
+numbers<- c(10,20,30,40)
+numbers[5]<- 50 
+print(sum(numbers))
+print(mean(numbers))
+print(numbers*2)
