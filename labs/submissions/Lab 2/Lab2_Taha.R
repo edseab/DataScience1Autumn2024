@@ -324,8 +324,8 @@ mean(simulations <= 11)
 ### 4.3
 # Let's run a Welch's t-test comparing the heights of men and women in class
 # 4.3
-men_heights <- c(180, 175, 170, 185, 190)  # Example data
-women_heights <- c(160, 165, 155, 170, 175)  # Example data
+men_heights <- c(180, 175, 170, 185, 190)
+women_heights <- c(160, 165, 155, 170, 175)
 
 my_t <- function(x1, x2) {
     n1 <- length(x1)
@@ -350,15 +350,11 @@ my_t(men_heights, women_heights)
  
   # next, calculate the degrees of freedom (again see slide 44)
   # make sure you use parentheses correctly here
- 
-  df <- 
- 
   # next, calculate the probability that the t-statistic would be greater than the absolute value of the t-statistic that you calculated if the TRUE difference between the groups was 0
   # to do this, you can use function pt
   p_value <- pt(abs(t), df=df, lower.tail = F)*2
 
   return(list(t = t, df = df, p_value=p_value))
-  }
 
 # compare this function to the in-built t-test
 t.test(men_heights,women_heights)
