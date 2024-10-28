@@ -38,9 +38,9 @@ rep(4,3)
 # If you can't remember in which order you have to input the arguments of a function, or if you just want to learn what a function does, you can type in ? followed by the function name in the console:
 ?rep
 
-# Each argument has a name. By explicitly referring to these names when calling the function, we can avoid  any problems with order. For example:
-rep(x=3, times=4)
-rep(times=4, x=3)
+# Each argument has a name. By explicitly referring to these names when calling the function, we can avoid  any problems with order. For example: # nolint
+rep(x=3, times=4) # nolint: infix_spaces_linter.
+rep(times=4, x=3) # nolint: infix_spaces_linter.
 
 # produce the same result, because we inputed the arguments by name using the 'argname = x' construction. When we don't use this construction, the function defaults each input to an argument according to a predefined order.
 
