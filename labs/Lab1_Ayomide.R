@@ -257,6 +257,10 @@ add_summ_dice <- function(x){
 
 w<-add_summ_dice(15)
 
+roll_dice_sum<- function(x){replicate(x,sum(sample(1:6,2,replace=TRUE)))}
+roll_dice_sum(50)
+
+
 # and the output is a vector of length x, where each element corresponds to the sum of the two sides of the dice.
 # HINT: one way to do this is to start by writing a function for a single 6-sided die, then create a new function 
 # that repeats the first function twice and adds up the result.
@@ -276,6 +280,8 @@ hist(add_summ_dice(50),1:12)
 hist(add_summ_dice(100),1:12)
 hist(add_summ_dice(1000),1:12)
 hist(add_summ_dice(10000),1:12)
+
+hist(roll_dice_sum(10),1:12)
 # I noticed that as the sample size begins to increase the shape of the histogram begins to conform to the shape of the graph of the probability mass function, also continously resembling a symmetric uniform distribution
 #The more the number of rolls the more the histogram takes the shape of a normal distribution.
 # What do you notice? Write it in comments below your code.
