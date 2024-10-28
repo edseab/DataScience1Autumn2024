@@ -15,9 +15,9 @@
 
 # On the right is the console. You can input code directly into the console line by line - you do not need to run an entire file. Try running a simple calculation in the console, like 5+9. Type it in and press enter. 
 5+9
-
 # You can also write code in this, the code editor, and run it from here. Try highlighting the following line and pressing 'Ctrl + Enter' ('Cmd + Enter' on MacOS):
 12 * 4 - 6
+
 
 # Text beginning with a # sign is read as 'comment' and will not be evaluated by the console.
 ## Numbers (like 1.1, 2.3, etc) signify that I would like you to write a line a code in the code file and run it in the console
@@ -28,6 +28,7 @@
 
 # FUNCTIONS are commands that take in inputs and produce outputs. They mostly take in the inputs in brackets, like this:
 sqrt(25)
+
 exp(3)
 
 # Often, functions take multiple inputs with different functions. Note how:
@@ -37,9 +38,9 @@ rep(4,3)
 # If you can't remember in which order you have to input the arguments of a function, or if you just want to learn what a function does, you can type in ? followed by the function name in the console:
 ?rep
 
-# Each argument has a name. By explicitly referring to these names when calling the function, we can avoid  any problems with order. For example:
-rep(x=3, times=4)
-rep(times=4, x=3)
+# Each argument has a name. By explicitly referring to these names when calling the function, we can avoid  any problems with order. For example: # nolint
+rep(x=3, times=4) # nolint: infix_spaces_linter.
+rep(times=4, x=3) # nolint: infix_spaces_linter.
 
 # produce the same result, because we inputed the arguments by name using the 'argname = x' construction. When we don't use this construction, the function defaults each input to an argument according to a predefined order.
 
@@ -52,6 +53,7 @@ rep(times=4, x=3)
 # Functions are one example of OBJECTS, which are stored within the main (global) ENVIRONMENT of the console. We can create new objects by using the 'assign' operator:
 
 x <- 4
+x
 
 # You can now see in the 'Environment' tab below that the object 'x'  is stored with the value 4.
 
@@ -137,19 +139,18 @@ my.vector[4] <- 'test'
 
 ### 1.2
 # You can even assign values to elements of a vector that don't exist yet, thus creating them. Try assigning the word 'example' to the (as yet non-existent) 5th element of my.vector.
-my.vector[5] <- 'example'
+my.vector[5]<- 'example'
 
 # Instead of indices, you can select elements of a vector using a logical vector of the same length, e.g.
 
 my.vector[c(TRUE,TRUE,FALSE,FALSE,FALSE)]
+
 
 ####################################
 ####     Logical operators      ####
 ####################################
 
 # LOGICAL OPERATORS are operators that return logical vectors of the same length as the left argument. Examples include '==', the equality operator (not to be confused with the single = which is an assignment operator), >, <, >=, <=, and != (the 'different from' operator).
-
-
 
 # For example:
 my.vector == 'is'
@@ -159,8 +160,7 @@ my.vector == 'is'
 ### 2.1
 digits <- 0:10
 # Using the least amount of code possible, write a line of code that returns only the odd values of the digits object.
-digits[digits %% 2 != 0]
-
+digits [digits %% 2 != 0]
 # Another important logical operator is the %in% operator. It tells you if the elements on the left are found in the elements on the right. E.G.
 group1 <- c('Arthur', 'Fatima', 'Suleiman', 'Marco')
 group2 <- c('Marco','Maria', 'Victor','Fatima', 'Antonio')
@@ -169,10 +169,8 @@ group1 %in% group2
 ## 2.2 
 # intersect is a function which returns the elements that all of its arguments have in common. For example:
 intersect(group1,group2)
-
 # Write a line of code that replicates this output using only group1, group2, square brackets, and logical operators.
-group1[group1 %in% group2]
-
+group1[group1 %in% group2] 
 ####################################
 ####     Writing functions      ####
 ####################################
@@ -186,7 +184,7 @@ f1(7)
 ex.vector <- c(2,7,4,24,13,8,12)
 f1(ex.vector)
 
-# You can write several lines of code in a function by enclosing all of them in curly brackets {}. The function 'return' can then specify what the output can be. For example:
+# You can write several lines of code in a function by enclosing all of the in curly brackets {}. The function 'return' can then specify what the output can be. For example:
 
 f2 <- function(x,y){
   z = x %% y
@@ -197,14 +195,13 @@ f2(8,9)
 f2(14,7)
 
 ### 3.1 What is the purpose of function f2? Write in comments below.
-# The purpose of the f2() is check if a number x is divisible by another number y without remainder, and then return TRUE or FALSE
-
+#the f2 function will return the boolean value (true or false) if the reminder is equal to zero
 ### 3.2
 # Based on the definition of the mean from today's lecture, write a function that calculates the mean of all of the elements of a vector. assign it to the object my.mean. You will find the functions 'sum' and 'length' useful here.
-my.mean <- function(x){
-  vectorSum = sum(x)
-  vectorMean = vectorSum / length(x)
-  return(vectorMean)
+my.mean <- function(myvector){
+  vecSum = sum(myvector)
+  vecmean = sum(myve ctor)/length(myvector)
+  return(vecmean)
 }
 
 # compare your function to the native function in R. Does it produce the same results?
@@ -221,10 +218,8 @@ mean(ex.vector)
 
 #which randomly draws WITHOUT replacement from a specified vector. For example, to choose a number at random between 1 and 10:
 sample(1:10, 1)
-
 # You can run this several times and notice that you get a different answer each time. You can also sample several times at once
 sample(1:10, 3)
-
 # However, by default, sample won't let the same number repeat when you do this. This is called sampling without replacement, 
 # because it is as if, each time you pick out a number, it is now gone from the pool of possible numbers and has not been replaced.
 # If you want to sample randomly between 1 and 10 20 times, each time choosing between all 10 numbers, you have to write:
@@ -235,41 +230,18 @@ sample(1:10, 20, replace = TRUE)
 # and the output is a vector of length x, where each element corresponds to the sum of the two sides of the dice.
 # HINT: one way to do this is to start by writing a function for a single 6-sided die, then create a new function 
 # that repeats the first function twice and adds up the result.
-roll_1_die <- function(x){
-  sample(c(1:6),x, replace = TRUE)
+roledice <- function(x){
+  dice1 <- sample(1:6, x, replace = TRUE)
+  dice2 <- sample(1:6, x ,replace = TRUE)
+  sumofdice <- dice1+dice2
+  return(sumofdice)
 }
-
-roll_2_die <- function(x) {
-  dice1 = roll_1_die(x)  # Roll first die 'x' times
-  dice2 = roll_1_die(x)  # Roll second die 'x' times
-  dice1 + dice2  # Sum of the two dice rolls
-}
-
 ### 4.2
 # Using the function hist, create histograms of the results of double dice rolls when you roll them 10 times, 
 #then 50, then 100, then 1000, then 10000. Use breaks=1:12 as an argument within the hist function. 
 # What do you notice? Write it in comments below your code.
-?hist
-dice_roll_10times <- roll_2_die(10)
-hist(dice_roll_10times, breaks = 1:12, col = "blue", xlab = "Sum of Two Dice", ylab = "Frequency")
 
-dice_roll_50times <- roll_2_die(50)
-hist(dice_roll_50times, breaks = 1:12, col = "skyblue", xlab = "Sum of Two Dice", ylab = "Frequency")
 
-dice_roll_100times <- roll_2_die(100)
-hist(dice_roll_100times, breaks = 1:12, col = "green", xlab = "Sum of Two Dice", ylab = "Frequency")
-
-dice_roll_1000times <- roll_2_die(1000)
-hist(dice_roll_1000times, breaks = 1:12, col = "yellow", xlab = "Sum of Two Dice", ylab = "Frequency")
-
-dice_roll_10000times <- roll_2_die(10000)
-hist(dice_roll_10000times, breaks = 1:12, col = "red", xlab = "Sum of Two Dice", ylab = "Frequency")
-# -- Comments
-# - It was observed that rolling two dice 10 time is Negatively skewed
-# - Also rolling the two dice 10,000 time shows that the distribution is symmetrical
-# - Hence the 10,000 time rolling proves what we did in the class in relation to the rolling of 2 dice with a the mean = the median = the mode which is = 7.
-# - This means that, the larger the sample size, the better the distribution.
-######################################################################################
 # Another way to generate randomness is to sample from a pdf, which is a continuous distribution. 
 # The simplest pdf is the uniform function. The uniform function is a flat line bounded between 2 numbers. 
 # Because it is flat, the probability of drawing a sample from any interval of given width between the two bounds 
@@ -282,33 +254,18 @@ runif(5,0,1)
 ### 4.3
 # Using runif, write a function that returns TRUE 22% of the time and FALSE 78% of the time
 
-result_43 <- function(x){
-  my.vector = runif(x,0,1) <= 0.22
-  set.seed(3) # For reproducibility
-  # Check the proportion of TRUE and FALSE results
-  table(my.vector) / x
-}
-
 ### 4.4
 # Based on today's lecture about pdfs, what is the probability density for a uniform pdf bounded between 
 # 0 and 1 associated with all values of x between 0 and 1? Explain why.
-# Ans: The Uniform PDF bounded by 0 and 1 is "1"
-# i.e. 1/(1-0) = 1
 
 ### 4.5
 # Similarly, what is the probability density for a uniform pdf bounded between 5 and 6 associated with all values of x between 5 and 6?
-# Ans: The Uniform PDF bounded by 5 and 6 is "1"
-# i.e. 1/(6-5) = 1
 
 ### 4.6
 # What is the probability density for a uniform pdf bounded between 0 and 0.5 associated with all values of x between 0 and 0.5?
-# Ans: The Uniform PDF bounded by 0 and 0.5 is "2"
-# i.e. 1/(0.5-0) = 2
 
 ### 4.7
 # What is the probability density for a uniform pdf bounded between 0 and 2 associated with all values of x between 0 and 2?
-# Ans: The Uniform PDF bounded by 0 and 2 is "0.5"
-# i.e. 1/(2-0) = 0.5
 
 ### 4.8
 # run the following code:
@@ -318,7 +275,3 @@ dunif(0.2,0,0.5)
 dunif(1.3,0,2)
 
 # Based on the results of this code and your answers above, what can you conclude about the purpose of the dunif function?
-# Ans: The purpose of the dunif() is to produce the uniform pdf bounded by a "min" and "max" value based on the value "x" where you want to evaluate the pdf.
-# if the value "x" is within the interval;
-# uniform pdf is 1/(max-min)
-# Otherwise the density is 0

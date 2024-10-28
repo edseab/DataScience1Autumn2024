@@ -26,7 +26,6 @@
 ####    Functions   ####
 ########################
 
-
 # FUNCTIONS are commands that take in inputs and produce outputs. They mostly take in the inputs in brackets, like this:
 sqrt(25)
 exp(3)
@@ -105,8 +104,7 @@ TRUE | FALSE
 FALSE | FALSE
 
 # There is also an exclusive or function, xor(), but it isn't used much.
-xor(TRUE,FALSE)
-xor(FALSE,FALSE)
+
 
 
 ####################################
@@ -136,12 +134,11 @@ my.vector[c(1,4)]
 ### 1.1
 # You can assign values to specific elements. Try writing a line of code below that changes the 4th element of my.vector to the word 'test'
 my.vector[4] <- 'test'
-my.vector[4]
+my.vector
 
 ### 1.2
 # You can even assign values to elements of a vector that don't exist yet, thus creating them. Try assigning the word 'example' to the (as yet non-existent) 5th element of my.vector.
-my.vector[5] <- "example"
-my.vector[5]
+my.vector[5] <- 'example'
 my.vector
 
 # Instead of indices, you can select elements of a vector using a logical vector of the same length, e.g.
@@ -163,7 +160,8 @@ my.vector == 'is'
 ### 2.1
 digits <- 0:10
 # Using the least amount of code possible, write a line of code that returns only the odd values of the digits object.
-digits %% 2 != 0
+odd <- digits [digits %% 2 != 0]
+odd
 # Another important logical operator is the %in% operator. It tells you if the elements on the left are found in the elements on the right. E.G.
 group1 <- c('Arthur', 'Fatima', 'Suleiman', 'Marco')
 group2 <- c('Marco','Maria', 'Victor','Fatima', 'Antonio')
@@ -173,7 +171,8 @@ group1 %in% group2
 # intersect is a function which returns the elements that all of its arguments have in common. For example:
 intersect(group1,group2)
 # Write a line of code that replicates this output using only group1, group2, square brackets, and logical operators.
-group1[group1 %in% group2]
+group3 <- group1[group1 %in% group2]
+group3
 
 ####################################
 ####     Writing functions      ####
@@ -199,19 +198,18 @@ f2(8,9)
 f2(14,7)
 
 ### 3.1 What is the purpose of function f2? Write in comments below.
-#The purpose of f2 is to determine whether the first argument is divisible by the second argument , if that is the case , the function will return TRUE , otherwise it will return FALSE.
+#f2 verifies if the the argument x is divisable by y, if yes it returns true, otherwise it returns false
 
 ### 3.2
 # Based on the definition of the mean from today's lecture, write a function that calculates the mean of all of the elements of a vector. assign it to the object my.mean. You will find the functions 'sum' and 'length' useful here.
-my.mean <- function(x){
-  sum(x) / length(x)
+my.mean <- function(x) {
+  return(sum(x) / length(x))
 }
-my.mean(ex.vector)
+ex.vector <- c(1, 2, 3, 4, 5)
 # compare your function to the native function in R. Does it produce the same results?
 
 my.mean(ex.vector)
 mean(ex.vector)
-#Yes, it does ! 
 
 ####################################
 ####      Randomness in R       ####
@@ -234,20 +232,39 @@ sample(1:10, 20, replace = TRUE)
 # and the output is a vector of length x, where each element corresponds to the sum of the two sides of the dice.
 # HINT: one way to do this is to start by writing a function for a single 6-sided die, then create a new function 
 # that repeats the first function twice and adds up the result.
-dice.roll <- function(x){
-  sample(1:6,x,replace = TRUE) + sample(1:6,x,replace = 5)
+roll_die <- function() {
+  sample(1:6, 1, replace = TRUE)
 }
-dice.roll(5)
+roll_two_dice <- function(x) {
+  # Roll the two dice x times and sum the results
+  dice_rolls <- replicate(x, roll_die() + roll_die())
+  return(dice_rolls)
+}
 
 ### 4.2
 # Using the function hist, create histograms of the results of double dice rolls when you roll them 10 times, 
 #then 50, then 100, then 1000, then 10000. Use breaks=1:12 as an argument within the hist function. 
 # What do you notice? Write it in comments below your code.
-hist(dice.roll(10))
-hist(dice.roll(50))
-hist(dice.roll(100))
-hist(dice.roll(1000))
-hist(dice.roll(10000))
+
+
+par(mfrow = c(3, 2))
+hist(roll_two_dice(10), breaks = 1:12, main = "10 Rolls", xlab = "Sum of Two Dice", col = "lightblue")
+
+hist(roll_two_dice(50), breaks = 1:12, main = "50 Rolls", xlab = "Sum of Two Dice", col = "lightblue")
+
+hist(roll_two_dice(100), breaks = 1:12, main = "100 Rolls", xlab = "Sum of Two Dice", col = "lightblue")
+
+hist(roll_two_dice(1000), breaks = 1:12, main = "1000 Rolls", xlab = "Sum of Two Dice", col = "lightblue")
+
+
+hist(roll_two_dice(10000), breaks = 1:12, main = "10000 Rolls", xlab = "Sum of Two Dice", col = "lightblue")
+
+par(mfrow = c(1, 1))
+
+# As the number of rolls increases, the histogram starts to resemble a bell-shaped curve.
+# Sums like 7 are more frequent than extremes like 2 or 12. The more rolls, the closer
+# the distribution matches the expected probability distribution.
+
 
 
 # Another way to generate randomness is to sample from a pdf, which is a continuous distribution. 
@@ -261,6 +278,9 @@ runif(5,0,1)
 
 ### 4.3
 # Using runif, write a function that returns TRUE 22% of the time and FALSE 78% of the time
+random_bool <- function() {
+  return(runif(1, 0, 1) < 0.22)
+}
 
 ### 4.4
 # Based on today's lecture about pdfs, what is the probability density for a uniform pdf bounded between 
