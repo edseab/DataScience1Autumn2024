@@ -38,9 +38,9 @@ rep(4,3)
 # If you can't remember in which order you have to input the arguments of a function, or if you just want to learn what a function does, you can type in ? followed by the function name in the console:
 ?rep
 
-# Each argument has a name. By explicitly referring to these names when calling the function, we can avoid  any problems with order. For example: # nolint
-rep(x=3, times=4) # nolint: infix_spaces_linter.
-rep(times=4, x=3) # nolint: infix_spaces_linter.
+# Each argument has a name. By explicitly referring to these names when calling the function, we can avoid  any problems with order. For example:
+rep(x=3, times=4)
+rep(times=4, x=3)
 
 # produce the same result, because we inputed the arguments by name using the 'argname = x' construction. When we don't use this construction, the function defaults each input to an argument according to a predefined order.
 
@@ -82,6 +82,8 @@ class (y)
 # If we forget to use quote marks R will search for a stored object with that name and return an error if it doesn't find it:
 
 Salaam -> y
+
+# One final very important class of object is the 'logical' class, a.k.a. Boolean. 
 
 # One final very important class of object is the 'logical' class, a.k.a. Boolean. 
 # Boolean objects can take one of two values
@@ -263,10 +265,3 @@ dunif(0.2,0,0.5)
 dunif(1.3,0,2)
 
 # Based on the results of this code and your answers above, what can you conclude about the purpose of the dunif function?
-name <- input('what is your name? ' )
-#%%
-numbers<- c(10,20,30,40)
-numbers[5]<- 50 
-print(sum(numbers))
-print(mean(numbers))
-print(numbers*2)

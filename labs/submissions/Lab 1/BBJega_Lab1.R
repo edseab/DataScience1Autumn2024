@@ -200,7 +200,7 @@ f2(14,7)
 # Based on the definition of the mean from today's lecture, write a function that calculates the mean of all of the elements of a vector. assign it to the object my.mean. You will find the functions 'sum' and 'length' useful here.
 my.mean <- function(myvector){
   vecSum = sum(myvector)
-  vecmean = sum(myvector)/length(myvector)
+  vecmean = sum(myve ctor)/length(myvector)
   return(vecmean)
 }
 
