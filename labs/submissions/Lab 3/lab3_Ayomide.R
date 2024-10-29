@@ -54,6 +54,15 @@ qnorm(((100-2.5)/100),170,15)
 #    What is the range of heights acceptable to join the APC? What percentage of the total population is eligible to join?
 
 
+<<<<<<< HEAD
+=======
+# One has to be from 168.5 to 171.5 cm in height to belong to the Average People's Club 
+pnorm(171.5,170,15)- pnorm(168.5,170,15)
+
+# Just about 8 percent of the population is eligible to join the average people club (APC)
+
+
+>>>>>>> ecb833b (Task for lab 3 completed)
 # 4. If we selected 10 Examplians at random from the population, what is the probability that none of them are eligible to join either
 #    the TSC or the APC? 
 1-(2.5+2.5+8)/100
@@ -78,6 +87,7 @@ dbinom(2,10,0.08)
 
 # The probability that at least 3 of them are eligible to join the TSC is about 4 percent 
 # or 0.04
+<<<<<<< HEAD
 
 
 # Data Viz
@@ -93,3 +103,5 @@ bins<- c(130,170,180,190,200)
 hist(heights, breaks=bins)
 
 >>>>>>> 06e94e7 (just commit)
+=======
+>>>>>>> ecb833b (Task for lab 3 completed)
