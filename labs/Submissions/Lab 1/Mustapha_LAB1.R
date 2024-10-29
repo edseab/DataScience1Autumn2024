@@ -159,12 +159,8 @@ my.vector == 'is'
 ### 2.1
 digits <- 0:10
 # Using the least amount of code possible, write a line of code that returns only the odd values of the digits object.
-<<<<<<< HEAD:labs/Submissions/Lab 1/Mustapha_LAB1.R
 digits[digits %% 2 != 0]
 
-=======
-digits[0:10 %% 2 != 0]
->>>>>>> origin/main:labs/submissions/Lab 1/Lab1-BACHAR-Imane.R
 # Another important logical operator is the %in% operator. It tells you if the elements on the left are found in the elements on the right. E.G.
 group1 <- c('Arthur', 'Fatima', 'Suleiman', 'Marco')
 group2 <- c('Marco','Maria', 'Victor','Fatima', 'Antonio')
@@ -285,11 +281,14 @@ runif(5,0,1)
 
 ### 4.3
 # Using runif, write a function that returns TRUE 22% of the time and FALSE 78% of the time
-generate.bool.22 <- function(x){
-  s <- runif(x,0,1)
-  return(s<0.22)
+
+result_43 <- function(x){
+  my.vector = runif(x,0,1) <= 0.22
+  set.seed(3) # For reproducibility
+  # Check the proportion of TRUE and FALSE results
+  table(my.vector) / x
 }
-generate.bool.22(10)
+
 ### 4.4
 # Based on today's lecture about pdfs, what is the probability density for a uniform pdf bounded between 
 # 0 and 1 associated with all values of x between 0 and 1? Explain why.
