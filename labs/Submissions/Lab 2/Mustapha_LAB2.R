@@ -321,7 +321,7 @@ my_t <- function(x1,x2){
   m2 <- mean(women_heights)
   s2 <- sd(women_heights)
  
-  # next, calculate the average standard deviation using the formula shown in the class on slide 44:
+  # next, calculate the average standard deviation using the formula shown in the class on slide 56:
  
   s <- sqrt(((s1^2)/n1) + ((s2^2)/n2))
 
