@@ -55,7 +55,7 @@ qnorm(((100-2.5)/100),170,15)
 # One has to be from 168.5 to 171.5 cm in height to belong to the Average People's Club 
 pnorm(171.5,170,15)- pnorm(168.5,170,15)
 
-# Just about 8 percent of the population is eligible to join the average people club
+# Just about 8 percent of the population is eligible to join the average people club (APC)
 
 
 # 4. If we selected 10 Examplians at random from the population, what is the probability that none of them are eligible to join either
@@ -66,4 +66,19 @@ pnorm(171.5,170,15)- pnorm(168.5,170,15)
 
 # 5. What is the probability that exactly 2 are eligible to join the APC and the rest are not?
 
+#Given that p the probability for joining  APC is 0.08
+# n is 10 trials
+# k (no of successes) is 2
+Pk= (0.08^2)*((1-.08)^8)*choose(10,2)
+Pk
+dbinom(2,10,0.08)
+# The probability tha exactly 2 are eligible to join the APC is about 14.8%
+#   0.147807
+
 # 6. What is the probability that at least 3 of them are eligible to join the TSC?
+
+# This will be removing the sum of the probability of 2 , 1 and none from 1 or 100%
+1-(dbinom(0,10,0.08)+dbinom(1,10,0.08)+dbinom(2,10,0.08))
+
+# The probability that at least 3 of them are eligible to join the TSC is about 4 percent 
+# or 0.04
