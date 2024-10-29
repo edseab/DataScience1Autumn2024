@@ -311,6 +311,7 @@ my_t <- function(x1,x2){
 # compare this function to the in-built t-test
 t.test(men_heights,women_heights)
 my_t(men_heights,women_heights)
+#Trying to send a pull request
 
 # One last question to ponder before next class: Why did we multiply the p-value by 2 in the above function?
 
