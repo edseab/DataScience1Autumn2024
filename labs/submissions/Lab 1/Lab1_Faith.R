@@ -231,8 +231,7 @@ sample(1:10, 20, replace = TRUE)
 rolldice <- function(x){
 dice1 <- sample(1:6, x, replace = TRUE)
   dice2 <- sample(1:6, x ,replace =TRUE)
-  sumofdice <- dice1+dice2
-  return(sumofdice)
+  sumofdice <- dice1=
 }
 
 ### 4.2
