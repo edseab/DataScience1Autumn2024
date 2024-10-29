@@ -68,6 +68,7 @@ pnorm(171.5,170,15)- pnorm(168.5,170,15)
 
 # 5. What is the probability that exactly 2 are eligible to join the APC and the rest are not?
 
+<<<<<<< HEAD
 #Given that p the probability for joining  APC is 0.08
 # n is 10 trials
 # k (no of successes) is 2
@@ -99,3 +100,7 @@ bins<- c(130,170,180,190,200)
 hist(heights, breaks=bins)
 
 >>>>>>> 06e94e7 (just commit)
+=======
+# 6. What is the probability that at least 3 of them are eligible to join the TSC?
+>>>>>>> 2efdb34 (question 1-4 done)
+>>>>>>> 1862296 (question 1-4 done)
