@@ -339,6 +339,7 @@ dunif(1.3,0,2)
 
 
 # Based on the results of this code and your answers above, what can you conclude about the purpose of the dunif function?
+
 # the function dunif(x,y,z) is a function that takes 3 parameters x,y,z
 # where y and z represents the boundary of the unifrm distribution 
 # and x represents the number whose probability density we are to check
