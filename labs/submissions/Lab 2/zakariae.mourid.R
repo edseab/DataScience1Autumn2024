@@ -48,16 +48,13 @@ colnames(star_wars_matrix) <- c("US revenue", "International revenue")
 # Some important base R functions to know: colSums, rowSums, colMeans, rowMeans
 # Use one of the above functions to calculate the total revenue for each movie (the sum of the US and international revenue)
 # and save it in an object called total_revenue
-total_revenue <- rowSums(star_wars_matrix)
-total_revenue
+
 # We can now add this vector as a new column using the function cbind (column bind)
 
 star_wars_matrix <- cbind(star_wars_matrix, total_revenue)
 
 ### 1.2
 # Rename the 3rd element of the column names of star_wars_matrix to "Total revenue"
-colnames(star_wars_matrix)[3] <- "Total revenue"
-star_wars_matrix
 
 # Now lets create vectors for the box office returns of the prequel trilogy
 
@@ -68,14 +65,7 @@ revenge_of_sith <- c(380.3, 468.5)
 ### 1.3
 # Turn these 3 vectors into a matrix, add a column for total revenue, 
 # and append them to star_wars_matrix using the function rbind (row bind)
-trilogy <- matrix(c(phantom_menace,attack_of_clones,revenge_of_sith),byrow = T,nrow = 3)
-total_revenue2 <- rowSums(trilogy)
-total_revenue2
-trilogy <- cbind(trilogy, total_revenue2)
-rownames(trilogy) <- c("phantom_menace","attack of clones ", "revenge of sith")
-trilogy
-star_wars_matrix <- rbind(star_wars_matrix,trilogy)
-star_wars_matrix
+
 # Matrices are understood by R to be both one-dimensional, because they are vectors folded onto themselves
 # into columns, but also 2 dimensional, because they have rows and columns. 
 # So you can index them like this:
@@ -89,7 +79,6 @@ star_wars_matrix[3,1]
 
 ### 1.4 
 # Write a line of code to extract the international revenue of the Phantom Menace (the 4th movie) using numbers to index the matrix
-star_wars_matrix[4,3]
 
 # Compare this to the following:
 star_wars_matrix["The Phantom Menace", "Total revenue"]
@@ -137,7 +126,7 @@ my_list$boolean
 
 ### 2.1
 # Using the $ operator, replace the "matrix" element of my_list with the star_wars_matrix
-my_list$matrix <- star_wars_matrix
+
 # Finally, you can turn any list into a vector with unlist().
 unlist(my_list)
 
