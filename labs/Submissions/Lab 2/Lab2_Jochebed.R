@@ -15,11 +15,7 @@
 ####  1. Matrices   ####
 ########################
 
-# In R, a MATRIX is a vector that has folded onto itself into a series of rows and columns. You can construct one from a normal vector:
-matrix(1:9, nrow = 3)
 
-# By default matrices get filled column by column, as you can see from the output. To fill them row by row instead, change the argument brow to TRUE:
-matrix(1:9, byrow = T, nrow = 3)
 
 # Now is a good time to point out that R will automatically read T as TRUE and F as FALSE, which can be a time-saver.
 
@@ -27,17 +23,11 @@ matrix(1:9, byrow = T, nrow = 3)
 # The first element of each vector indicates the US box office revenue,
 # the second element refers to the Non-US box office.
 
-# Box office Star Wars (in millions!)
-new_hope <- c(460.998, 314.4)
-empire_strikes <- c(290.475, 247.900)
-return_jedi <- c(309.306, 165.8)
 
-# Create box_office vector
-box_office <- c(new_hope, empire_strikes, return_jedi)
 
-# Construct star_wars_matrix
-star_wars_matrix <- matrix(box_office, byrow = T, nrow = 3)
-star_wars_matrix
+
+
+
 
 # we can give matrices rownames and column names
 
@@ -48,23 +38,33 @@ colnames(star_wars_matrix) <- c("US revenue", "International revenue")
 # Some important base R functions to know: colSums, rowSums, colMeans, rowMeans
 # Use one of the above functions to calculate the total revenue for each movie (the sum of the US and international revenue)
 # and save it in an object called total_revenue
+total_revenue <- rowSums(star_wars_matrix)
 
 # We can now add this vector as a new column using the function cbind (column bind)
-
 star_wars_matrix <- cbind(star_wars_matrix, total_revenue)
 
 ### 1.2
 # Rename the 3rd element of the column names of star_wars_matrix to "Total revenue"
+colnames(star_wars_matrix) <- c("US revenue", "International revenue", "Total revenue")
+colnames(star_wars_matrix)[3] <- "Total revenue"
 
 # Now lets create vectors for the box office returns of the prequel trilogy
-
 phantom_menace <- c(474.5,552.5)
 attack_of_clones <- c(310.7,338.7)
 revenge_of_sith <- c(380.3, 468.5)
 
+
 ### 1.3
 # Turn these 3 vectors into a matrix, add a column for total revenue, 
 # and append them to star_wars_matrix using the function rbind (row bind)
+prequel_trilogy_matrix <- matrix(c(phantom_menace, attack_of_clones, revenge_of_sith), byrow = T, nrow = 3)
+total_revenue <- rowSums(prequel_trilogy_matrix)
+prequel_trilogy_matrix <- cbind(prequel_trilogy_matrix, total_revenue)
+
+all <- rbind(star_wars_matrix, prequel_trilogy_matrix)
+rownames(all)[4] <- "phantom_menace"
+rownames(all)[5] <- "attack_of_clones"
+rownames(all)[6] <- "revenge_of_sith"
 
 # Matrices are understood by R to be both one-dimensional, because they are vectors folded onto themselves
 # into columns, but also 2 dimensional, because they have rows and columns. 
@@ -72,13 +72,14 @@ revenge_of_sith <- c(380.3, 468.5)
 star_wars_matrix[4]
 
 # but also like this
-star_wars_matrix[3,1]
+star_wars_matrix[3, 1]
 
 # When you put a comma in between square brackets, you are indexing both the rows (to the left of the comma),
 # and the columns (to the right of the comma).
 
 ### 1.4 
 # Write a line of code to extract the international revenue of the Phantom Menace (the 4th movie) using numbers to index the matrix
+all[4, 2]
 
 # Compare this to the following:
 star_wars_matrix["The Phantom Menace", "Total revenue"]
@@ -119,6 +120,7 @@ my_list_2
 
 # You cane name the elements of a list with names()
 names(my_list) <- c("colours","digits","boolean","matrix")
+
 my_list
 
 # and you can access each element of a list with the $ operator
@@ -126,6 +128,7 @@ my_list$boolean
 
 ### 2.1
 # Using the $ operator, replace the "matrix" element of my_list with the star_wars_matrix
+my_list$matrix <- star_wars_matrix
 
 # Finally, you can turn any list into a vector with unlist().
 unlist(my_list)
@@ -160,7 +163,7 @@ summary(iris)
 # which each give you different information about the data frame.
 
 # Just like lists, you can call each column using the $ operator
-iris$Species
+iris$Sepal.Length
 
 # Let's do some basic data visualization in R:
 # First, a histogram
@@ -188,7 +191,7 @@ sample(1:100,1)
 # As a result, we can set our own seed and generate our own randomness:
 
 set.seed(123)
-sample(1:100,1)
+sample(1:100, 1)
 
 # You got 31, right? Run it again and see:
 
@@ -201,8 +204,9 @@ sample(1:100,1)
 ## RANDOM DISTRIBUTIONS 
 
 # Remember the formula for the Binomial distribution:
-# 𝑷(W=k) =  𝒑^𝒌∗(𝟏−𝒑)^((𝑵−𝒌) )∗(𝒏¦𝒌)
-# Where (𝒏¦𝒌)=  𝒏!/𝒌!(𝒏−𝒌)!
+### P(W=k) = p^k*(1-p)^(N-k)*(n|k)
+
+# Where (n|k) = n!/(k!(n-k)!)
 
 ### 4.1
 # Write a function to calculate the probability of exactly k successes
@@ -210,11 +214,19 @@ sample(1:100,1)
 # where n, k and p are arguments of the function
 # To do this you will need to use either the factorial() function
 # or the choose() function
+binom <- function(n, k, p){
+  nk = factorial(n) / (factorial(k) * factorial(n-k))
+  bin = p^k * (1-p) ^(n-k) * nk 
+  return (bin)
+}
+# probability is 0.2334744405
 
-# use your function to calculate the probability that when the aliens send 10 probes to Earth (probability of water = 0.7),
-# exactly 8 of those probes will send a signal of water
+# use your function to calculate the probability that when the aliens send 10 probes to Earth
+# (probability of water = 0.7), exactly 8 of those probes will send a signal of water
+binom(n = 10, k = 8, p = 0.7)
 
 # compare this to dbinom(8,10,0.7)
+# Parameters
 
 ### PROBABILITY FUNCTIONS IN R 
 # dbinom, dnorm, dunif, dbeta, .... all of these functions calculate f(x) for any given x
@@ -237,13 +249,25 @@ sample(1:100,1)
 # Using rbinom(), simulate 100,000 universes where the aliens sent out 20 probes to Earth
 # and calculate in what percentage of these universes the number of probes signalling Water is 11 or fewer
 # What do you conclude to the astronomer?
+universes <- rbinom(1:100000, 20)
+
+n = 20, k = 11, p = 0.7
+
+num_probes <- 20
+num_universes <- 100000
+prob_water <- 0.7 
+
+results <- rbinom(num_universes, num_probes, prob_water)
+
+percentage <- sum(results <= 11) / num_universes * 100
+# percentage of universes 11.32
 
 # pbinom, pnorm, punif, pbeta, .... all calculate the area under the curve of a given distribution,
 # in the LOWER tail (if lower.tail=TRUE, by default), or the UPPER tail (if you set it to false)
 
 # So for example, if a person of 195 cm was drawn from a gaussian distribution of heights,
 # with mean 175cm and standard deviation 10cm, What percentile would they be in?
-pnorm(195, 175, 10, lower.tail=FALSE)
+pnorm(195, mean =  175, sd = 10, lower.tail=FALSE)
 # They would be in the upper 2.3 percentile
 
 # qbinom, qnorm, qunif, qbeta, .... all calculate value of x for which
@@ -260,32 +284,34 @@ qnorm(0.1,175, 10, lower.tail=FALSE)
 
 ### 4.3
 # Let's run a Welch's t-test comparing the heights of men and women in class
-men_heights <- c() ## Populate with the heights of men from class
-women_heights <- c() ## Populate with the heights of women from class
+men_heights <- c(175, 180, 165, 170, 185)  # Example heights in cm
+women_heights <- c(160, 155, 170, 165, 162)  # Example heights in cm
+
 
 # Write a Welch's t-test function for any two samples x1 and x2
 my_t <- function(x1,x2){
   # first, extract the means, variances and Ns of the two samples and save thel to
-  n1 <- 
-  m1 <-
-  s1 <- 
-  n2 <-
-  m2 <- 
-  s2 <- 
+  n1 <- length(men_heights)
+  m1 <- mean(men_heights)
+  s1 <- sd(men_heights)
+  n2 <- length(women_heights)
+  m2 <- mean(women_heights)
+  s2 <- sd(women_heights)
  
   # next, calculate the average standard deviation using the formula shown in the class on slide 44:
  
-  s <- 
+  s <- sqrt((s1^2/n1)+(s2^2/n2))
 
   # next, calculate the t-statistic, again as shown on slide 44
  
-  t <- 
+  t <- (m1 - m2) / s
  
  
   # next, calculate the degrees of freedom (again see slide 44)
   # make sure you use parentheses correctly here
  
-  df <- 
+  df <- ((s1^2 / n1 + s2^2 / n2)^2) / 
+      (((s1^2 / n1)^2 / (n1 - 1)) + ((s2^2 / n2)^2 / (n2 - 1)))
  
   # next, calculate the probability that the t-statistic would be greater than the absolute value of the t-statistic that you calculated if the TRUE difference between the groups was 0
   # to do this, you can use function pt

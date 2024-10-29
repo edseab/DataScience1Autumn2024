@@ -281,14 +281,11 @@ runif(5,0,1)
 
 ### 4.3
 # Using runif, write a function that returns TRUE 22% of the time and FALSE 78% of the time
-
-result_43 <- function(x){
-  my.vector = runif(x,0,1) < 0.22
-  set.seed(3) # For reproducibility
-  # Check the proportion of TRUE and FALSE results
-  table(my.vector) / x
+generate.bool.22 <- function(x){
+  s <- runif(x,0,1)
+  return(s<0.22)
 }
-
+generate.bool.22(10)
 ### 4.4
 # Based on today's lecture about pdfs, what is the probability density for a uniform pdf bounded between 
 # 0 and 1 associated with all values of x between 0 and 1? Explain why.

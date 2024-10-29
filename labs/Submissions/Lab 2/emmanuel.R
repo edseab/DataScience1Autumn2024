@@ -31,10 +31,9 @@ matrix(1:9, byrow = T, nrow = 3)
 new_hope <- c(460.998, 314.4)
 empire_strikes <- c(290.475, 247.900)
 return_jedi <- c(309.306, 165.8)
-
+return_jedi[2]
 # Create box_office vector
 box_office <- c(new_hope, empire_strikes, return_jedi)
-
 # Construct star_wars_matrix
 star_wars_matrix <- matrix(box_office, byrow = T, nrow = 3)
 star_wars_matrix
@@ -43,19 +42,28 @@ star_wars_matrix
 
 rownames(star_wars_matrix) <- c("A new hope", "The empire strikes back", "Return of the Jedi")
 colnames(star_wars_matrix) <- c("US revenue", "International revenue")
+star_wars_matrix
 
 ### 1.1
 # Some important base R functions to know: colSums, rowSums, colMeans, rowMeans
 # Use one of the above functions to calculate the total revenue for each movie (the sum of the US and international revenue)
 # and save it in an object called total_revenue
+colSums(star_wars_matrix)
+rowSums(star_wars_matrix)
+colMeans(star_wars_matrix)
+rowMeans(star_wars_matrix)
+rowSums(star_wars_matrix) 
+rowSums(star_wars_matrix) -> total
 
+total_revenue <-rowSums(star_wars_matrix)
+total_revenue
 # We can now add this vector as a new column using the function cbind (column bind)
-
+star_wars_matrix
 star_wars_matrix <- cbind(star_wars_matrix, total_revenue)
 
 ### 1.2
 # Rename the 3rd element of the column names of star_wars_matrix to "Total revenue"
-
+colnames(star_wars_matrix) <- c("US revenue", "International revenue",'Total Revenue')
 # Now lets create vectors for the box office returns of the prequel trilogy
 
 phantom_menace <- c(474.5,552.5)
@@ -65,7 +73,14 @@ revenge_of_sith <- c(380.3, 468.5)
 ### 1.3
 # Turn these 3 vectors into a matrix, add a column for total revenue, 
 # and append them to star_wars_matrix using the function rbind (row bind)
-
+emmosei <- matrix(c(phantom_menace,attack_of_clones,revenge_of_sith),byrow = T,nrow = 3)
+emmosei
+total_revenue2 <- rowSums(emmosei)
+total_revenue2
+emmosei <- cbind(emmosei,total_revenue2)
+rownames(emmosei) <- c('phantom menace', 'attack of clones' , ' revenge of smith')
+star_wars_matrix <- rbind(star_wars_matrix,emmosei)
+star_wars_matrix
 # Matrices are understood by R to be both one-dimensional, because they are vectors folded onto themselves
 # into columns, but also 2 dimensional, because they have rows and columns. 
 # So you can index them like this:
@@ -79,7 +94,7 @@ star_wars_matrix[3,1]
 
 ### 1.4 
 # Write a line of code to extract the international revenue of the Phantom Menace (the 4th movie) using numbers to index the matrix
-
+star_wars_matrix[4]
 # Compare this to the following:
 star_wars_matrix["The Phantom Menace", "Total revenue"]
 
@@ -111,7 +126,7 @@ star_wars_matrix[1:3,] * star_wars_matrix[4:6,]
 my_list <- list(c("red,green"), 1:5, FALSE, matrix(1:9,3,3))
 my_list
 
-my_list[3]
+my_list[4]
 
 # You can even have lists inside of lists, recursively
 my_list_2 <- list(my_list,c("Hello","World"))
@@ -126,7 +141,7 @@ my_list$boolean
 
 ### 2.1
 # Using the $ operator, replace the "matrix" element of my_list with the star_wars_matrix
-
+my_list$matrix <-star_wars_matrix
 # Finally, you can turn any list into a vector with unlist().
 unlist(my_list)
 
@@ -201,8 +216,9 @@ sample(1:100,1)
 ## RANDOM DISTRIBUTIONS 
 
 # Remember the formula for the Binomial distribution:
-# 𝑷(W=k) =  𝒑^𝒌∗(𝟏−𝒑)^((𝑵−𝒌) )∗(𝒏¦𝒌)
-# Where (𝒏¦𝒌)=  𝒏!/𝒌!(𝒏−𝒌)!
+### P(W=k) = p^k*(1-p)^(N-k)*(n|k)
+
+# Where (n|k) = n!/(k!(n-k)!)
 
 ### 4.1
 # Write a function to calculate the probability of exactly k successes

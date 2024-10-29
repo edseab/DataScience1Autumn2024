@@ -163,28 +163,11 @@ my.vector[c(1,4)]
 
 ### 1.1
 # You can assign values to specific elements. Try writing a line of code below that changes the 4th element of my.vector to the word 'test'
-<<<<<<< HEAD
-<<<<<<< HEAD
 my.vector[4] <- 'test'
 
 ### 1.2
 # You can even assign values to elements of a vector that don't exist yet, thus creating them. Try assigning the word 'example' to the (as yet non-existent) 5th element of my.vector.
 my.vector[5]<- 'example'
-=======
-=======
->>>>>>> f0b54161af98ea6ebabc800f662e7333e553e204
-my.vector[4]<- "scalar"
-my.vector
-
-
-### 1.2
-# You can even assign values to elements of a vector that don't exist yet, thus creating them. Try assigning the word 'example' to the (as yet non-existent) 5th element of my.vector.
-my.vector[5]<- "product"
-my.vector
-<<<<<<< HEAD
->>>>>>> 5a74f89 (partial completion of assignment)
-=======
->>>>>>> f0b54161af98ea6ebabc800f662e7333e553e204
 
 # Instead of indices, you can select elements of a vector using a logical vector of the same length, e.g.
 
@@ -206,17 +189,7 @@ my.vector == 'is'
 digits <- 0:10
 digits
 # Using the least amount of code possible, write a line of code that returns only the odd values of the digits object.
-<<<<<<< HEAD
-<<<<<<< HEAD
 digits [digits %% 2 != 0]
-=======
-digits[digits %% 2 == 1]
-
->>>>>>> 5a74f89 (partial completion of assignment)
-=======
-digits[digits %% 2 == 1]
-
->>>>>>> f0b54161af98ea6ebabc800f662e7333e553e204
 # Another important logical operator is the %in% operator. It tells you if the elements on the left are found in the elements on the right. E.G.
 group1 <- c('Arthur', 'Fatima', 'Suleiman', 'Marco')
 group2 <- c('Marco','Maria', 'Victor','Fatima', 'Antonio')
@@ -226,17 +199,7 @@ group1 %in% group2
 # intersect is a function which returns the elements that all of its arguments have in common. For example:
 intersect(group1,group2)
 # Write a line of code that replicates this output using only group1, group2, square brackets, and logical operators.
-<<<<<<< HEAD
-<<<<<<< HEAD
 group1[group1 %in% group2] 
-=======
-
-group1[group1 %in% group2]
->>>>>>> 5a74f89 (partial completion of assignment)
-=======
-
-group1[group1 %in% group2]
->>>>>>> f0b54161af98ea6ebabc800f662e7333e553e204
 ####################################
 ####     Writing functions      ####
 ####################################
@@ -261,13 +224,7 @@ f2(8,9)
 f2(14,7)
 
 ### 3.1 What is the purpose of function f2? Write in comments below.
-<<<<<<< HEAD
-<<<<<<< HEAD
 #the f2 function will return the boolean value (true or false) if the reminder is equal to zero
-=======
-# Function f2 checks if the remainder is 0
-
->>>>>>> 5a74f89 (partial completion of assignment)
 ### 3.2
 # Based on the definition of the mean from today's lecture, write a function that calculates the mean of all of the elements of a vector. assign it to the object my.mean. You will find the functions 'sum' and 'length' useful here.
 my.mean <- function(myvector){
@@ -275,21 +232,6 @@ my.mean <- function(myvector){
   vecmean = sum(myvector)/length(myvector)
   return(vecmean)
 }
-=======
-# Function f2 checks if the remainder is 0
-
-### 3.2
-# Based on the definition of the mean from today's lecture, write a function that calculates the mean of all of the elements of a vector. assign it to the object my.mean. You will find the functions 'sum' and 'length' useful here.
->>>>>>> f0b54161af98ea6ebabc800f662e7333e553e204
-
-my.mean <- function(x){
-  # this is a function that calculates the mean
-  z = sum(x)/length(x)
-  return(z)
-}
-testQuestion.vector<- c(2,7,4,24,13,8,12)
-
-my.mean(testQuestion.vector)
 
 # compare your function to the native function in R. Does it produce the same results?
 

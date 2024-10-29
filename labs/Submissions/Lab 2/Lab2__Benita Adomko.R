@@ -7,7 +7,7 @@
 ########                   ########
 ###################################
 ###################################
-
+#Benita Adomako
 
 # Welcome to lab number 2. Let's learn some new R concepts.
 
@@ -49,6 +49,10 @@ colnames(star_wars_matrix) <- c("US revenue", "International revenue")
 # Use one of the above functions to calculate the total revenue for each movie (the sum of the US and international revenue)
 # and save it in an object called total_revenue
 
+#MY ANSWER 
+total_revenue <- rowSums(star_wars_matrix)
+
+
 # We can now add this vector as a new column using the function cbind (column bind)
 
 star_wars_matrix <- cbind(star_wars_matrix, total_revenue)
@@ -79,6 +83,13 @@ star_wars_matrix[3,1]
 
 ### 1.4 
 # Write a line of code to extract the international revenue of the Phantom Menace (the 4th movie) using numbers to index the matrix
+
+#MY ANSWER
+
+
+star_wars_matrix[4, 2]
+
+
 
 # Compare this to the following:
 star_wars_matrix["The Phantom Menace", "Total revenue"]
@@ -126,6 +137,10 @@ my_list$boolean
 
 ### 2.1
 # Using the $ operator, replace the "matrix" element of my_list with the star_wars_matrix
+
+#MY ANSWER
+my_list$matrix <- star_wars_matrix
+
 
 # Finally, you can turn any list into a vector with unlist().
 unlist(my_list)
@@ -201,8 +216,9 @@ sample(1:100,1)
 ## RANDOM DISTRIBUTIONS 
 
 # Remember the formula for the Binomial distribution:
-# 𝑷(W=k) =  𝒑^𝒌∗(𝟏−𝒑)^((𝑵−𝒌) )∗(𝒏¦𝒌)
-# Where (𝒏¦𝒌)=  𝒏!/𝒌!(𝒏−𝒌)!
+### P(W=k) = p^k*(1-p)^(N-k)*(n|k)
+
+# Where (n|k) = n!/(k!(n-k)!)
 
 ### 4.1
 # Write a function to calculate the probability of exactly k successes
@@ -210,6 +226,18 @@ sample(1:100,1)
 # where n, k and p are arguments of the function
 # To do this you will need to use either the factorial() function
 # or the choose() function
+
+#My answer
+binomial_dist <- function(k, n, p) {
+  probability <- p^k * (1 - p)^(n - k) * choose(n, k)
+  return(probability)
+}
+
+# Example usage: Probability of exactly 8 probes out of 10 signaling water (p = 0.7)
+result <- binomial_dist(8, 10, 0.7)
+result
+
+
 
 # use your function to calculate the probability that when the aliens send 10 probes to Earth (probability of water = 0.7),
 # exactly 8 of those probes will send a signal of water
@@ -237,6 +265,18 @@ sample(1:100,1)
 # Using rbinom(), simulate 100,000 universes where the aliens sent out 20 probes to Earth
 # and calculate in what percentage of these universes the number of probes signalling Water is 11 or fewer
 # What do you conclude to the astronomer?
+
+#MY ANSWER
+set.seed(123)  # Set seed for reproducibility
+water_sigs <- rbinom(100000, 20, 0.7)
+probs_fewer_11 <- sum(water_sigs <= 11)
+percentage <- (probs_fewer_11 / 100000) * 100
+percentage
+
+#What I conclude
+#The result is approximately 11.376%, which means there’s about an 11.376% chance of 11 or fewer probes signaling water if this planet were Earth.
+#This suggests it’s possible, though relatively unlike
+
 
 # pbinom, pnorm, punif, pbeta, .... all calculate the area under the curve of a given distribution,
 # in the LOWER tail (if lower.tail=TRUE, by default), or the UPPER tail (if you set it to false)
@@ -266,36 +306,55 @@ women_heights <- c() ## Populate with the heights of women from class
 # Write a Welch's t-test function for any two samples x1 and x2
 my_t <- function(x1,x2){
   # first, extract the means, variances and Ns of the two samples and save thel to
-  n1 <- 
-  m1 <-
-  s1 <- 
-  n2 <-
-  m2 <- 
-  s2 <- 
+  my_t <- function(x1, x2) {
+    n1 <- length(x1)
+    m1 <- mean(x1)
+    s1 <- var(x1)
+    n2 <- length(x2)
+    m2 <- mean(x2)
+    s2 <- var(x2)
+    
+ 
+  
  
   # next, calculate the average standard deviation using the formula shown in the class on slide 44:
  
-  s <- 
+  # Standard deviation for Welch's test
+  s <- sqrt(s1 / n1 + s2 / n2)
 
   # next, calculate the t-statistic, again as shown on slide 44
  
-  t <- 
+  # Calculate the t-statistic
+  t <- (m1 - m2) / s
+  
  
  
   # next, calculate the degrees of freedom (again see slide 44)
   # make sure you use parentheses correctly here
  
-  df <- 
+
+  df <- (s1 / n1 + s2 / n2)^2 / ((s1 / n1)^2 / (n1 - 1) + (s2 / n2)^2 / (n2 - 1))
  
   # next, calculate the probability that the t-statistic would be greater than the absolute value of the t-statistic that you calculated if the TRUE difference between the groups was 0
   # to do this, you can use function pt
-  p_value <- pt(abs(t), df=df, lower.tail = F)*2
-
-  return(list(t = t, df = df, p_value=p_value))
+  # Calculate the p-value
+  p_value <- pt(abs(t), df = df, lower.tail = FALSE) * 2
+  
+  return(list(t = t, df = df, p_value = p_value))
   }
 
 # compare this function to the in-built t-test
-t.test(men_heights,women_heights)
-my_t(men_heights,women_heights)
+  
+  men_heights <- c(175, 180, 178, 172, 169, 183, 177, 176, 181, 179)
+  women_heights <- c(160, 165, 162, 170, 155, 168, 172, 158, 164, 166)
+  
+  t.test(men_heights, women_heights)
+  my_t(men_heights, women_heights)
+  
+
 
 # One last question to ponder before next class: Why did we multiply the p-value by 2 in the above function?
+  
+  #MY ANSWER
+  #We multiply the p-value by 2 in the above function because this is a two-tailed test, where we are interested in extreme differences in both directions (men significantly taller or shorter than women). 
+  #Multiplying by 2 adjusts the p-value for both tails of the distribution.
