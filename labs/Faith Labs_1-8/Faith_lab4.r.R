@@ -22,6 +22,7 @@ data()
 
 # To load one into your environment, run for example
 data(mtcars)
+head(mtcars)
 
 ########################
 ####    Plotting    ####
@@ -45,7 +46,7 @@ plot(1:25,rep(1,25),pch=1:25)
 
 # You can also put in any symbol you like in quote marks:
 plot(mtcars$wt,mtcars$mpg, pch="$")
-plot(mtcars$wt,mtcars$mpg,pch="✌")
+plot(mtcars$wt,mtcars$mpg,pch="😊")
 
 # To change x axis and y axis labels, and add a title you can use
 plot(mtcars$wt,mtcars$mpg, pch=20, xlab='Weight (1000 lbs)', ylab='Fuel efficiency (mpg)', main='Association between car weight and fuel efficiency')
@@ -171,11 +172,17 @@ dev.off()
 
 # 1.1 Transform the 'wt' variable in the mtcars dataset, which represents the weight of cars in 1000s of lbs,
 # to a variable representing that weight in kg. 1 lb = 0.453592kg
+mtcars$wt_kg <- mtcars$wt * 1000 * 0.453592
 
 # 1.2 Plot a histogram and a density plot of the weights of cars in kg in the mtcars dataset.
+hist(mtcars$wt_kg, main="Histogram of Car Weights in kg", xlab="Weight (kg)", col="lightblue", border="black")
+
+plot(density(mtcars$wt_kg), main="Density Plot of Car Weights in kg", xlab="Weight (kg)", col="darkgreen")
+
 
 # Let's extract data about survival rates among the Titanic
 data(Titanic)
+
 survived <- as.data.frame(Titanic[,,2,2])
 died <-  as.data.frame(Titanic[,,2,1])
 
@@ -194,13 +201,33 @@ colnames(barplot_d)<- d$class
 barplot (barplot_d, beside=T, ylim=c(0,1))
 
 # 1.3. Fix this barplot so that the colours are nicer and there is a legend, title, and appropriate axes labels.
+barplot(barplot_d, beside=T, ylim=c(0,1), col=c("blue", "red"), 
+  main="Proportion of Survivors by Class and Sex", 
+  xlab="Class", ylab="Proportion of Survivors")
+legend("topright", legend=c("Male", "Female"), fill=c("blue", "red"))
+
 
 # 1.4. Looking at this barplot, what can you say about who was more likely to survive the Titanic?
 #      Which group was the least likely to survive?
+# Based on the barplot, it is evident that females were more likely to survive the Titanic compared to males. 
+# Among the different classes, 1st class passengers had the highest survival rate, while the crew had the lowest survival rate.
 
 # 1.5 Load the Iris dataset 
 data(Iris)
+head(Iris)
 
 # Please attempt to replicate the graph from the slides. It is a scatterplot of petal length against sepal length,
 # with species differentiated by color.
 # Add ablines plotting the linear relationship between petal length and sepal length for each group.
+data(iris)
+plot(iris$Petal.Length ~ iris$Sepal.Length, col=iris$Species, 
+  xlab="Sepal Length", ylab="Petal Length", 
+  main="Scatterplot of Petal Length vs Sepal Length by Species")
+legend("topright", legend=levels(iris$Species), col=1:3, pch=1)
+
+# Adding ablines for each species
+species_levels <- levels(iris$Species)
+for (species in species_levels) {
+  species_data <- subset(iris, Species == species)
+  abline(lm(Petal.Length ~ Sepal.Length, data=species_data), col=which(species_levels == species))
+}
