@@ -15,10 +15,9 @@
 
 # On the right is the console. You can input code directly into the console line by line - you do not need to run an entire file. Try running a simple calculation in the console, like 5+9. Type it in and press enter. 
 5+9
-# You can also write code in this, the code editor, and run it from here. Try highlighting the following line and clicking 'Run':
+# You can also write code in this, the code editor, and run it from here. Try highlighting the following line and pressing 'Ctrl + Enter' ('Cmd + Enter' on MacOS):
 12 * 4 - 6
 
-# You can also press 'Ctrl (Cmd) + Enter' to run the code you have highlighted.
 
 # Text beginning with a # sign is read as 'comment' and will not be evaluated by the console.
 ## Numbers (like 1.1, 2.3, etc) signify that I would like you to write a line a code in the code file and run it in the console
@@ -29,7 +28,7 @@
 
 # FUNCTIONS are commands that take in inputs and produce outputs. They mostly take in the inputs in brackets, like this:
 sqrt(25)
-exp(3) 
+exp(3)
 
 # Often, functions take multiple inputs with different functions. Note how:
 rep(3,4)
@@ -135,10 +134,12 @@ my.vector[c(1,4)]
 ### 1.1
 # You can assign values to specific elements. Try writing a line of code below that changes the 4th element of my.vector to the word 'test'
 
-
+my.vector[4] <- 'test'
+my.vector
 ### 1.2
 # You can even assign values to elements of a vector that don't exist yet, thus creating them. Try assigning the word 'example' to the (as yet non-existent) 5th element of my.vector.
-
+my.vector[5] <- 'example'
+my.vector
 
 # Instead of indices, you can select elements of a vector using a logical vector of the same length, e.g.
 
@@ -159,7 +160,7 @@ my.vector == 'is'
 ### 2.1
 digits <- 0:10
 # Using the least amount of code possible, write a line of code that returns only the odd values of the digits object.
-
+digits[0:10 %% 2 != 0]
 # Another important logical operator is the %in% operator. It tells you if the elements on the left are found in the elements on the right. E.G.
 group1 <- c('Arthur', 'Fatima', 'Suleiman', 'Marco')
 group2 <- c('Marco','Maria', 'Victor','Fatima', 'Antonio')
@@ -169,8 +170,7 @@ group1 %in% group2
 # intersect is a function which returns the elements that all of its arguments have in common. For example:
 intersect(group1,group2)
 # Write a line of code that replicates this output using only group1, group2, square brackets, and logical operators.
-
-
+group2[group2 %in% group1]
 ####################################
 ####     Writing functions      ####
 ####################################
@@ -195,10 +195,12 @@ f2(8,9)
 f2(14,7)
 
 ### 3.1 What is the purpose of function f2? Write in comments below.
-
+#The function f2 takes in two arguments(x and y), and then it calculates the remainder of dividing x by y, and if the remainder is 0 it returns true; otherwise, it returns false.
 ### 3.2
 # Based on the definition of the mean from today's lecture, write a function that calculates the mean of all of the elements of a vector. assign it to the object my.mean. You will find the functions 'sum' and 'length' useful here.
-
+my.mean <- function(vector){
+  return(sum(vector)/length(vector))
+}
 # compare your function to the native function in R. Does it produce the same results?
 
 my.mean(ex.vector)
@@ -225,13 +227,30 @@ sample(1:10, 20, replace = TRUE)
 # and the output is a vector of length x, where each element corresponds to the sum of the two sides of the dice.
 # HINT: one way to do this is to start by writing a function for a single 6-sided die, then create a new function 
 # that repeats the first function twice and adds up the result.
+roll <- function(){
+  return(sample(1:6, 1))
+}
 
+roll_dice <- function(x){
+  sums <- numeric(x)
+  for (i in 1:x){
+    die1 <- roll()
+    die2 <- roll()
+    sums[i] <- die1 + die2
+  }
+  return (sums)
+}
+roll_dice(5)
 ### 4.2
 # Using the function hist, create histograms of the results of double dice rolls when you roll them 10 times, 
 #then 50, then 100, then 1000, then 10000. Use breaks=1:12 as an argument within the hist function. 
 # What do you notice? Write it in comments below your code.
-
-
+?hist()
+n_rolls <- c(10, 50, 100, 1000, 10000)
+for( n in n_rolls){
+  sums <- roll_dice(n)
+  hist(sums, breaks=1:12)
+}
 # Another way to generate randomness is to sample from a pdf, which is a continuous distribution. 
 # The simplest pdf is the uniform function. The uniform function is a flat line bounded between 2 numbers. 
 # Because it is flat, the probability of drawing a sample from any interval of given width between the two bounds 
@@ -243,20 +262,25 @@ runif(5,0,1)
 
 ### 4.3
 # Using runif, write a function that returns TRUE 22% of the time and FALSE 78% of the time
-
+random <- function(){
+  return(runif(1) < 0.22)
+}
+result <- random()
+result
 ### 4.4
 # Based on today's lecture about pdfs, what is the probability density for a uniform pdf bounded between 
 # 0 and 1 associated with all values of x between 0 and 1? Explain why.
-
+1
+  # the probability is the area under the curve, so the total area must be equal to 1, using the formula f(x)= 1/b−a, where b is the upper bound and a is the lower bound, so it simplifies to 1
 ### 4.5
 # Similarly, what is the probability density for a uniform pdf bounded between 5 and 6 associated with all values of x between 5 and 6?
-
+1
 ### 4.6
 # What is the probability density for a uniform pdf bounded between 0 and 0.5 associated with all values of x between 0 and 0.5?
-
+2
 ### 4.7
 # What is the probability density for a uniform pdf bounded between 0 and 2 associated with all values of x between 0 and 2?
-
+0.5
 ### 4.8
 # run the following code:
 dunif(0.5,0,1)
@@ -265,3 +289,4 @@ dunif(0.2,0,0.5)
 dunif(1.3,0,2)
 
 # Based on the results of this code and your answers above, what can you conclude about the purpose of the dunif function?
+ # the purpose of the dunif function is to calculte the probabilty density for a uniform distribution.

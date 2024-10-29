@@ -15,13 +15,12 @@
 
 # On the right is the console. You can input code directly into the console line by line - you do not need to run an entire file. Try running a simple calculation in the console, like 5+9. Type it in and press enter. 
 5+9
-# You can also write code in this, the code editor, and run it from here. Try highlighting the following line and clicking 'Run':
+# You can also write code in this, the code editor, and run it from here. Try highlighting the following line and pressing 'Ctrl + Enter' ('Cmd + Enter' on MacOS):
 12 * 4 - 6
 
-# You can also press 'Ctrl (Cmd) + Enter' to run the code you have highlighted.
 
 # Text beginning with a # sign is read as 'comment' and will not be evaluated by the console.
-## Numbers (like 1.1, 2.3, etc) signify that I would like you to write a line a code in the code file and run it in the console
+## Numbers (like 1.1, 2.3, etc) signify that I would like you to write a line of code in the code file and run it in the console
 
 ########################
 ####    Functions   ####
@@ -29,7 +28,7 @@
 
 # FUNCTIONS are commands that take in inputs and produce outputs. They mostly take in the inputs in brackets, like this:
 sqrt(25)
-exp(3) 
+exp(3)
 
 # Often, functions take multiple inputs with different functions. Note how:
 rep(3,4)
@@ -81,7 +80,7 @@ class (y)
 
 # If we forget to use quote marks R will search for a stored object with that name and return an error if it doesn't find it:
 
-Salaam -> y
+"Salaam" -> y
 
 # One final very important class of object is the 'logical' class, a.k.a. Boolean. 
 
@@ -134,11 +133,12 @@ my.vector[c(1,4)]
 
 ### 1.1
 # You can assign values to specific elements. Try writing a line of code below that changes the 4th element of my.vector to the word 'test'
+my.vector[4] <- 'test'
 
 
 ### 1.2
 # You can even assign values to elements of a vector that don't exist yet, thus creating them. Try assigning the word 'example' to the (as yet non-existent) 5th element of my.vector.
-
+my.vector[5] <- 'example'
 
 # Instead of indices, you can select elements of a vector using a logical vector of the same length, e.g.
 
@@ -159,7 +159,7 @@ my.vector == 'is'
 ### 2.1
 digits <- 0:10
 # Using the least amount of code possible, write a line of code that returns only the odd values of the digits object.
-
+digits[digits %% 2 != 0]
 # Another important logical operator is the %in% operator. It tells you if the elements on the left are found in the elements on the right. E.G.
 group1 <- c('Arthur', 'Fatima', 'Suleiman', 'Marco')
 group2 <- c('Marco','Maria', 'Victor','Fatima', 'Antonio')
@@ -169,7 +169,7 @@ group1 %in% group2
 # intersect is a function which returns the elements that all of its arguments have in common. For example:
 intersect(group1,group2)
 # Write a line of code that replicates this output using only group1, group2, square brackets, and logical operators.
-
+group1[group1 %in% group2]
 
 ####################################
 ####     Writing functions      ####
@@ -195,10 +195,14 @@ f2(8,9)
 f2(14,7)
 
 ### 3.1 What is the purpose of function f2? Write in comments below.
-
+##The function is to perform a division and return either true or false depending if the number is 0 or not.
 ### 3.2
 # Based on the definition of the mean from today's lecture, write a function that calculates the mean of all of the elements of a vector. assign it to the object my.mean. You will find the functions 'sum' and 'length' useful here.
-
+my.mean <- function(testing) {
+  testingsum = sum(testing)
+  testingmean = testingsum/length(testing)
+  return(testingmean)
+}
 # compare your function to the native function in R. Does it produce the same results?
 
 my.mean(ex.vector)
@@ -225,6 +229,13 @@ sample(1:10, 20, replace = TRUE)
 # and the output is a vector of length x, where each element corresponds to the sum of the two sides of the dice.
 # HINT: one way to do this is to start by writing a function for a single 6-sided die, then create a new function 
 # that repeats the first function twice and adds up the result.
+sample(1:6,1, replace = TRUE)
+roledice <- function(x){
+  dice1 <- sample(1:6, x, replace = TRUE)
+  dice2 <- sample(1:6, x ,replace = TRUE)
+  sumofdice <- dice1+dice2
+  return(sumofdice)
+}
 
 ### 4.2
 # Using the function hist, create histograms of the results of double dice rolls when you roll them 10 times, 
