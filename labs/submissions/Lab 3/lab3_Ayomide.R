@@ -1,4 +1,3 @@
-
 <<<<<<< HEAD
 =======
 ###################################
@@ -69,39 +68,5 @@ pnorm(171.5,170,15)- pnorm(168.5,170,15)
 
 # 5. What is the probability that exactly 2 are eligible to join the APC and the rest are not?
 
-<<<<<<< HEAD
-#Given that p the probability for joining  APC is 0.08
-# n is 10 trials
-# k (no of successes) is 2
-Pk= (0.08^2)*((1-.08)^8)*choose(10,2)
-Pk
-dbinom(2,10,0.08)
-# The probability tha exactly 2 are eligible to join the APC is about 14.8%
-#   0.147807
-
 # 6. What is the probability that at least 3 of them are eligible to join the TSC?
-
-# This will be removing the sum of the probability of 2 , 1 and none from 1 or 100%
-1-(dbinom(0,10,0.08)+dbinom(1,10,0.08)+dbinom(2,10,0.08))
-
-# The probability that at least 3 of them are eligible to join the TSC is about 4 percent 
-# or 0.04
-
-
-# Data Viz
-# Equal bins
-set.seed(123)
-heights<- rnorm(100,165,15)
-bins<- seq(130,200,by=5)
-hist(heights, breaks=bins)
-#Unequal bins
-set.seed(123)
-heights<- rnorm(100,165,15)
-bins<- c(130,170,180,190,200)
-hist(heights, breaks=bins)
-
->>>>>>> 06e94e7 (just commit)
-=======
-# 6. What is the probability that at least 3 of them are eligible to join the TSC?
->>>>>>> 2efdb34 (question 1-4 done)
->>>>>>> 1862296 (question 1-4 done)
+>>>>>>> 470022d (question 1-4 done)
