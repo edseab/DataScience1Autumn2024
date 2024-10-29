@@ -254,7 +254,7 @@ my.roll_two_dices()
 # Using the function hist, create histograms of the results of double dice rolls when you roll them 10 times, 
 #then 50, then 100, then 1000, then 10000. Use breaks=1:12 as an argument within the hist function. 
 # What do you notice? Write it in comments below your code.
-hist(my.f4(100000), breaks = 1:12)
+hist(my.f4(10000), breaks = 1:12)
 #what i've noticed that the more iterations we do 
 ?hist
 
@@ -269,6 +269,11 @@ runif(5,0,1)
 ?dunif
 ### 4.3
 # Using runif, write a function that returns TRUE 22% of the time and FALSE 78% of the time
+
+p_22_true <- function() runif(1,0,1) < 0.22
+p_22_true()
+results <- replicate(100,p_22_true())
+results
 
 ### 4.4
 # Based on today's lecture about pdfs, what is the probability density for a uniform pdf bounded between 
