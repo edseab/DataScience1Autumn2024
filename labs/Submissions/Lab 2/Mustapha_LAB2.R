@@ -347,7 +347,7 @@ t.test(men_heights,women_heights)
 my_t(men_heights,women_heights)
 
 # One last question to ponder before next class: Why did we multiply the p-value by 2 in the above function?
-
+# Answer:
 # Setting lower.tail = FALSE requests the upper tail probability (i.e., the probability that a value
 # is greater than abs(t) in the t-distribution). This gives us the probability in one tail only.
 
