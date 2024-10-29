@@ -29,7 +29,7 @@
 
 # FUNCTIONS are commands that take in inputs and produce outputs. They mostly take in the inputs in brackets, like this:
 sqrt(25)
-exp(3)
+exp(3) 
 
 # Often, functions take multiple inputs with different functions. Note how:
 rep(3,4)
