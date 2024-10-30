@@ -15,10 +15,9 @@
 
 # On the right is the console. You can input code directly into the console line by line - you do not need to run an entire file. Try running a simple calculation in the console, like 5+9. Type it in and press enter. 
 5+9
-# You can also write code in this, the code editor, and run it from here. Try highlighting the following line and clicking 'Run':
+# You can also write code in this, the code editor, and run it from here. Try highlighting the following line and pressing 'Ctrl + Enter' ('Cmd + Enter' on MacOS):
 12 * 4 - 6
 
-# You can also press 'Ctrl (Cmd) + Enter' to run the code you have highlighted.
 
 # Text beginning with a # sign is read as 'comment' and will not be evaluated by the console.
 ## Numbers (like 1.1, 2.3, etc) signify that I would like you to write a line a code in the code file and run it in the console
@@ -29,7 +28,7 @@
 
 # FUNCTIONS are commands that take in inputs and produce outputs. They mostly take in the inputs in brackets, like this:
 sqrt(25)
-exp(3) 
+exp(3)
 
 # Often, functions take multiple inputs with different functions. Note how:
 rep(3,4)
