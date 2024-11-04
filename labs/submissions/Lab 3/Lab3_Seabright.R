@@ -22,7 +22,6 @@ men <- c(174,180,178,185,178,189,175,165,174,197,171,163,173)
 # Amir is in the 95th percentile
 
 
-
 # 2. A group of Examplians start a club called the Tall and Short Club (TSC), where you have to be in the tallest 2.5% of the population 
 #    OR the bottom 2.5% of the population in height to be let in. 
 #    How tall or how short do you have to be to be accepted into the TSC? Would Amir be accepted?
