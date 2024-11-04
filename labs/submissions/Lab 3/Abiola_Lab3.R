@@ -71,6 +71,5 @@ prob_exactly_2
 n <- 10
 k <-3
 p_TSC <- 0.05
-
 prob_atleast_3 <- 1- sum(dbinom(0:2,n,p_TSC))
 prob_atleast_3
