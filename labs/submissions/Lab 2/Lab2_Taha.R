@@ -368,3 +368,4 @@ my_t(men_heights,women_heights)
 #####If you have a p-value of 0.03 from a one-tailed test, the two-tailed p-value would be 0.03 * 2 = 0.06
 
 
+#gyi
