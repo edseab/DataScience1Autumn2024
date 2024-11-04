@@ -84,7 +84,6 @@ Salaam -> y
 
 # One final very important class of object is the 'logical' class, a.k.a. Boolean. 
 
-# One final very important class of object is the 'logical' class, a.k.a. Boolean. 
 # Boolean objects can take one of two values
 
 TRUE
