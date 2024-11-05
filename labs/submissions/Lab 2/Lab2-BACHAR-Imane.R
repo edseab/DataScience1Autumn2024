@@ -237,7 +237,10 @@ dbinom(8, 10, 0.7)
 # for each of their relative distributions
 # in other words, they calculate probability MASS or probability DENSITY for each of
 # these distributions
-
+?dbinom
+?dnorm
+?dunif
+?dbeta
 # rbinom, rnorm, runif, rbeta, .... all SAMPLE from these respective distributions,
 # i.e. they generate random draws of x in proportion to their respective f(x) in these distributions.
 
