@@ -57,6 +57,8 @@ x <- 4
 
 x*5
 
+
+matrix(1:25, nrow = 5)
 ##############################################################
 ###    ADVANCED NOTE: the = operator can also be used      ###
 ###    to assign values to objects, like in Python.        ###
@@ -71,7 +73,6 @@ x*5
 class(x)
 
 # We can also store text into an object, by surrounding it with quote marks:
-
 "Hello" -> y
 y
 class (y)
@@ -184,8 +185,7 @@ my.vector == 'is'
 ### 2.1
 digits <- 0:10
 # Using the least amount of code possible, write a line of code that returns only the odd values of the digits object.
-digitsOdd <- 
-digitsOdd
+digitsOdd <- digits[digits %% 2 == 1]
 # Another important logical operator is the %in% operator. It tells you if the elements on the left are found in the elements on the right. E.G.
 group1 <- c('Arthur', 'Fatima', 'Suleiman', 'Marco')
 group2 <- c('Marco','Maria', 'Victor','Fatima', 'Antonio')
@@ -195,7 +195,7 @@ group1 %in% group2
 # intersect is a function which returns the elements that all of its arguments have in common. For example:
 intersect(group1,group2)
 # Write a line of code that replicates this output using only group1, group2, square brackets, and logical operators.
-
+group1[group1 %in% group2]
 
 ####################################
 ####     Writing functions      ####
@@ -232,6 +232,10 @@ if(FALSE){
 my.mean <- function(a){
   return(sum(a)/length(a))
 }
+
+##Another concise way of writing that function in one line would be:
+## my.mean <- function(x) sum(x)/length(x)
+
 my.mean(1:5)
 #Ret. 3
 # compare your function to the native function in R. Does it produce the same results?
