@@ -134,11 +134,14 @@ my.vector[c(1,4)]
 
 ### 1.1
 # You can assign values to specific elements. Try writing a line of code below that changes the 4th element of my.vector to the word 'test'
-
-
+my.vector <- c('this','is','a','vector')
+my.vector
+my.vector[4] <- "test"
+my.vector[1:4]
 ### 1.2
 # You can even assign values to elements of a vector that don't exist yet, thus creating them. Try assigning the word 'example' to the (as yet non-existent) 5th element of my.vector.
-
+my.vector[5] <- "example"
+my.vector[1:5]
 
 # Instead of indices, you can select elements of a vector using a logical vector of the same length, e.g.
 
@@ -159,7 +162,9 @@ my.vector == 'is'
 ### 2.1
 digits <- 0:10
 # Using the least amount of code possible, write a line of code that returns only the odd values of the digits object.
-
+digits
+digits %% 2 == 1
+digits[c(FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE,TRUE,FALSE)]
 # Another important logical operator is the %in% operator. It tells you if the elements on the left are found in the elements on the right. E.G.
 group1 <- c('Arthur', 'Fatima', 'Suleiman', 'Marco')
 group2 <- c('Marco','Maria', 'Victor','Fatima', 'Antonio')
@@ -169,7 +174,7 @@ group1 %in% group2
 # intersect is a function which returns the elements that all of its arguments have in common. For example:
 intersect(group1,group2)
 # Write a line of code that replicates this output using only group1, group2, square brackets, and logical operators.
-
+group1[c(FALSE,TRUE,FALSE,TRUE)]
 
 ####################################
 ####     Writing functions      ####
