@@ -175,7 +175,6 @@ intersect(group1,group2)
 group1[group1 %in% group2]
 
 
-
 ####################################
 ####     Writing functions      ####
 ####################################
@@ -248,18 +247,6 @@ sample(1:10, 20, replace = TRUE)
 
 my.2.roll_dice(5)
 
-#Class answer
-cast.die <- function(x){
-  sample(1:6,x,replace=TRUE)
-}
-
-dast.2.dice <- functionBody(x){
-  return(cast.die(x)+cast.die(x))
-}
-
-cast.2.dice(20)
-
-
 ### 4.2
 # Using the function hist, create histograms of the results of double dice rolls when you roll them 10 times, 
 #then 50, then 100, then 1000, then 10000. Use breaks=1:12 as an argument within the hist function. 
@@ -267,33 +254,11 @@ cast.2.dice(20)
 
 ?hist
 
-<<<<<<< HEAD
 hist(my.2.roll_dice(10),breaks=1:12)
 hist(my.2.roll_dice(50),breaks=1:12)
 hist(my.2.roll_dice(100),breaks=1:12)
 hist(my.2.roll_dice(1000),breaks=1:12)
 hist(my.2.roll_dice(10000),breaks=1:12)
-=======
-par(mfrow = c(3, 2))
-hist(roll_two_dice(10), breaks = 1:12, main = "10 Rolls", xlab = "Sum of Two Dice", col = "lightblue")
-
-hist(roll_two_dice(50), breaks = 1:12, main = "50 Rolls", xlab = "Sum of Two Dice", col = "lightblue")
-
-hist(roll_two_dice(100), breaks = 1:12, main = "100 Rolls", xlab = "Sum of Two Dice", col = "lightblue")
-
-hist(roll_two_dice(1000), breaks = 1:12, main = "1000 Rolls", xlab = "Sum of Two Dice", col = "lightblue")
-
-
-hist(roll_two_dice(10000), breaks = 1:12, main = "10000 Rolls", xlab = "Sum of Two Dice", col = "lightblue")
-
-par(mfrow = c(1, 1))
-
-
-
-# As the number of rolls increases, the histogram starts to resemble a bell-shaped curve.
-# Sums like 7 are more frequent than extremes like 2 or 12. The more rolls, the closer
-# the distribution matches the expected probability distribution.
->>>>>>> 13949b7bba750a72f94d7297c6590d7d62db9082
 
 #Answer: the more dice we roll, the more the histogramm looks like the PMF we saw in class.
 
