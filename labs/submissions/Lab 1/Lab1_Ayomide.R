@@ -298,7 +298,8 @@ prob<- function(x){
   return(runif(x,0,1)<=0.22)
 }
 # checking answer
-#prob(1000)
+prob(1000)
+mean(prob(1000))
 #hist(as.numeric(prob(100),1:12))
 ### 4.4
 # Based on today's lecture about pdfs, what is the probability density for a uniform pdf bounded between 
