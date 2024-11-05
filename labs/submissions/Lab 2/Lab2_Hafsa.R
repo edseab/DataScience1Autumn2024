@@ -17,24 +17,17 @@
 
 # In R, a MATRIX is a vector that has folded onto itself into a series of rows and columns. You can construct one from a normal vector:
 matrix(1:9, nrow = 3)
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
->>>>>>> d33fc8a (fix files)
 ?matrix
 
 # By default matrices get filled column by column, as you can see from the output. To fill them row by row instead, change the argument brow to TRUE:
 
 <<<<<<< HEAD
-
-
-=======
 =======
 
 # By default matrices get filled column by column, as you can see from the output. To fill them row by row instead, change the argument brow to TRUE:
 >>>>>>> e47eb87 (fix files)
->>>>>>> d33fc8a (fix files)
+=======
+>>>>>>> ee3b33e (lab 3)
 matrix(1:9, byrow = T, nrow = 3)
 
 # Now is a good time to point out that R will automatically read T as TRUE and F as FALSE, which can be a time-saver.
@@ -65,21 +58,15 @@ colnames(star_wars_matrix) <- c("US revenue", "International revenue")
 # Use one of the above functions to calculate the total revenue for each movie (the sum of the US and international revenue)
 # and save it in an object called total_revenue
 
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
->>>>>>> d33fc8a (fix files)
 total_revenue <- rowSums(star_wars_matrix)
 total_revenue
 
 
 <<<<<<< HEAD
-
-=======
 =======
 >>>>>>> e47eb87 (fix files)
->>>>>>> d33fc8a (fix files)
+=======
+>>>>>>> ee3b33e (lab 3)
 # We can now add this vector as a new column using the function cbind (column bind)
 
 star_wars_matrix <- cbind(star_wars_matrix, total_revenue)
@@ -87,21 +74,15 @@ star_wars_matrix <- cbind(star_wars_matrix, total_revenue)
 ### 1.2
 # Rename the 3rd element of the column names of star_wars_matrix to "Total revenue"
 
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
->>>>>>> d33fc8a (fix files)
 colnames(star_wars_matrix) <- c("US revenue", "International revenue", "Total revenue")
 
 
 
 <<<<<<< HEAD
-
-=======
 =======
 >>>>>>> e47eb87 (fix files)
->>>>>>> d33fc8a (fix files)
+=======
+>>>>>>> ee3b33e (lab 3)
 # Now lets create vectors for the box office returns of the prequel trilogy
 
 phantom_menace <- c(474.5,552.5)
@@ -112,18 +93,16 @@ revenge_of_sith <- c(380.3, 468.5)
 # Turn these 3 vectors into a matrix, add a column for total revenue, 
 # and append them to star_wars_matrix using the function rbind (row bind)
 
-<<<<<<< HEAD
 my.matrix <- matrix(c(phantom_menace,attack_of_clones,revenge_of_sith),byrow = T, nrow = 3)
 my.matrix <- cbind(my.matrix,rowSums(my.matrix))
 rownames(my.matrix) <- c("The Phantom Menace", "The attack of clones", "revenge of sith")
 star_wars_matrix <- rbind(star_wars_matrix,my.matrix)
 
 <<<<<<< HEAD
-
-=======
 =======
 >>>>>>> e47eb87 (fix files)
->>>>>>> d33fc8a (fix files)
+=======
+>>>>>>> ee3b33e (lab 3)
 # Matrices are understood by R to be both one-dimensional, because they are vectors folded onto themselves
 # into columns, but also 2 dimensional, because they have rows and columns. 
 # So you can index them like this:
@@ -137,15 +116,12 @@ star_wars_matrix[3,1]
 
 ### 1.4 
 # Write a line of code to extract the international revenue of the Phantom Menace (the 4th movie) using numbers to index the matrix
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
->>>>>>> d33fc8a (fix files)
 star_wars_matrix[4,2]
+<<<<<<< HEAD
 =======
 >>>>>>> e47eb87 (fix files)
-
+=======
+>>>>>>> ee3b33e (lab 3)
 
 # Compare this to the following:
 star_wars_matrix["The Phantom Menace", "Total revenue"]
@@ -193,15 +169,12 @@ my_list$boolean
 
 ### 2.1
 # Using the $ operator, replace the "matrix" element of my_list with the star_wars_matrix
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
->>>>>>> d33fc8a (fix files)
 my_list$matrix <-star_wars_matrix
+<<<<<<< HEAD
 =======
 >>>>>>> e47eb87 (fix files)
-
+=======
+>>>>>>> ee3b33e (lab 3)
 
 # Finally, you can turn any list into a vector with unlist().
 unlist(my_list)
@@ -287,11 +260,6 @@ sample(1:100,1)
 # To do this you will need to use either the factorial() function
 # or the choose() function
 
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
->>>>>>> d33fc8a (fix files)
 success.probability <- function(n,k,p){
   return(p^k*(1-p)^(n-k)*choose(n,k))
 }
@@ -310,13 +278,15 @@ success.probability(10,8,0.7)
 
 # compare this to dbinom(8,10,0.7)
 dbinom(8,10,0.7)
+<<<<<<< HEAD
 =======
 # use your function to calculate the probability that when the aliens send 10 probes to Earth (probability of water = 0.7),
 # exactly 8 of those probes will send a signal of water
 
 # compare this to dbinom(8,10,0.7)
 >>>>>>> e47eb87 (fix files)
-
+=======
+>>>>>>> ee3b33e (lab 3)
 
 ### PROBABILITY FUNCTIONS IN R 
 # dbinom, dnorm, dunif, dbeta, .... all of these functions calculate f(x) for any given x
@@ -340,17 +310,15 @@ dbinom(8,10,0.7)
 # and calculate in what percentage of these universes the number of probes signalling Water is 11 or fewer
 # What do you conclude to the astronomer?
 
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
->>>>>>> d33fc8a (fix files)
 rbinom(20,100000,0.7)
 proba.11.or.fewer <- sum(rbinom(20,100000,0.7) <=11)/100000
 #Answer: the result is 0, which supports the astromoner's claim that the planet may not be earth.
 
+<<<<<<< HEAD
 =======
 >>>>>>> e47eb87 (fix files)
+=======
+>>>>>>> ee3b33e (lab 3)
 # pbinom, pnorm, punif, pbeta, .... all calculate the area under the curve of a given distribution,
 # in the LOWER tail (if lower.tail=TRUE, by default), or the UPPER tail (if you set it to false)
 
@@ -373,26 +341,20 @@ qnorm(0.1,175, 10, lower.tail=FALSE)
 
 ### 4.3
 # Let's run a Welch's t-test comparing the heights of men and women in class
-<<<<<<< HEAD
-
 
 men_heights <- c(175, 180, 178, 172, 185, 177, 183, 174, 179, 181) #random heights
 women_heights <- c(165, 162, 170, 168, 160, 172, 167, 164, 169, 161) #random heights
+<<<<<<< HEAD
 =======
 men_heights <- c() ## Populate with the heights of men from class
 women_heights <- c() ## Populate with the heights of women from class
 >>>>>>> e47eb87 (fix files)
-
-
+=======
+>>>>>>> ee3b33e (lab 3)
 
 # Write a Welch's t-test function for any two samples x1 and x2
 my_t <- function(x1,x2){
   # first, extract the means, variances and Ns of the two samples and save thel to
-<<<<<<< HEAD
-
-=======
-<<<<<<< HEAD
->>>>>>> d33fc8a (fix files)
   n1 <- length(x1)
   m1 <- mean(x1)
   s1 <- var(x1)
@@ -408,10 +370,6 @@ my_t <- function(x1,x2){
  
   t <- (m1 - m2) / s
 <<<<<<< HEAD
-
- 
-
-=======
 =======
   n1 <- 
   m1 <-
@@ -428,23 +386,20 @@ my_t <- function(x1,x2){
  
   t <- 
 >>>>>>> e47eb87 (fix files)
->>>>>>> d33fc8a (fix files)
+=======
+>>>>>>> ee3b33e (lab 3)
  
  
   # next, calculate the degrees of freedom (again see slide 44)
   # make sure you use parentheses correctly here
  
-<<<<<<< HEAD
-
   df <- ((s1 / n1) + (s2 / n2))^2 / (((s1 / n1)^2 / (n1 - 1)) + ((s2 / n2)^2 / (n2 - 1)))
-
-=======
 <<<<<<< HEAD
-  df <- ((s1 / n1) + (s2 / n2))^2 / (((s1 / n1)^2 / (n1 - 1)) + ((s2 / n2)^2 / (n2 - 1)))
 =======
   df <- 
 >>>>>>> e47eb87 (fix files)
->>>>>>> d33fc8a (fix files)
+=======
+>>>>>>> ee3b33e (lab 3)
  
   # next, calculate the probability that the t-statistic would be greater than the absolute value of the t-statistic that you calculated if the TRUE difference between the groups was 0
   # to do this, you can use function pt
