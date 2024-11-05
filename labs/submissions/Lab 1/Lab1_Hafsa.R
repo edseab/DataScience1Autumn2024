@@ -84,7 +84,6 @@ Salaam -> y
 
 # One final very important class of object is the 'logical' class, a.k.a. Boolean. 
 
-# One final very important class of object is the 'logical' class, a.k.a. Boolean. 
 # Boolean objects can take one of two values
 
 TRUE
@@ -160,8 +159,9 @@ my.vector == 'is'
 ### 2.1
 digits <- 0:10
 # Using the least amount of code possible, write a line of code that returns only the odd values of the digits object.
-odd <- digits [digits %% 2 != 0]
-odd
+
+digits[digits %% 2 !=0 ]
+
 # Another important logical operator is the %in% operator. It tells you if the elements on the left are found in the elements on the right. E.G.
 group1 <- c('Arthur', 'Fatima', 'Suleiman', 'Marco')
 group2 <- c('Marco','Maria', 'Victor','Fatima', 'Antonio')
@@ -171,8 +171,9 @@ group1 %in% group2
 # intersect is a function which returns the elements that all of its arguments have in common. For example:
 intersect(group1,group2)
 # Write a line of code that replicates this output using only group1, group2, square brackets, and logical operators.
-group3 <- group1[group1 %in% group2]
-group3
+
+group1[group1 %in% group2]
+
 
 ####################################
 ####     Writing functions      ####
@@ -198,18 +199,21 @@ f2(8,9)
 f2(14,7)
 
 ### 3.1 What is the purpose of function f2? Write in comments below.
-#f2 verifies if the the argument x is divisable by y, if yes it returns true, otherwise it returns false
+
+#Answer: f2 verifies if the the argument x is divisible by y, if yes it returns true, otherwise it returns false
 
 ### 3.2
 # Based on the definition of the mean from today's lecture, write a function that calculates the mean of all of the elements of a vector. assign it to the object my.mean. You will find the functions 'sum' and 'length' useful here.
-my.mean <- function(x) {
-  return(sum(x) / length(x))
-}
-ex.vector <- c(1, 2, 3, 4, 5)
+
+my.mean <- function(x) sum(x)/length(x)
+
 # compare your function to the native function in R. Does it produce the same results?
 
-my.mean(ex.vector)
-mean(ex.vector)
+my.vector <- c(2,5,10,24,17,48)
+
+
+my.mean(my.vector)
+mean(my.vector)
 
 ####################################
 ####      Randomness in R       ####
@@ -232,39 +236,31 @@ sample(1:10, 20, replace = TRUE)
 # and the output is a vector of length x, where each element corresponds to the sum of the two sides of the dice.
 # HINT: one way to do this is to start by writing a function for a single 6-sided die, then create a new function 
 # that repeats the first function twice and adds up the result.
-roll_die <- function() {
-  sample(1:6, 1, replace = TRUE)
-}
-roll_two_dice <- function(x) {
-  # Roll the two dice x times and sum the results
-  dice_rolls <- replicate(x, roll_die() + roll_die())
-  return(dice_rolls)
-}
+
+ my.1.roll_dice <- function(x) {
+   sample(1:6, x , replace =TRUE )
+ }
+
+ my.2.roll_dice <- function(x){
+   return (my.1.roll_dice(x)+my.1.roll_dice(x))
+ }
+
+my.2.roll_dice(5)
 
 ### 4.2
 # Using the function hist, create histograms of the results of double dice rolls when you roll them 10 times, 
 #then 50, then 100, then 1000, then 10000. Use breaks=1:12 as an argument within the hist function. 
 # What do you notice? Write it in comments below your code.
 
+?hist
 
-par(mfrow = c(3, 2))
-hist(roll_two_dice(10), breaks = 1:12, main = "10 Rolls", xlab = "Sum of Two Dice", col = "lightblue")
+hist(my.2.roll_dice(10),breaks=1:12)
+hist(my.2.roll_dice(50),breaks=1:12)
+hist(my.2.roll_dice(100),breaks=1:12)
+hist(my.2.roll_dice(1000),breaks=1:12)
+hist(my.2.roll_dice(10000),breaks=1:12)
 
-hist(roll_two_dice(50), breaks = 1:12, main = "50 Rolls", xlab = "Sum of Two Dice", col = "lightblue")
-
-hist(roll_two_dice(100), breaks = 1:12, main = "100 Rolls", xlab = "Sum of Two Dice", col = "lightblue")
-
-hist(roll_two_dice(1000), breaks = 1:12, main = "1000 Rolls", xlab = "Sum of Two Dice", col = "lightblue")
-
-
-hist(roll_two_dice(10000), breaks = 1:12, main = "10000 Rolls", xlab = "Sum of Two Dice", col = "lightblue")
-
-par(mfrow = c(1, 1))
-
-# As the number of rolls increases, the histogram starts to resemble a bell-shaped curve.
-# Sums like 7 are more frequent than extremes like 2 or 12. The more rolls, the closer
-# the distribution matches the expected probability distribution.
-
+#Answer: the more dice we roll, the more the histogramm looks like the PMF we saw in class.
 
 
 # Another way to generate randomness is to sample from a pdf, which is a continuous distribution. 
@@ -278,22 +274,34 @@ runif(5,0,1)
 
 ### 4.3
 # Using runif, write a function that returns TRUE 22% of the time and FALSE 78% of the time
-random_bool <- function() {
-  return(runif(1, 0, 1) < 0.22)
+
+generate.bool.22 <- function(x){
+  s <- runif(x,0,1)
+  return(s<0.22)
 }
 
 ### 4.4
 # Based on today's lecture about pdfs, what is the probability density for a uniform pdf bounded between 
 # 0 and 1 associated with all values of x between 0 and 1? Explain why.
 
+#Answer:for a uniform distribution, the pdf is f(x)=1/b-a
+#since a=0 and b = 1 then the answer is 1.
+#This means that every value within this range has an equal likelihood of occurring.
+
 ### 4.5
 # Similarly, what is the probability density for a uniform pdf bounded between 5 and 6 associated with all values of x between 5 and 6?
+
+#Answer: f(x)=1/b-a =1/6-5=1
 
 ### 4.6
 # What is the probability density for a uniform pdf bounded between 0 and 0.5 associated with all values of x between 0 and 0.5?
 
+#Answer: f(x)=1/b-a =1/(0.5-0) = 2
+
 ### 4.7
 # What is the probability density for a uniform pdf bounded between 0 and 2 associated with all values of x between 0 and 2?
+
+#Answer: f(x)=1/b-a =1/(2-0) = 0.5
 
 ### 4.8
 # run the following code:
@@ -301,5 +309,10 @@ dunif(0.5,0,1)
 dunif(2,0,1)
 dunif(0.2,0,0.5)
 dunif(1.3,0,2)
+?dunif
 
 # Based on the results of this code and your answers above, what can you conclude about the purpose of the dunif function?
+
+#this function returns the Probability density of the unifrom distribution.
+# the first argument represents the number whose the probability density we want to check, while the 2 remaining arguments are the upper and the lower bounds
+
