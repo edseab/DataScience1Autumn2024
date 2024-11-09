@@ -1,5 +1,6 @@
 ?C
 A <- c(1,2,3,4,5,6,7,8,9)
+<<<<<<< HEAD
 c(1,2,3,4,5,6,7,8,9)
 drink_vector <- (c('milk','water','juice'))
 drink_vector
@@ -21,3 +22,6 @@ df<-data.frame(a, b)
 df
 setwd("d: /reasercher")
 unlink()
+=======
+c(1,2,3,4,5,6,7,8,9)
+>>>>>>> baf215d (Oluwafemiiii)
