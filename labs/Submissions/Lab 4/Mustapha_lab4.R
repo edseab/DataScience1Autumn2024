@@ -121,7 +121,7 @@ abline(lm(mpg~wt,data=bigcars), col="firebrick")
 
 # Legends can be added with legend(), 
 # where the first 2 arguments determine the position of the legend
-legend(4,40, fill=c("slateblue","firebrick"), 
+legend(4,30, fill=c("slateblue","firebrick"), 
             legend= c("Small cars (4 cylinders)", "Big cars (5+ cylinders)"),
           bty = "n", cex = 0.8)
 
@@ -181,8 +181,16 @@ dev.off()
 
 # 1.1 Transform the 'wt' variable in the mtcars dataset, which represents the weight of cars in 1000s of lbs,
 # to a variable representing that weight in kg. 1 lb = 0.453592kg
+wt_kg <- mtcars$wt * 0.453592
 
 # 1.2 Plot a histogram and a density plot of the weights of cars in kg in the mtcars dataset.
+
+# Histogram
+hist(wt_kg, main = "Histogram of Weights of Cars in kilograms", xlab = "weights in kg", breaks = 5)
+
+# Density Plot
+plot(density(wt_kg), main = "Density Plot of Car Weights in kg",
+          xlab = "weights in kg", col = "red", lwd = 2)
 
 # Let's extract data about survival rates among the Titanic
 data(Titanic)
@@ -197,24 +205,61 @@ d <- data.frame(Male = (survived$Freq/(survived$Freq+died$Freq))[1:4],
 
 # Finally we format it for the barplot function.
 # Each row must be a sex and each column a class, with row names and column names specified
- barplot_d <- as.matrix(t(d[1:2]))
+barplot_d <- as.matrix(t(d[1:2]))
 colnames(barplot_d)<- d$class
 
 # From this dataset, create a clustered barchart
-barplot (barplot_d, beside=T, ylim=c(0,1))
+barplot(barplot_d, beside=T, ylim=c(0,1))
 
 # 1.3. Fix this barplot so that the colours are nicer and there is a legend, title, and appropriate axes labels.
+barplot(barplot_d, beside=T, ylim=c(0,1), col = c('red','yellow'),
+          xlab = 'gender class', ylab = 'proportion of survivors',
+        main = 'Survival Rate of Male and Female of the Titanic')
+legend('topright', legend = c("Male","Female"), bty = "n",
+        fill = c('red','yellow'))
 
 # 1.4. Looking at this barplot, what can you say about who was more likely to survive the Titanic?
 #      Which group was the least likely to survive?
+# Answer:
+# 1. Females were consistently more likely to survive than males across 
+# all   classes and crew: Hence, 1st class females had the highest survival 
+# rate of  nearly 100%.
+# 2. The group that was least likely to survive was 2nd class males, with 
+# less than 10% survival rate.
 
 # 1.5 Load the Iris dataset 
-data(Iris)
+data(iris)
 
 # Please attempt to replicate the graph from the slides. It is a scatterplot of petal length against sepal length,
 # with species differentiated by color.
 # Add ablines plotting the linear relationship between petal length and sepal length for each group.
 
+petal_length <- iris$Petal.Length
+sepal_length <- iris$Sepal.Length
 
+# Set up colors for the three species
+colors <- c("green", "yellow", "orange")
+species_colors <- colors[as.numeric(iris$Species)]
 
+plot(petal_length,sepal_length, xlab = 'Petal length (cm)',
+        ylab = 'Sepal length (cm)', main = 'Relationship between petal and sepal length in irises', pch = 18, col = species_colors)
 
+legend("topleft", legend = c('Versicolor', 'Setosa', 'Virginica'),
+         title = "Species", fill = c("yellow", "green", "orange"),
+         cex = 0.7, inset = 0.05, x.intersp = 0.5, y.intersp = 0.6,
+         text.width = 1.2)
+
+# Add simple linear regression lines for each species
+setosa_data <- iris[iris$Species=='setosa',]
+abline(lm(Sepal.Length ~ Petal.Length, data = setosa_data), col = 'green')
+
+versicolor_data <- iris[iris$Species=='versicolor',]
+abline(lm(Sepal.Length ~ Petal.Length, data = versicolor_data), col = 'yellow')
+
+virginica_data <- iris[iris$Species=='virginica',]
+abline(lm(Sepal.Length ~ Petal.Length, data = virginica_data), col = 'orange')
+
+# Alternative approach
+abline(lm(Sepal.Length ~ Petal.Length, data = iris, subset = Species == "setosa"), col = "green", lwd = 2)
+abline(lm(Sepal.Length ~ Petal.Length, data = iris, subset = Species == "versicolor"), col = "yellow", lwd = 2)
+abline(lm(Sepal.Length ~ Petal.Length, data = iris, subset = Species == "virginica"), col = "orange", lwd = 2)
