@@ -69,9 +69,13 @@ total_revenue
 # Rename the 3rd element of the column names of star_wars_matrix to "Total revenue"
 colnames(star_wars_matrix)[3]<- "Total revenue"
 <<<<<<< HEAD
+<<<<<<< HEAD
 star_wars_matrix
 =======
 >>>>>>> 1cdeb47 (Exercise completed)
+=======
+star_wars_matrix
+>>>>>>> 05f2642 (modified lab2)
 # Now lets create vectors for the box office returns of the prequel trilogy
 
 phantom_menace <- c(474.5,552.5)
