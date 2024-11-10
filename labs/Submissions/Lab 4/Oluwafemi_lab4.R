@@ -246,17 +246,7 @@ legend("topleft", legend = c('Versicolor', 'Setosa', 'Virginica'),
          title = "Species", fill = c("yellow", "green", "orange"),
          cex = 0.7, inset = 0.05, x.intersp = 0.5, y.intersp = 0.6,
          text.width = 1.2)
-
-# Add simple linear regression lines for each species
-setosa_data <- iris[iris$Species=='setosa',]
-abline(lm(Sepal.Length ~ Petal.Length, data = setosa_data), col = 'green')
-
-versicolor_data <- iris[iris$Species=='versicolor',]
-abline(lm(Sepal.Length ~ Petal.Length, data = versicolor_data), col = 'yellow')
-
-virginica_data <- iris[iris$Species=='virginica',]
-abline(lm(Sepal.Length ~ Petal.Length, data = virginica_data), col = 'orange')
-
+                                                                      
 # Alternative approach
 abline(lm(Sepal.Length ~ Petal.Length, data = iris, subset = Species == "setosa"), col = "green", lwd = 2)
 abline(lm(Sepal.Length ~ Petal.Length, data = iris, subset = Species == "versicolor"), col = "yellow", lwd = 2)
