@@ -57,7 +57,11 @@ qnorm(((100-2.5)/100),170,15)
 # One has to be from 168.5 to 171.5 cm in height to belong to the Average People's Club 
 pnorm(171.5,170,15)- pnorm(168.5,170,15)
 
+<<<<<<< HEAD
 # Just about 8 percent of the population is eligible to join the average people club
+=======
+# Just about 8 percent of the population is eligible to join the average people club (APC)
+>>>>>>> 237fbaf80af3df4d4db6fd309b573c72af7d55c4
 
 
 # 4. If we selected 10 Examplians at random from the population, what is the probability that none of them are eligible to join either
@@ -84,6 +88,10 @@ dbinom(2,10,0.08)
 
 # The probability that at least 3 of them are eligible to join the TSC is about 4 percent 
 # or 0.04
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 237fbaf80af3df4d4db6fd309b573c72af7d55c4
 
 
 # Data Viz
@@ -99,3 +107,8 @@ bins<- c(130,170,180,190,200)
 hist(heights, breaks=bins)
 
 >>>>>>> 06e94e7 (just commit)
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 4fefc401faddf90203ee189e5320495272625370
+>>>>>>> 237fbaf80af3df4d4db6fd309b573c72af7d55c4
