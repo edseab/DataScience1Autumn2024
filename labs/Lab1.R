@@ -702,6 +702,13 @@ digits[digits%%2==1]
 
 digits[digits%%2==1]
 
+<<<<<<< HEAD
+=======
+digits[digits%%2==1]
+
+digits[digits%%2==1]
+
+>>>>>>> f6c49e1cb4f8183cc1d09bb15c828a83c9f66c95
 
 # Another important logical operator is the %in% operator. It tells you if the elements on the left are found in the elements on the right. E.G.
 group1 <- c('Arthur', 'Fatima', 'Suleiman', 'Marco')
