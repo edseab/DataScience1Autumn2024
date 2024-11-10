@@ -157,7 +157,6 @@ dev.off()
 #############################
 ####    Saving graphs    ####
 #############################
-
 # You can save graphs directly from your device (in RStudio, you would click on the 'export' button)
 # However, this can be annoying if you have to go through the process every time you make a small adjustment to your graph
 # Also, there is no guarantee of conistency if you save your graphs manually
