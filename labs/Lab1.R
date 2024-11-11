@@ -29,7 +29,7 @@
 
 # FUNCTIONS are commands that take in inputs and produce outputs. They mostly take in the inputs in brackets, like this:
 sqrt(25)
-exp(3) 
+exp(3)
 
 # Often, functions take multiple inputs with different functions. Note how:
 rep(3,4)
@@ -84,8 +84,6 @@ class (y)
 Salaam -> y
 
 # One final very important class of object is the 'logical' class, a.k.a. Boolean. 
-
-# One final very important class of object is the 'logical' class, a.k.a. Boolean. 
 # Boolean objects can take one of two values
 
 TRUE
@@ -134,17 +132,17 @@ my.vector[c(1,4)]
 
 ### 1.1
 # You can assign values to specific elements. Try writing a line of code below that changes the 4th element of my.vector to the word 'test'
-
+my.vector [4] <- "test"
 
 ### 1.2
 # You can even assign values to elements of a vector that don't exist yet, thus creating them. Try assigning the word 'example' to the (as yet non-existent) 5th element of my.vector.
-
+my.vector [5] <- "example"
 
 # Instead of indices, you can select elements of a vector using a logical vector of the same length, e.g.
 
 my.vector[c(TRUE,TRUE,FALSE,FALSE,FALSE)]
 
-
+#[] will isolate and c will combine
 ####################################
 ####     Logical operators      ####
 ####################################
@@ -157,9 +155,12 @@ my.vector == 'is'
 1:10 %% 2 == 0    ## %% is the remainder operator, it returns the remainder when you divide the left argument by the right argument.
 
 ### 2.1
-digits <- 0:10
+digits <- 0:10 
+digits
 # Using the least amount of code possible, write a line of code that returns only the odd values of the digits object.
-
+1:10 %% 2 == 1
+1:10 %% 2 != 1
+digits [c(digits %% 2 == 1)]
 # Another important logical operator is the %in% operator. It tells you if the elements on the left are found in the elements on the right. E.G.
 group1 <- c('Arthur', 'Fatima', 'Suleiman', 'Marco')
 group2 <- c('Marco','Maria', 'Victor','Fatima', 'Antonio')
@@ -265,3 +266,21 @@ dunif(0.2,0,0.5)
 dunif(1.3,0,2)
 
 # Based on the results of this code and your answers above, what can you conclude about the purpose of the dunif function?
+name <- input('what is your name? ' )
+#%%
+numbers<- c(10,20,30,40)
+numbers[5]<- 50 
+print(sum(numbers))
+print(mean(numbers))
+print(numbers*2)
+numbers <- c(1, 2, 3, 4)
+for (num in numbers) {
+  print(num * 2)  # Multiplies each element by 2
+}
+
+count <- 1
+while (count <= 5) {
+  print(count)
+  count <- count + 1  # Increases count by 1
+}
+
