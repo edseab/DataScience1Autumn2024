@@ -56,7 +56,7 @@ high_range
 # 4. If we selected 10 Examplians at random from the population, what is the probability that none of them are eligible to join either
 #    the TSC or the APC? 
 p_not_eligible = 1 - 0.05 - 0.08
-p_10_,not_eligible = p_not_eligible^10
+p_10_not_eligible = p_not_eligible^10
 
 # 5. What is the probability that exactly 2 are eligible to join the APC and the rest are not?
 p_eligible<- 1-p_not_eligible
@@ -66,3 +66,4 @@ p_exactly_2_eligible <- dbinom(2,10,p_eligible)
 #p(x>=3) = 1-p(x<3)= 1-[p(0)+p(1)+p(2)]
 p_tsc = 1 - p_not_tsc
 p_at_least_3 <- sum(dbinom(0:2, 10, 0.05))
+
