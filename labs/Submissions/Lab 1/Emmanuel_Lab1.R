@@ -82,7 +82,7 @@ class (y)
 
 # If we forget to use quote marks R will search for a stored object with that name and return an error if it doesn't find it:
 
-Salaam -> y
+Bonjour -> y
 
 # One final very important class of object is the 'logical' class, a.k.a. Boolean. 
 
