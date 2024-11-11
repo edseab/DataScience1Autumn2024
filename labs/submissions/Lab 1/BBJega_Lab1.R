@@ -194,15 +194,12 @@ f2 <- function(x,y){
 f2(8,9)
 f2(14,7)
 
-### 3.1 What is the purpose of function f2? Write in comments below.
+### 3.1 What is the purpose of function f2? Write in comments below. to know whether x is divisible by y
 #the f2 function will return the boolean value (true or false) if the reminder is equal to zero
 ### 3.2
 # Based on the definition of the mean from today's lecture, write a function that calculates the mean of all of the elements of a vector. assign it to the object my.mean. You will find the functions 'sum' and 'length' useful here.
-my.mean <- function(myvector){
-  vecSum = sum(myvector)
-  vecmean = sum(myve ctor)/length(myvector)
-  return(vecmean)
-}
+my.mean <- function(x) sum(x)/length(x)
+mean(ex.vector)
 
 # compare your function to the native function in R. Does it produce the same results?
 
@@ -253,7 +250,13 @@ runif(5,0,1)
 
 ### 4.3
 # Using runif, write a function that returns TRUE 22% of the time and FALSE 78% of the time
+true.22.per <- function(){
+  return(runif(1,0,1) <= 0.22)
+}
 
+true.22.per()
+  results <- replicate(1000, true.22.per)
+)
 ### 4.4
 # Based on today's lecture about pdfs, what is the probability density for a uniform pdf bounded between 
 # 0 and 1 associated with all values of x between 0 and 1? Explain why.
