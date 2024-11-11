@@ -47,15 +47,19 @@ pnorm(171.5, 170, 15) - pnorm(168.5, 170, 15)
 #    the TSC or the APC? 
 
 # The porcentage of being eligible in TSC is 5% and APC is 8%, the total is 13%
-# The probability that none of 10 Examplians are eligible to join either TSC or APC is (1-0.13)^10 equals 0.248
+
+# The probability that none of 10 Examplians are eligible to join either TSC or APC is 
+Prob.no.club <- function(p, n, k) (p^k)*(1-p)^(n-k)*choose(n,k)
+Prob.no.club(0.13,10,0)
+Prob.no.club(0.87,10,10)
 
 # 5. What is the probability that exactly 2 are eligible to join the APC and the rest are not?
 
 # We can use the binomial distribution P(X=k)= (N choose K)* p^k * (1-p)^N-K
-# P(X=2)= (10 choose 2)* (0.08)^2 * (1-0.08)^8 = 0.147
+Prob.2.apc = function(p, n, k) (p^k)*(1-p)^(n-k)*choose(n,k)
+Prob.2.apc(0.08, 10, 2)
+dbinom(2, 10, 0.08)
 
 # 6. What is the probability that at least 3 of them are eligible to join the TSC?
 # P(X>=3)= 1−P(X<3)=1−[P(X=0)+P(X=1)+P(X=2)]
-# P(X=0)= (10 choose 0)* (0.05)^0 * (1-0.05)^10 = 0.598
-# P(X=1)= (10 choose 1)* (0.05)^1 * (1-0.05)^9 = 0.315
-# P(X=2)= (10 choose 2)* (0.05)^2 * (1-0.05)^8 = 0.074
+1- (dbinom(0, 10, 0.05)+dbinom(1, 10, 0.05)+dbinom(2, 10, 0.05))
