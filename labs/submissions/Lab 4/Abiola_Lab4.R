@@ -1,3 +1,13 @@
+###################################
+###################################
+########                   ########
+########   Data Science 1  ########
+########       Lab 4       ######## 
+########  5th Nov. 2023    ########
+########                   ########
+###################################
+###################################
+
 ## Welcome to lab #4. Today we will start with an introduction to plotting in base R
 
 ########################
@@ -39,7 +49,7 @@ plot(mtcars$wt,mtcars$mpg)
 plot(mtcars$mpg~mtcars$wt)
 
 # You can change the shape of the points in a scatterplot with the 'pch' argument
-plot(mtcars$wt,mtcars$mpg, pch=20)
+plot(mtcars$wt,mtcars$mpg,pch=20)
 # There are 25 preset values for the scatterplot points. To see them all run:
 plot(1:25,rep(1,25),pch=1:25)
 
@@ -171,14 +181,18 @@ dev.off()
 
 # 1.1 Transform the 'wt' variable in the mtcars dataset, which represents the weight of cars in 1000s of lbs,
 # to a variable representing that weight in kg. 1 lb = 0.453592kg
+mtcars$wt <- mtcars$wt*1000*0.453592
 
 # 1.2 Plot a histogram and a density plot of the weights of cars in kg in the mtcars dataset.
-
+?hist()
+hist(mtcars$wt)
+plot(hist(mtcars$wt))
+plot(density(mtcars$wt))
 # Let's extract data about survival rates among the Titanic
 data(Titanic)
 survived <- as.data.frame(Titanic[,,2,2])
 died <-  as.data.frame(Titanic[,,2,1])
-
+died
 # Now we create a new data frame from survived and died that contains the proportion of survivors for each combination of sex and class
 
 d <- data.frame(Male = (survived$Freq/(survived$Freq+died$Freq))[1:4],
@@ -194,13 +208,27 @@ colnames(barplot_d)<- d$class
 barplot (barplot_d, beside=T, ylim=c(0,1))
 
 # 1.3. Fix this barplot so that the colours are nicer and there is a legend, title, and appropriate axes labels.
+barplot (barplot_d, beside=T, ylim=c(0,1), xlab = 'Class', ylab = 'Proportion of survivors', 
+ main = 'Proportion of survivors by sex and Class', col = c('blue', 'pink'))
+
 
 # 1.4. Looking at this barplot, what can you say about who was more likely to survive the Titanic?
 #      Which group was the least likely to survive?
 
+# answer: First class females were more likely to survive the Titanic while 2nd class males were the least likely to survive the Titanic
+
 # 1.5 Load the Iris dataset 
-data(Iris)
+data(iris)
 
 # Please attempt to replicate the graph from the slides. It is a scatterplot of petal length against sepal length,
 # with species differentiated by color.
 # Add ablines plotting the linear relationship between petal length and sepal length for each group.
+plot(iris$Petal.Length, iris$Sepal.Length,
+    xlab = 'Petal Length',
+      ylab = 'Sepal Length',
+      main = 'Relationship between Sepal and Petal Length in Iris',
+      pch = 18)
+
+
+
+
