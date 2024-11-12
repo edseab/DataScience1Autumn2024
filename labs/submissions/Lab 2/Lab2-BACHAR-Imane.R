@@ -91,7 +91,7 @@ star_wars_matrix[3,1]
 # Write a line of code to extract the international revenue of the Phantom Menace (the 4th movie) using numbers to index the matrix
 star_wars_matrix[4,2]
 # Compare this to the following:
-star_wars_matrix["The Phantom Menace", "Total revenue"]
+star_wars_matrix["The Phantom Menace", "International revenue"]
 
 # This works because our matrix has row and column names.
 
@@ -237,7 +237,10 @@ dbinom(8, 10, 0.7)
 # for each of their relative distributions
 # in other words, they calculate probability MASS or probability DENSITY for each of
 # these distributions
-
+?dbinom
+?dnorm
+?dunif
+?dbeta
 # rbinom, rnorm, runif, rbeta, .... all SAMPLE from these respective distributions,
 # i.e. they generate random draws of x in proportion to their respective f(x) in these distributions.
 
@@ -265,7 +268,7 @@ pourcentage
 
 # So for example, if a person of 195 cm was drawn from a gaussian distribution of heights,
 # with mean 175cm and standard deviation 10cm, What percentile would they be in?
-pnorm(195, 175, 10, lower.tail=FALSE)
+pnorm(195, 175, 10,lower.tail=FALSE)
 # They would be in the upper 2.3 percentile
 
 # qbinom, qnorm, qunif, qbeta, .... all calculate value of x for which
@@ -321,3 +324,4 @@ t.test(men_heights,women_heights)
 my_t(men_heights,women_heights)
 
 # One last question to ponder before next class: Why did we multiply the p-value by 2 in the above function?
+#we need to take into account the two tails
