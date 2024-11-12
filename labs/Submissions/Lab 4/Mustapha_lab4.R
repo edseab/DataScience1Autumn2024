@@ -181,7 +181,7 @@ dev.off()
 
 # 1.1 Transform the 'wt' variable in the mtcars dataset, which represents the weight of cars in 1000s of lbs,
 # to a variable representing that weight in kg. 1 lb = 0.453592kg
-wt_kg <- mtcars$wt * 0.453592
+wt_kg <- mtcars$wt * 1000 * 0.453592
 
 # 1.2 Plot a histogram and a density plot of the weights of cars in kg in the mtcars dataset.
 
