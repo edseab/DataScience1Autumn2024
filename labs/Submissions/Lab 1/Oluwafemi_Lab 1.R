@@ -315,5 +315,5 @@ x.values <- seq(-5,+5,0.01)
 y.values <- dunif(x.values,0,1)
 
 plot(x.values, y.values,type='l', ylim=c(0,5))
-P
+
 
