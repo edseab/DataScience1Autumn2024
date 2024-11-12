@@ -239,8 +239,3 @@ plot(iris$Petal.Length, iris$Sepal.Length,
 abline(lm(Sepal.Length ~Petal.Length,data=iris,subset = Species == "setosa"), col="red")
 abline(lm(Sepal.Length ~Petal.Length,data=iris,subset = Species == "versicolor"), col="green")
 abline(lm(Sepal.Length ~Petal.Length,data=iris,subset = Species == "virginica"), col="blue")
-
-
-
-
-
