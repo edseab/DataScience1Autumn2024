@@ -218,7 +218,7 @@ legend('topright', legend = c("Male","Female"), bty = "n",
 
 # 1.4. Looking at this barplot, what can you say about who was more likely to survive the Titanic?
 #      Which group was the least likely to survive?
-Answer:
+
 # 1. Females were consistently more likely to survive than males across 
 # all   classes and crew: Hence, 1st class females had the highest survival 
 # rate of  nearly 100%.
@@ -252,5 +252,4 @@ abline(lm(Sepal.Length ~ Petal.Length, data = iris, subset = Species == "setosa"
 abline(lm(Sepal.Length ~ Petal.Length, data = iris, subset = Species == "versicolor"), col = "yellow", lwd = 2)
 abline(lm(Sepal.Length ~ Petal.Length, data = iris, subset = Species == "virginica"), col = "orange", lwd = 2)
 
-
-
+# i've added a file im zack
