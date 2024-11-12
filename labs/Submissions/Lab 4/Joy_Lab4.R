@@ -232,10 +232,21 @@ barplot (barplot_d, beside=T, ylim=c(0,1), main = "Proportion of Survivors by se
 #First class females were more likely to survive the Titanic while 2nd class males were the least likely to survive the Titanic
 
 # 1.5 Load the Iris dataset 
-data(Iris)
+data(iris)
 
 # Please attempt to replicate the graph from the slides. It is a scatterplot of petal length against sepal length,
+
+plot(iris$Petal.Length, iris$Sepal.Length,
+     xlab = 'Petal Length',
+     ylab = 'Sepal Length',
+     main = 'Relationship between Sepal and Petal Length in Iris',
+     pch = 18)
+
 # with species differentiated by color.
+
+
+
+
 # Add ablines plotting the linear relationship between petal length and sepal length for each group.
 
 
