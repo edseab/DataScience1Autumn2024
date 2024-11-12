@@ -251,5 +251,3 @@ legend("topleft", legend = c('Versicolor', 'Setosa', 'Virginica'),
 abline(lm(Sepal.Length ~ Petal.Length, data = iris, subset = Species == "setosa"), col = "green", lwd = 2)
 abline(lm(Sepal.Length ~ Petal.Length, data = iris, subset = Species == "versicolor"), col = "yellow", lwd = 2)
 abline(lm(Sepal.Length ~ Petal.Length, data = iris, subset = Species == "virginica"), col = "orange", lwd = 2)
-
-# i've added a file im zack
