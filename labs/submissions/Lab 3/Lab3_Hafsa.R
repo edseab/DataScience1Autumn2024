@@ -21,7 +21,6 @@ round(percentile)
 
 #Answer: Amir is in the 95th percentile of the population
 
-
 # 2. A group of Examplians start a club called the Tall and Short Club (TSC), where you have to be in the tallest 2.5% of the population 
 #    OR the bottom 2.5% of the population in height to be let in. 
 #    How tall or how short do you have to be to be accepted into the TSC? Would Amir be accepted?
@@ -46,6 +45,11 @@ percentage <- pnorm(upper_bound, 170, 15) - pnorm(lower_bound, 170, 15)*100
 #    the TSC or the APC? 
 proba.not.eligible <- 1 - 0.05 - 0.08
 proba.none.10 <- proba.not.eligible ^ 10
+
+
+
+# 4. If we selected 10 Examplians at random from the population, what is the probability that none of them are eligible to join either
+#    the TSC or the APC? 
 
 
 # 5. What is the probability that exactly 2 are eligible to join the APC and the rest are not?
