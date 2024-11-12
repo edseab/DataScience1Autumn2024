@@ -49,7 +49,7 @@ plot(mtcars$wt,mtcars$mpg)
 plot(mtcars$mpg~mtcars$wt)
 
 # You can change the shape of the points in a scatterplot with the 'pch' argument
-plot(mtcars$wt,mtcars$mpg, pch=20)
+plot(mtcars$wt,mtcars$mpg,pch=20)
 # There are 25 preset values for the scatterplot points. To see them all run:
 plot(1:25,rep(1,25),pch=1:25)
 
@@ -121,7 +121,7 @@ abline(lm(mpg~wt,data=bigcars), col="firebrick")
 
 # Legends can be added with legend(), 
 # where the first 2 arguments determine the position of the legend
-legend(4,30, fill=c("slateblue","firebrick"), 
+legend(4,40, fill=c("slateblue","firebrick"), 
             legend= c("Small cars (4 cylinders)", "Big cars (5+ cylinders)"),
           bty = "n", cex = 0.8)
 
@@ -181,22 +181,18 @@ dev.off()
 
 # 1.1 Transform the 'wt' variable in the mtcars dataset, which represents the weight of cars in 1000s of lbs,
 # to a variable representing that weight in kg. 1 lb = 0.453592kg
-wt_kg <- mtcars$wt * 0.453592
+mtcars$wt <- mtcars$wt*1000*0.453592
 
 # 1.2 Plot a histogram and a density plot of the weights of cars in kg in the mtcars dataset.
-
-# Histogram
-hist(wt_kg, main = "Histogram of Weights of Cars in kilograms", xlab = "weights in kg", breaks = 5)
-
-# Density Plot
-plot(density(wt_kg), main = "Density Plot of Car Weights in kg",
-          xlab = "weights in kg", col = "red", lwd = 2)
-
+?hist()
+hist(mtcars$wt)
+plot(hist(mtcars$wt))
+plot(density(mtcars$wt))
 # Let's extract data about survival rates among the Titanic
 data(Titanic)
 survived <- as.data.frame(Titanic[,,2,2])
 died <-  as.data.frame(Titanic[,,2,1])
-
+died
 # Now we create a new data frame from survived and died that contains the proportion of survivors for each combination of sex and class
 
 d <- data.frame(Male = (survived$Freq/(survived$Freq+died$Freq))[1:4],
@@ -205,27 +201,21 @@ d <- data.frame(Male = (survived$Freq/(survived$Freq+died$Freq))[1:4],
 
 # Finally we format it for the barplot function.
 # Each row must be a sex and each column a class, with row names and column names specified
-barplot_d <- as.matrix(t(d[1:2]))
+ barplot_d <- as.matrix(t(d[1:2]))
 colnames(barplot_d)<- d$class
 
 # From this dataset, create a clustered barchart
-barplot(barplot_d, beside=T, ylim=c(0,1))
+barplot (barplot_d, beside=T, ylim=c(0,1))
 
 # 1.3. Fix this barplot so that the colours are nicer and there is a legend, title, and appropriate axes labels.
-barplot(barplot_d, beside=T, ylim=c(0,1), col = c('red','yellow'),
-          xlab = 'gender class', ylab = 'proportion of survivors',
-        main = 'Survival Rate of Male and Female of the Titanic')
-legend('topright', legend = c("Male","Female"), bty = "n",
-        fill = c('red','yellow'))
+barplot (barplot_d, beside=T, ylim=c(0,1), xlab = 'Class', ylab = 'Proportion of survivors', 
+ main = 'Proportion of survivors by sex and Class', col = c('blue', 'pink'))
+
 
 # 1.4. Looking at this barplot, what can you say about who was more likely to survive the Titanic?
 #      Which group was the least likely to survive?
-# Answer:
-# 1. Females were consistently more likely to survive than males across 
-# all   classes and crew: Hence, 1st class females had the highest survival 
-# rate of  nearly 100%.
-# 2. The group that was least likely to survive was 2nd class males, with 
-# less than 10% survival rate.
+
+# answer: First class females were more likely to survive the Titanic while 2nd class males were the least likely to survive the Titanic
 
 # 1.5 Load the Iris dataset 
 data(iris)
@@ -233,29 +223,12 @@ data(iris)
 # Please attempt to replicate the graph from the slides. It is a scatterplot of petal length against sepal length,
 # with species differentiated by color.
 # Add ablines plotting the linear relationship between petal length and sepal length for each group.
+plot(iris$Petal.Length, iris$Sepal.Length,
+    xlab = 'Petal Length',
+      ylab = 'Sepal Length',
+      main = 'Relationship between Sepal and Petal Length in Iris',
+      pch = 18)
 
-petal_length <- iris$Petal.Length
-sepal_length <- iris$Sepal.Length
 
-# Set up colors for the three species
-colors <- c("green", "yellow", "orange")
-species_colors <- colors[as.numeric(iris$Species)]
 
-plot(petal_length,sepal_length, xlab = 'Petal length (cm)',
-        ylab = 'Sepal length (cm)', main = 'Relationship between petal and sepal length in irises', pch = 18, col = species_colors)
-
-legend("topleft", legend = c('Versicolor', 'Setosa', 'Virginica'),
-         title = "Species", fill = c("yellow", "green", "orange"),
-         cex = 0.7, inset = 0.05, x.intersp = 0.5, y.intersp = 0.6,
-         text.width = 1.2)
-
-# Add simple linear regression lines for each species
-setosa_data <- iris[iris$Species=='setosa',]
-abline(lm(Sepal.Length ~ Petal.Length, data = setosa_data), col = 'green')
-
-versicolor_data <- iris[iris$Species=='versicolor',]
-abline(lm(Sepal.Length ~ Petal.Length, data = versicolor_data), col = 'yellow')
-
-virginica_data <- iris[iris$Species=='virginica',]
-abline(lm(Sepal.Length ~ Petal.Length, data = virginica_data), col = 'orange')
 
