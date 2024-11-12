@@ -64,10 +64,13 @@ star_wars_matrix
 rownames(star_wars_matrix) <- c("A new hope", "The empire strikes back", "Return of the Jedi")
 colnames(star_wars_matrix) <- c("US revenue", "International revenue")
 
+
 ### 1.1
 # Some important base R functions to know: colSums, rowSums, colMeans, rowMeans
 ?colSums()
 ?rowSums()
+?colMeans()
+?rowMeans()
 
 # Use one of the above functions to calculate the total revenue for each movie (the sum of the US and international revenue)
 rowSums(star_wars_matrix)
@@ -97,6 +100,7 @@ total_revenue_prequel <- rowSums(prequel_matrix)
 rownames(prequel_matrix) <- c("Phantom Menace", "Attack of Clones", "Revenge of Sith")
 prequel_matrix <- cbind(prequel_matrix, total_revenue_prequel)
 colnames(prequel_matrix) <- colnames(star_wars_matrix)
+
 
 # and append them to star_wars_matrix using the function rbind (row bind)
 star_wars_matrix <- rbind(star_wars_matrix, prequel_matrix)
@@ -369,3 +373,25 @@ my_t(men_heights,women_heights)
 
 
 #gyi
+
+alp <- runif(10000,0,1)
+length(alp)
+mean(alp)
+?punif()
+
+p <- pnorm(145, 175, 20)
+p
+
+zscore <- function(x, mean = 0, sd = 1) {
+  (x - mean) / sd
+}
+
+z <- zscore(145, 175, 20)
+pnorm(z)
+
+z2 <- zscore(145, 175, 5)
+pnorm(z2)
+
+#
+pnorm(-1.5)
+(1 - pnorm(1.5))

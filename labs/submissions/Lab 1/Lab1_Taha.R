@@ -32,14 +32,20 @@ exp(3)
 
 # Often, functions take multiple inputs with different functions. Note how:
 rep(3,4)
+rep.int(x = 3, times = 4)
 # produces a different output from
 rep(4,3)
+rep.int(x = 4, times = 3)
+rep.int(times = 3, x=4)
+
 # If you can't remember in which order you have to input the arguments of a function, or if you just want to learn what a function does, you can type in ? followed by the function name in the console:
 ?rep
 
 # Each argument has a name. By explicitly referring to these names when calling the function, we can avoid  any problems with order. For example:
 rep(x=3, times=4)
 rep(times=4, x=3)
+
+
 
 # produce the same result, because we inputed the arguments by name using the 'argname = x' construction. When we don't use this construction, the function defaults each input to an argument according to a predefined order.
 
@@ -51,14 +57,20 @@ rep(times=4, x=3)
 
 # Functions are one example of OBJECTS, which are stored within the main (global) ENVIRONMENT of the console. We can create new objects by using the 'assign' operator:
 
-x <- 4
+a <- 4
+a
+print(c(a, "is", "food"))
+
+
 
 # You can now see in the 'Environment' tab below that the object 'x'  is stored with the value 4.
 
-x*5
+y <- a*5
+print(y)
 
 
-matrix(1:25, nrow = 5)
+ds1 <- matrix(1:25, ncol = 5, nrow = 2)
+ds1
 ##############################################################
 ###    ADVANCED NOTE: the = operator can also be used      ###
 ###    to assign values to objects, like in Python.        ###
@@ -73,7 +85,7 @@ matrix(1:25, nrow = 5)
 class(x)
 
 # We can also store text into an object, by surrounding it with quote marks:
-"Hello" -> y
+'a' -> y
 y
 class (y)
 
@@ -343,7 +355,7 @@ mean(results)
 # run the following code:
 dunif(0.5,0,1)
 dunif(2,0,1)
-dunif(0.2,0,0.5)
+dunif(0.51,0,0.5)
 dunif(1.3,0,2)
 
 # Based on the results of this code and your answers above, what can you conclude about the purpose of the dunif function?
