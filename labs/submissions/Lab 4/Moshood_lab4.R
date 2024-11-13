@@ -29,9 +29,11 @@
 # R contains a number of inbuilt datasets
 # To see a list of them, run
 data()
+?data()
 
 # To load one into your environment, run for example
 data(mtcars)
+
 
 ########################
 ####    Plotting    ####
@@ -49,7 +51,8 @@ plot(mtcars$wt,mtcars$mpg)
 plot(mtcars$mpg~mtcars$wt)
 
 # You can change the shape of the points in a scatterplot with the 'pch' argument
-plot(mtcars$wt,mtcars$mpg, pch=20)
+plot(mtcars$wt,mtcars$mpg, pch=25)
+# There are 25 predefined pch values
 # There are 25 preset values for the scatterplot points. To see them all run:
 plot(1:25,rep(1,25),pch=1:25)
 
@@ -67,7 +70,7 @@ plot(mtcars$wt,mtcars$mpg, pch=20, ylim = c(0,40), xlim = c(0,7))
 x <- seq(-4,4,0.2)
 y <- dnorm(x)
 
-plot(x,y,pch=20)
+plot(x,y,pch=5)
 plot(x,y,type='l')
 plot(x,y,type='h')
 plot(x,y,type='b')
@@ -81,7 +84,7 @@ plot(x,y,type='o', col='red')
 # https://www.nceas.ucsb.edu/sites/default/files/2020-04/colorPaletteCheatsheet.pdf
 
 # You can also use hex codes, such as:
-plot(dnorm(seq(-4,4,0.2)),type='o', col='#6D1ACF')
+plot(dnorm(seq(-4,4,0.2)),type='o', col='#177678')
 
 # Pick your own color and find its hex code here:
 # https://htmlcolorcodes.com/color-picker/
@@ -98,15 +101,23 @@ plot(dnorm(seq(-4,4,0.2)),type='o', col='#6D1ACF')
 # New axes can be added using the axis() function
 # text(), segments(), arrows(), polygon(), legend(), add these respective elements to your plot. 
 # Experiment with them or run ?text, ?segments, etc. to find out more.
+?text()
+?segments()
+?arrows()
+?polygon()
+?legend()
 
 # Fonts can be changed using the arguments cex (for size), family (for font type), and font (for bold or italics)
 
 # Straight lines can be added to plots using abline()
 plot(x,y,type="l", xlim=c(-4,4))
-abline(v=0)
+abline(v=c(-4,0,4))
+
+abline(h = max(y)) # horizontal line = max of y
+?abline() #straight line
 
 plot(mtcars$wt,mtcars$mpg, pch=20, ylim = c(0,40), xlim = c(0,7))
-     abline(v=0,h=0,lm(mpg~wt,data=mtcars))
+abline(v=0,h=0,lm(mpg~wt,data=mtcars))
 
 # Layers of different points or lines can be added to a plot using points() and lines()
 smallcars <- mtcars[mtcars$cyl<=4,]
@@ -181,29 +192,51 @@ dev.off()
 
 # 1.1 Transform the 'wt' variable in the mtcars dataset, which represents the weight of cars in 1000s of lbs,
 # to a variable representing that weight in kg. 1 lb = 0.453592kg
-
+mtcars$wt <- mtcars$wt * 1000 * 0.453592
 # 1.2 Plot a histogram and a density plot of the weights of cars in kg in the mtcars dataset.
-
+plot(hist(mtcars$wt))
+# <=> hist(mtcars$wt)
+plot(density(mtcars$wt))
 # Let's extract data about survival rates among the Titanic
 data(Titanic)
+
+#Subsetting the array: Titanic[,,2,2]
+
+# The Titanic dataset is a 4-dimensional array.
+# The dimensions correspond to Class, Sex, Age, and Survival status.
+# By using ,,2,2, you are selecting:
+# All levels of the first dimension (Class).
+# All levels of the second dimension (Sex).
+# The second level of the third dimension (Age, which corresponds to "Adult").
+# The second level of the fourth dimension (Survival status, which corresponds to "Yes").
+#Titanic[Class, Sex, Age, and Survival status]
+#Titanic[2,,2,2] # 2nd class, male|female, Adults, Died
 survived <- as.data.frame(Titanic[,,2,2])
+survived
 died <-  as.data.frame(Titanic[,,2,1])
 
 # Now we create a new data frame from survived and died that contains the proportion of survivors for each combination of sex and class
 
-d <- data.frame(Male = (survived$Freq/(survived$Freq+died$Freq))[1:4],
+df <- data.frame(Male = (survived$Freq/(survived$Freq+died$Freq))[1:4],
                 Female = (survived$Freq/(survived$Freq+died$Freq))[5:8],
                 class = c("1st","2nd","3rd","Crew"))
-
+#Titanic
 # Finally we format it for the barplot function.
 # Each row must be a sex and each column a class, with row names and column names specified
- barplot_d <- as.matrix(t(d[1:2]))
-colnames(barplot_d)<- d$class
+barplot_d <- as.matrix(t(df[1:2]))
+colnames(barplot_d)<- df$class
 
 # From this dataset, create a clustered barchart
-barplot (barplot_d, beside=T, ylim=c(0,1))
+barplot(barplot_d, beside=T, ylim=c(0,1))
 
 # 1.3. Fix this barplot so that the colours are nicer and there is a legend, title, and appropriate axes labels.
+barplot(barplot_d, beside = TRUE, ylim = c(0, 1), 
+        ylab = "Proportion of Survival", 
+        xlab = "Class", 
+        main = "The Proportion of Survivors with Regards to Gender & Class",
+        col = c("#c735a5", "#a75925"), 
+        legend.text = c("Male", "Female"),
+        args.legend = list(x = "topright", inset = c(0.05, 0.05), horiz = TRUE, bty = "n"))
 
 # 1.4. Looking at this barplot, what can you say about who was more likely to survive the Titanic?
 #      Which group was the least likely to survive?
@@ -214,6 +247,43 @@ data(Iris)
 # Please attempt to replicate the graph from the slides. It is a scatterplot of petal length against sepal length,
 # with species differentiated by color.
 # Add ablines plotting the linear relationship between petal length and sepal length for each group.
+# Define petal and sepal length variables
+petal_length <- iris$Petal.Length
+sepal_length <- iris$Sepal.Length
+
+# Assign colors to each species
+colors <- c("green", "yellow", "orange")
+species_colors <- colors[as.numeric(iris$Species)]
+
+# Create scatter plot of petal length vs. sepal length, colored by species
+plot(petal_length, sepal_length, 
+     xlab = 'Petal length (in cm)', 
+     ylab = 'Sepal length (in cm)', 
+     main = 'Relationship between petal & sepal length in irises', 
+     pch = 18, col = species_colors)
+
+# Legend
+legend("topleft", 
+       legend = c('Versicolor', 'Setosa', 'Virginica'),
+       title = "Species", 
+       fill = c("yellow", "green", "orange"),
+       cex = 0.7, inset = 0.05, 
+       x.intersp = 0.5, y.intersp = 0.6, 
+       text.width = 1.2)
+
+# Add regression lines for each species
+# Setosa
+setosa_data <- iris[iris$Species == 'setosa', ]
+abline(lm(Sepal.Length ~ Petal.Length, data = setosa_data), col = 'green')
+
+# Versicolor
+versicolor_data <- iris[iris$Species == 'versicolor', ]
+abline(lm(Sepal.Length ~ Petal.Length, data = versicolor_data), col = 'yellow')
+
+# Virginica
+virginica_data <- iris[iris$Species == 'virginica', ]
+abline(lm(Sepal.Length ~ Petal.Length, data = virginica_data), col = 'orange')
+
 
 
 
