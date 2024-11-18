@@ -189,6 +189,7 @@ dev.off()
 # 1.1 Transform the 'wt' variable in the mtcars dataset, which represents the weight of cars in 1000s of lbs,
 # to a variable representing that weight in kg. 1 lb = 0.453592kg
 <<<<<<< HEAD
+<<<<<<< HEAD
 mtcars$wt
 mtcars$wtkg <- mtcars$wt * 1000 * 0.453592
 mtcars$wtkg
@@ -203,6 +204,15 @@ mtcars$wtkg
 hist(mtcars$wtkg)
 plot(density(mtcars$wtkg))
 >>>>>>> 9d67e98 (lab 4 start)
+=======
+mtcars$wt
+mtcars$wtkg <- mtcars$wt * 1000 * 0.453592
+mtcars$wtkg
+# 1.2 Plot a histogram and a density plot of the weights of cars in kg in the mtcars dataset.
+hist(mtcars$wtkg, breaks = 10, main = "Car Weights", xlab = "Weight (kg)", col = "lightblue")
+plot(density(mtcars$wtkg), col = "darkred", main = "Density of Car Weights")
+
+>>>>>>> 9b5a038 (partial lab4)
 # Let's extract data about survival rates among the Titanic
 data(Titanic)
 Titanic
