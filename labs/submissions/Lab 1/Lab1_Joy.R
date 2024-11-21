@@ -512,6 +512,8 @@ prob(50)
 ### 4.4
 # Based on today's lecture about pdfs, what is the probability density for a uniform pdf bounded between
 # 0 and 1 associated with all values of x between 0 and 1? Explain why.
+
+
 ### 4.5
 # Similarly, what is the probability density for a uniform pdf bounded between 5 and 6 associated with all values of x between 5 and 6?
 
