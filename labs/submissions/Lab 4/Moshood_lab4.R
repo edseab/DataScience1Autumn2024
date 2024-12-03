@@ -192,11 +192,17 @@ dev.off()
 
 # 1.1 Transform the 'wt' variable in the mtcars dataset, which represents the weight of cars in 1000s of lbs,
 # to a variable representing that weight in kg. 1 lb = 0.453592kg
+<<<<<<< HEAD
 mtcars$wt <- mtcars$wt * 1000 * 0.453592
 # 1.2 Plot a histogram and a density plot of the weights of cars in kg in the mtcars dataset.
 plot(hist(mtcars$wt))
 # <=> hist(mtcars$wt)
 plot(density(mtcars$wt))
+=======
+wt_kg <- mtcars$wt * 1000 * 0.453592
+# 1.2 Plot a histogram and a density plot of the weights of cars in kg in the mtcars dataset.
+plot(hist(wt_kg))
+>>>>>>> 613711a (done)
 # Let's extract data about survival rates among the Titanic
 data(Titanic)
 
@@ -223,11 +229,20 @@ df <- data.frame(Male = (survived$Freq/(survived$Freq+died$Freq))[1:4],
 #Titanic
 # Finally we format it for the barplot function.
 # Each row must be a sex and each column a class, with row names and column names specified
+<<<<<<< HEAD
 barplot_d <- as.matrix(t(df[1:2]))
 colnames(barplot_d)<- df$class
 
 # From this dataset, create a clustered barchart
 barplot(barplot_d, beside=T, ylim=c(0,1))
+=======
+ barplot_d <- as.matrix(t(d[1:2]))
+colnames(barplot_d) <- d$class
+
+
+# From this dataset, create a clustered barchart
+barplot(barplot_d, beside=T, ylim=c(0,1), xlab = "class", ylab = 'proportion of survivors')
+>>>>>>> 613711a (done)
 
 # 1.3. Fix this barplot so that the colours are nicer and there is a legend, title, and appropriate axes labels.
 barplot(barplot_d, beside = TRUE, ylim = c(0, 1), 
@@ -237,6 +252,10 @@ barplot(barplot_d, beside = TRUE, ylim = c(0, 1),
         col = c("#c735a5", "#a75925"), 
         legend.text = c("Male", "Female"),
         args.legend = list(x = "topright", inset = c(0.05, 0.05), horiz = TRUE, bty = "n"))
+
+barplot(barplot_d, beside=T, ylim=c(0,1), xlab = 'class', ylab = 'proportion of survivors',
+        main = "Titanic survival frequency for each sex and class", col = c('#a6ff00', '#96f8e3'))
+
 
 # 1.4. Looking at this barplot, what can you say about who was more likely to survive the Titanic?
 #      Which group was the least likely to survive?
@@ -283,6 +302,7 @@ abline(lm(Sepal.Length ~ Petal.Length, data = versicolor_data), col = 'yellow')
 # Virginica
 virginica_data <- iris[iris$Species == 'virginica', ]
 abline(lm(Sepal.Length ~ Petal.Length, data = virginica_data), col = 'orange')
+
 
 
 
