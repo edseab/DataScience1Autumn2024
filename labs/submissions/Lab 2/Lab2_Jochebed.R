@@ -325,3 +325,21 @@ t.test(men_heights,women_heights)
 my_t(men_heights,women_heights)
 
 # One last question to ponder before next class: Why did we multiply the p-value by 2 in the above function?
+
+probability<-pnorm(145,175,20)
+percentage <- probability * 100
+percentage
+
+
+pnorm(-1.96)*2
+
+set.seed(123)
+heights <- rnorm(30, 175, 15)
+mean(heights)
+sd(heights)
+sem <- sd(heights)/sqrt(length(heights))
+sem
+upperCI97 <- mean(heights) + sem*qnorm(0.985)
+lowerCI97 <- mean(heights) - sem*qnorm(0.985)
+CIs97 <- c(lowerCI97, upperCI97)
+CIs97
