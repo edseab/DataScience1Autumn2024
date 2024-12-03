@@ -181,9 +181,9 @@ dev.off()
 
 # 1.1 Transform the 'wt' variable in the mtcars dataset, which represents the weight of cars in 1000s of lbs,
 # to a variable representing that weight in kg. 1 lb = 0.453592kg
-
+wt_kg <- mtcars$wt * 1000 * 0.453592
 # 1.2 Plot a histogram and a density plot of the weights of cars in kg in the mtcars dataset.
-
+plot(hist(wt_kg))
 # Let's extract data about survival rates among the Titanic
 data(Titanic)
 survived <- as.data.frame(Titanic[,,2,2])
@@ -198,12 +198,17 @@ d <- data.frame(Male = (survived$Freq/(survived$Freq+died$Freq))[1:4],
 # Finally we format it for the barplot function.
 # Each row must be a sex and each column a class, with row names and column names specified
  barplot_d <- as.matrix(t(d[1:2]))
-colnames(barplot_d)<- d$class
+colnames(barplot_d) <- d$class
+
 
 # From this dataset, create a clustered barchart
-barplot (barplot_d, beside=T, ylim=c(0,1))
+barplot(barplot_d, beside=T, ylim=c(0,1), xlab = "class", ylab = 'proportion of survivors')
 
 # 1.3. Fix this barplot so that the colours are nicer and there is a legend, title, and appropriate axes labels.
+
+barplot(barplot_d, beside=T, ylim=c(0,1), xlab = 'class', ylab = 'proportion of survivors',
+        main = "Titanic survival frequency for each sex and class", col = c('#a6ff00', '#96f8e3'))
+
 
 # 1.4. Looking at this barplot, what can you say about who was more likely to survive the Titanic?
 #      Which group was the least likely to survive?
@@ -214,6 +219,7 @@ data(Iris)
 # Please attempt to replicate the graph from the slides. It is a scatterplot of petal length against sepal length,
 # with species differentiated by color.
 # Add ablines plotting the linear relationship between petal length and sepal length for each group.
+
 
 
 
