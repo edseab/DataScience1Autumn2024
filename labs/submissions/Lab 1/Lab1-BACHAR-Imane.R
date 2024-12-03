@@ -160,7 +160,7 @@ my.vector == 'is'
 ### 2.1
 digits <- 0:10
 # Using the least amount of code possible, write a line of code that returns only the odd values of the digits object.
-digits[digits %% 2 != 0]
+digits[0:10 %% 2 != 0]
 # Another important logical operator is the %in% operator. It tells you if the elements on the left are found in the elements on the right. E.G.
 group1 <- c('Arthur', 'Fatima', 'Suleiman', 'Marco')
 group2 <- c('Marco','Maria', 'Victor','Fatima', 'Antonio')
@@ -245,12 +245,13 @@ roll_dice(5)
 # Using the function hist, create histograms of the results of double dice rolls when you roll them 10 times, 
 #then 50, then 100, then 1000, then 10000. Use breaks=1:12 as an argument within the hist function. 
 # What do you notice? Write it in comments below your code.
-?hist()
-n_rolls <- c(10, 50, 100, 1000, 10000)
-for( n in n_rolls){
-  sums <- roll_dice(n)
-  hist(sums, breaks=1:12)
-}
+
+hist(roll_dice(10), breaks=1:12)
+hist(roll_dice(50), breaks=1:12)
+hist(roll_dice(100), breaks=1:12)
+hist(roll_dice(1000), breaks=1:12)
+hist(roll_dice(10000), breaks=1:12)
+
 # Another way to generate randomness is to sample from a pdf, which is a continuous distribution. 
 # The simplest pdf is the uniform function. The uniform function is a flat line bounded between 2 numbers. 
 # Because it is flat, the probability of drawing a sample from any interval of given width between the two bounds 
@@ -262,11 +263,15 @@ runif(5,0,1)
 
 ### 4.3
 # Using runif, write a function that returns TRUE 22% of the time and FALSE 78% of the time
-random <- function(){
-  return(runif(1) < 0.22)
+random <- function(n){
+  return(runif(n) <= 0.22)
 }
-result <- random()
+result <- random(1)
 result
+
+results <- random(1000)
+mean(results)
+
 ### 4.4
 # Based on today's lecture about pdfs, what is the probability density for a uniform pdf bounded between 
 # 0 and 1 associated with all values of x between 0 and 1? Explain why.

@@ -3,7 +3,7 @@
 ########                   ########
 ########   Data Science 1  ########
 ########       Lab 1       ######## 
-########   15 Oct. 2024    ########
+########   10 Oct. 2023    ########
 ########                   ########
 ###################################
 ###################################
@@ -15,9 +15,10 @@
 
 # On the right is the console. You can input code directly into the console line by line - you do not need to run an entire file. Try running a simple calculation in the console, like 5+9. Type it in and press enter. 
 5+9
-# You can also write code in this, the code editor, and run it from here. Try highlighting the following line and pressing 'Ctrl + Enter' ('Cmd + Enter' on MacOS):
+# You can also write code in this, the code editor, and run it from here. Try highlighting the following line and clicking 'Run':
 12 * 4 - 6
 
+# You can also press 'Ctrl (Cmd) + Enter' to run the code you have highlighted.
 
 # Text beginning with a # sign is read as 'comment' and will not be evaluated by the console.
 ## Numbers (like 1.1, 2.3, etc) signify that I would like you to write a line a code in the code file and run it in the console
@@ -37,9 +38,9 @@ rep(4,3)
 # If you can't remember in which order you have to input the arguments of a function, or if you just want to learn what a function does, you can type in ? followed by the function name in the console:
 ?rep
 
-# Each argument has a name. By explicitly referring to these names when calling the function, we can avoid  any problems with order. For example: # nolint
-rep(x=3, times=4) # nolint: infix_spaces_linter.
-rep(times=4, x=3) # nolint: infix_spaces_linter.
+# Each argument has a name. By explicitly referring to these names when calling the function, we can avoid  any problems with order. For example:
+rep(x=3, times=4)
+rep(times=4, x=3)
 
 # produce the same result, because we inputed the arguments by name using the 'argname = x' construction. When we don't use this construction, the function defaults each input to an argument according to a predefined order.
 
@@ -133,11 +134,11 @@ my.vector[c(1,4)]
 
 ### 1.1
 # You can assign values to specific elements. Try writing a line of code below that changes the 4th element of my.vector to the word 'test'
-my.vector [4] <- 'test'
+
 
 ### 1.2
 # You can even assign values to elements of a vector that don't exist yet, thus creating them. Try assigning the word 'example' to the (as yet non-existent) 5th element of my.vector.
-my.vector [5] <- 'example'
+
 
 # Instead of indices, you can select elements of a vector using a logical vector of the same length, e.g.
 
@@ -158,16 +159,21 @@ my.vector == 'is'
 ### 2.1
 digits <- 0:10
 # Using the least amount of code possible, write a line of code that returns only the odd values of the digits object.
-digits[digits %% 2 != 0]
+
+digits[digits %% 2 == 1]
+
 # Another important logical operator is the %in% operator. It tells you if the elements on the left are found in the elements on the right. E.G.
 group1 <- c('Arthur', 'Fatima', 'Suleiman', 'Marco')
 group2 <- c('Marco','Maria', 'Victor','Fatima', 'Antonio')
 group1 %in% group2
-group1[group1 %in% group2]
+
 ## 2.2 
 # intersect is a function which returns the elements that all of its arguments have in common. For example:
 intersect(group1,group2)
 # Write a line of code that replicates this output using only group1, group2, square brackets, and logical operators.
+group1[group1 %in% group2]
+# OR
+group2[group2 %in% group1]
 
 
 ####################################
@@ -194,14 +200,14 @@ f2(8,9)
 f2(14,7)
 
 ### 3.1 What is the purpose of function f2? Write in comments below.
-# f2 will return 
+
+## f2 returns TRUE if x is a multiple of y (x is divisible by y, the remainder of x/y is 0), FALSE otherwise
+
 ### 3.2
 # Based on the definition of the mean from today's lecture, write a function that calculates the mean of all of the elements of a vector. assign it to the object my.mean. You will find the functions 'sum' and 'length' useful here.
-my.mean <- function(experimental){
-  expSum = sum(experimental)
-  expMean = expSum / length(experimental)
-  return(expMean)
-}
+
+my.mean <- function(x) sum(x)/length(x)
+
 # compare your function to the native function in R. Does it produce the same results?
 
 my.mean(ex.vector)
@@ -226,19 +232,31 @@ sample(1:10, 20, replace = TRUE)
 ### 4.1
 # Write a function that simulates the roll of 2 6-sided dice, where the argument x is the number of times you roll the 2 dice, 
 # and the output is a vector of length x, where each element corresponds to the sum of the two sides of the dice.
-# HINT: one way to do this is to start by writing a function for a single 6-sided die, then create a new function 
-# that repeats the first function twice and adds up the result.
-rolldice <- function(x){
-dice1 <- sample(1:6, x, replace = TRUE)
-  dice2 <- sample(1:6, x ,replace =TRUE)
-  sumofdice <- dice1=
+# HINT: one way to do this is to start by writing a function for a single 6-sided die, then create a new function that repeats the first function twice and adds up the result.
+
+cast.die <- function(x){
+  sample(1:6,x,replace=TRUE)
 }
+
+cast.2.dice <- function(x){
+return(cast.die(x)+cast.die(x))
+}
+
+cast.2.dice(20)
 
 ### 4.2
 # Using the function hist, create histograms of the results of double dice rolls when you roll them 10 times, 
 #then 50, then 100, then 1000, then 10000. Use breaks=1:12 as an argument within the hist function. 
 # What do you notice? Write it in comments below your code.
 
+set.seed(105)
+hist(cast.2.dice(10),breaks=1:12)
+hist(cast.2.dice(50),breaks=1:12)
+hist(cast.2.dice(100),breaks=1:12)
+hist(cast.2.dice(1000),breaks=1:12)
+hist(cast.2.dice(10000),breaks=1:12)
+
+## The more dice we roll, the more the histogram looks like the probability mass function derived in class
 
 # Another way to generate randomness is to sample from a pdf, which is a continuous distribution. 
 # The simplest pdf is the uniform function. The uniform function is a flat line bounded between 2 numbers. 
@@ -252,18 +270,35 @@ runif(5,0,1)
 ### 4.3
 # Using runif, write a function that returns TRUE 22% of the time and FALSE 78% of the time
 
+generate.bool.22 <- function(x){
+  s <- runif(x,0,1)
+  return(s<0.22)
+}
+
+o1 <- generate.bool.22(10)
+hist(as.numeric(o1))
+o2 <- generate.bool.22(1000000)
+hist(as.numeric(o2))
 ### 4.4
 # Based on today's lecture about pdfs, what is the probability density for a uniform pdf bounded between 
 # 0 and 1 associated with all values of x between 0 and 1? Explain why.
 
+# Answer: 1, because the total area under the curve must equal one, and the non-zero values of x must be in the interval [0,1], which is of length 1, so the y-axis value must also be 1 for these values of x in order for the rectangle to have area 1.
+
 ### 4.5
 # Similarly, what is the probability density for a uniform pdf bounded between 5 and 6 associated with all values of x between 5 and 6?
+
+# Answer: 1. Same reason as before since the length of the interval is 1.
 
 ### 4.6
 # What is the probability density for a uniform pdf bounded between 0 and 0.5 associated with all values of x between 0 and 0.5?
 
+# Answer: 2. Since the width of the interval is now 0.5, the height of the rectangle must be 2 for the area (height*width) to be equal to 1. 
+
 ### 4.7
 # What is the probability density for a uniform pdf bounded between 0 and 2 associated with all values of x between 0 and 2?
+
+# Answer: 0.5. Since the width of the interval is now 2, the height of the rectangle must be 0.5 for the area to be equal to 1.
 
 ### 4.8
 # run the following code:
@@ -273,3 +308,11 @@ dunif(0.2,0,0.5)
 dunif(1.3,0,2)
 
 # Based on the results of this code and your answers above, what can you conclude about the purpose of the dunif function?
+
+# dunif returns the probability density of the uniform distribution, where the first argument is the value of x to evaluate the pdf, and the second and third arguments are the lower and upper bounds of the uniform distribution.
+
+x.values <- seq(-5,+5,0.01)
+y.values <- dunif(x.values,0,1)
+
+plot(x.values, y.values,type='l', ylim=c(0,5))
+

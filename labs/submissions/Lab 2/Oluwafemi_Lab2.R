@@ -39,7 +39,6 @@ box_office <- c(new_hope, empire_strikes, return_jedi)
 star_wars_matrix <- matrix(box_office, byrow = T, nrow = 3)
 star_wars_matrix
 
-
 # we can give matrices rownames and column names
 
 rownames(star_wars_matrix) <- c("A new hope", "The empire strikes back", "Return of the Jedi")
@@ -50,13 +49,14 @@ colnames(star_wars_matrix) <- c("US revenue", "International revenue")
 # Use one of the above functions to calculate the total revenue for each movie (the sum of the US and international revenue)
 # and save it in an object called total_revenue
 total_revenue <- rowSums(star_wars_matrix)
+total_revenue
 # We can now add this vector as a new column using the function cbind (column bind)
 
 star_wars_matrix <- cbind(star_wars_matrix, total_revenue)
 
 ### 1.2
 # Rename the 3rd element of the column names of star_wars_matrix to "Total revenue"
-colnames(star_wars_matrix)[3] <- 'Total revenue'
+colnames(star_wars_matrix)[3] <- "Total revenue"
 # Now lets create vectors for the box office returns of the prequel trilogy
 
 phantom_menace <- c(474.5,552.5)
@@ -66,16 +66,14 @@ revenge_of_sith <- c(380.3, 468.5)
 ### 1.3
 # Turn these 3 vectors into a matrix, add a column for total revenue, 
 # and append them to star_wars_matrix using the function rbind (row bind)
-box_office_returns <- c(phantom_menace, attack_of_clones, revenge_of_sith)
-star_wars_matrix_2 <- matrix(box_office_returns, byrow = T, nrow = 3)
+trilogy <- c(phantom_menace,attack_of_clones, revenge_of_sith)
+trilogy_matrix <- matrix(trilogy, byrow = T, nrow = 3)
+rownames(trilogy_matrix) <- c("The Phantom Menace", "Attack of Clones", "Revenge of Sith")
+colnames(trilogy_matrix) <- c("US revenue", "International revenue")
+total_revenue_tr <- rowSums(trilogy_matrix)
+trilogy_matrix <- cbind(trilogy_matrix,total_revenue_tr)
+star_wars_matrix <- rbind(star_wars_matrix,trilogy_matrix)
 
-rownames(star_wars_matrix_2) <- c("The Phantom Menace", "attack_of_clones", "revenge_of_sith")
-colnames(star_wars_matrix_2) <- c("US revenue", "International revenue")
-total_revenue <- rowSums(star_wars_matrix_2)
-star_wars_matrix_2 <- cbind(star_wars_matrix_2, total_revenue)
-colnames(star_wars_matrix_2)[3] <- 'Total revenue'
-star_wars_matrix_2
-star_wars_matrix <- rbind(star_wars_matrix, star_wars_matrix_2)
 # Matrices are understood by R to be both one-dimensional, because they are vectors folded onto themselves
 # into columns, but also 2 dimensional, because they have rows and columns. 
 # So you can index them like this:
@@ -90,8 +88,9 @@ star_wars_matrix[3,1]
 ### 1.4 
 # Write a line of code to extract the international revenue of the Phantom Menace (the 4th movie) using numbers to index the matrix
 star_wars_matrix[4,2]
+
 # Compare this to the following:
-star_wars_matrix["The Phantom Menace", "International revenue"]
+star_wars_matrix["The Phantom Menace", "Total revenue"]
 
 # This works because our matrix has row and column names.
 
@@ -220,27 +219,21 @@ sample(1:100,1)
 # where n, k and p are arguments of the function
 # To do this you will need to use either the factorial() function
 # or the choose() function
-binomial_dist <- function(k, n, p){
-  probability <- p^k*(1-p)^(n-k)*choose(n, k)
-  return(probability)
+binomial_function <- function(n,k,p){
+  combination = choose(n,k)
+  return((p^k)*((1-p)^(n-k))*combination)
 }
-
 # use your function to calculate the probability that when the aliens send 10 probes to Earth (probability of water = 0.7),
 # exactly 8 of those probes will send a signal of water
-result <- binomial_dist(8, 10, 0.7)
-print(result)
+binomial_function(10,8,0.7)
 # compare this to dbinom(8,10,0.7)
-dbinom(8, 10, 0.7)
-
+dbinom(8,10,0.7)
 ### PROBABILITY FUNCTIONS IN R 
 # dbinom, dnorm, dunif, dbeta, .... all of these functions calculate f(x) for any given x
 # for each of their relative distributions
 # in other words, they calculate probability MASS or probability DENSITY for each of
 # these distributions
-?dbinom
-?dnorm
-?dunif
-?dbeta
+
 # rbinom, rnorm, runif, rbeta, .... all SAMPLE from these respective distributions,
 # i.e. they generate random draws of x in proportion to their respective f(x) in these distributions.
 
@@ -256,19 +249,13 @@ dbinom(8, 10, 0.7)
 # Using rbinom(), simulate 100,000 universes where the aliens sent out 20 probes to Earth
 # and calculate in what percentage of these universes the number of probes signalling Water is 11 or fewer
 # What do you conclude to the astronomer?
-water_sigs <- rbinom(100000, 20, 0.7)
-probs_fewer_11 <- sum(water_sigs <= 11)
-pourcentage <- (probs_fewer_11/100000)*100
-pourcentage
-
-#The calculated pourcentage is 11.376% which is higher than 5%, so the null hypothesis cannot be rejected.
 
 # pbinom, pnorm, punif, pbeta, .... all calculate the area under the curve of a given distribution,
 # in the LOWER tail (if lower.tail=TRUE, by default), or the UPPER tail (if you set it to false)
 
 # So for example, if a person of 195 cm was drawn from a gaussian distribution of heights,
 # with mean 175cm and standard deviation 10cm, What percentile would they be in?
-pnorm(195, 175, 10,lower.tail=FALSE)
+pnorm(195, 175, 10, lower.tail=FALSE)
 # They would be in the upper 2.3 percentile
 
 # qbinom, qnorm, qunif, qbeta, .... all calculate value of x for which
@@ -285,22 +272,22 @@ qnorm(0.1,175, 10, lower.tail=FALSE)
 
 ### 4.3
 # Let's run a Welch's t-test comparing the heights of men and women in class
-men_heights <- c(175, 180, 178, 172, 169, 183, 177, 176, 181, 179) ## Populate with the heights of men from class
-women_heights <- c(160, 165, 162, 170, 155, 168, 172, 158, 164, 166) ## Populate with the heights of women from class
+men_heights <- c(173, 177, 175, 180, 184, 188, 200) ## Populate with the heights of men from class
+women_heights <- c(160, 165, 168, 170, 173) ## Populate with the heights of women from class
 
 # Write a Welch's t-test function for any two samples x1 and x2
 my_t <- function(x1,x2){
   # first, extract the means, variances and Ns of the two samples and save thel to
-  n1 <- length(x1)
-  m1 <- mean(x1)
-  s1 <- var(x1)
-  n2 <- length(x2)
-  m2 <- mean(x2)
-  s2 <- var(x2)
+  n1 <- length(men_heights)
+  m1 <- mean(men_heights)
+  s1 <- sd(men_heights)
+  n2 <- length(women_heights)
+  m2 <- mean(women_heights)
+  s2 <- sd(women_heights)
  
   # next, calculate the average standard deviation using the formula shown in the class on slide 44:
  
-  s <- sqrt(s1/n1 + s2/n2)
+  s <- sqrt(((s1^2)/n1) + ((s2^2)/n2))
 
   # next, calculate the t-statistic, again as shown on slide 44
  
@@ -310,7 +297,7 @@ my_t <- function(x1,x2){
   # next, calculate the degrees of freedom (again see slide 44)
   # make sure you use parentheses correctly here
  
-  df <- (s1/n1 + s2/n2)^2 / ((s1/n1)^2 / (n1 - 1) + (s2/n2)^2 / (n2 - 1))
+  df <- ((((s1^2)/n1) + ((s2^2)/n2))^2) / (((((s1^2)/n1)^2)/(n1-1)) + (((s2^2)/n2)^2)/(n2-1))
  
   # next, calculate the probability that the t-statistic would be greater than the absolute value of the t-statistic that you calculated if the TRUE difference between the groups was 0
   # to do this, you can use function pt
@@ -324,4 +311,3 @@ t.test(men_heights,women_heights)
 my_t(men_heights,women_heights)
 
 # One last question to ponder before next class: Why did we multiply the p-value by 2 in the above function?
-#we need to take into account the two tails
