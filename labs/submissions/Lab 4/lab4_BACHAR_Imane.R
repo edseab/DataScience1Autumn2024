@@ -181,7 +181,7 @@ dev.off()
 
 # 1.1 Transform the 'wt' variable in the mtcars dataset, which represents the weight of cars in 1000s of lbs,
 # to a variable representing that weight in kg. 1 lb = 0.453592kg
-mtcars$wt_kg <- mtcars$wt * 0.453592
+mtcars$wt_kg <- mtcars$wt*1000*0.453592
 # 1.2 Plot a histogram and a density plot of the weights of cars in kg in the mtcars dataset.
 hist(mtcars$wt_kg, breaks= 6, main= "Histogram of Weights of cars in Kg", xlab = "Weights in Kg")
 plot(density(mtcars$wt_kg), main= "Density plot of Weights of cars in Kg", xlab = "Weights in Kg")
@@ -210,7 +210,7 @@ barplot(
   barplot_d, 
   beside = TRUE, ylim = c(0, 1),
   col = c("green", "yellow"),  
-  main = "Proportions of Survivals by Class and Gender",  # Add a title
+  main = "Proportions of Survivals by Class and Gender",  
   xlab = "Class", 
   ylab = "Proportion", 
 )
