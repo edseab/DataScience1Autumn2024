@@ -35,9 +35,10 @@ head(mtcars)
 # Using indexing (square brackets) and the & operator, write a line of code
 # that selects only the rows of mtcars with at least 6 cylinders (mtcars$cyl >= 6) and horsepower of at least 110 (mtcars$hp >= 110). Remember to include all the columns.
 
+mtcars[mtcars$cyl >= 6 & mtcars$hp >= 110, ]
 ### 1.2
 # Now select only those rows with either high efficiency (miles per gallon (mpg) of at least 25) or low weight (wt <= 2.5)
-
+mtcars[mtcars$mpg >= 25 | mtcars$wt <= 2.5, ]
 #############################
 ####    If statements    ####
 #############################
@@ -56,8 +57,17 @@ if (x - 4 == 1) {
 # The function should return a character vector of length n, consisting of 'Water' and 'Land', sampled with probability w. (so probability of sampling 'Water' is w)
 # If the p argument is not numeric, or if it is not between 0 and 1, the function should return the following message:
 # "Please input a probability between 0 and 1"
+?sample
+probe <- function(n, w) {
+     if (is.numeric(w) & w >= 0 & w <= 1) {
+          a <- sample(c("water", "land"), n, replace = T, prob = c(w, 1 - w))
+          b <- c(a)
+          return(b)
+     }
+     return("Please input a probability between 0 and 1")
+}
 
-
+probe(10, 0.2)
 # After the if statement we can put an else statement:
 if (x - 4 > 1) {
      new_object <- c("this", "statement", "is", "also", "true")
@@ -106,7 +116,10 @@ useless_function(7)
 data(iris)
 
 # Write a for loop that iterates over the column names of the iris dataset and print each together with the number of characters in the column name in parenthesis. Example output: Sepal.Length (12). To get the number of characters use the function nchar().
-
+?nchar
+for (i in colnames(iris)) {
+     print(paste(i, nchar(i), sep = ": "))
+}
 # Next, WHILE loops continue to loop until the boolean statment in the defining parentheses, e.g.
 x <- 0
 while (x < 100) {
@@ -116,6 +129,13 @@ while (x < 100) {
 
 ### 4.2 How many numbers do you need in the sequence 1*2*3*4*5*... before the product exceeds 10 million?
 # Use a while loop to get the answer
+i <- 1
+n <- 1
+while (i < 10000000) {
+     print(n)
+     i <- i * n
+     n <- n + 1
+}
 
 ###################################
 ####    Linear models intro    ####
