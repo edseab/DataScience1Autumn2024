@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 2c3d3f5db2bc6d7af0d5ecba8c71956a5ebe92c2
 ###################################
 ###################################
 ########                   ########
@@ -267,7 +262,3 @@ plot(iris$Petal.Length ~ iris$Sepal.Length,
 abline(lm(Petal.Length ~ Sepal.Length, data = iris, subset = Species == "setosa"), col = "red")
 abline(lm(Petal.Length ~ Sepal.Length, data = iris, subset = Species == "versicolor"), col = "blue")
 abline(lm(Petal.Length ~ Sepal.Length, data = iris, subset = Species == "virginica"), col = "green")
-<<<<<<< HEAD
->>>>>>> 00d8872 (created lab 4)
-=======
->>>>>>> 2c3d3f5db2bc6d7af0d5ecba8c71956a5ebe92c2
