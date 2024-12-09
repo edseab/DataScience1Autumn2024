@@ -145,29 +145,51 @@ while (i < 10000000) {
 # Inside the lm and other model functions we use formulas
 # Formulas have the dependent variable on the left and the independent (predictor) variables on the right with a ~ in between
 # Lets run a bivariate regression of car weight (in 1000 pounds/500 kg) on miles per gallon (1mpg = 1km/L)
+?mtcars
 model <- lm(mtcars$mpg ~ mtcars$wt)
 summary(model)
+
 ### 5.1
 # What does the Estimate for the (Intercept) number represent?
+'''The estimate for the Intercept (37.2851) represents the predicted value of mpg when mtcars$wt is zero. i.e b0'''
+
 ### 5.2
 # What does the Estimate for the mtcars$wt number represent?
+
+'''The estimate for mtcars$wt (-5.3445) represents the predicted decrease in mtcars$mpg for every additional unit of mtcars$wt .'''
 
 ### 5.3
 # Is the relationship between these two variables positive or negative? Why do you think that might be?
 
+'''The relationship is negative, as indicated by the negative coefficient (-5.3445). This is because heavier cars typically require more fuel for the same distance as compared to lighter cars. Hence the decrease in mtcars$mpg with additional weight .'''
+
 ### 5.4 What is the predicted average efficiency in miles per gallon of a 4000 pound (2000kg) car?
+
+
+
+a<- (-5.3445 *4) + 37.2851 
+
+'''The predicted average efficiency is 15.91 mpg.'''
+
+
 
 # Let's transform the independent variable:
 mtcars$wt_centred <- mtcars$wt - mean(mtcars$wt)
 
 ### 5.5
 # compare the mean and variance of the new variable with the untransformed variable. What do you notice?
-
+ mean(mtcars$wt_centred)
+ var(mtcars$wt_centred)
+ mean(mtcars$wt)
+ var(mtcars$wt)
+'''The mean of changes to approximately 0 because mtcars$wt_centred was centered on 0 by subtracting the mean of wt. The spread remains the same, hence variance doesnot change'''
 
 ### 5.6
 # Run the following code:
 y <- mtcars$mpg
 x <- cbind(1, mtcars$wt)
+
+solve(t(x) %*% x) %*% (t(x) %*% y)
 
 # A couple of functions for you to know:
 # t() returns the transpose of any matrix
@@ -177,3 +199,5 @@ x <- cbind(1, mtcars$wt)
 # (x'x)^(-1) * (x'y)
 # where ' means the transpose
 # Run the code you have written. What do you find?
+
+'''It gives the two OLM coefficients: b0 (intercept) and b1 (slope). These correspond with the output from lm(mpg ~ wt).'''
