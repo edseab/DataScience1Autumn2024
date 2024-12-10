@@ -119,6 +119,10 @@ useless_function(7)
 data(iris)
 
 # Write a for loop that iterates over the column names of the iris dataset and print each together with the number of characters in the column name in parenthesis. Example output: Sepal.Length (12). To get the number of characters use the function nchar().
+for (clmn in colnames(iris)){
+  message <- paste0(clmn,' (',nchar(clmn),')')
+  print(message)
+}
 
 # Next, WHILE loops continue to loop until the boolean statment in the defining parentheses, e.g.
 x <- 0
@@ -130,6 +134,18 @@ while(x<100){
 ### 4.2 How many numbers do you need in the sequence 1*2*3*4*5*... before the product exceeds 10 million?
 # Use a while loop to get the answer
 
+product <- 1
+n <- 1
+while(product < 10000000){
+  product <- product * n
+  n <- n+1
+}
+print(n-1)
+
+factorial(10) > 10000000 #returns false
+factorial(11) > 10000000 #returns true
+
+
 ###################################
 ####    Linear models intro    ####
 ###################################
@@ -137,30 +153,45 @@ while(x<100){
 # We can run an OLS linear model using lm()
 # Inside the lm and other model functions we use formulas
 # Formulas have the dependent variable on the left and the independent (predictor) variables on the right with a ~ in between
-# Lets run a bivariate regression of car weight (in 1000 pounds/500 kg) on miles per gallon (1mpg = 1km/L)
+# Lets run a bivariate regression of car weight (in 1000 pounds/500 kg) on miles per gallon (1mpg = .425 km/L)
 model <- lm(mtcars$mpg ~ mtcars$wt)
 summary(model)
 ### 5.1
 # What does the Estimate for the (Intercept) number represent?
+##### That would be the value of the fuel efficiency of a "weightless" car.
 ### 5.2
 # What does the Estimate for the mtcars$wt number represent?
+##### For every 1k lbs increase in the weight of a car, we should expect a decrease of 5.3445 miles per gallon in the efficiency
 
 ### 5.3 
 # Is the relationship between these two variables positive or negative? Why do you think that might be?
+###### Since the increase of one of the variables yields the decrease of the other, The relationship is negative.
 
 ### 5.4 What is the predicted average efficiency in miles per gallon of a 4000 pound (2000kg) car?
+###### 37.2851-5.3445*4 = 15.9071 mpg (*.425 for km/l)
 
 # Let's transform the independent variable:
 mtcars$wt_centred <- mtcars$wt - mean(mtcars$wt)
 
 ### 5.5
 # compare the mean and variance of the new variable with the untransformed variable. What do you notice?
+###### 
 
+mean(mtcars$wt)
+mean(mtcars$wt_centred)
+
+var(mtcars$wt)
+var(mtcars$wt_centred)
+#same variance (distance from mean), but the mean of the wt_centered is 0 because we substracted the mean to get the column.
 
 ### 5.6
 # Run the following code:
 y <- mtcars$mpg
 x <- cbind(1,mtcars$wt)
+
+y
+x
+#####
 
 # A couple of functions for you to know:
 # t() returns the transpose of any matrix
@@ -168,8 +199,22 @@ x <- cbind(1,mtcars$wt)
 # %*% is matrix multiplication
 # with that in mind try to code the following expression in R:
 # (x'x)^(-1) * (x'y)
+
+#########
+
+#x' <- t(x)
+#x'x <- t(x) %*% x
+#(x'x)^(-1) <- solve(t(x) %*% x)
+
+#(x'y) <- t(x) %*% y
+
+# (x'x)^(-1) * (x'y) <- solve(t(x) %*% x) %*% (t(x) %*% y)
+
+solve(t(x) %*% x) %*% (t(x) %*% y)
+
 # where ' means the transpose
 # Run the code you have written. What do you find?
 
+#I found the same estimate and intercept from earlier. (-5.3444 for the weight estimate and 37.28 for the intercept)
 
 
