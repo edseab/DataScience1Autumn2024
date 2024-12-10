@@ -34,10 +34,12 @@ data(mtcars)
 head(mtcars)
 # Using indexing (square brackets) and the & operator, write a line of code
 # that selects only the rows of mtcars with at least 6 cylinders (mtcars$cyl >= 6) and horsepower of at least 110 (mtcars$hp >= 110). Remember to include all the columns.
-
+x <- mtcars[(mtcars$cyl >= 6) & (mtcars$hp >= 110), ]
+x
 ### 1.2
 # Now select only those rows with either high efficiency (miles per gallon (mpg) of at least 25) or low weight (wt <= 2.5)
-
+x <- mtcars[(mtcars$mpg >= 25) | (mtcars$wt <= 2.5), ]
+x
 #############################
 ####    If statements    ####
 #############################
@@ -57,7 +59,10 @@ if(x-4==1){
 # If the p argument is not numeric, or if it is not between 0 and 1, the function should return the following message:
 # "Please input a probability between 0 and 1"
 
-
+Probe <- function(n,w){
+  if(!is.numeric(w) | w <0 | w>1) print("Please input a probability between 0 and 1")
+  else sample(c("Land", "water"), size=n, replace = T)
+}
 # After the if statement we can put an else statement:
 if(x-4>1){
   new_object <- c('this','statement','is','also','true')
@@ -107,6 +112,10 @@ data(iris)
 
 # Write a for loop that iterates over the column names of the iris dataset and print each together with the number of characters in the column name in parenthesis. Example output: Sepal.Length (12). To get the number of characters use the function nchar().
 
+for (i in colnames(iris)) {
+  print(paste(i, " (", nchar(i), ")", sep = ""))
+}
+
 # Next, WHILE loops continue to loop until the boolean statment in the defining parentheses, e.g.
 x <- 0
 while(x<100){
@@ -116,7 +125,13 @@ while(x<100){
 
 ### 4.2 How many numbers do you need in the sequence 1*2*3*4*5*... before the product exceeds 10 million?
 # Use a while loop to get the answer
-
+x<-1
+n<-1
+while (x<10000000) {
+  n<- n+1
+  x <- x*n
+}
+print(n)
 ###################################
 ####    Linear models intro    ####
 ###################################
@@ -129,21 +144,28 @@ model <- lm(mtcars$mpg ~ mtcars$wt)
 summary(model)
 ### 5.1
 # What does the Estimate for the (Intercept) number represent?
+#37.2851 could be interpreted as the fuel efficiency of a car with a weight of 0.
 ### 5.2
-# What does the Estimate for the mtcars$wt number represent?
-
+# What does the Estimate for the mtcars$wt number represent?g
+# For every unit increase of weight, we estimate the fuel efficiency will decrease by -5.3445 units.
 ### 5.3 
 # Is the relationship between these two variables positive or negative? Why do you think that might be?
-
+# the relationship is negative, as indicated by the negative slope, As the car weight increases, the fuel efficiency decreases, we can say that heavier cars cosume more energy. 
 ### 5.4 What is the predicted average efficiency in miles per gallon of a 4000 pound (2000kg) car?
+predict(lm(mpg~wt, data=mtcars), newdata = data.frame(wt = 4))
 
 # Let's transform the independent variable:
 mtcars$wt_centred <- mtcars$wt - mean(mtcars$wt)
 
 ### 5.5
 # compare the mean and variance of the new variable with the untransformed variable. What do you notice?
+mean(mtcars$wt)
+var(mtcars$wt)
 
+mean(mtcars$wt_centred)
+var(mtcars$wt_centred)
 
+#the mean of the transformed variable is approxiamately equal to 0 (3.469447e-17), and the variance remains the same, centereing does not change the variablity.
 ### 5.6
 # Run the following code:
 y <- mtcars$mpg
@@ -157,3 +179,9 @@ x <- cbind(1,mtcars$wt)
 # (x'x)^(-1) * (x'y)
 # where ' means the transpose
 # Run the code you have written. What do you find?
+solve((t(x)%*%x)) %*% (t(x)%*%y)
+
+# it calculates the intercept and the slope, coefficients of the linear regression
+
+
+
