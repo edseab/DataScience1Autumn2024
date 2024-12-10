@@ -244,7 +244,7 @@ abline(lm(Sepal.Length~Petal.Length,data=virginica), col="orange")
 
 points(versicolor$Sepal.Length~versicolor$Petal.Length, pch=20, col = "yellow")
 abline(lm(Sepal.Length~Petal.Length,data=versicolor), col="yellow")
-
+ 
 points(setosa$Sepal.Length~setosa$Petal.Length, pch=20, col = "green")
 abline(lm(Sepal.Length~Petal.Length,data=setosa), col="green")
 
