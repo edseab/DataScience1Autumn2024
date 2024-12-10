@@ -144,16 +144,18 @@ while(x<100){
 # Inside the lm and other model functions we use formulas
 # Formulas have the dependent variable on the left and the independent (predictor) variables on the right with a ~ in between
 # Lets run a bivariate regression of car weight (in 1000 pounds/500 kg) on miles per gallon (1mpg = 1km/L)
+#425 km/l
 model <- lm(mtcars$mpg ~ mtcars$wt)
 summary(model)
 ### 5.1
 # What does the Estimate for the (Intercept) number represent?
 ### 5.2
 # What does the Estimate for the mtcars$wt number represent?
+#for every 1000 pounds increase in the car's weight we can expect a decrease of 5.3445 in their efficeincy i.e for every 1000 pounds weight increase, a car would run 5.3445 miles less per gallon
 
 ### 5.3 
 # Is the relationship between these two variables positive or negative? Why do you think that might be?
-
+#Negative 
 ### 5.4 What is the predicted average efficiency in miles per gallon of a 4000 pound (2000kg) car?
 
 # Let's transform the independent variable:
