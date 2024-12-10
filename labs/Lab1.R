@@ -37,7 +37,7 @@
 # FUNCTIONS are commands that take in inputs and produce outputs. They mostly take in the inputs in brackets, like this:
 sqrt(25)
 exp(3) 
-
+?exp
 # Often, functions take multiple inputs with different functions. Note how:
 rep(3,4)
 # produces a different output from
@@ -48,6 +48,7 @@ rep(4,3)
 # Each argument has a name. By explicitly referring to these names when calling the function, we can avoid  any problems with order. For example:
 rep(x=3, times=4)
 rep(times=4, x=3)
+
 
 # produce the same result, because we inputed the arguments by name using the 'argname = x' construction. When we don't use this construction, the function defaults each input to an argument according to a predefined order.
 
@@ -235,11 +236,13 @@ sample(1:10, 20, replace = TRUE)
 # HINT: one way to do this is to start by writing a function for a single 6-sided die, then create a new function 
 # that repeats the first function twice and adds up the result.
 
+
+
 ### 4.2
 # Using the function hist, create histograms of the results of double dice rolls when you roll them 10 times, 
 #then 50, then 100, then 1000, then 10000. Use breaks=1:12 as an argument within the hist function. 
 # What do you notice? Write it in comments below your code.
-
+?hist
 
 # Another way to generate randomness is to sample from a pdf, which is a continuous distribution. 
 # The simplest pdf is the uniform function. The uniform function is a flat line bounded between 2 numbers. 
