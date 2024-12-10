@@ -47,7 +47,7 @@ example("plot")
 # it can either take an x variable and a y variable as its 2 first arguments, or it can take a formula
 plot(mtcars$wt,mtcars$mpg)
 plot(mtcars$mpg~mtcars$wt)
-
+?pch
 # You can change the shape of the points in a scatterplot with the 'pch' argument
 plot(mtcars$wt,mtcars$mpg, pch=20)
 # There are 25 preset values for the scatterplot points. To see them all run:
@@ -184,7 +184,8 @@ dev.off()
 wt_kg <- mtcars$wt * 0.453592
 
 # 1.2 Plot a histogram and a density plot of the weights of cars in kg in the mtcars dataset.
-
+plot (hist(mtcars$wt))
+plot (density(mtcars$wt))
 # Histogram
 hist(wt_kg, main = "Histogram of Weights of Cars in kilograms", xlab = "weights in kg", breaks = 5)
 
@@ -212,6 +213,8 @@ colnames(barplot_d)<- d$class
 barplot(barplot_d, beside=T, ylim=c(0,1))
 
 # 1.3. Fix this barplot so that the colours are nicer and there is a legend, title, and appropriate axes labels.
+plot (iris$Sepal.Length, iris$Petal.Length, ylab = 'Sepal length (cm)', xlab= 'Petal length in irises (sm)')
+
 barplot(barplot_d, beside=T, ylim=c(0,1), col = c('red','yellow'),
           xlab = 'gender class', ylab = 'proportion of survivors',
         main = 'Survival Rate of Male and Female of the Titanic')
