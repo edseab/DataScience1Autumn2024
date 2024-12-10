@@ -139,7 +139,7 @@ print(n)
 # We can run an OLS linear model using lm()
 # Inside the lm and other model functions we use formulas
 # Formulas have the dependent variable on the left and the independent (predictor) variables on the right with a ~ in between
-# Lets run a bivariate regression of car weight (in 1000 pounds/500 kg) on miles per gallon (1mpg = 1km/L)
+# Lets run a bivariate regression of car weight (in 1000 pounds/500 kg) on miles per gallon (1mpg = 0.42km/L)
 model <- lm(mtcars$mpg ~ mtcars$wt)
 summary(model)
 ### 5.1
