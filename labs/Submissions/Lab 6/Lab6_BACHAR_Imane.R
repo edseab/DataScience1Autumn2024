@@ -146,7 +146,7 @@ summary(model)
 # What does the Estimate for the (Intercept) number represent?
 #37.2851 could be interpreted as the fuel efficiency of a car with a weight of 0.
 ### 5.2
-# What does the Estimate for the mtcars$wt number represent?
+# What does the Estimate for the mtcars$wt number represent?g
 # For every unit increase of weight, we estimate the fuel efficiency will decrease by -5.3445 units.
 ### 5.3 
 # Is the relationship between these two variables positive or negative? Why do you think that might be?
