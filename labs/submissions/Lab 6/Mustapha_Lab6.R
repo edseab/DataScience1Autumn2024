@@ -188,4 +188,4 @@ x <- cbind(1,mtcars$wt)
 # Run the code you have written. What do you find?
 solve(t(x) %*% x) %*% (t(x) %*% y)
 
-# I observed that the output is same as the Expections gotten from the lm() function
+# I observed that the output is same as the Coefficients gotten from the lm() function
