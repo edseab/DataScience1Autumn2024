@@ -91,7 +91,6 @@ strsplit('Hello to you too. /My name is Ed.', split='/')
 # You'll notice that strsplit returns a list. This allows us to vectorise the function:
 strsplit(rownames(mtcars),split=' ')
 
-
 #####################
 ####    Loops    ####
 #####################
