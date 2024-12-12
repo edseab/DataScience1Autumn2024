@@ -8,7 +8,6 @@
 ###################################
 ###################################
 
-
 # Welcome to lab number 6. Today we'll be learning a few more 
 # R/general programming concepts before moving onto lecture examples
 
