@@ -254,4 +254,7 @@ abline(lm(Sepal.Length ~ Petal.Length, data = versicolor_data), col = 'yellow')
 
 virginica_data <- iris[iris$Species=='virginica',]
 abline(lm(Sepal.Length ~ Petal.Length, data = virginica_data), col = 'orange')
+<<<<<<< HEAD
 >>>>>>> ee5810c (Completed all exercises)
+=======
+>>>>>>> 4a769bac63453aff4b39354df1953d747484d2fa

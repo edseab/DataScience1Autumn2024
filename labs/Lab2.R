@@ -1,11 +1,17 @@
 team###################################
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 team###################################
 =======
 >>>>>>> 1cdeb47 (Exercise completed)
 =======
 >>>>>>> 4d768c0 (Exercise completed)
+=======
+team###################################
+=======
+>>>>>>> f6c49e1cb4f8183cc1d09bb15c828a83c9f66c95
+>>>>>>> 4a769bac63453aff4b39354df1953d747484d2fa
 ###################################
 ########                   ########
 ########   Data Science 2  ########
@@ -58,6 +64,9 @@ colnames(star_wars_matrix) <- c("US revenue", "International revenue")
 total_revenue <- rowSums(star_wars_matrix)
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 4a769bac63453aff4b39354df1953d747484d2fa
 total_revenue <- rowSums(star_wars_matrix)
 # We can now add this vector as a new column using the function cbind (column bind)
 
@@ -67,16 +76,21 @@ total_revenue
 # We can now add this vector as a new column using the function cbind (column bind)
 
 total_revenue
+<<<<<<< HEAD
 >>>>>>> 1cdeb47 (Exercise completed)
 =======
 # We can now add this vector as a new column using the function cbind (column bind)
 
 total_revenue
 >>>>>>> 4d768c0 (Exercise completed)
+=======
+>>>>>>> f6c49e1cb4f8183cc1d09bb15c828a83c9f66c95
+>>>>>>> 4a769bac63453aff4b39354df1953d747484d2fa
 
 ### 1.2
 # Rename the 3rd element of the column names of star_wars_matrix to "Total revenue"
 colnames(star_wars_matrix)[3]<- "Total revenue"
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 star_wars_matrix
@@ -99,6 +113,16 @@ star_wars_matrix
 =======
 star_wars_matrix
 >>>>>>> 343e482 (modified lab2)
+=======
+star_wars_matrix
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+star_wars_matrix
+=======
+>>>>>>> 4d768c0 (Exercise completed)
+>>>>>>> f6c49e1cb4f8183cc1d09bb15c828a83c9f66c95
+>>>>>>> 4a769bac63453aff4b39354df1953d747484d2fa
 # Now lets create vectors for the box office returns of the prequel trilogy
 
 phantom_menace <- c(474.5,552.5)
@@ -108,11 +132,17 @@ revenge_of_sith <- c(380.3, 468.5)
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
 >>>>>>> 1cdeb47 (Exercise completed)
 =======
 >>>>>>> 4d768c0 (Exercise completed)
+=======
+
+=======
+>>>>>>> f6c49e1cb4f8183cc1d09bb15c828a83c9f66c95
+>>>>>>> 4a769bac63453aff4b39354df1953d747484d2fa
 ### 1.3
 # Turn these 3 vectors into a matrix, add a column for total revenue, 
 # and append them to star_wars_matrix using the function rbind (row bind)
@@ -125,6 +155,9 @@ trilogy_matrix <- cbind(trilogy_matrix,total_revenue_tr)
 star_wars_matrix <- rbind(star_wars_matrix, trilogy_matrix)
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 4a769bac63453aff4b39354df1953d747484d2fa
 trilogy <- c(phantom_menace, attack_of_clones, revenge_of_sith)
 trilogy_matrix <- matrix(trilogy, byrow = T, nrow = 3)
 rownames(trilogy_matrix) <- c("The Phanton Menace", "Attack of Clones", "Revenge of Sith")
@@ -133,9 +166,13 @@ total_revenue_tr <- rowSums(trilogy_matrix)
 trilogy_matrix <- cbind(trilogy_matrix,total_revenue_tr)
 star_wars_matrix <- rbind(star_wars_matrix, trilogy_matrix)
 =======
+<<<<<<< HEAD
 >>>>>>> 1cdeb47 (Exercise completed)
 =======
 >>>>>>> 4d768c0 (Exercise completed)
+=======
+>>>>>>> f6c49e1cb4f8183cc1d09bb15c828a83c9f66c95
+>>>>>>> 4a769bac63453aff4b39354df1953d747484d2fa
 
 # Matrices are understood by R to be both one-dimensional, because they are vectors folded onto themselves
 # into columns, but also 2 dimensional, because they have rows and columns. 
@@ -153,11 +190,17 @@ star_wars_matrix[3,1]
 star_wars_matrix[4,2]
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 star_wars_matrix[4,2]
 =======
 >>>>>>> 1cdeb47 (Exercise completed)
 =======
 >>>>>>> 4d768c0 (Exercise completed)
+=======
+star_wars_matrix[4,2]
+=======
+>>>>>>> f6c49e1cb4f8183cc1d09bb15c828a83c9f66c95
+>>>>>>> 4a769bac63453aff4b39354df1953d747484d2fa
 # Compare this to the following:
 star_wars_matrix["The Phantom Menace", "Total revenue"]
 
@@ -207,11 +250,17 @@ my_list$boolean
 mylist$matrix <- star_wars_matrix
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 mylist$matrix <- star_wars_matrix
 =======
 >>>>>>> 1cdeb47 (Exercise completed)
 =======
 >>>>>>> 4d768c0 (Exercise completed)
+=======
+mylist$matrix <- star_wars_matrix
+=======
+>>>>>>> f6c49e1cb4f8183cc1d09bb15c828a83c9f66c95
+>>>>>>> 4a769bac63453aff4b39354df1953d747484d2fa
 # Finally, you can turn any list into a vector with unlist().
 unlist(my_list)
 
@@ -301,14 +350,21 @@ binomial_function <- function(n,k,p){
 }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 4a769bac63453aff4b39354df1953d747484d2fa
 binomial_function <- function(n,k,p){
   combination = choose(n,k)
   return((p^k)*((1-p)^(n-k))*combination)
 }
 =======
+<<<<<<< HEAD
 >>>>>>> 1cdeb47 (Exercise completed)
 =======
 >>>>>>> 4d768c0 (Exercise completed)
+=======
+>>>>>>> f6c49e1cb4f8183cc1d09bb15c828a83c9f66c95
+>>>>>>> 4a769bac63453aff4b39354df1953d747484d2fa
 
 # use your function to calculate the probability that when the aliens send 10 probes to Earth (probability of water = 0.7),
 # exactly 8 of those probes will send a signal of water
@@ -363,12 +419,19 @@ men_heights <- c(177, 178, 186, 170, 175, 188, 181) ## Populate with the heights
 women_heights <- c(160, 167, 169, 163, 170, 168, 171) ## Populate with the heights of women from class
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 men_heights <- c(177, 178, 186, 170, 175, 188, 181) ## Populate with the heights of men from class
 women_heights <- c(160, 167, 169, 163, 170, 168, 171) ## Populate with the heights of women from class
 =======
 >>>>>>> 1cdeb47 (Exercise completed)
 =======
 >>>>>>> 4d768c0 (Exercise completed)
+=======
+men_heights <- c(177, 178, 186, 170, 175, 188, 181) ## Populate with the heights of men from class
+women_heights <- c(160, 167, 169, 163, 170, 168, 171) ## Populate with the heights of women from class
+=======
+>>>>>>> f6c49e1cb4f8183cc1d09bb15c828a83c9f66c95
+>>>>>>> 4a769bac63453aff4b39354df1953d747484d2fa
 
 # Write a Welch's t-test function for any two samples x1 and x2
 my_t <- function(x1,x2){
@@ -381,6 +444,9 @@ my_t <- function(x1,x2){
   s2 <- sd(women_heights)
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 4a769bac63453aff4b39354df1953d747484d2fa
   n1 <- length(men_heights)
   m1 <-mean(men_heights)
   s1 <- sd(men_heights)
@@ -388,31 +454,47 @@ my_t <- function(x1,x2){
   m2 <- mean(women_heights)
   s2 <- sd(women_heights)
 =======
+<<<<<<< HEAD
 >>>>>>> 1cdeb47 (Exercise completed)
 =======
 >>>>>>> 4d768c0 (Exercise completed)
+=======
+>>>>>>> f6c49e1cb4f8183cc1d09bb15c828a83c9f66c95
+>>>>>>> 4a769bac63453aff4b39354df1953d747484d2fa
  
   # next, calculate the average standard deviation using the formula shown in the class on slide 44:
  
   s <- sqrt(((s1^2)/n1) + ((s2^2)/n2))
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   s <- sqrt(((s1^2)/n1) + ((s2^2)/n2))
 =======
 >>>>>>> 1cdeb47 (Exercise completed)
 =======
 >>>>>>> 4d768c0 (Exercise completed)
+=======
+  s <- sqrt(((s1^2)/n1) + ((s2^2)/n2))
+=======
+>>>>>>> f6c49e1cb4f8183cc1d09bb15c828a83c9f66c95
+>>>>>>> 4a769bac63453aff4b39354df1953d747484d2fa
 
   # next, calculate the t-statistic, again as shown on slide 44
  
   t <- (m1 - m2) / s
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   t <- (m1 - m2) / s
 =======
 >>>>>>> 1cdeb47 (Exercise completed)
 =======
 >>>>>>> 4d768c0 (Exercise completed)
+=======
+  t <- (m1 - m2) / s
+=======
+>>>>>>> f6c49e1cb4f8183cc1d09bb15c828a83c9f66c95
+>>>>>>> 4a769bac63453aff4b39354df1953d747484d2fa
  
  
   # next, calculate the degrees of freedom (again see slide 44)
@@ -421,11 +503,17 @@ my_t <- function(x1,x2){
   df <- ((((s1^2)/n1) + ((s2^2)/n2))^2) / (((((s1^2)/n1)^2)/(n1-1)) + (((s2^2)/n2)^2)/(n2-1))
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   df <- ((((s1^2)/n1) + ((s2^2)/n2))^2) / (((((s1^2)/n1)^2)/(n1-1)) + (((s2^2)/n2)^2)/(n2-1))
 =======
 >>>>>>> 1cdeb47 (Exercise completed)
 =======
 >>>>>>> 4d768c0 (Exercise completed)
+=======
+  df <- ((((s1^2)/n1) + ((s2^2)/n2))^2) / (((((s1^2)/n1)^2)/(n1-1)) + (((s2^2)/n2)^2)/(n2-1))
+=======
+>>>>>>> f6c49e1cb4f8183cc1d09bb15c828a83c9f66c95
+>>>>>>> 4a769bac63453aff4b39354df1953d747484d2fa
  
   # next, calculate the probability that the t-statistic would be greater than the absolute value of the t-statistic that you calculated if the TRUE difference between the groups was 0
   # to do this, you can use function pt
