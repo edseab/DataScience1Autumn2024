@@ -35,6 +35,10 @@ rnorm(200) |> hist(breaks=seq(-4,4,0.5))
 set.seed(123)
 round(sqrt(log(runif(10,1,10))),2)
 
+set.seed(123)
+runif(10,1,10) |> log() |> sqrt() |>  round(2)
+set.seed(123)
+
 
 # Pipes were initially created in a package called magrittr, part of the 'tidyverse' group of packages
 
@@ -100,7 +104,8 @@ mtcars %>%
 ### 2.1
 # using select() and filter(), create a new database of cars that are over 4000 lbs in weight, retaining only the wt and mpg columns. Save this database to an object called 'df'.
 
-
+df <- mtcars  %>% filter(wt >= 4) %>% select(wt, mpg)
+df
 # After you have selected the rows and columns you are interested in, you can 
 # change the order of the rows using arrange
 
@@ -109,15 +114,15 @@ df %>% arrange(wt)
 df %>% arrange(desc(wt))
 
 
-# To change variables, we can use mutate()
+# To change variables, we can use mutate() instead of doing mtcars$newvariablename <- value
 df <- df %>% mutate(wt_kg=wt*453.592,
                     km_per_l = mpg*1.60934/3.78541)
-
+df
 # And we can use ifelse() within mutate()
 mtcars <- mtcars %>%
             mutate(wt_class = ifelse(wt>=4, 'Oversized','Standard'))
 
-# We can even do a sultiple ifelse statment using case_when()
+# We can even do a multiple ifelse statment using case_when()
 mtcars <- mtcars %>%
             mutate(
               efficiency = case_when(
@@ -125,7 +130,7 @@ mtcars <- mtcars %>%
                 mpg>15 & mpg<=20 ~ 'medium',
                 mpg>20 ~ 'high'
                 ))
-
+mtcars
 # Next, summarise (or summarize) is a useful function which collapses a dataframe into a single row and can calculate summary statistics, eg:
 
 mtcars %>% 
@@ -162,9 +167,10 @@ mtcars %>%
   summarise(
     wt_kg=mean(wt),
     n=length(hp)
-  )
+  ) %>%  ungroup() -> mtcars_new
+  mtcars_new
 
-# After grouping a tibble, remember to ungroup it later using ungroup(), or you may have issues down the line.
+# After grouping a table, remember to ungroup it later using ungroup(), or you may have issues down the line.
 
 # 3.1
 data(iris)
