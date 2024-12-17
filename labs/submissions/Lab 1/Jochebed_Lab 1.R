@@ -134,6 +134,7 @@ my.vector[c(1,4)]
 
 ### 1.1
 # You can assign values to specific elements. Try writing a line of code below that changes the 4th element of my.vector to the word 'test'
+
 my.vector[5] <- 'test'
 
 ### 1.2
@@ -320,6 +321,7 @@ dunif(1.3,0,2)
 
 # Based on the results of this code and your answers above, what can you conclude about the purpose of the dunif function?
 
+<<<<<<< HEAD
 <<<<<<< HEAD:labs/submissions/Lab 1/Jochebed_Lab 1.R
 <<<<<<< HEAD
 # the function dunif(x,y,z) is a function that takes 3 parameters x,y,z
@@ -328,3 +330,10 @@ dunif(1.3,0,2)
 # we can observe that when the value of x is outside the range, we get the probability density of 0
 # which corresponds to the probability density of a uniform distribution
 
+
+=======
+>>>>>>> be70fb9 (Creat lab 1 file)
+=======
+>>>>>>> 0eb3579 (Creat lab 1 file):labs/Submissions/Jochebed_Lab 1.R
+=======
+>>>>>>> 5a85a2f19f564b5f6f1699a061f9ea1182474f09
