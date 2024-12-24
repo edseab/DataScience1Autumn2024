@@ -35,7 +35,6 @@ rnorm(200) |> hist(breaks=seq(-4,4,0.5))
 set.seed(123)
 round(sqrt(log(runif(10,1,10))),2)
 
-
 # Pipes were initially created in a package called magrittr, part of the 'tidyverse' group of packages
 
 
