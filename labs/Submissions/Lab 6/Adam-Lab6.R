@@ -147,6 +147,7 @@ print(n)
 # Lets run a bivariate regression of car weight (in 1000 pounds/500 kg) on miles per gallon (1mpg = 1km/L)
 model <- lm(mtcars$mpg ~ mtcars$wt)
 summary(model)
+
 ### 5.1
 # What does the Estimate for the (Intercept) number represent?
 #It Represents the predicted value of the dependent variable (mpg) when the independent variable (wt) is equal to 0

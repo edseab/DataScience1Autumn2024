@@ -182,7 +182,11 @@ dev.off()
 # 1.1 Transform the 'wt' variable in the mtcars dataset, which represents the weight of cars in 1000s of lbs,
 # to a variable representing that weight in kg. 1 lb = 0.453592kg
 
+mtcars$wt_kg <- mtcars$wt*0.453592*1000
+
 # 1.2 Plot a histogram and a density plot of the weights of cars in kg in the mtcars dataset.
+hist(mtcars$wt_kg, xlab = "Weight (kg)", main = "Histogram of car weights from mtcars database", col = "lightblue")
+plot(density(mtcars$wt_kg), main = "Density plot of car weights from mtcars database", xlab = "Weight (kg)", col = "darkblue")
 
 # Let's extract data about survival rates among the Titanic
 data(Titanic)
@@ -205,16 +209,47 @@ barplot (barplot_d, beside=T, ylim=c(0,1))
 
 # 1.3. Fix this barplot so that the colours are nicer and there is a legend, title, and appropriate axes labels.
 
+
+barplot (barplot_d, beside=T, ylim=c(0,1), xlab = "Ticket type",
+                                           ylab = "Proportion survived",
+                                           main = "Survivorship rates of adults on the Titanic",
+                                           col = c('#2eaaa6','#f7e44e'))
+legend("topright", fill=c('#2eaaa6','#f7e44e'), legend = c("Men", "Women"), bty='n', cex=0.8)
+
 # 1.4. Looking at this barplot, what can you say about who was more likely to survive the Titanic?
 #      Which group was the least likely to survive?
 
+# Women survived more than men, first class more than other ticket holders. 2d class men were least likely to survive.
+
 # 1.5 Load the Iris dataset 
-data(Iris)
+data(iris)
 
 # Please attempt to replicate the graph from the slides. It is a scatterplot of petal length against sepal length,
 # with species differentiated by color.
 # Add ablines plotting the linear relationship between petal length and sepal length for each group.
+vers <- iris[iris$Species=="versicolor",]
+set <- iris[iris$Species=="setosa",]
+vir <- iris[iris$Species=="virginica",]
 
-
-
+plot(vers$Sepal.Length ~ vers$Petal.Length,
+            xlim = c(1,7),
+            ylim = c(4.5, 8),
+            main = "Relationship between petal and sepal length in irises",
+            xlab = "Petal length( cm)",
+            ylab = "Sepal length (cm)",
+            col = "#d3b012",
+            pch = 20
+            )
+abline(lm(Sepal.Length ~ Petal.Length, data=vers), col = "#d3b012")
+points(set$Sepal.Length ~ set$Petal.Length,
+            col = "#54cf2e",
+            pch = 20)
+abline(lm(Sepal.Length ~ Petal.Length, data=set), col = "#54cf2e")
+points(vir$Sepal.Length ~ vir$Petal.Length,
+  col = "#c1560f",
+  pch = 20)
+abline(lm(Sepal.Length ~ Petal.Length, data=vir), col = "#c1560f")
+legend(1, 8, fill = c("#d3b012","#54cf2e","#c1560f"),
+             legend = c("Versicolor", "Setosa", "Virginica"),
+            title = "Species", cex = 0.5)
 
