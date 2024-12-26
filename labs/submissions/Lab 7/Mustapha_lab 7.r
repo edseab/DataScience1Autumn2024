@@ -35,6 +35,7 @@ rnorm(200) |> hist(breaks=seq(-4,4,0.5))
 set.seed(123)
 round(sqrt(log(runif(10,1,10))),2)
 
+runif(10,1,10) |> log() |> sqrt() |> round(2)
 # Pipes were initially created in a package called magrittr, part of the 'tidyverse' group of packages
 
 
@@ -99,6 +100,9 @@ mtcars %>%
 ### 2.1
 # using select() and filter(), create a new database of cars that are over 4000 lbs in weight, retaining only the wt and mpg columns. Save this database to an object called 'df'.
 
+df <- mtcars %>%
+          filter(wt > 4) %>%
+          select(c('wt','mpg'))
 
 # After you have selected the rows and columns you are interested in, you can 
 # change the order of the rows using arrange
@@ -116,7 +120,7 @@ df <- df %>% mutate(wt_kg=wt*453.592,
 mtcars <- mtcars %>%
             mutate(wt_class = ifelse(wt>=4, 'Oversized','Standard'))
 
-# We can even do a sultiple ifelse statment using case_when()
+# We can even do a multiple ifelse statment using case_when()
 mtcars <- mtcars %>%
             mutate(
               efficiency = case_when(
@@ -151,7 +155,7 @@ mtcars %>%
     n=length(hp)
   ) %>%
   arrange(
-    c('high','medium','low')
+    desc(c('high','medium','low'))
   )
 
 # You can group by multiple variables
@@ -172,7 +176,21 @@ data(iris)
 # For each of the different species of iris, present the mean and standard deviation for the sepal length, sepal width, and petal area, as well as the number of samples (n)
 # Order this database in decreasing order of average petal length.
 
+Summary_data <- iris %>%
+  mutate(Petal.Area = Petal.Width * Petal.Length) %>%
+  group_by(Species) %>%
+  summarise(
+    mean_sepal_Len = mean(Sepal.Length),
+    SD_sepal_Len = sd(Sepal.Length),
+    mean_sepal_width = mean(Sepal.Width),
+    SD_sepal_width = sd(Sepal.Width),
+    mean_petal_area = mean(Petal.Area),
+    SD_petal_area = sd(Petal.Area),
+    N_samples = n()
+  ) %>%
+  arrange(desc(mean_petal_area))
 
+print(Summary_data)
 
 #######################################################
 ####    Code your own lm and predict functions!    ####
@@ -189,37 +207,47 @@ data(iris)
 my.lm <- function(y,x){
 
 # Start by saving the sample size (n). You will need it later for calculating degrees of freedom for the test statistics and sampling distributions.
-  n <- 
+  n <- length(y)  # Number of observations in the dataset
 # Next create the X matrix using as.matrix. Don't forget to add the column of 1s!
-  x <- 
+  x <- as.matrix(cbind(1,x))    # Add a column of 1s for the intercept term
 # use the y input and your newly constructed x matrix to calculate the parameter estimates (or coefficients). 
 # Hint: see lab 6, and remember that t() gives the transpose of a matrix and solve() gives its inverse
-  b <- 
+  # Formula: beta = (X'X)^(-1) X'y
+  b <- solve(t(x) %*% x) %*% t(x) %*% y   # Coefficients
 # Next, using these calculated coefficients, calculate all of the predicted values, y_hat, for each of the values of x (each of the rows of the X matrix). 
 # Hint: look at the formula for the linear model - and remember we are multiplying matrices!
-  y_hat <- 
+  # Formula: y_hat = X * beta
+  y_hat <- x %*% b   # Predicted values
 # Next, calculate the residuals (actual values of y minus the predicted values y_hat)
-  e <- 
+  # Formula: residuals = y - y_hat
+  e <- y - y_hat   # Difference between actual and predicted values
 # Next calculate the estimate of the residual standard error, s. Careful about the denominator here: check how many degrees of freedom you have!
-  s <- 
+  # Formula: s = sqrt((1/(n-p)) * sum(residuals^2))
+  # Where p is the number of coefficients (including intercept)
+  p <- ncol(x)       
+  s <- sqrt(sum(e^2) / (n - p))   # Residual standard error
 # Using s, calculate the variance covariance matrix of the coefficients.
-  vcov_coef <- 
+  # Formula: Var(beta) = s^2 * (X'X)^(-1)
+  vcov_coef <- (s^2) * solve(t(x) %*% x)  
 # from this covariance matrix, extract the standard errors of the coefficients
-  se_coef <- 
+  se_coef <- sqrt(diag(vcov_coef))     # Square root of diagonal elements
 # use these standard errors to calculate the t-values for each of the coefficients
-  t_vals <- 
+  # Formula: t = estimate / standard error
+  t_vals <- b / se_coef    # t-statistics
 # And use these t-values to calculate p-values.
-  p <- 
+  p_vals <- (1 - pt(abs(t_vals), df = n - p)) * 2       # Two-tailed test
 # Next, calculate the R2 value
-
-  RSS <- 
-  TSS <- 
-  r2 <- 
+  # Formula: R^2 = 1 - (RSS / TSS)
+  RSS <- sum(e^2)  # Residual sum of squares
+  TSS <- sum((y - mean(y))^2)  # Total sum of squares
+  r2 <- 1 - (RSS / TSS)
 # Bonus points if you want to look up how to calculate adjusted R2
-  adj_r2 <-
+  # Formula: adj_R^2 = 1 - ((1 - R^2) * (n - 1) / (n - p))
+  adj_r2 <- 1 - ((1 - r2) * (n - 1) / (n - p))
 # Next, calculate the F-statistic and the p-value for the model.
-  f_stat <- 
-  model_p <- 
+  # Formula: F = (R^2 / (p - 1)) / ((1 - R^2) / (n - p))
+  f_stat <- ((TSS - RSS) / (p - 1)) / (RSS / (n - p))
+  model_p <- 1 - pf(f_stat, df1 = p - 1, df2 = n - p)  # F-distribution
   
 # Finally, put all of these elements into a list, and have your function return that list. 
   return(list(n=n,
@@ -229,16 +257,19 @@ my.lm <- function(y,x){
               vcov = vcov_coef,
               se = se_coef,
               t_values = t_vals,
-              p_values = p,
+              p_values = p_vals,
               r2 = r2,
               adj_r2 = adj_r2,
               F_statistic = f_stat,
-              model_p_value = model_p))
+              model_p_value = model_p,
+              df = n - p))
 }
 
 # compare your function against the built-in R function in R.
 
-my.lm(y=mtcars$mpg,x=mtcars[,c('wt','cyl')])
+model_output <- my.lm(y=mtcars$mpg,x=mtcars[,c('wt','cyl')])
+
+summary(lm(mpg ~ wt + cyl, data = mtcars))
 
 ### 4.2 predict()
 
@@ -247,34 +278,35 @@ my.lm(y=mtcars$mpg,x=mtcars[,c('wt','cyl')])
 my.predict <- function(model_output, new_data, ci_level = 0.97) {
   
   # Extract coefficients from your my.lm output
-  coef = 
+  coef = model_output$coefficients
 
   # Add a column of 1s to the new_data
-  new_data = 
+  new_data = cbind(1, as.matrix(new_data))
 
   # generate the predicted values of y from the new_data object based on the coefficients from the model
   # Again, remember the formula for the linear model!
-  y_hat = 
+  y_hat = new_data %*% coef
 
 #for each of these predicted values, calculate a confidence interval
   # first calculate the critical levels of the t-distribution using the ci_level and the degrees of freedom
-  area_in_tails = 
-  t_lower = 
-  t_upper = 
+  df = model_output$df
+  area_in_tails = (1 - ci_level) / 2 
+  t_lower = qt(area_in_tails, df = df) 
+  t_upper = 1 - qt(area_in_tails, df = df) 
 
   # next, for each row of the new_data object, calculate the standard error of the predicted value
   # Check the slides, and remember that 𝒗𝒄𝒐𝒗(𝒃) was saved as "vcov" in the model output
- sy = sqrt(apply(new_data,1,function(.)t(.)%*%model_output$vcov%*%.))
+ sy = sqrt(apply(new_data,1,function(.) t(.)%*%model_output$vcov%*%.))  # SE for each prediction
   
   # next, calculate the upper and lower confidence boundaries for each prediction using the critical t-levels and the previously calculated standard error
- ci_lower = 
- ci_upper = 
+ ci_lower = y_hat - (t_lower * sy)   # Lower bound of the CI
+ ci_upper = y_hat + (t_upper * sy)   # Upper bound of the CI
 
   # finally, put these confidence intervals into a dataframe
- ci = data.frame(ci_lower,ci_upper)
- colnames(ci) = paste0(ci_level,'%_',c('lower','upper'))
- df = cbind(y_hat = y_hat,ci)
- return(df)
+ ci = data.frame(ci_lower,ci_upper)   # Combine lower and upper bounds
+ colnames(ci) = paste0(ci_level * 100,'%_',c('lower','upper'))   # Label columns with CI percentage
+ data_f = cbind(y_hat = y_hat,ci)
+ return(data_f)
 }
 
 
@@ -282,10 +314,31 @@ my.predict <- function(model_output, new_data, ci_level = 0.97) {
 # Use your functions to run the following model
 
 # mtcars$mpg ~ mtcars$wt + mtcars$cyl
+# Creating newdata for predictions
+wt_range <- seq(min(mtcars$wt), max(mtcars$wt), length.out = 32)  # Weight range
+newdata <- data.frame(wt = wt_range, cyl = 4)  # Set cyl to 4
 
+# Predict with confidence intervals
+predictions <- my.predict(model_output, new_data = newdata, ci_level = 0.97)
 
 # Then plot predicted marginal effect of weight for a car with 4 cylynders. Add 96% confidence intervals to the graph.
 # Hint: For this, in your "newdata" object, add a column of 4s for the number of cylinders
+# Plot predictions with confidence intervals
+plot(
+  wt_range, predictions$y_hat, type = "l", lwd = 2, col = "blue",
+  ylim = range(predictions), xlab = "Weight (wt)", ylab = "Miles Per Gallon (mpg)",
+  main = "Predicted MPG vs Weight for Cars with 4 Cylinders"
+)
+
+# Add confidence intervals
+lines(wt_range, predictions$`97%_lower`, lty = 2, col = "red")  # Lower CI
+lines(wt_range, predictions$`97%_upper`, lty = 2, col = "red")  # Upper CI
+
+# Add legend
+legend(
+  "topright", legend = c("Predicted MPG", "97% CI"), 
+  col = c("blue", "red"), lty = c(1, 2), lwd = 2
+)
 
 # Compare this graph to the graph from the lecture.
 
