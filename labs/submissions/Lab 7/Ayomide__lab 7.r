@@ -187,17 +187,20 @@ data(iris)
 iris_mut <- iris %>%
   mutate(Petal.Area = Petal.Length * Petal.Width)
 # For each of the different species of iris, present the mean and standard deviation for the sepal length, sepal width, and petal area, as well as the number of samples (n)
-iris_mut %>%
+iris_summ <- iris_mut %>%
   group_by(Species) %>%
   summarise(
-    mean_sepal_length = mean(Sepal.Length), # Mean of Sepal.Length
-    sd_sepal_length = sd(Sepal.Length), # Standard deviation of Sepal.Length
-    mean_sepal_width = mean(Sepal.Width), # Mean of Sepal.Width
-    sd_sepal_width = sd(Sepal.Width), # Standard deviation of Sepal.Width
-    mean_petal_area = mean(Petal.Area), # Mean of Petal.Area
-    sd_petal_area = sd(Petal.Area), # Standard deviation of Petal.Area
+    mean_sepal_length = mean(Sepal.Length),
+    sd_sepal_length = sd(Sepal.Length),
+    mean_sepal_width = mean(Sepal.Width),
+    sd_sepal_width = sd(Sepal.Width),
+    mean_petal_area = mean(Petal.Area),
+    sd_petal_area = sd(Petal.Area),
+    mean_petal_Length = mean(Petal.Length),
+    sd_petal_Length = sd(Petal.Length),
     n = n() # Count of samples
-  )
+  ) %>%
+  arrange(desc(mean_petal_Length))
 # Order this database in decreasing order of average petal length.
 
 
