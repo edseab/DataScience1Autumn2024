@@ -35,7 +35,10 @@ rnorm(200) |> hist(breaks = seq(-4, 4, 0.5))
 set.seed(123)
 round(sqrt(log(runif(10, 1, 10))), 2)
 set.seed(123)
-sqrt(log(runif(10, 1, 10))) |> round(2)
+runif(10, 1, 10) |>
+  log() |>
+  sqrt() |>
+  round(2)
 
 
 # Pipes were initially created in a package called magrittr, part of the 'tidyverse' group of packages
@@ -101,7 +104,9 @@ mtcars %>%
 
 ### 2.1
 # using select() and filter(), create a new database of cars that are over 4000 lbs in weight, retaining only the wt and mpg columns. Save this database to an object called 'df'.
-
+df <- mtcars %>%
+  filter(wt > 4) %>%
+  select(c(wt, mpg))
 
 # After you have selected the rows and columns you are interested in, you can
 # change the order of the rows using arrange
@@ -170,12 +175,29 @@ mtcars %>%
   )
 
 # After grouping a tibble, remember to ungroup it later using ungroup(), or you may have issues down the line.
+ungroup(mtcars)
 
 # 3.1
 data(iris)
+
+?iris
+
 # using the dplyr functions do the following:
 # create a new column called Petal.Area which is the product of the petal width and petal length columns.
+iris_mut <- iris %>%
+  mutate(Petal.Area = Petal.Length * Petal.Width)
 # For each of the different species of iris, present the mean and standard deviation for the sepal length, sepal width, and petal area, as well as the number of samples (n)
+iris_mut %>%
+  group_by(Species) %>%
+  summarise(
+    mean_sepal_length = mean(Sepal.Length), # Mean of Sepal.Length
+    sd_sepal_length = sd(Sepal.Length), # Standard deviation of Sepal.Length
+    mean_sepal_width = mean(Sepal.Width), # Mean of Sepal.Width
+    sd_sepal_width = sd(Sepal.Width), # Standard deviation of Sepal.Width
+    mean_petal_area = mean(Petal.Area), # Mean of Petal.Area
+    sd_petal_area = sd(Petal.Area), # Standard deviation of Petal.Area
+    n = n() # Count of samples
+  )
 # Order this database in decreasing order of average petal length.
 
 
