@@ -146,7 +146,8 @@ while (i < 10000000) {
 # Formulas have the dependent variable on the left and the independent (predictor) variables on the right with a ~ in between
 # Lets run a bivariate regression of car weight (in 1000 pounds/500 kg) on miles per gallon (1mpg = 1km/L)
 ?mtcars
-model <- lm(mtcars$mpg ~ mtcars$wt)
+model <- lm(mtcars$mpg ~ mtcars$wt) #couldn't use this with the predict function
+# model <- lm(mpg ~ wt, data = mtcars)
 summary(model)
 
 ### 5.1
@@ -168,6 +169,8 @@ summary(model)
 
 
 a<- (-5.3445 *4) + 37.2851 
+b<-data.frame(wt=c(4))
+predict(model,newdata=b)
 
 '''The predicted average efficiency is 15.91 mpg.'''
 
@@ -189,11 +192,7 @@ mtcars$wt_centred <- mtcars$wt - mean(mtcars$wt)
 y <- mtcars$mpg
 x <- cbind(1, mtcars$wt)
 
-<<<<<<< HEAD:labs/submissions/Lab 6/Ayomide__lab6.R
   solve(t(x) %*% x) %*% (t(x) %*% y)
-=======
-solve(t(x) %*% x) %*% (t(x) %*% y)
->>>>>>> 034c318 (lab 6 done):labs/Submissions/Lab 4/Ayomide_lab6.R
 
 # A couple of functions for you to know:
 # t() returns the transpose of any matrix
