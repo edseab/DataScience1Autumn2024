@@ -196,6 +196,7 @@ plot(density(mtcars$wtkg), col = "darkred", main = "Density of Car Weights")
 
 # Let's extract data about survival rates among the Titanic
 data(Titanic)
+class(Titanic)
 Titanic
 survived <- as.data.frame(Titanic[, , 2, 2])
 died <- as.data.frame(Titanic[, , 2, 1])
@@ -207,7 +208,7 @@ d <- data.frame(
      Female = (survived$Freq / (survived$Freq + died$Freq))[5:8],
      class = c("1st", "2nd", "3rd", "Crew")
 )
-
+d
 # Finally we format it for the barplot function.
 # Each row must be a sex and each column a class, with row names and column names specified
 barplot_d <- as.matrix(t(d[1:2]))
