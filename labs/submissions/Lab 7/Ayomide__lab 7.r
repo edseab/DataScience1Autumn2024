@@ -216,60 +216,61 @@ iris_summ <- iris_mut %>%
 # At each step of the way, you should save each new element you calculate into a new object.
 
 # Your lm function should take as input a y variable, and one or more x variables which should be inputted as a matrix or dataframe with one variable per column.
+data(mtcars)
 
-my.lm <- function(y, x) {
+my.lm <- function(x, y) {
   # Start by saving the sample size (n). You will need it later for calculating degrees of freedom for the test statistics and sampling distributions.
-  n <-
-    # Next create the X matrix using as.matrix. Don't forget to add the column of 1s!
-    x <-
-    # use the y input and your newly constructed x matrix to calculate the parameter estimates (or coefficients).
-    # Hint: see lab 6, and remember that t() gives the transpose of a matrix and solve() gives its inverse
-    b <-
-    # Next, using these calculated coefficients, calculate all of the predicted values, y_hat, for each of the values of x (each of the rows of the X matrix).
-    # Hint: look at the formula for the linear model - and remember we are multiplying matrices!
-    y_hat <-
-    # Next, calculate the residuals (actual values of y minus the predicted values y_hat)
-    e <-
-    # Next calculate the estimate of the residual standard error, s. Careful about the denominator here: check how many degrees of freedom you have!
-    s <-
-    # Using s, calculate the variance covariance matrix of the coefficients.
-    vcov_coef <-
-    # from this covariance matrix, extract the standard errors of the coefficients
-    se_coef <-
-    # use these standard errors to calculate the t-values for each of the coefficients
-    t_vals <-
-    # And use these t-values to calculate p-values.
-    p <-
-    # Next, calculate the R2 value
+  n <- length(y)
+  x <- as.matrix(cbind(1, x))
+  b <- solve(t(x) %*% x) %*% (t(x) %*% y)
+  # Next, using these calculated coefficients, calculate all of the predicted values, y_hat, for each of the values of x (each of the rows of the X matrix).
+  # Hint: look at the formula for the linear model - and remember we are multiplying matrices!
+  y_hat <- x %*% b
+  # Next, calculate the residuals (actual values of y minus the predicted values y_hat)
+  e <- y - y_hat
+  # Next calculate the estimate of the residual standard error, s. Careful about the denominator here: check how many degrees of freedom you have!
+  s <- sqrt(sum(e^2) / (n - ncol(x)))
+  # Using s, calculate the variance covariance matrix of the coefficients.
+  vcov_coef <- s^2 * solve(t(x) %*% x)
+  # from this covariance matrix, extract the standard errors of the coefficients
+  se_coef <- sqrt(diag(vcov_coef))
+  # use these standard errors to calculate the t-values for each of the coefficients
+  t_vals <- b / se_coef
+  # And use these t-values to calculate p-values.
+  p <- 2 * pt(-abs(t_vals), df = (n - ncol(x)))
+  # Next, calculate the R2 value
 
-    RSS <-
-    TSS <-
-    r2 <-
-    # Bonus points if you want to look up how to calculate adjusted R2
-    adj_r2 <-
-    # Next, calculate the F-statistic and the p-value for the model.
-    f_stat <-
-    model_p <-
-    # Finally, put all of these elements into a list, and have your function return that list.
-    return(list(
-      n = n,
-      coefficients = b,
-      residuals = e,
-      s = s,
-      vcov = vcov_coef,
-      se = se_coef,
-      t_values = t_vals,
-      p_values = p,
-      r2 = r2,
-      adj_r2 = adj_r2,
-      F_statistic = f_stat,
-      model_p_value = model_p
-    ))
+  RSS <- sum(e^2)
+  TSS <- sum((y - mean(y))^2)
+  r2 <- 1 - (RSS / TSS)
+  # Bonus points if you want to look up how to calculate adjusted R2
+  adj_r2 <- 1 - (((1 - r2) * (n - 1)) / (n - ncol(x)))
+  # Next, calculate the F-statistic and the p-value for the model.
+  f_stat <- ((TSS - RSS) / (ncol(x) - 1)) / (RSS / (n - ncol(x)))
+  model_p <- pf(f_stat, df1 = (ncol(x) - 1), df2 = (n - (ncol(x))), lower.tail = F)
+  # Finally, put all of these elements into a list, and have your function return that list.
+  return(list(
+    n = n,
+    coefficients = b,
+    residuals = e,
+    s = s,
+    vcov = vcov_coef,
+    se = se_coef,
+    t_values = t_vals,
+    p_values = p,
+    r2 = r2,
+    adj_r2 = adj_r2,
+    F_statistic = f_stat,
+    model_p_value = model_p
+  ))
 }
 
 # compare your function against the built-in R function in R.
 
-my.lm(y = mtcars$mpg, x = mtcars[, c("wt", "cyl")])
+my.lm(y = mtcars$mpg, x = cbind(mtcars$wt, mtcars$cyl))
+summary(lm(mpg ~ wt + cyl, data = mtcars))
+my.lm()
+
 
 ### 4.2 predict()
 
