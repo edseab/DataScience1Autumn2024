@@ -269,7 +269,7 @@ my.lm <- function(x, y) {
 
 my.lm(y = mtcars$mpg, x = cbind(mtcars$wt, mtcars$cyl))
 summary(lm(mpg ~ wt + cyl, data = mtcars))
-my.lm()
+
 
 
 ### 4.2 predict()
@@ -278,26 +278,32 @@ my.lm()
 
 my.predict <- function(model_output, new_data, ci_level = 0.97) {
   # Extract coefficients from your my.lm output
-  coef <-
-    # Add a column of 1s to the new_data
-    new_data <-
-    # generate the predicted values of y from the new_data object based on the coefficients from the model
-    # Again, remember the formula for the linear model!
-    y_hat <-
-    # for each of these predicted values, calculate a confidence interval
-    # first calculate the critical levels of the t-distribution using the ci_level and the degrees of freedom
-    area_in_tails <-
-    t_lower <-
-    t_upper <-
-    # next, for each row of the new_data object, calculate the standard error of the predicted value
-    # Check the slides, and remember that 𝒗𝒄𝒐𝒗(𝒃) was saved as "vcov" in the model output
-    sy <- sqrt(apply(new_data, 1, function(.) t(.) %*% model_output$vcov %*% .))
+  coef <- model_output$coefficients
+  # Add a column of 1s to the new_data
+  new_data <- as.matrix(cbind(1, new_data))
+  # generate the predicted values of y from the new_data object based on the coefficients from the model
+  # Again, remember the formula for the linear model!
+  y_hat <- new_data %*% coef
+
+
+  df <- model_output$n - length(coef)
+
+  # for each of these predicted values, calculate a confidence interval
+  # first calculate the critical levels of the t-distribution using the ci_level and the degrees of freedom
+
+
+  area_in_tails <- (1 - ci_level) / 2
+  t_lower <- qt(area_in_tails, df = df)
+  t_upper <- qt((1 - area_in_tails), df = df)
+  # next, for each row of the new_data object, calculate the standard error of the predicted value
+  # Check the slides, and remember that 𝒗𝒄𝒐𝒗(𝒃) was saved as "vcov" in the model output
+  sy <- sqrt(apply(new_data, 1, function(.) t(.) %*% model_output$vcov %*% .))
 
   # next, calculate the upper and lower confidence boundaries for each prediction using the critical t-levels and the previously calculated standard error
-  ci_lower <-
-    ci_upper <-
-    # finally, put these confidence intervals into a dataframe
-    ci <- data.frame(ci_lower, ci_upper)
+  ci_lower <- y_hat + t_lower * sy
+  ci_upper <- y_hat + t_upper * sy
+  # finally, put these confidence intervals into a dataframe
+  ci <- data.frame(ci_lower, ci_upper)
   colnames(ci) <- paste0(ci_level, "%_", c("lower", "upper"))
   df <- cbind(y_hat = y_hat, ci)
   return(df)
@@ -313,7 +319,37 @@ my.predict <- function(model_output, new_data, ci_level = 0.97) {
 # Then plot predicted marginal effect of weight for a car with 4 cylynders. Add 96% confidence intervals to the graph.
 # Hint: For this, in your "newdata" object, add a column of 4s for the number of cylinders
 
+# Fit the model
+modell <- my.lm(y = mtcars$mpg, x = cbind(mtcars$wt, mtcars$cyl))
+
+# Generate predictions for cars with 4 cylinders
+wt_range <- seq(min(mtcars$wt), max(mtcars$wt), length.out = 100) # Range of wt values
+new_data <- cbind(wt_range, rep(4, length(wt_range))) # wt varies, cyl fixed at 4
+plot_data <- my.predict(modell, new_data, ci_level = 0.96)
+
+# Plot the original data
+plot(mtcars$wt, mtcars$mpg,
+  main = "Marginal Effect of Weight on MPG (4 Cylinders)",
+  xlab = "Weight", ylab = "MPG", pch = 16, col = "gray"
+)
+
+# Add the predicted line for 4 cylinders
+lines(wt_range, plot_data$y_hat, col = "blue", lwd = 2)
+
+# Add 96% confidence interval as a shaded area
+polygon(c(wt_range, rev(wt_range)),
+  c(plot_data$`0.96%_lower`, rev(plot_data$`0.96%_upper`)),
+  col = rgb(1, 0, 0, alpha = 0.2), border = NA
+)
+
+# Add legend
+legend("topright",
+  legend = c("Predicted MPG (4 Cylinders)", "96% CI"),
+  col = c("blue", rgb(1, 0, 0, alpha = 0.2)), lty = c(1, NA), pch = c(NA, 15), bty = "n"
+)
+
 # Compare this graph to the graph from the lecture.
 
 
 # What do you conclude?
+# The higher the confidence level the more allowance for uncertainty i.e a wider range of confidence interval
