@@ -314,31 +314,30 @@ my.predict <- function(model_output, new_data, ci_level = 0.97) {
 # Use your functions to run the following model
 
 # mtcars$mpg ~ mtcars$wt + mtcars$cyl
+# Fit the model
+model_output <- my.lm(y = mtcars$mpg, x = mtcars[, c("wt", "cyl")])
 # Creating newdata for predictions
 wt_range <- seq(min(mtcars$wt), max(mtcars$wt), length.out = 32)  # Weight range
-newdata <- data.frame(wt = wt_range, cyl = 4)  # Set cyl to 4
-
-# Predict with confidence intervals
-predictions <- my.predict(model_output, new_data = newdata, ci_level = 0.97)
+new_data <- data.frame(wt = wt_range, cyl = 4)  # Set cyl to 4
 
 # Then plot predicted marginal effect of weight for a car with 4 cylynders. Add 96% confidence intervals to the graph.
 # Hint: For this, in your "newdata" object, add a column of 4s for the number of cylinders
-# Plot predictions with confidence intervals
-plot(
-  wt_range, predictions$y_hat, type = "l", lwd = 2, col = "blue",
-  ylim = range(predictions), xlab = "Weight (wt)", ylab = "Miles Per Gallon (mpg)",
-  main = "Predicted MPG vs Weight for Cars with 4 Cylinders"
-)
+# Predict with confidence intervals
+predictions <- my.predict(model_output, new_data = newdata, ci_level = 0.96)
+# Plot the predicted marginal effect of weight
+plot(new_data$wt, predictions$y_hat, type = "l", col = "blue",
+     ylim = range(c(predictions$`96%_lower`, predictions$`96%_upper`)),
+     xlab = "Weight (wt)", ylab = "Miles Per Gallon (mpg)",
+     main = "Predicted Marginal Effect of Weight on Fuel Efficiency")
 
 # Add confidence intervals
-lines(wt_range, predictions$`97%_lower`, lty = 2, col = "red")  # Lower CI
-lines(wt_range, predictions$`97%_upper`, lty = 2, col = "red")  # Upper CI
+lines(new_data$wt, predictions$`96%_lower`, col = "red", lty = 2)  # Lower CI
+lines(new_data$wt, predictions$`96%_upper`, col = "red", lty = 2)  # Upper CI
 
 # Add legend
-legend(
-  "topright", legend = c("Predicted MPG", "97% CI"), 
-  col = c("blue", "red"), lty = c(1, 2), lwd = 2
-)
+legend("topright", legend = c("Predicted mpg", "96% CI"), 
+       col = c("blue", "red"), lty = c(1, 2), cex = 0.8)
+
 
 # Compare this graph to the graph from the lecture.
 
