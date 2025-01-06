@@ -1,3 +1,13 @@
+###################################
+###################################
+########                   ########
+########   Data Science 1  ########
+########       Lab 4       ######## 
+########  5th Nov. 2023    ########
+########                   ########
+###################################
+###################################
+
 ## Welcome to lab #4. Today we will start with an introduction to plotting in base R
 
 ########################
@@ -204,3 +214,4 @@ data(Iris)
 # Please attempt to replicate the graph from the slides. It is a scatterplot of petal length against sepal length,
 # with species differentiated by color.
 # Add ablines plotting the linear relationship between petal length and sepal length for each group.
+
