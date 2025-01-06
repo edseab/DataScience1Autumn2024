@@ -36,8 +36,6 @@ set.seed(123)
 round(sqrt(log(runif(10,1,10))),2)
 
 
-runif(10,1,10) |> log() |> sqrt() |> round(2)
-
 # Pipes were initially created in a package called magrittr, part of the 'tidyverse' group of packages
 
 
@@ -101,8 +99,7 @@ mtcars %>%
 
 ### 2.1
 # using select() and filter(), create a new database of cars that are over 4000 lbs in weight, retaining only the wt and mpg columns. Save this database to an object called 'df'.
-mtcars %>% filter(wt >= 4) %>%
-  select(wt, mpg) -> df
+
 
 # After you have selected the rows and columns you are interested in, you can 
 # change the order of the rows using arrange
