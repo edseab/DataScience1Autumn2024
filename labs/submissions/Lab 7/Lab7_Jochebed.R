@@ -35,6 +35,7 @@ rnorm(200) |> hist(breaks=seq(-4,4,0.5))
 set.seed(123)
 round(sqrt(log(runif(10,1,10))),2)
 
+runif(10,1,10) |> log() |> sqrt() |> round(2)
 
 # Pipes were initially created in a package called magrittr, part of the 'tidyverse' group of packages
 
@@ -100,6 +101,8 @@ mtcars %>%
 ### 2.1
 # using select() and filter(), create a new database of cars that are over 4000 lbs in weight, retaining only the wt and mpg columns. Save this database to an object called 'df'.
 
+mtcars %>% filter(wt >= 4) %>%
+           select(wt,mpg) -> df
 
 # After you have selected the rows and columns you are interested in, you can 
 # change the order of the rows using arrange
@@ -110,14 +113,14 @@ df %>% arrange(desc(wt))
 
 
 # To change variables, we can use mutate()
-df <- df %>% mutate(wt_kg=wt*453.592,
-                    km_per_l = mpg*1.60934/3.78541)
+df %>% mutate(wt_kg=wt*453.592,
+                    km_per_l = mpg*1.60934/3.78541) -> df
 
 # And we can use ifelse() within mutate()
 mtcars <- mtcars %>%
             mutate(wt_class = ifelse(wt>=4, 'Oversized','Standard'))
 
-# We can even do a sultiple ifelse statment using case_when()
+# We can even do a multiple ifelse statement using case_when()
 mtcars <- mtcars %>%
             mutate(
               efficiency = case_when(
@@ -162,7 +165,7 @@ mtcars %>%
   summarise(
     wt_kg=mean(wt),
     n=length(hp)
-  )
+  ) %>% ungroup() -> mtcars_new
 
 # After grouping a tibble, remember to ungroup it later using ungroup(), or you may have issues down the line.
 
@@ -190,36 +193,38 @@ data(iris)
 my.lm <- function(y,x){
 
 # Start by saving the sample size (n). You will need it later for calculating degrees of freedom for the test statistics and sampling distributions.
-  n <- 
+  n <- length(y)
 # Next create the X matrix using as.matrix. Don't forget to add the column of 1s!
-  x <- 
+  x <- cbind(1,x) |> as.matrix()
 # use the y input and your newly constructed x matrix to calculate the parameter estimates (or coefficients). 
 # Hint: see lab 6, and remember that t() gives the transpose of a matrix and solve() gives its inverse
-  b <- 
+  b <- solve(t(x)%*%x) %*% t(x)%*%(y)
 # Next, using these calculated coefficients, calculate all of the predicted values, y_hat, for each of the values of x (each of the rows of the X matrix). 
 # Hint: look at the formula for the linear model - and remember we are multiplying matrices!
-  y_hat <- 
+  y_hat <- x %*% b
 # Next, calculate the residuals (actual values of y minus the predicted values y_hat)
-  e <- 
+  e <- y - y_hat
 # Next calculate the estimate of the residual standard error, s. Careful about the denominator here: check how many degrees of freedom you have!
-  s <- 
+  s <- sqrt(sum(e^2)/(n-ncol(x)))
+
 # Using s, calculate the variance covariance matrix of the coefficients.
-  vcov_coef <- 
+  vcov_coef <- s^2 * solve(t(x)%*%(x))
 # from this covariance matrix, extract the standard errors of the coefficients
-  se_coef <- 
+  se_coef <- vcov_coef |> diag() |> sqrt()
 # use these standard errors to calculate the t-values for each of the coefficients
-  t_vals <- 
+  t_vals <- b/se_coef
 # And use these t-values to calculate p-values.
-  p <- 
+  p <- pt(-abs(t_vals), n-ncol(x))*2
 # Next, calculate the R2 value
 
-  RSS <- 
-  TSS <- 
-  r2 <- 
+  RSS <- sum(e^2)
+  TSS <- sum((y - mean(y)^2))
+  r2 <- 1 - RSS/TSS
 # Bonus points if you want to look up how to calculate adjusted R2
-  adj_r2 <-
+  adj_r2 <- 1 - (RSS/(n - ncol(x)))/(TSS/(n-1))
+
 # Next, calculate the F-statistic and the p-value for the model.
-  f_stat <- 
+  f_stat <- ((TSS-RSS)/(ncol(x)-1))/(RSS/(n-ncol(x)))
   model_p <- 
   
 # Finally, put all of these elements into a list, and have your function return that list. 
@@ -248,28 +253,31 @@ my.lm(y=mtcars$mpg,x=mtcars[,c('wt','cyl')])
 my.predict <- function(model_output, new_data, ci_level = 0.97) {
   
   # Extract coefficients from your my.lm output
-  coef = 
+  coef = model_output$coefficients
 
   # Add a column of 1s to the new_data
-  new_data = 
+  new_data = as.matrix(cbind(1, new_data))
 
   # generate the predicted values of y from the new_data object based on the coefficients from the model
   # Again, remember the formula for the linear model!
-  y_hat = 
+  y_hat = new_data %*% coef
 
 #for each of these predicted values, calculate a confidence interval
   # first calculate the critical levels of the t-distribution using the ci_level and the degrees of freedom
-  area_in_tails = 
-  t_lower = 
-  t_upper = 
+  area_in_tails = (1-ci_level)/2
+  t_lower = qt(area_in_tails, model_output$n - length(coef))
+  t_upper = - t_lower
+  t_upper = qt(area_in_tails, model_output$n - length(coef), lower.tail = F)
 
   # next, for each row of the new_data object, calculate the standard error of the predicted value
   # Check the slides, and remember that 𝒗𝒄𝒐𝒗(𝒃) was saved as "vcov" in the model output
- sy = sqrt(apply(new_data,1,function(.)t(.)%*%model_output$vcov%*%.))
+  sy = sqrt(apply(new_data,1,function(.)t(.)%*%model_output$vcov%*%.))
   
+
+
   # next, calculate the upper and lower confidence boundaries for each prediction using the critical t-levels and the previously calculated standard error
- ci_lower = 
- ci_upper = 
+ ci_lower = sy*t_lower + y_hat
+ ci_upper = sy*t_upper + y_hat
 
   # finally, put these confidence intervals into a dataframe
  ci = data.frame(ci_lower,ci_upper)
@@ -282,10 +290,14 @@ my.predict <- function(model_output, new_data, ci_level = 0.97) {
 ### 4.3
 # Use your functions to run the following model
 
+
 # mtcars$mpg ~ mtcars$wt + mtcars$cyl
 
+model <- my.lm(y = mtcars$mpg, x = mtcars[, c("wt", "cyl")])
+my.predict(model, new_data = data.frame(wt = 3.5, cyl = 4), ci_level = 0.99)
+predict(lm(mpg~ wt + cyl, data=mtcars), data.frame(wt = 3.5, cyl = 4), interval = "confidence", level = 0.99)
 
-# Then plot predicted marginal effect of weight for a car with 4 cylynders. Add 96% confidence intervals to the graph.
+# Then plot predicted marginal effect of weight for a car with 4 cylinders. Add 96% confidence intervals to the graph.
 # Hint: For this, in your "newdata" object, add a column of 4s for the number of cylinders
 
 # Compare this graph to the graph from the lecture.
