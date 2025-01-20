@@ -257,8 +257,8 @@ my.predict <- function(model_output, new_data, ci_level = 0.97) {
 #for each of these predicted values, calculate a confidence interval
   # first calculate the critical levels of the t-distribution using the ci_level and the degrees of freedom
   area_in_tails=(1-ci_level)/2
-  t_lower = qt(area_in_tails)
-  t_upper = qt(area_in_tails,lower.tail = F)
+  t_lower = qt(area_in_tails,df=model_output$n-ncol(new_data))
+  t_upper = -t_lower
 
   # next, for each row of the new_data object, calculate the standard error of the predicted value
   # Check the slides, and remember that 𝒗𝒄𝒐𝒗(𝒃) was saved as "vcov" in the model output
@@ -285,7 +285,10 @@ my.predict(model,new_data = data.frame(wt=3.5,cyl=4),ci_level =0.99)
 
 # Then plot predicted marginal effect of weight for a car with 4 cylynders. Add 96% confidence intervals to the graph.
 # Hint: For this, in your "newdata" object, add a column of 4s for the number of cylinders
-
+x <- seq(0,6,0.1)
+ci <- my.predict(model,new_data = cbind(wt=x,cyl=4),ci_level = 0.96)
+plot(mtcars$wt,mtcars$mpg,pch=20)
+lines(x,model$coefficients['1',]+x*model$coefficients['wt',]+4*model$coefficients['cyl',])
 # Compare this graph to the graph from the lecture.
 
 
