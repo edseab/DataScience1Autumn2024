@@ -278,7 +278,7 @@ my.predict <- function(model_output, new_data, ci_level = 0.97) {
   # Again, remember the formula for the linear model!
   y_hat = new_data%*%coef
 
-#for each of these predicted values, calculate a confidence interval
+  #for each of these predicted values, calculate a confidence interval
   # first calculate the critical levels of the t-distribution using the ci_level and the degrees of freedom
   area_in_tails = (1-ci_level)/2
   t_lower = qt(area_in_tails,df=model_output$n-ncol(new_data))
@@ -286,17 +286,17 @@ my.predict <- function(model_output, new_data, ci_level = 0.97) {
 
   # next, for each row of the new_data object, calculate the standard error of the predicted value
   # Check the slides, and remember that 𝒗𝒄𝒐𝒗(𝒃) was saved as "vcov" in the model output
- sy = sqrt(apply(new_data,1,function(.)t(.)%*%model_output$vcov%*%.))
+  sy = sqrt(apply(new_data,1,function(.)t(.)%*%model_output$vcov%*%.))
   
   # next, calculate the upper and lower confidence boundaries for each prediction using the critical t-levels and the previously calculated standard error
- ci_lower = y_hat + t_lower.*sy
- ci_upper = y_hat + t_upper.*sy
+  ci_lower = y_hat + t_lower*sy
+  ci_upper = y_hat + t_upper*sy
 
   # finally, put these confidence intervals into a dataframe
- ci = data.frame(ci_lower,ci_upper)
- colnames(ci) = paste0(ci_level,'%_',c('lower','upper'))
- df = cbind(y_hat = y_hat,ci)
- return(df)
+  ci = data.frame(ci_lower,ci_upper)
+  colnames(ci) = paste0(ci_level,'%_',c('lower','upper'))
+  df = cbind(y_hat = y_hat,ci)
+  return(df)
 }
 
 
