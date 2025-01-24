@@ -108,7 +108,7 @@ abline(v=0)
 plot(mtcars$wt,mtcars$mpg, pch=20, ylim = c(0,40), xlim = c(0,7))
      abline(v=0,h=0,lm(mpg~wt,data=mtcars))
 
-# Layers of different points or lines can be added to a plot using points() and lines()
+# Layers of different points or lines can be added to a plot using points() and lines
 smallcars <- mtcars[mtcars$cyl<=4,]
 bigcars <- mtcars[mtcars$cyl>4,]
 

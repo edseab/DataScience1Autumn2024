@@ -11,8 +11,6 @@
 ## Welcome to lab #4. Today we will start with an introduction to the tidyverse,
 # Then you will write your own lm() function, and finally a couple of exercises
 
-
-
 #####################
 ####    Pipes    ####
 #####################
@@ -33,7 +31,8 @@ rnorm(200) |> hist(breaks=seq(-4,4,0.5))
 
 ### 1.1 Rewrite the following expression using pipes:
 set.seed(123)
-round(sqrt(log(runif(10,1,10))),2)
+
+10  |> runif(1,10)  |> log()  |> sqrt() |> round(2)
 
 
 # Pipes were initially created in a package called magrittr, part of the 'tidyverse' group of packages
@@ -91,7 +90,11 @@ runif(10,1,10) %>%
 data(mtcars)
 
 # so instead of:
-mtcars[mtcars$cyl == 6, 1:5]
+View(mtcars)
+
+view(mtcars %>% filter(cyl==6) %>% select(1:5))
+
+
 # we would write:
 mtcars %>%
   filter(cyl==6) %>%
@@ -99,6 +102,9 @@ mtcars %>%
 
 ### 2.1
 # using select() and filter(), create a new database of cars that are over 4000 lbs in weight, retaining only the wt and mpg columns. Save this database to an object called 'df'.
+
+df <- mtcars %>% filter(wt >4) %>% select(wt, mpg)
+view(df)
 
 
 # After you have selected the rows and columns you are interested in, you can 
@@ -110,12 +116,13 @@ df %>% arrange(desc(wt))
 
 
 # To change variables, we can use mutate()
-df <- df %>% mutate(wt_kg=wt*453.592,
+df <- df %>% mutate(wt_kg = wt*453.592,
                     km_per_l = mpg*1.60934/3.78541)
-
+view (df)
 # And we can use ifelse() within mutate()
-mtcars <- mtcars %>%
-            mutate(wt_class = ifelse(wt>=4, 'Oversized','Standard'))
+df <- df %>% mutate(wt_class = ifelse(wt < 5, 'Light', 'Heavy'))
+view (df)
+
 
 # We can even do a sultiple ifelse statment using case_when()
 mtcars <- mtcars %>%
@@ -134,6 +141,10 @@ mtcars %>%
     sd_wt = sd(wt),
     n = length(mpg)
   )
+
+mean(mtcars$wt)
+sd(mtcars$wt)
+length(mtcars$mpg)
 
 # We can also use summarise to collapse a data frame not into one single row, but into as many rows as we have groups of interest. 
 # To do this, first we need to use group_by()
@@ -154,9 +165,9 @@ mtcars %>%
   arrange(
     c('high','medium','low')
   )
-
+ 
 # You can group by multiple variables
-
+View(mtcars)
 mtcars %>% 
   group_by(efficiency,cyl) %>%
   summarise(
@@ -168,9 +179,34 @@ mtcars %>%
 
 # 3.1
 data(iris)
+view(iris)
 # using the dplyr functions do the following:
 # create a new column called Petal.Area which is the product of the petal width and petal length columns.
+iris_a <- iris %>% mutate(
+ Petal.Area = Petal.Width * Petal.Length,
+)
 # For each of the different species of iris, present the mean and standard deviation for the sepal length, sepal width, and petal area, as well as the number of samples (n)
+print(unique(iris$Species))
+group_by(iris_a, Species) %>% 
+ summarise(
+  mean_sepal_l = mean(Sepal.Length),
+  # mean_sepal_w = mean(Sepal.Width),
+  # mean_petal_area = mean(Petal.Area),
+  # sd_sepal_l = sd(Sepal.Length),
+  sd_sepal_w = sd(Sepal.Width),
+  sd_petal_area = sd(Petal.Area),
+   n = length(Petal.Width)
+ )
+
+#  name   | gender                            name   | gender              name   | gender
+#  ---------------                            ---------------              ---------------
+#  yaw    | male                              yaw    | male          +     ama    | female
+#  ama    | female                            akwesi | male                yaa    | female
+#  akwesi | male        group_by(gender)      kwame  | male
+#  kwame  | male
+#  yaa    | female
+
+
 # Order this database in decreasing order of average petal length.
 
 
@@ -187,62 +223,111 @@ data(iris)
 
 # Your lm function should take as input a y variable, and one or more x variables which should be inputted as a matrix or dataframe with one variable per column. 
 
-my.lm <- function(y,x){
+y <- rnorm(n = 50,  mean = 5.4, sd = 3.2)
+x <- runif(50)
 
-# Start by saving the sample size (n). You will need it later for calculating degrees of freedom for the test statistics and sampling distributions.
-  n <- 
-# Next create the X matrix using as.matrix. Don't forget to add the column of 1s!
-  x <- 
-# use the y input and your newly constructed x matrix to calculate the parameter estimates (or coefficients). 
-# Hint: see lab 6, and remember that t() gives the transpose of a matrix and solve() gives its inverse
-  b <- 
-# Next, using these calculated coefficients, calculate all of the predicted values, y_hat, for each of the values of x (each of the rows of the X matrix). 
-# Hint: look at the formula for the linear model - and remember we are multiplying matrices!
-  y_hat <- 
-# Next, calculate the residuals (actual values of y minus the predicted values y_hat)
-  e <- 
-# Next calculate the estimate of the residual standard error, s. Careful about the denominator here: check how many degrees of freedom you have!
-  s <- 
-# Using s, calculate the variance covariance matrix of the coefficients.
-  vcov_coef <- 
-# from this covariance matrix, extract the standard errors of the coefficients
-  se_coef <- 
-# use these standard errors to calculate the t-values for each of the coefficients
-  t_vals <- 
-# And use these t-values to calculate p-values.
-  p <- 
-# Next, calculate the R2 value
+model <- lm(y ~ x) 
+summary(model) 
+ y = mx + c
+ y =  2.9029*x + 3.8802
 
-  RSS <- 
-  TSS <- 
-  r2 <- 
-# Bonus points if you want to look up how to calculate adjusted R2
-  adj_r2 <-
-# Next, calculate the F-statistic and the p-value for the model.
-  f_stat <- 
-  model_p <- 
+
+       3.8802     0.8813
+
+       (3.8802 -  0.8813)       --     (3.8802  +   0.8813)
+
+
+more predictors: a lot of variables
+
+y = mx + nt + vh + c  where m, n, and v are slopes/estimates adn x, t, and h are variables...
+
+Additional predictor variables automatically cause an effect in error reduction (even though they may be useless in reality)
+
+F-Statistic = 3.212 explained
+              ---------------
+               1  unexplained
+
+
+BEFORE predictor
+
+
+AFTER predictor
+
+Remark:
+signifance level/ threshold - 0.05
+
+P-value 0.07934 ( prob that x has no effect on y) then what is the probability that x has an effect  on y?
+P-value = 0.01 0.99
+# x: predictor, independent variable, regressor, explanatory variable
+# y: dependent variable, response, outcome
+
+my.lm <- function(y, x) {
+  # Start by saving the sample size (n). 
+  n <- length(y)
   
-# Finally, put all of these elements into a list, and have your function return that list. 
-  return(list(n=n,
-              coefficients = b,
-              residuals = e,
-              s = s,
-              vcov = vcov_coef,
-              se = se_coef,
-              t_values = t_vals,
-              p_values = p,
-              r2 = r2,
-              adj_r2 = adj_r2,
-              F_statistic = f_stat,
-              model_p_value = model_p))
+  # Create the X matrix using as.matrix. Add a column of 1s for the intercept.
+  X <- as.matrix(cbind(1, x))
+  
+  # Calculate the parameter estimates (coefficients) using the formula: (X'X)^-1 X'y
+  b <- solve(t(X) %*% X) %*% t(X) %*% y
+  
+  # Calculate predicted values (y_hat)
+  y_hat <- X %*% b
+  
+  # Calculate residuals (actual y - predicted y)
+  e <- y - y_hat
+  
+  # Calculate the residual standard error, s
+  s <- sqrt(sum(e^2) / (n - ncol(X))) # ncol(X) gives the number of estimated parameters (including intercept)
+  
+  # Calculate the variance-covariance matrix of the coefficients
+  vcov_coef <- s^2 * solve(t(X) %*% X)
+  
+  # Extract the standard errors of the coefficients
+  se_coef <- sqrt(diag(vcov_coef))
+  
+  # Calculate the t-values for each coefficient
+  t_vals <- b / se_coef
+  
+  # Calculate the p-values for each t-value
+  p <- 2 * pt(-abs(t_vals), df = n - ncol(X)) # Two-tailed test
+  
+  # Calculate R-squared (R^2) value
+  RSS  <- sum(e^2)  # where RSS is ()
+  TSS  <- sum((y - mean(y))^2) #  where TSS is (SSE_n)
+  r2 <- 1 - (RSS / TSS) 
+  
+  # Calculate adjusted R-squared
+  adj_r2 <- 1 - ((1 - r2) * (n - 1) / (n - ncol(X)))
+  
+  # Calculate the F-statistic and its p-value
+  f_stat <- ((TSS - RSS) / (ncol(X) - 1)) / (RSS / (n - ncol(X)))
+  model_p <- pf(f_stat, df1 = ncol(X) - 1, df2 = n - ncol(X), lower.tail = FALSE)
+  
+  # Return all elements in a list
+  return(list(
+    n = n,
+    coefficients = b,
+    residuals = e,
+    s = s,
+    vcov = vcov_coef,
+    se = se_coef,
+    t_values = t_vals,
+    p_values = p,
+    r2 = r2,
+    adj_r2 = adj_r2,
+    F_statistic = f_stat,
+    model_p_value = model_p
+  ))
 }
+
 
 # compare your function against the built-in R function in R.
 
 my.lm(y=mtcars$mpg,x=mtcars[,c('wt','cyl')])
 
 ### 4.2 predict()
-
+model <- lm(y~x)
 # This will be much shorter. Create a new function that takes as input the output from your first function, along with a new_data object that has as many columns as there are predictor variables in the model output, and a confidence interval size
 
 my.predict <- function(model_output, new_data, ci_level = 0.97) {

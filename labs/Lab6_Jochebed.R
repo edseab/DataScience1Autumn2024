@@ -30,13 +30,22 @@ xor(1==1 , 2==2)
 
 # 1.1 
 # mtcars is a database of cars with several variables such as horsepower, weight, number of cylinders etc.
-data(mtcars)
-head(mtcars)
+data(mtcars) # bring in mtcars
+head(mtcars) # 
 # Using indexing (square brackets) and the & operator, write a line of code
 # that selects only the rows of mtcars with at least 6 cylinders (mtcars$cyl >= 6) and horsepower of at least 110 (mtcars$hp >= 110). Remember to include all the columns.
 
+mtcars$cyl >= 6 & mtcars$hp >= 110
+
+dummy <- mtcars[mtcars$cyl >= 6 & mtcars$hp >= 110,]
+View(dummy)
+
 ### 1.2
 # Now select only those rows with either high efficiency (miles per gallon (mpg) of at least 25) or low weight (wt <= 2.5)
+
+mtcars$mpg >= 25 | mtcars$wt <= 2.5
+pie <- mtcars[mtcars$mpg >= 25 | mtcars$wt <= 2.5,]
+pie
 
 #############################
 ####    If statements    ####
@@ -45,7 +54,8 @@ head(mtcars)
 # The if() function will execute everything after it, either on the same line or in {} brackets,
 # only if there is a TRUE boolean statement within the parentheses
 x <- 5
-if(x > 3) print ('This statement is true')
+if(x > 3) print ('This statement is true') 
+
 if(x-4==1){
   new_object <- c('this','statement','is','also','true')
   print(new_object)
@@ -57,23 +67,35 @@ if(x-4==1){
 # If the p argument is not numeric, or if it is not between 0 and 1, the function should return the following message:
 # "Please input a probability between 0 and 1"
 
-probe <- function (n, w) {
-    if (!is.numeric(w) || w<0 || w<1) {
-        return ("Please input a probability between 0 and 1")
-    }
-    sample (c("Land", "water")) not done
-}
+ probe <- function(n, w){
+   if(!is.numeric(w) | (w <= 0 | w >= 1)) {
+     print("Please input a probability between 0 and 1")
+   }
+    x = c("Land", "Water")
+    size = n
+    replace = TRUE
+    prob = c(1-w, w)
+    result = sample(x,size,replace, prob)
+   
+   return (result)
+ }
+
+ probe (3, 0.7)
 
 
 # After the if statement we can put an else statement:
-if(x-4>1){
-  new_object <- c('this','statement','is','also','true')
-  print(new_object)
-}else{
-  print('This is untrue')
-}
 
-# A simplified version of if()else is the following:
+# If y is 2, print hello else print hi
+
+  if ( y==2 ) { 
+    print("hello") 
+  } else {
+    print("hi")
+  }
+
+
+x <- 20
+# A simplified version of if() else is the following:
 ifelse(x/2==7,print('Definitely true'),print('categorically false'))
 
 ##################################
@@ -83,11 +105,12 @@ ifelse(x/2==7,print('Definitely true'),print('categorically false'))
 # paste() and strsplit() can be used to join and separate
 # character objects (strings), respectively. For example:
 
-paste('Hello','world!', sep='_')
+paste('Hello','world!', sep=' ')
 strsplit('Hello to you too. /My name is Ed.', split='/')
 
 # You'll notice that strsplit returns a list. This allows us to vectorise the function:
-strsplit(rownames(mtcars),split=' ')
+strsplit("Chrysler Imperial", split='r')
+
 
 
 #####################
@@ -98,61 +121,73 @@ strsplit(rownames(mtcars),split=' ')
 # There are two main kinds:
 # FOR loops iterate over a predetermined set (vector, list, etc)
 fruits <- c('apple','banana', 'pineapple','mango','orange')
-for(i in fruits){
-  print(paste('My favourite fruit is',i,sep=': '))
+
+for (fruit in fruits){
+  print (fruit)
 }
 
-useless_function <- function(n){
+
+for (i in 1:5){
+  print (fruits[i])
+}
+
+
+
+
+
+for(fruit in fruits){
+  print(paste('My favourite fruit is',fruit,sep=': '))
+}
+
+useful_function <- function(n){
   for (i in 1:n){
-    print(paste0(i,'. This number is: ', c('even','odd')[i%%2 +1]))
+    paste0(i,'. This number is: ', c('even','odd')[i%%2 + 1])
   }
 }
-useless_function(7)
+
+useful_function(7)
 
 ### 4.1 
 data(iris)
 
 # Write a for loop that iterates over the column names of the iris dataset and print each together with the number of characters in the column name in parenthesis. Example output: Sepal.Length (12). To get the number of characters use the function nchar().
+ names <- colnames(iris)
+ 
+ for(name in names){
+   result <- paste0(name, " (", nchar(name), ")")
+  print(result) 
+ }
+ 
+ "Sepal.Length (12)"
 
-
-  for (i in iris){
-    print(paste(i, "(", nchar(i), ")", sep =" "))
-  }
+ # Continue from hear........ #
 
 # Next, WHILE loops continue to loop until the boolean statment in the defining parentheses, e.g.
-x <- 0
-while(x<100){
-  print(x)
-  x <- x + sample(1:20, 1)
+
+
+condition <- FALSE
+
+# variables : a container that holds a value 
+
+# Write a while loop to print "Yes" infinit times
+
+condition <- TRUE
+while(condition){
+  print("Yes")
 }
 
-# 3 x 1 = 3
 
-x <- 1
 
-while(x<13){
-  print(paste0("3 x ", x, " = ", x * 3 ))
-  x = x + 1
-}
 
-### 4.2 How many numbers do you need in the sequence 1*2*3*4*5*... before the product exceeds 2?
+### 4.2 How many numbers do you need in the sequence 1*2*3*4*5*... before the product exceeds 10 million?
 # Use a while loop to get the answer
-
-
-
-# var x to hold counts
-# 
-# 1*2*3
-# 1 * 2
-
-count <- 2
-result <- 2
-while(result <=  10000000){
-  result = result * count
-  count = count + 1
+x<-1
+n<-1
+while (x<10000000) {
+  n<- n+1
+  x <- x*n
 }
-print(count)
-
+print(n)
 ###################################
 ####    Linear models intro    ####
 ###################################
@@ -160,33 +195,33 @@ print(count)
 # We can run an OLS linear model using lm()
 # Inside the lm and other model functions we use formulas
 # Formulas have the dependent variable on the left and the independent (predictor) variables on the right with a ~ in between
-# Lets run a bivariate regression of car weight (in 1000 pounds/500 kg) on miles per gallon (1mpg = 0.425km/L)
+# Lets run a bivariate regression of car weight (in 1000 pounds/500 kg) on miles per gallon (1mpg = 1km/L)
 model <- lm(mtcars$mpg ~ mtcars$wt)
 summary(model)
 ### 5.1
 # What does the Estimate for the (Intercept) number represent?
-# for every 500kg change in the weight of the ar, we would expect the the car to be 5 times less efficient (not sure i heard right)
+#37.2851 could be interpreted as the fuel efficiency of a car with a weight of 0.
 ### 5.2
-# What does the Estimate for the mtcars$wt number represent?
-
+# What does the Estimate for the mtcars$wt number represent?g
+# For every unit increase of weight, we estimate the fuel efficiency will decrease by -5.3445 units.
 ### 5.3 
 # Is the relationship between these two variables positive or negative? Why do you think that might be?
-
-# negative. When one increases the other decreases.
-
+# the relationship is negative, as indicated by the negative slope, As the car weight increases, the fuel efficiency decreases, we can say that heavier cars cosume more energy. 
 ### 5.4 What is the predicted average efficiency in miles per gallon of a 4000 pound (2000kg) car?
-
-37.2851 - 5.3445 * 4
-# The predicted average efficiency is 15.9071 miles per gallon (6.760517 kms/l)
+predict(lm(mpg~wt, data=mtcars), newdata = data.frame(wt = 4))
 
 # Let's transform the independent variable:
-# mtcars$wt_centred <- mtcars$wt - mean(mtcars$wt)
+mtcars$wt_centred <- mtcars$wt - mean(mtcars$wt)
 
 ### 5.5
 # compare the mean and variance of the new variable with the untransformed variable. What do you notice?
 mean(mtcars$wt)
-mean(mtcars$wt_centred)
+var(mtcars$wt)
 
+mean(mtcars$wt_centred)
+var(mtcars$wt_centred)
+
+#the mean of the transformed variable is approxiamately equal to 0 (3.469447e-17), and the variance remains the same, centereing does not change the variablity.
 ### 5.6
 # Run the following code:
 y <- mtcars$mpg
@@ -200,12 +235,9 @@ x <- cbind(1,mtcars$wt)
 # (x'x)^(-1) * (x'y)
 # where ' means the transpose
 # Run the code you have written. What do you find?
+solve((t(x)%*%x)) %*% (t(x)%*%y)
 
-x' <- t(x)
-x' <- t(x)%*%x 
-(x'x) ^ (-1) <- solve (t(x)%*%x )
-(x'y) <- t(x)%*%y
-solve(t(x)%*%x) %*% t(x)%*%y
+# it calculates the intercept and the slope, coefficients of the linear regression
 
 
 
