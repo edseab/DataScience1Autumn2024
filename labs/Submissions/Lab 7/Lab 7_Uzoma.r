@@ -283,7 +283,7 @@ my.predict <- function(model_output, new_data, ci_level = 0.97) {
   df=model_output$df
   area_in_tails = (1-ci_level)/2
   t_lower = qt(area_in_tails, df=df)
-  t_upper = qt((1-area_in_tails),df=df)
+  t_upper = qt((1-area_in_tails),df=df) #you can also say that t_upper = -t_lower
 
   # next, for each row of the new_data object, calculate the standard error of the predicted value
   # Check the slides, and remember that 𝒗𝒄𝒐𝒗(𝒃) was saved as "vcov" in the model output
@@ -305,11 +305,12 @@ my.predict <- function(model_output, new_data, ci_level = 0.97) {
 # Use your functions to run the following model
 
 # mtcars$mpg ~ mtcars$wt + mtcars$cyl
-
+model<-my.lm(y=mtcars$mpg,x=mtcars[,c('wt','cyl')])
 
 # Then plot predicted marginal effect of weight for a car with 4 cylynders. Add 96% confidence intervals to the graph.
 # Hint: For this, in your "newdata" object, add a column of 4s for the number of cylinders
-
+x<-seq(0,6,0.1)
+ci<-my.predict(model,new_data=cbind(wt))
 # Compare this graph to the graph from the lecture.
 
 
