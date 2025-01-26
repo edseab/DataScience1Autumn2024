@@ -61,7 +61,7 @@ probe <- function (n, w) {
     if (!is.numeric(w) || w<0 || w<1) {
         return ("Please input a probability between 0 and 1")
     }
-    sample (c("Land", "water")) not done
+    return (sample(c("Water", "Land"), n, replace = TRUE, prob = c(w, 1 - w)))
 }
 
 
@@ -145,13 +145,13 @@ while(x<13){
 # 1*2*3
 # 1 * 2
 
-count <- 2
+count <- 1
 result <- 2
 while(result <=  10000000){
   result = result * count
   count = count + 1
 }
-print(count)
+print(count - 1)
 
 ###################################
 ####    Linear models intro    ####
@@ -163,29 +163,40 @@ print(count)
 # Lets run a bivariate regression of car weight (in 1000 pounds/500 kg) on miles per gallon (1mpg = 0.425km/L)
 model <- lm(mtcars$mpg ~ mtcars$wt)
 summary(model)
+
+    #  y = mx + c      ; y is mpg and x is wt 
+
+   y = -5.3445x + 37.2851     
+
 ### 5.1
 # What does the Estimate for the (Intercept) number represent?
-# for every 500kg change in the weight of the ar, we would expect the the car to be 5 times less efficient (not sure i heard right)
+# A car with weight of 0 pounds per kg  travels 37.29  miles with 1 gallon of oil
+
 ### 5.2
 # What does the Estimate for the mtcars$wt number represent?
+# When we increase the weight of a car by 1 ond per kg, its efficiency reduces by 5.34
 
 ### 5.3 
 # Is the relationship between these two variables positive or negative? Why do you think that might be?
 
-# negative. When one increases the other decreases.
+# negative. When one increases the other decreases. because a car with more weight will require more energy to drag it from one point to another. 
 
-### 5.4 What is the predicted average efficiency in miles per gallon of a 4000 pound (2000kg) car?
+### 5.4 What is the predicted average efficiency in miles per gallon of a 4000 pound (2000kg) car?2
 
-37.2851 - 5.3445 * 4
-# The predicted average efficiency is 15.9071 miles per gallon (6.760517 kms/l)
+#37.2851 - 5.3445 * 4 = 15.90724 
+# Hence the predicted average efficiency is 15.9071 miles per gallon (6.760517 kms/l)
 
 # Let's transform the independent variable:
-# mtcars$wt_centred <- mtcars$wt - mean(mtcars$wt)
+ mtcars$wt_centred <- mtcars$wt - mean(mtcars$wt)
 
 ### 5.5
 # compare the mean and variance of the new variable with the untransformed variable. What do you notice?
 mean(mtcars$wt)
 mean(mtcars$wt_centred)
+var(mtcars$wt)
+var(mtcars$wt_centred)
+# We notice a change in mean value but no change in variance 
+# The mean of the centered weight is approximately zero
 
 ### 5.6
 # Run the following code:

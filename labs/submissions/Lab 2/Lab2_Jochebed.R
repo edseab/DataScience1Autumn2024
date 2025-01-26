@@ -88,9 +88,10 @@ star_wars_matrix["The Phantom Menace", "Total revenue"]
 
 # If you try to include a comma in the index of a one-dimensional object (like a vector),
 # you get an error message:
+new_hope <- c(1,2)
 new_hope[1,2]
 
-# If you leave a blank space either to the left or the right of the comma, you select for ALL the rows
+# If you leave a blank space either to t he left or the right of the comma, you select for ALL the rows
 # or ALL the columns, respectively
 star_wars_matrix[,2]
 star_wars_matrix[4,]
@@ -251,7 +252,9 @@ binom(n = 10, k = 8, p = 0.7)
 # What do you conclude to the astronomer?
 universes <- rbinom(1:100000, 20)
 
-n = 20, k = 11, p = 0.7
+n = 20
+k = 11
+p = 0.7
 
 num_probes <- 20
 num_universes <- 100000

@@ -80,7 +80,7 @@ class (y)
 
 # If we forget to use quote marks R will search for a stored object with that name and return an error if it doesn't find it:
 
-Salaam -> y
+"Salaam" -> y
 
 # One final very important class of object is the 'logical' class, a.k.a. Boolean. 
 
@@ -203,7 +203,7 @@ f3 <- function(x,y) x %% y
 f3 (7,6)
 
 ### 3.1 What is the purpose of function f2? Write in comments below.
-f2 helps us know if x is divisible by y
+# f2 helps us know if x is divisible by y
 
 ### 3.2
 # Based on the definition of the mean from today's lecture, write a function that calculates the mean of all of the elements of a vector. assign it to the object my.mean.
@@ -281,10 +281,10 @@ runif(5,0,1)
 ### 4.3
 # Using runif, write a function that returns TRUE 22% of the time and FALSE 78% of the time
 
-random_bool <- function() {
+true.22.per <- function() {
   return(runif(1, 0, 1) <= 0.22)
 }
-true.22.per()
+
 results <- replicate (1000, true.22.per())
 mean (results)
 
@@ -321,9 +321,6 @@ dunif(1.3,0,2)
 
 # Based on the results of this code and your answers above, what can you conclude about the purpose of the dunif function?
 
-<<<<<<< HEAD
-<<<<<<< HEAD:labs/submissions/Lab 1/Jochebed_Lab 1.R
-<<<<<<< HEAD
 # the function dunif(x,y,z) is a function that takes 3 parameters x,y,z
 # where y and z represents the boundary of the unifrm distribution 
 # and x represents the number whose probability density we are to check
@@ -331,9 +328,175 @@ dunif(1.3,0,2)
 # which corresponds to the probability density of a uniform distribution
 
 
-=======
->>>>>>> be70fb9 (Creat lab 1 file)
-=======
->>>>>>> 0eb3579 (Creat lab 1 file):labs/Submissions/Jochebed_Lab 1.R
-=======
->>>>>>> 5a85a2f19f564b5f6f1699a061f9ea1182474f09
+
+###################################
+########                   ########
+########   Data Science 1  ########
+########       Lab 1       ######## 
+########   15 Oct. 2024    ########
+########                   ########
+###################################
+
+## Welcome to this first lab. Here we will learn the basics of R, an open-source programming language and software environment.
+
+# On the right is the console. You can input code directly into the console line by line - you do not need to run an entire file. Try running a simple calculation in the console, like 5+9. Type it in and press enter. 
+5+9
+# You can also write code in this, the code editor, and run it from here. Try highlighting the following line and pressing 'Ctrl + Enter' ('Cmd + Enter' on MacOS):
+12 * 4 - 6
+
+# Text beginning with a # sign is read as 'comment' and will not be evaluated by the console.
+
+########################
+####    Functions   ####
+########################
+
+# FUNCTIONS are commands that take in inputs and produce outputs. They mostly take in the inputs in brackets, like this:
+sqrt(25)
+exp(3)
+
+# Often, functions take multiple inputs. Note how:
+rep(3,4)
+# produces a different output from
+rep(4,3)
+
+# If you can't remember the order of the arguments in a function, or want to learn what a function does, type ? followed by the function name:
+?rep
+
+# You can explicitly name arguments to avoid order-related errors:
+rep(x=3, times=4)
+rep(times=4, x=3)
+
+# OPERATORS are special functions that take only 2 arguments, e.g., +, -, *, /, ^, %%, %/%, :.
+
+########################
+####     Objects    ####
+########################
+
+# Functions are examples of OBJECTS stored in the global ENVIRONMENT. You can create new objects using the assignment operator:
+x <- 4
+x*5
+
+# Objects can have different classes:
+class(x)
+
+# You can also store text in an object:
+"Hello" -> y
+y
+class(y)
+
+# R will throw an error if a quoted string is not used:
+# Salaam -> y  # Uncommenting this will cause an error.
+
+# A 'logical' class object (Boolean) can take two values:
+TRUE
+FALSE
+
+# Logical values can be combined using &, |, xor(), etc.:
+TRUE & FALSE
+TRUE | FALSE
+xor(TRUE, FALSE)
+
+####################################
+####     Vectors and Indices    ####
+####################################
+
+# Vectors can contain multiple elements:
+z <- 50:80
+z
+
+# Vectors can be created using the c() function:
+my.vector <- c('this', 'is', 'a', 'vector')
+length(my.vector)
+class(my.vector)
+
+# Indexing vectors:
+my.vector[1]
+my.vector[4]
+my.vector[2:4]
+my.vector[c(1,4)]
+
+# Assign new values to existing or non-existent indices:
+my.vector[4] <- 'test'
+my.vector[5] <- 'example'
+
+# Logical indexing:
+my.vector[c(TRUE, TRUE, FALSE, FALSE, FALSE)]
+
+####################################
+####     Logical Operators      ####
+####################################
+
+# Examples of logical operators:
+my.vector == 'is'
+1:10 >= 5
+1:10 %% 2 == 0  # Checks for even numbers.
+
+# Task: Return only the odd values from `digits`:
+digits <- 0:10
+digits[digits %% 2 == 1]
+
+# Using %in% to check for common elements:
+group1 <- c('Arthur', 'Fatima', 'Suleiman', 'Marco')
+group2 <- c('Marco', 'Maria', 'Victor', 'Fatima', 'Antonio')
+group1[group1 %in% group2]
+
+####################################
+####     Writing Functions      ####
+####################################
+
+# Example function:
+f1 <- function(x) x*2 + 1
+f1(3)
+f1(7)
+
+# A function with multiple arguments:
+f2 <- function(x, y) {
+  z <- x %% y
+  return(z == 0)
+}
+f2(14, 7)
+
+# Purpose of `f2`:
+# The function checks if `x` is divisible by `y`.
+
+# Custom mean function:
+my.mean <- function(x) sum(x) / length(x)
+my.mean(c(1, 2, 3))
+mean(c(1, 2, 3))
+
+####################################
+####      Randomness in R       ####
+####################################
+
+# Rolling two dice multiple times:
+roll_die <- function() sample(1:6, 1, replace = TRUE)
+roll_two_dice <- function(x) replicate(x, roll_die() + roll_die())
+
+# Histograms:
+par(mfrow = c(3, 2))
+hist(roll_two_dice(10), breaks = 1:12, main = "10 Rolls", xlab = "Sum", col = "lightblue")
+hist(roll_two_dice(50), breaks = 1:12, main = "50 Rolls", xlab = "Sum", col = "lightblue")
+hist(roll_two_dice(100), breaks = 1:12, main = "100 Rolls", xlab = "Sum", col = "lightblue")
+hist(roll_two_dice(1000), breaks = 1:12, main = "1000 Rolls", xlab = "Sum", col = "lightblue")
+hist(roll_two_dice(10000), breaks = 1:12, main = "10000 Rolls", xlab = "Sum", col = "lightblue")
+par(mfrow = c(1, 1))
+
+# Observation:
+# The distribution approaches a bell-shaped curve as the number of rolls increases.
+
+# Generate TRUE 22% of the time:
+random_bool <- function() runif(1, 0, 1) <= 0.22
+mean(replicate(1000, random_bool()))
+
+# Probability density of uniform PDFs:
+# Uniform PDF between 0 and 1 has a density of 1.
+# Uniform PDF between 5 and 6 has a density of 1/(6 - 5) = 1.
+# Uniform PDF between 0 and 0.5 has a density of 1/(0.5 - 0) = 2.
+# Uniform PDF between 0 and 2 has a density of 1/(2 - 0) = 0.5.
+
+# Purpose of `dunif`:
+# The function `dunif(x, min, max)` calculates the probability density for `x` within the range `[min, max]`.
+# If `x` is outside the range, the function returns 0.
+# Based on the results of this code and the explanations above, we can conclude:
+# - `dunif` is used to determine the probability density of a uniform distribution for a given value `x`.
+ 
