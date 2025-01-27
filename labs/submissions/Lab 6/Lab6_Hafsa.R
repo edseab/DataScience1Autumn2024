@@ -122,8 +122,8 @@ data(iris)
 
 # Write a for loop that iterates over the column names of the iris dataset and print each together with the number of characters in the column name in parenthesis. Example output: Sepal.Length (12). To get the number of characters use the function nchar().
 
-for(i in colnames(iris)){
-  print(paste(i, " (", nchar(i), ")",seq(= " ") ))
+for( i in colnames(iris)){
+  print(paste(i, " (", nchar(i), ")", sep=''))
 }
 
 # Next, WHILE loops continue to loop until the boolean statment in the defining parentheses, e.g.
