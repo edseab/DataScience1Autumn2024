@@ -10,7 +10,7 @@
 
 
 ## Welcome to this first lab. Here we  will learn the basics of R, an open-source programming language and software environment.
-
+ 
 
 
 # On the right is the console. You can input code directly into the console line by line - you do not need to run an entire file. Try running a simple calculation in the console, like 5+9. Type it in and press enter. 
@@ -134,7 +134,8 @@ my.vector[c(1,4)]
 
 ### 1.1
 # You can assign values to specific elements. Try writing a line of code below that changes the 4th element of my.vector to the word 'test'
-my.vector[4] <- "test"
+
+my.vector[5] <- 'test'
 
 ### 1.2
 # You can even assign values to elements of a vector that don't exist yet, thus creating them. Try assigning the word 'example' to the (as yet non-existent) 5th element of my.vector.
@@ -320,6 +321,9 @@ dunif(1.3,0,2)
 
 # Based on the results of this code and your answers above, what can you conclude about the purpose of the dunif function?
 
+<<<<<<< HEAD
+<<<<<<< HEAD:labs/submissions/Lab 1/Jochebed_Lab 1.R
+<<<<<<< HEAD
 # the function dunif(x,y,z) is a function that takes 3 parameters x,y,z
 # where y and z represents the boundary of the unifrm distribution 
 # and x represents the number whose probability density we are to check
@@ -327,3 +331,9 @@ dunif(1.3,0,2)
 # which corresponds to the probability density of a uniform distribution
 
 
+=======
+>>>>>>> be70fb9 (Creat lab 1 file)
+=======
+>>>>>>> 0eb3579 (Creat lab 1 file):labs/Submissions/Jochebed_Lab 1.R
+=======
+>>>>>>> 5a85a2f19f564b5f6f1699a061f9ea1182474f09
