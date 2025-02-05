@@ -41,6 +41,7 @@ star_wars_matrix
 
 # we can give matrices rownames and column names
 
+
 rownames(star_wars_matrix) <- c("A new hope", "The empire strikes back", "Return of the Jedi")
 colnames(star_wars_matrix) <- c("US revenue", "International revenue")
 
@@ -48,6 +49,7 @@ colnames(star_wars_matrix) <- c("US revenue", "International revenue")
 # Some important base R functions to know: colSums, rowSums, colMeans, rowMeans
 # Use one of the above functions to calculate the total revenue for each movie (the sum of the US and international revenue)
 # and save it in an object called total_revenue
+total_revenue <- rowSums(star_wars_matrix)
 
 # We can now add this vector as a new column using the function cbind (column bind)
 
@@ -55,6 +57,7 @@ star_wars_matrix <- cbind(star_wars_matrix, total_revenue)
 
 ### 1.2
 # Rename the 3rd element of the column names of star_wars_matrix to "Total revenue"
+colnames(star_wars_matrix) <- "Total revenue"
 
 # Now lets create vectors for the box office returns of the prequel trilogy
 
@@ -65,6 +68,14 @@ revenge_of_sith <- c(380.3, 468.5)
 ### 1.3
 # Turn these 3 vectors into a matrix, add a column for total revenue, 
 # and append them to star_wars_matrix using the function rbind (row bind)
+prequel_box_office <- c(phantom_menace, attack_of_clones, revenge_of_sith)
+prequel_matrix <- matrix(prequel_box_office, byrow = TRUE, nrow = 3)
+total_revenue_prequel <- rowSums(prequel_matrix)
+prequel_matrix <- cbind(prequel_matrix, total_revenue_prequel)
+rownames(prequel_matrix) <- c("The Phantom Menace", "Attack of the Clones", "Revenge of the Sith")
+colnames(prequel_matrix) <- c("US revenue", "International revenue", "Total revenue")
+
+star_wars_matrix <- rbind(star_wars_matrix, prequel_matrix)
 
 # Matrices are understood by R to be both one-dimensional, because they are vectors folded onto themselves
 # into columns, but also 2 dimensional, because they have rows and columns. 
@@ -79,6 +90,7 @@ star_wars_matrix[3,1]
 
 ### 1.4 
 # Write a line of code to extract the international revenue of the Phantom Menace (the 4th movie) using numbers to index the matrix
+star_wars_matrix[4, 2]
 
 # Compare this to the following:
 star_wars_matrix["The Phantom Menace", "Total revenue"]
@@ -126,6 +138,7 @@ my_list$boolean
 
 ### 2.1
 # Using the $ operator, replace the "matrix" element of my_list with the star_wars_matrix
+my_list$matrix <- star_wars_matrix
 
 # Finally, you can turn any list into a vector with unlist().
 unlist(my_list)
@@ -213,8 +226,16 @@ sample(1:100,1)
 
 # use your function to calculate the probability that when the aliens send 10 probes to Earth (probability of water = 0.7),
 # exactly 8 of those probes will send a signal of water
+binom_prob <- function(n, k, p) {
+  choose(n, k) * p^k * (1 - p)^(n - k)
+}
+
+binom_prob(10, 8, 0.7)
 
 # compare this to dbinom(8,10,0.7)
+dbinom(8, 10, 0.7)
+# The result from binom_prob(10, 8, 0.7) matches the result from dbinom(8, 10, 0.7), confirming the function's correctness.
+
 
 ### PROBABILITY FUNCTIONS IN R 
 # dbinom, dnorm, dunif, dbeta, .... all of these functions calculate f(x) for any given x
@@ -237,6 +258,13 @@ sample(1:100,1)
 # Using rbinom(), simulate 100,000 universes where the aliens sent out 20 probes to Earth
 # and calculate in what percentage of these universes the number of probes signalling Water is 11 or fewer
 # What do you conclude to the astronomer?
+set.seed(123)
+simulations <- rbinom(100000, 20, 0.7)
+probability <- mean(simulations <= 11)
+probability
+
+# Conclusion: The probability that 11 or fewer probes would signal water if the planet is Earth is approximately 0.0003, suggesting it is highly unlikely to be Earth.
+
 
 # pbinom, pnorm, punif, pbeta, .... all calculate the area under the curve of a given distribution,
 # in the LOWER tail (if lower.tail=TRUE, by default), or the UPPER tail (if you set it to false)
@@ -244,6 +272,7 @@ sample(1:100,1)
 # So for example, if a person of 195 cm was drawn from a gaussian distribution of heights,
 # with mean 175cm and standard deviation 10cm, What percentile would they be in?
 pnorm(195, 175, 10, lower.tail=FALSE)
+
 # They would be in the upper 2.3 percentile
 
 # qbinom, qnorm, qunif, qbeta, .... all calculate value of x for which
@@ -299,3 +328,4 @@ t.test(men_heights,women_heights)
 my_t(men_heights,women_heights)
 
 # One last question to ponder before next class: Why did we multiply the p-value by 2 in the above function?
+# The p-value was multiplied by 2 to account for a two-tailed test, which considers both tails of the distribution.
