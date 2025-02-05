@@ -21,6 +21,7 @@
 # It signifies: take the element on the left and use it as the first argument in the function on the right
 
 # Example
+
 hist(rnorm(200), breaks=seq(-4,4,0.5))
 # is equivalent to
 
@@ -33,7 +34,8 @@ rnorm(200) |> hist(breaks=seq(-4,4,0.5))
 ### 1.1 Rewrite the following expression using pipes:
 set.seed(123)
 round(sqrt(log(runif(10,1,10))),2)
-runif(10,1,10) |> log() |>sqrt() |>round(2)
+
+runif(10,1,10) |> log() |> sqrt() |> round(2)
 
 # Pipes were initially created in a package called magrittr, part of the 'tidyverse' group of packages
 
@@ -95,11 +97,13 @@ mtcars[mtcars$cyl == 6, 1:5]
 mtcars %>%
   filter(cyl==6) %>%
   select(1:5)
-mtcars
+
 ### 2.1
 # using select() and filter(), create a new database of cars that are over 4000 lbs in weight, retaining only the wt and mpg columns. Save this database to an object called 'df'.
-df <- mtcars %>% filter( wt > 4) %>% select(1,6)
-df
+
+mtcars %>% filter(wt >= 4) %>%
+           select(wt,mpg) -> df
+
 # After you have selected the rows and columns you are interested in, you can 
 # change the order of the rows using arrange
 
@@ -109,14 +113,14 @@ df %>% arrange(desc(wt))
 
 
 # To change variables, we can use mutate()
-df <- df %>% mutate(wt_kg=wt*453.592,
-                    km_per_l = mpg*1.60934/3.78541)
-df
+df %>% mutate(wt_kg=wt*453.592,
+                    km_per_l = mpg*1.60934/3.78541) -> df
+
 # And we can use ifelse() within mutate()
 mtcars <- mtcars %>%
             mutate(wt_class = ifelse(wt>=4, 'Oversized','Standard'))
-mtcars
-# We can even do a sultiple ifelse statment using case_when()
+
+# We can even do a multiple ifelse statement using case_when()
 mtcars <- mtcars %>%
             mutate(
               efficiency = case_when(
@@ -138,7 +142,7 @@ mtcars %>%
 # To do this, first we need to use group_by()
 
 mtcars %>% group_by(efficiency)
-mtcars
+
 # You'll notice that this automatically changes the data frame into a new kind of object, called a tibble.
 # Tibbles are basically tidyverse dataframes, that display information slightly differently, and are a bit more particular about certain things like not wanting empty cells.
 # Tibbles can also be grouped, which allows for further operations down the line
@@ -161,19 +165,19 @@ mtcars %>%
   summarise(
     wt_kg=mean(wt),
     n=length(hp)
-  )
+  ) %>% ungroup() -> mtcars_new
 
 # After grouping a tibble, remember to ungroup it later using ungroup(), or you may have issues down the line.
-?ungroup()
+
 # 3.1
 data(iris)
 # using the dplyr functions do the following:
 # create a new column called Petal.Area which is the product of the petal width and petal length columns.
 # For each of the different species of iris, present the mean and standard deviation for the sepal length, sepal width, and petal area, as well as the number of samples (n)
 # Order this database in decreasing order of average petal length.
-iris <- iris %>% mutate(Petal.Area= Petal.Width * Petal.Length)
-iris %>% group_by(Species) %>% summarise(mean_sep_leg = mean(Sepal.Length),sd_sep_leg=sd(Sepal.Length),mean_sep_wit = mean(Sepal.Width),sd_sep_wit = sd(Sepal.Width),mean_pet_ar = mean(Petal.Area),sd_petal_area = sd(Petal.Area), n = n() )
-iris %>% arrange(desc(Petal.Length))
+
+
+
 #######################################################
 ####    Code your own lm and predict functions!    ####
 #######################################################
@@ -185,15 +189,16 @@ iris %>% arrange(desc(Petal.Length))
 # At each step of the way, you should save each new element you calculate into a new object.
 
 # Your lm function should take as input a y variable, and one or more x variables which should be inputted as a matrix or dataframe with one variable per column. 
+
 my.lm <- function(y,x){
 
 # Start by saving the sample size (n). You will need it later for calculating degrees of freedom for the test statistics and sampling distributions.
   n <- length(y)
 # Next create the X matrix using as.matrix. Don't forget to add the column of 1s!
-  x <- cbind(1,as.matrix(x))
+  x <- cbind(1,x) |> as.matrix()
 # use the y input and your newly constructed x matrix to calculate the parameter estimates (or coefficients). 
 # Hint: see lab 6, and remember that t() gives the transpose of a matrix and solve() gives its inverse
-  b <- solve((t(x)%*%x)) %*% t(x)%*%y
+  b <- solve(t(x)%*%x) %*% t(x)%*%(y)
 # Next, using these calculated coefficients, calculate all of the predicted values, y_hat, for each of the values of x (each of the rows of the X matrix). 
 # Hint: look at the formula for the linear model - and remember we are multiplying matrices!
   y_hat <- x %*% b
@@ -201,23 +206,26 @@ my.lm <- function(y,x){
   e <- y - y_hat
 # Next calculate the estimate of the residual standard error, s. Careful about the denominator here: check how many degrees of freedom you have!
   s <- sqrt(sum(e^2)/(n-ncol(x)))
+
 # Using s, calculate the variance covariance matrix of the coefficients.
-  vcov_coef <- s^2 * (solve(t(x)%*%x))
+  vcov_coef <- s^2 * solve(t(x)%*%(x))
 # from this covariance matrix, extract the standard errors of the coefficients
-  se_coef <- sqrt(diag(vcov_coef))
+  se_coef <- vcov_coef |> diag() |> sqrt()
 # use these standard errors to calculate the t-values for each of the coefficients
-  t_vals <- b / se_coef
+  t_vals <- b/se_coef
 # And use these t-values to calculate p-values.
-  p <- pt(-abs(t_vals),df=n-ncol(x))*2
+  p <- pt(-abs(t_vals), n-ncol(x))*2
 # Next, calculate the R2 value
+
   RSS <- sum(e^2)
-  TSS <- sum((y-mean(y))^2)
-  r2 <- 1-(RSS/TSS)
+  TSS <- sum((y - mean(y)^2))
+  r2 <- 1 - RSS/TSS
 # Bonus points if you want to look up how to calculate adjusted R2
-  adj_r2 <- 1-((1-r2)*(n-1)/(n-ncol(x)-1))
+  adj_r2 <- 1 - (RSS/(n - ncol(x)))/(TSS/(n-1))
+
 # Next, calculate the F-statistic and the p-value for the model.
-  f_stat <- ((TSS - RSS) / (ncol(x) - 1)) / (RSS / (n - ncol(x)))
-  model_p <- 1-pf(f_stat, df1 = ncol(x) - 1, df2 = n - ncol(x))
+  f_stat <- ((TSS-RSS)/(ncol(x)-1))/(RSS/(n-ncol(x)))
+  model_p <- 
   
 # Finally, put all of these elements into a list, and have your function return that list. 
   return(list(n=n,
@@ -237,9 +245,9 @@ my.lm <- function(y,x){
 # compare your function against the built-in R function in R.
 
 my.lm(y=mtcars$mpg,x=mtcars[,c('wt','cyl')])
-model <- lm(mpg ~ wt + cyl, data = mtcars)
-summary(model)
+
 ### 4.2 predict()
+
 # This will be much shorter. Create a new function that takes as input the output from your first function, along with a new_data object that has as many columns as there are predictor variables in the model output, and a confidence interval size
 
 my.predict <- function(model_output, new_data, ci_level = 0.97) {
@@ -248,7 +256,7 @@ my.predict <- function(model_output, new_data, ci_level = 0.97) {
   coef = model_output$coefficients
 
   # Add a column of 1s to the new_data
-  new_data = cbind(1,as.matrix(new_data))
+  new_data = as.matrix(cbind(1, new_data))
 
   # generate the predicted values of y from the new_data object based on the coefficients from the model
   # Again, remember the formula for the linear model!
@@ -256,17 +264,20 @@ my.predict <- function(model_output, new_data, ci_level = 0.97) {
 
 #for each of these predicted values, calculate a confidence interval
   # first calculate the critical levels of the t-distribution using the ci_level and the degrees of freedom
-  area_in_tails=(1-ci_level)/2
-  t_lower = qt(area_in_tails)
-  t_upper = qt(area_in_tails,lower.tail = F)
+  area_in_tails = (1-ci_level)/2
+  t_lower = qt(area_in_tails, model_output$n - length(coef))
+  t_upper = - t_lower
+  t_upper = qt(area_in_tails, model_output$n - length(coef), lower.tail = F)
 
   # next, for each row of the new_data object, calculate the standard error of the predicted value
   # Check the slides, and remember that 𝒗𝒄𝒐𝒗(𝒃) was saved as "vcov" in the model output
- sy = sqrt(apply(new_data,1,function(.)t(.)%*%model_output$vcov%*%.))
+  sy = sqrt(apply(new_data,1,function(.)t(.)%*%model_output$vcov%*%.))
   
+
+
   # next, calculate the upper and lower confidence boundaries for each prediction using the critical t-levels and the previously calculated standard error
- ci_lower = sy*t_lower
- ci_upper = sy * t_upper
+ ci_lower = sy*t_lower + y_hat
+ ci_upper = sy*t_upper + y_hat
 
   # finally, put these confidence intervals into a dataframe
  ci = data.frame(ci_lower,ci_upper)
@@ -278,30 +289,21 @@ my.predict <- function(model_output, new_data, ci_level = 0.97) {
 
 ### 4.3
 # Use your functions to run the following model
-model <- my.lm(y=mtcars$mpg,x=mtcars[,c("wt","cyl")])
-my.predict(model,new_data = data.frame(wt=3.5,cyl=4),ci_level =0.99)
+
+
 # mtcars$mpg ~ mtcars$wt + mtcars$cyl
-# Fit the model using your custom lm function
-model <- my.lm(y = mtcars$mpg, x = mtcars[, c('wt', 'cyl')])
 
-# Create new data for prediction
-new_data <- data.frame(wt = seq(min(mtcars$wt), max(mtcars$wt), length.out = 100), cyl = 4)
+model <- my.lm(y = mtcars$mpg, x = mtcars[, c("wt", "cyl")])
+my.predict(model, new_data = data.frame(wt = 3.5, cyl = 4), ci_level = 0.99)
+predict(lm(mpg~ wt + cyl, data=mtcars), data.frame(wt = 3.5, cyl = 4), interval = "confidence", level = 0.99)
 
-# Use your custom predict function to get predictions and confidence intervals
-predictions <- my.predict(model_output = model, new_data = new_data, ci_level = 0.96)
-
-
-# Then plot predicted marginal effect of weight for a car with 4 cylynders. Add 96% confidence intervals to the graph.
+# Then plot predicted marginal effect of weight for a car with 4 cylinders. Add 96% confidence intervals to the graph.
 # Hint: For this, in your "newdata" object, add a column of 4s for the number of cylinders
-# Plot predicted marginal effect of weight for a car with 4 cylinders
-plot(new_data$wt, predictions$y_hat, type = 'l', col = 'blue', lwd = 2,
-  xlab = 'Weight', ylab = 'Predicted MPG', main = 'Predicted MPG vs Weight for 4 Cylinders')
-lines(new_data$wt, predictions$`96%_lower`, col = 'red', lty = 2)
-lines(new_data$wt, predictions$`96%_upper`, col = 'red', lty = 2)
-legend('topright', legend = c('Predicted MPG', '96% CI'), col = c('blue', 'red'), lty = c(1, 2), lwd = 2)
 
 # Compare this graph to the graph from the lecture.
 
 
 # What do you conclude?
+
+
 

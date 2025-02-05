@@ -39,7 +39,7 @@ selected
 
 ### 1.2
 # Now select only those rows with either high efficiency (miles per gallon (mpg) of at least 25) or low weight (wt <= 2.5)
-selected1 <- mtcars[mtcars$mpg >= 5 & mtcars$wt <= 2.5, ]
+selected1 <- mtcars[mtcars$mpg >= 25 | mtcars$wt <= 2.5, ]
 selected1
 
 #############################
@@ -62,13 +62,13 @@ if(x-4==1){
 # "Please input a probability between 0 and 1"
 
 probe <- function(n, w){
-  if(!is.numeric(w) || w < 0 || w > 1){
+  if(!is.numeric(w) | w < 0 | w > 1){
     return("Please input a probability between 0 and 1")
   }
-    sample(c('Land', 'Water'), size=n, replace=T, prob=(c(1- w, w)))
+    sample(c('Land', 'Water'), size=n, replace=T, prob=(c(w, 1-w)))
 
 } 
-probe(3, 1)
+probe(35, 0.3)
 
 
 
@@ -135,7 +135,16 @@ while(x<100){
 
 ### 4.2 How many numbers do you need in the sequence 1*2*3*4*5*... before the product exceeds 10 million?
 # Use a while loop to get the answer
+num_count <- 0
+product <- 1
 
+while(product < 10000000){
+  num_count <- num_count + 1
+  product <- product * num_count
+  
+}
+
+print(num_count)
 ###################################
 ####    Linear models intro    ####
 ###################################
@@ -146,24 +155,45 @@ while(x<100){
 # Lets run a bivariate regression of car weight (in 1000 pounds/500 kg) on miles per gallon (1mpg = 1km/L)
 #425 km/l
 model <- lm(mtcars$mpg ~ mtcars$wt)
+model
 summary(model)
 ### 5.1
 # What does the Estimate for the (Intercept) number represent?
+
+#Answer:  It represents the predicted fuel efficiency of a car that weights 0 pounds
+
 ### 5.2
 # What does the Estimate for the mtcars$wt number represent?
+#It represents the predicted change in fuel efficiency associated with a unit change in weight
+
 #for every 1000 pounds increase in the car's weight we can expect a decrease of 5.3445 in their efficeincy i.e for every 1000 pounds weight increase, a car would run 5.3445 miles less per gallon
 
 ### 5.3 
 # Is the relationship between these two variables positive or negative? Why do you think that might be?
 #Negative 
+
+# It is negativew because bigger cars used more energy and so they are less efficient
+
 ### 5.4 What is the predicted average efficiency in miles per gallon of a 4000 pound (2000kg) car?
 
+#using the formula y = b0 + b1x + e assuming the residula error is 0
+predicted_avergae <- 37.2851 + (-5.3445)*4
+predicted_avergae
 # Let's transform the independent variable:
 mtcars$wt_centred <- mtcars$wt - mean(mtcars$wt)
+mtcars$wt_centred
 
 ### 5.5
 # compare the mean and variance of the new variable with the untransformed variable. What do you notice?
 
+m_v_new <- c(mean(mtcars$wt_centred),var(mtcars$wt_centred))
+
+m_v_old <- c(mean(mtcars$wt),var(mtcars$wt))
+
+m_v_new
+m_v_old
+
+#It is noticed that the two mean are signifcantly different but their variances.
 
 ### 5.6
 # Run the following code:
@@ -179,5 +209,7 @@ x <- cbind(1,mtcars$wt)
 # where ' means the transpose
 # Run the code you have written. What do you find?
 
+formula <- solve((t(x) %*% x)) %*% (t(x) %*%y)
+formula
 
-
+#I notice it gives exact value as the intercept and the slope

@@ -184,6 +184,3 @@ x <- cbind(1,mtcars$wt)
 solve(t(x) %*% x) %*% t(x) %*% y
 
 # Run the code you have written. What do you find?
-# The code calculates the coefficients of the linear regression model manually.
-# The result should match the coefficients obtained from the lm() function.
-solve(t(x) %*% x) %*% t(x) %*% y

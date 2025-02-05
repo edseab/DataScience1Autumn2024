@@ -281,27 +281,12 @@ my.predict <- function(model_output, new_data, ci_level = 0.97) {
 model <- my.lm(y=mtcars$mpg,x=mtcars[,c("wt","cyl")])
 my.predict(model,new_data = data.frame(wt=3.5,cyl=4),ci_level =0.99)
 # mtcars$mpg ~ mtcars$wt + mtcars$cyl
-# Fit the model using your custom lm function
-model <- my.lm(y = mtcars$mpg, x = mtcars[, c('wt', 'cyl')])
-
-# Create new data for prediction
-new_data <- data.frame(wt = seq(min(mtcars$wt), max(mtcars$wt), length.out = 100), cyl = 4)
-
-# Use your custom predict function to get predictions and confidence intervals
-predictions <- my.predict(model_output = model, new_data = new_data, ci_level = 0.96)
 
 
 # Then plot predicted marginal effect of weight for a car with 4 cylynders. Add 96% confidence intervals to the graph.
 # Hint: For this, in your "newdata" object, add a column of 4s for the number of cylinders
-# Plot predicted marginal effect of weight for a car with 4 cylinders
-plot(new_data$wt, predictions$y_hat, type = 'l', col = 'blue', lwd = 2,
-  xlab = 'Weight', ylab = 'Predicted MPG', main = 'Predicted MPG vs Weight for 4 Cylinders')
-lines(new_data$wt, predictions$`96%_lower`, col = 'red', lty = 2)
-lines(new_data$wt, predictions$`96%_upper`, col = 'red', lty = 2)
-legend('topright', legend = c('Predicted MPG', '96% CI'), col = c('blue', 'red'), lty = c(1, 2), lwd = 2)
 
 # Compare this graph to the graph from the lecture.
 
 
 # What do you conclude?
-
