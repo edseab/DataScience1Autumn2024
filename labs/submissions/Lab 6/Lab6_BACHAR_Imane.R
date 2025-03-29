@@ -153,6 +153,7 @@ summary(model)
 # the relationship is negative, as indicated by the negative slope, As the car weight increases, the fuel efficiency decreases, we can say that heavier cars cosume more energy. 
 ### 5.4 What is the predicted average efficiency in miles per gallon of a 4000 pound (2000kg) car?
 predict(lm(mpg~wt, data=mtcars), newdata = data.frame(wt = 4))
+37.2851-5.3445*4
 
 # Let's transform the independent variable:
 mtcars$wt_centred <- mtcars$wt - mean(mtcars$wt)
