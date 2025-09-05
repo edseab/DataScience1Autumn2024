@@ -29,9 +29,10 @@
 
 # Let's simulate the cold-water therapy experiment
 # 1.1 Start by saving a sample size of 100 to an object N
+N <- 100
 
 # 1.2 Next, create a vector of 1s and 0s, so that half of your sample receives the treatement (coded 1), and the other half doesn't (coded 0)
-
+my.vector <- c(rep(1,N/2),rep(0,N/2))
 
 # Next we will run 60 different t-tests using a for loop, and save the p-value for each of these tests
 # 1.3 start by initializing an empty vector for your p-values using an empty c() function. 

@@ -34,13 +34,9 @@ data(mtcars)
 head(mtcars)
 # Using indexing (square brackets) and the & operator, write a line of code
 # that selects only the rows of mtcars with at least 6 cylinders (mtcars$cyl >= 6) and horsepower of at least 110 (mtcars$hp >= 110). Remember to include all the columns.
-selected <- mtcars[mtcars$cyl >= 6 & mtcars$hp >= 110, ]
-selected
 
 ### 1.2
 # Now select only those rows with either high efficiency (miles per gallon (mpg) of at least 25) or low weight (wt <= 2.5)
-selected1 <- mtcars[mtcars$mpg >= 25 | mtcars$wt <= 2.5, ]
-selected1
 
 #############################
 ####    If statements    ####
@@ -49,7 +45,7 @@ selected1
 # The if() function will execute everything after it, either on the same line or in {} brackets,
 # only if there is a TRUE boolean statement within the parentheses
 x <- 5
-
+if(x > 3) print ('This statement is true')
 if(x-4==1){
   new_object <- c('this','statement','is','also','true')
   print(new_object)
@@ -61,15 +57,12 @@ if(x-4==1){
 # If the p argument is not numeric, or if it is not between 0 and 1, the function should return the following message:
 # "Please input a probability between 0 and 1"
 
-probe <- function(n, w){
-  if(!is.numeric(w) | w < 0 | w > 1){
-    return("Please input a probability between 0 and 1")
-  }
-    sample(c('Land', 'Water'), size=n, replace=T, prob=(c(w, 1-w)))
-
-} 
-probe(35, 0.3)
-
+probe <- function (n, w) {
+    if (!is.numeric(w) || w<0 || w<1) {
+        return ("Please input a probability between 0 and 1")
+    }
+    sample (c("Land", "water")) not done
+}
 
 
 # After the if statement we can put an else statement:
@@ -95,7 +88,6 @@ strsplit('Hello to you too. /My name is Ed.', split='/')
 
 # You'll notice that strsplit returns a list. This allows us to vectorise the function:
 strsplit(rownames(mtcars),split=' ')
-rownames(mtcars)
 
 
 #####################
@@ -122,9 +114,10 @@ data(iris)
 
 # Write a for loop that iterates over the column names of the iris dataset and print each together with the number of characters in the column name in parenthesis. Example output: Sepal.Length (12). To get the number of characters use the function nchar().
 
-for( i in colnames(iris)){
-  print(paste(i, "(", nchar(i), ")", sep=' '))
-}
+
+  for (i in iris){
+    print(paste(i, "(", nchar(i), ")", sep =" "))
+  }
 
 # Next, WHILE loops continue to loop until the boolean statment in the defining parentheses, e.g.
 x <- 0
@@ -135,16 +128,7 @@ while(x<100){
 
 ### 4.2 How many numbers do you need in the sequence 1*2*3*4*5*... before the product exceeds 10 million?
 # Use a while loop to get the answer
-num_count <- 0
-product <- 1
 
-while(product < 10000000){
-  num_count <- num_count + 1
-  product <- product * num_count
-  
-}
-
-print(num_count)
 ###################################
 ####    Linear models intro    ####
 ###################################
@@ -152,48 +136,32 @@ print(num_count)
 # We can run an OLS linear model using lm()
 # Inside the lm and other model functions we use formulas
 # Formulas have the dependent variable on the left and the independent (predictor) variables on the right with a ~ in between
-# Lets run a bivariate regression of car weight (in 1000 pounds/500 kg) on miles per gallon (1mpg = 1km/L)
-#425 km/l
+# Lets run a bivariate regression of car weight (in 1000 pounds/500 kg) on miles per gallon (1mpg = 0.425km/L)
 model <- lm(mtcars$mpg ~ mtcars$wt)
-model
 summary(model)
 ### 5.1
 # What does the Estimate for the (Intercept) number represent?
-
-#Answer:  It represents the predicted fuel efficiency of a car that weights 0 pounds
-
+for every 500kg change in the weight of the ar, we would expect the the car to be 5 times less efficient (not sure i heard right)
 ### 5.2
 # What does the Estimate for the mtcars$wt number represent?
-#It represents the predicted change in fuel efficiency associated with a unit change in weight
-
-#for every 1000 pounds increase in the car's weight we can expect a decrease of 5.3445 in their efficeincy i.e for every 1000 pounds weight increase, a car would run 5.3445 miles less per gallon
 
 ### 5.3 
 # Is the relationship between these two variables positive or negative? Why do you think that might be?
-#Negative 
 
-# It is negativew because bigger cars used more energy and so they are less efficient
+negative. When one increases the other decreases.
 
 ### 5.4 What is the predicted average efficiency in miles per gallon of a 4000 pound (2000kg) car?
 
-#using the formula y = b0 + b1x + e assuming the residula error is 0
-predicted_avergae <- 37.2851 + (-5.3445)*4
-predicted_avergae
+37.2851 - 5.3445 * 4
+The predicted average efficiency is 15.9071 miles per gallon (6.760517 kms/l)
+
 # Let's transform the independent variable:
 mtcars$wt_centred <- mtcars$wt - mean(mtcars$wt)
-mtcars$wt_centred
 
 ### 5.5
 # compare the mean and variance of the new variable with the untransformed variable. What do you notice?
-
-m_v_new <- c(mean(mtcars$wt_centred),var(mtcars$wt_centred))
-
-m_v_old <- c(mean(mtcars$wt),var(mtcars$wt))
-
-m_v_new
-m_v_old
-
-#It is noticed that the two mean are signifcantly different but their variances.
+mean(mtcars$wt)
+mean(mtcars$wt_centred)
 
 ### 5.6
 # Run the following code:
@@ -209,7 +177,11 @@ x <- cbind(1,mtcars$wt)
 # where ' means the transpose
 # Run the code you have written. What do you find?
 
-formula <- solve((t(x) %*% x)) %*% (t(x) %*%y)
-formula
+x' <- t(x)
+x' <- t(x)%*%x 
+(x'x) ^ (-1) <- solve (t(x)%*%x )
+(x'y) <- t(x)%*%y
+solve(t(x)%*%x) %*% t(x)%*%y
 
-#I notice it gives exact value as the intercept and the slope
+
+

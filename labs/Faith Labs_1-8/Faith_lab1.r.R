@@ -195,6 +195,7 @@ f2(8,9)
 f2(14,7)
 
 ### 3.1 What is the purpose of function f2? Write in comments below.
+# The purpose of function f2 is to check if x is divisible by y without a remainder.
 
 ### 3.2
 # Based on the definition of the mean from today's lecture, write a function that calculates the mean of all of the elements of a vector. assign it to the object my.mean. You will find the functions 'sum' and 'length' useful here.
@@ -223,12 +224,29 @@ sample(1:10, 20, replace = TRUE)
 ### 4.1
 # Write a function that simulates the roll of 2 6-sided dice, where the argument x is the number of times you roll the 2 dice, 
 # and the output is a vector of length x, where each element corresponds to the sum of the two sides of the dice.
+
+
+
 # HINT: one way to do this is to start by writing a function for a single 6-sided die, then create a new function 
 # that repeats the first function twice and adds up the result.
+roll_dice <- function(x) {
+  roll_single_die <- function() sample(1:6, 1, replace = TRUE)
+  rolls <- replicate(x, roll_single_die() + roll_single_die())
+  return(rolls)
+}
 
 ### 4.2
 # Using the function hist, create histograms of the results of double dice rolls when you roll them 10 times, 
 #then 50, then 100, then 1000, then 10000. Use breaks=1:12 as an argument within the hist function. 
+# Creating histograms
+hist(rolls_10, breaks=1:12, main="Histogram of 10 Rolls", xlab="Sum of Dice")
+hist(rolls_50, breaks=1:12, main="Histogram of 50 Rolls", xlab="Sum of Dice")
+hist(rolls_100, breaks=1:12, main="Histogram of 100 Rolls", xlab="Sum of Dice")
+hist(rolls_1000, breaks=1:12, main="Histogram of 1000 Rolls", xlab="Sum of Dice")
+hist(rolls_10000, breaks=1:12, main="Histogram of 10000 Rolls", xlab="Sum of Dice")
+
+# As the number of rolls increases, the histogram approaches a normal distribution centered around 7.
+
 # What do you notice? Write it in comments below your code.
 
 
@@ -243,19 +261,28 @@ runif(5,0,1)
 
 ### 4.3
 # Using runif, write a function that returns TRUE 22% of the time and FALSE 78% of the time
+random_boolean <- function() {
+  return(runif(1) < 0.22)
+}
 
 ### 4.4
 # Based on today's lecture about pdfs, what is the probability density for a uniform pdf bounded between 
 # 0 and 1 associated with all values of x between 0 and 1? Explain why.
+# The probability density for a uniform pdf bounded between 0 and 1 is 1. This is because the total area under the pdf must equal 1, and since the interval length is 1, the height of the pdf must be 1.
+
+# The dunif function returns the height of the probability density function for a uniform distribution at a given value of x. The height is constant for all values of x within the specified bounds, and 0 for values of x outside the bounds.
 
 ### 4.5
 # Similarly, what is the probability density for a uniform pdf bounded between 5 and 6 associated with all values of x between 5 and 6?
+# The probability density for a uniform pdf bounded between 5 and 6 is also 1. This is because the interval length is 1, and the total area under the pdf must equal 1, so the height of the pdf must be 1.
 
 ### 4.6
 # What is the probability density for a uniform pdf bounded between 0 and 0.5 associated with all values of x between 0 and 0.5?
+# The probability density for a uniform pdf bounded between 0 and 0.5 is 2. This is because the interval length is 0.5, and the total area under the pdf must equal 1, so the height of the pdf must be 1 / 0.5 = 2.
 
 ### 4.7
 # What is the probability density for a uniform pdf bounded between 0 and 2 associated with all values of x between 0 and 2?
+# The probability density for a uniform pdf bounded between 0 and 2 is 0.5. This is because the interval length is 2, and the total area under the pdf must equal 1, so the height of the pdf must be 1 / 2 = 0.5.
 
 ### 4.8
 # run the following code:
@@ -265,3 +292,4 @@ dunif(0.2,0,0.5)
 dunif(1.3,0,2)
 
 # Based on the results of this code and your answers above, what can you conclude about the purpose of the dunif function?
+# The dunif function returns the height of the probability density function for a uniform distribution at a given value of x. The height is constant for all values of x within the specified bounds, and 0 for values of x outside the bounds.

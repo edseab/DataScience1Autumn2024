@@ -257,8 +257,8 @@ my.predict <- function(model_output, new_data, ci_level = 0.97) {
 #for each of these predicted values, calculate a confidence interval
   # first calculate the critical levels of the t-distribution using the ci_level and the degrees of freedom
   area_in_tails=(1-ci_level)/2
-  t_lower = qt(area_in_tails,df=model_output$n-ncol(new_data))
-  t_upper = -t_lower
+  t_lower = qt(area_in_tails)
+  t_upper = qt(area_in_tails,lower.tail = F)
 
   # next, for each row of the new_data object, calculate the standard error of the predicted value
   # Check the slides, and remember that 𝒗𝒄𝒐𝒗(𝒃) was saved as "vcov" in the model output
@@ -293,19 +293,12 @@ predictions <- my.predict(model_output = model, new_data = new_data, ci_level = 
 
 # Then plot predicted marginal effect of weight for a car with 4 cylynders. Add 96% confidence intervals to the graph.
 # Hint: For this, in your "newdata" object, add a column of 4s for the number of cylinders
-
-x <- seq(0,6,0.1)
-ci <- my.predict(model,new_data = cbind(wt=x,cyl=4),ci_level = 0.96)
-plot(mtcars$wt,mtcars$mpg,pch=20)
-lines(x,model$coefficients['1',]+x*model$coefficients['wt',]+4*model$coefficients['cyl',])
-
 # Plot predicted marginal effect of weight for a car with 4 cylinders
 plot(new_data$wt, predictions$y_hat, type = 'l', col = 'blue', lwd = 2,
   xlab = 'Weight', ylab = 'Predicted MPG', main = 'Predicted MPG vs Weight for 4 Cylinders')
 lines(new_data$wt, predictions$`96%_lower`, col = 'red', lty = 2)
 lines(new_data$wt, predictions$`96%_upper`, col = 'red', lty = 2)
 legend('topright', legend = c('Predicted MPG', '96% CI'), col = c('blue', 'red'), lty = c(1, 2), lwd = 2)
-
 
 # Compare this graph to the graph from the lecture.
 
